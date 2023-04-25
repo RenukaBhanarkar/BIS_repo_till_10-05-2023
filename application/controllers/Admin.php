@@ -1284,12 +1284,12 @@ class Admin extends CI_Controller
         if ($quiz_id==1) 
         {
             $this->session->set_flashdata('MSG', ShowAlert("Quiz approved successfully.", "SS"));
-                redirect(base_url() . "Quiz/quiz_list", 'refresh');
+                redirect(base_url() . "Quiz/manage_quiz_list", 'refresh');
         }
         else 
         {
             $this->session->set_flashdata('MSG', ShowAlert("Failed to approve by admin,Please try again", "DD"));
-            redirect(base_url() . "Quiz/quiz_list", 'refresh');
+            redirect(base_url() . "Quiz/manage_quiz_list", 'refresh');
         }
     }  
  

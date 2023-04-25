@@ -62,25 +62,35 @@
                       <td><?= $quiz['status_name'] ?></td>
                       <td class="d-flex border-bottom-0">
 
-                        <a href="quiz_view/<?= $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">View</a>
-                        <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
+                          <a href="quiz_view/<?= $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">View</a>
+                          <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
+                 
+                            <?php if ($quiz['status'] == 1 ) { ?>
+                            
+                              <a href="sendToCreate/<?= $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">Create</a>                         
 
-                          <?php if ($quiz['status'] == 3 || $quiz['status'] == 6) { ?>
+                            <?php } ?>
+                          <?php } ?>
+
+                        <!-- <a href="quiz_view/<?= $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">View</a>
+                        <?php //if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
+
+                          <?php //if ($quiz['status'] == 3 || $quiz['status'] == 6) { ?>
                             <a href="publishQuiz/<?= $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">Publish</a>
 
-                          <?php } ?>
-                          <?php if ($quiz['status'] == 5) { ?>
+                          <?php //} ?>
+                          <?php //if ($quiz['status'] == 5) { ?>
 
                             <a href="unPublishQuiz/<?= $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">UnPublish</a>
-                          <?php } ?>
+                          <?php //} ?>
 
-                          <?php if ($quiz['status'] == 1 || $quiz['status'] == 4) { ?>
-                             <a href="editquiz/<?= $quiz['id'] ?>" class="btn btn-info btn-sm mr-2 text-white">Edit</a>
-                            <a href="sendApprove/<?= $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">Create</a>
+                          <?php //if ($quiz['status'] == 1 || $quiz['status'] == 4) { ?>
+                             <a href="editquiz/<?=  $quiz['id'] ?>" class="btn btn-info btn-sm mr-2 text-white">Edit</a>
+                            <a href="sendApprove/<?=  $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">Create</a>
                              <button onClick="" class="btn btn-danger btn-sm mr-2">Delete</button> 
 
-                          <?php } ?>
-                        <?php } ?>
+                          <?php // } ?>
+                        <?php // } ?> -->
                       </td>
                     </tr>
                 <?php }

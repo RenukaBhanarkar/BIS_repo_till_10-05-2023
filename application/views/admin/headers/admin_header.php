@@ -23,8 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" integrity="sha512-/Ae8qSd9X8ajHk6Zty0m8yfnKJPlelk42HTJjOHDWs1Tjr41RfsSkceZ/8yyJGLkxALGMIYd5L2oGemy/x1PLg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+  
     <link href="<?php echo base_url();?>assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/admin/css/dashboard.css" rel="stylesheet">
     <script src="<?php echo base_url();?>assets/admin/js/jquery-3.5.1.js"></script>

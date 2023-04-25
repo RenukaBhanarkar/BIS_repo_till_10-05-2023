@@ -4,15 +4,10 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Question Bank Archive</h1>
-            <nav aria-label="breadcrumb">
+            <nav  aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="<?php echo base_url().'Admin/dashboard';?>" >Sub Admin Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/organizing_quiz';?>" >Competitions</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/quiz_dashboard';?>" >Quiz Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="<?php echo base_url().'subadmin/questionBankList';?>" >Question Bank List</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Question Bank Archive</li>
-                
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Question Bank Archive</li>
                 </ol>
             </nav>
         </div>
@@ -21,7 +16,7 @@
        
         <div class="row">
             <div class="col-12 mt-3">
-                <div class="card border-top card-body table-responsive">
+                <div class="card border-top card-body">
                     <table id="listView" class="table-bordered display nowrap" style="width:100%">
                         <thead>
                             <tr>
@@ -85,7 +80,7 @@
     <script>
          $(document).ready(function () {
     $('#listView').DataTable({
-        // scrollX: true,
+        scrollX: true,
     });
     });
         function deleteRecord(que_bank_id) {

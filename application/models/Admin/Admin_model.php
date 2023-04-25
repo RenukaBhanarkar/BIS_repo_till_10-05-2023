@@ -419,7 +419,7 @@ class Admin_model extends CI_Model {
     public function getAllManageQuiz()
     { 
         $this->db->select('tbl_quiz_details.*,tbl_mst_status.status_name'); 
-        $this->db->where_in('tbl_quiz_details.status',array(2,3,4,5,6));
+        $this->db->where_in('tbl_quiz_details.status',array(2,3,4,5,6,10));
         $this->db->join('tbl_mst_status','tbl_mst_status.id = tbl_quiz_details.status'); 
         return $this->db->get('tbl_quiz_details')->result_array(); 
 

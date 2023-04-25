@@ -28,7 +28,9 @@ class Quiz_model extends CI_Model {
     {   
         $this->db->select('tbl_quiz_details.*,tbl_mst_status.status_name'); 
         $this->db->join('tbl_mst_status','tbl_mst_status.id = tbl_quiz_details.status'); 
-        $this->db->where_in('tbl_quiz_details.status',array(1,2,3,4,5,6)); 
+      
+        //$this->db->where_in('tbl_quiz_details.status',array(1,2,3,4,5,6)); 
+        $this->db->where_in('tbl_quiz_details.status',array(1)); 
         return $this->db->get('tbl_quiz_details')->result_array();  
     }
    /*  public function getAllQuizeCreated()
@@ -124,6 +126,44 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
         else
         {
             return 2;
+        } 
+    }
+    public function getAnswerKeyForUser($user_id,$quiz_id){
+        
+        $this->db->select(' 
+        tbl_user_quiz.selected_op,tbl_user_quiz.quiz_id,tbl_user_quiz.user_id,tbl_user_quiz.mark_review,
+        tbl_que_details.*,
+        tbl_quiz_details.language_id,
+        tbl_quiz_submission_details.selected_lang,
+        ');  
+        $this->db->from('tbl_user_quiz');      
+        $this->db->join('tbl_que_details','tbl_que_details.que_id = tbl_user_quiz.ques_id');    
+        $this->db->join('tbl_quiz_details','tbl_quiz_details.id = tbl_user_quiz.quiz_id'); 
+        $this->db->join('tbl_quiz_submission_details','tbl_quiz_submission_details.user_id = tbl_user_quiz.user_id AND tbl_quiz_submission_details.quiz_id = tbl_user_quiz.quiz_id');      
+        $this->db->where('tbl_user_quiz.user_id',$user_id);
+        $this->db->where('tbl_user_quiz.quiz_id',$quiz_id);
+        $query = $this->db->get();
+        $rs=array();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row) {
+                array_push($rs,$row);
+            }
+        }
+        //echo json_encode($rs); exit();
+        return $rs;
+    } 
+    public function sendToCreate($id,$formdata)
+    {
+        $this->db->where('id',$id); 
+        $quiz = $this->db->get('tbl_quiz_details')->row_array();
+        if ($quiz) 
+        {
+            $this->db->where('id', $id);
+            return $this->db->update('tbl_quiz_details', $formdata);
+        }
+        else
+        {
+            return false;
         } 
     }
 
@@ -228,21 +268,20 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
         }
         //SELECT `qb`.`que_bank_id`, `qb`.`title` FROM `tbl_que_bank` `qb` WHERE `qb`.`status` = 3 AND `qb`.`is_active` = 1 AND `qb`.`quiz_linked_id` = `=` 0 AND `qb`.`no_of_ques` >= '4' AND `qb`.`language` IN(1, 3)
         $query = $this->db->select('qb.que_bank_id,qb.title')
-            ->from('tbl_que_bank qb')          
-            
+            ->from('tbl_que_bank qb')  
             ->where('qb.status', 3)
             ->where ('qb.is_active', 1)
             ->where ('qb.quiz_linked_id ', 0)
             ->where ('qb.no_of_ques >=', $total_question)
             ->where_in ('qb.language', $lang)
-            ->get();
-       
+            ->get();       
         $rs = array();
         if ($query->num_rows() > 0) {
             foreach ($query->result_array() as $row) {
                 array_push($rs,$row);
             }
         }
+        //echo json_encode($rs);exit();
         return $rs;
     }
     public function getListOfArchiveQuiz(){
