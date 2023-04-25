@@ -95,19 +95,19 @@
                             </div>
                             <div class="mb-2 col-md-4">
                                 <label class="d-block text-font">Start Time<sup class="text-danger">*</sup></label>
-                                <input type="time" class="form-control input-font" name="start_time" id="start_time" placeholder="Select Date" value="<?php echo set_value('start_time'); ?>">
+                                <input type="text" class="form-control input-font timepicker" name="start_time" id="start_time" placeholder="Select Date" value="<?php echo set_value('start_time'); ?>">
                                 <span class="error_text"><?php echo form_error('start_time'); ?></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="mb-2 col-md-4">
                                 <label class="d-block text-font">End Date<sup class="text-danger">*</sup></label>
-                                <input type="date" class="form-control input-font" name="end_date" id="end_date" placeholder="Select Date" value="<?php echo set_value('end_date'); ?>">
+                                <input type="text" class="form-control input-font timepicker" name="end_date" id="end_date" placeholder="Select Date" value="<?php echo set_value('end_date'); ?>">
                                 <span class="error_text"><?php echo form_error('end_date'); ?></span>
                             </div>
                             <div class="mb-2 col-md-4">
                                 <label class="d-block text-font"> End Time<sup class="text-danger">*</sup></label>
-                                <input type="time" class="form-control input-font" name="end_time" id="end_time" placeholder="Select Date" value="<?php echo set_value('end_time'); ?>">
+                                <input type="text" class="form-control input-font timepicker" name="end_time" id="end_time" placeholder="Select Date" value="<?php echo set_value('end_time'); ?>">
                                 <span class="error_text"><?php echo form_error('end_time'); ?></span>
                             </div>
                         </div>
@@ -457,7 +457,7 @@
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <div class="mb-2 col-md-12">
+                            <div class="mb-2 col-md-12 table-responsive">
                                 <table id="example" class="table-bordered display nowrap" style="width:100%">
                                     <thead>
                                         <tr>
@@ -624,6 +624,8 @@
         $("#outputConsol").hide();
     }
     $(document).ready(function() {
+
+        $(".timepicker").timepicker();
         $("#terms_conditions_error").hide();
         $("#description_error").hide();
 

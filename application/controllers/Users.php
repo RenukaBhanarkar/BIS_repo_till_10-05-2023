@@ -125,7 +125,6 @@ class Users extends CI_Controller
                         'standard_club_branch_id' =>  $userData['StandardClubBranchID'],
                         'standard_club_dept_id' =>  $userData['StandardClubDeptID'],
                         'standard_club_region' =>  $userData['StandardClubRegion'],
-                        'standard_club_category' =>  $userData['StandardClubCategory'],
 
                         'comm_id' =>  $comm_id,
                         'comm_name' =>  $comm_name,
@@ -1043,11 +1042,7 @@ class Users extends CI_Controller
                                 redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
 
                             }
-                        }   else{
-                            $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
-                            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-
-                        }                  
+                        }                     
                         
                     } else {
                         redirect(base_url() . "Users/login", 'refresh');
@@ -1073,7 +1068,6 @@ class Users extends CI_Controller
 
         $que_id = $this->input->post("que_id");
         $corr_opts = $this->input->post("corr_opt");
-        $selected_lang = $_SESSION["quiz_lang_id"];
         //$mark_for_review = $this->input->post("mark_for_review");
 
        // echo json_encode($mark_for_review);exit();
@@ -1082,7 +1076,6 @@ class Users extends CI_Controller
       // echo  $user_id ;
         $quiz_id = $this->input->post("quiz_id");
         $start_time = $this->input->post("start_time");
-        $review = $this->input->post("review");
         $end_time = $this->input->post("end_time");
         $number = count($que_id);
         if ($number > 0) {
@@ -1092,7 +1085,6 @@ class Users extends CI_Controller
                 if (trim($que_id[$i] != '')) {
                     $ques_id =  $que_id[$i];
                     $corr_opt =  $corr_opts[$i];
-                    $setForReview = in_array($ques_id, $review);
 
                     if ($_POST['option' . $ques_id . $j] != "") {
                         $selected_op = $_POST['option' . $ques_id . $j];
@@ -1106,9 +1098,10 @@ class Users extends CI_Controller
                     $formdata['ques_id'] = $ques_id;
                     $formdata['selected_op'] = $selected_op;
                     $formdata['corr_opt'] = $corr_opt;
-                    $formdata['mark_review'] = $setForReview;
                    // print_r($formdata);exit();
+
                     $this->Users_model->insertQuestion($formdata);
+
                     $successCount++;
                     if ($successCount == $number) {
                         $wrong_ques = $this->Users_model->getWrongAns($quiz_id, $user_id);
@@ -1129,19 +1122,17 @@ class Users extends CI_Controller
                         $formdata2['correct_ques'] = $correct_ques;
                         $formdata2['wrong_ques'] = $wrong_ques;
                         $formdata2['not_ans_ques'] = $not_ans_ques;
-                        $formdata2['selected_lang'] = $selected_lang;
+
 
                         $ans = $total_mark / $total_question;
-                        
                         $score = $ans * $correct_ques;
                         
-                        $formdata2['score'] = $score;                    
-                        
+                        $formdata2['score'] = $score;
                         if ($this->Users_model->insertQuziSubmission($formdata2)) {
                             $this->session->set_flashdata('MSG', ShowAlert("Submission Successfully", "SS"));
                            redirect(base_url() . "users/quiz_submission", 'refresh');
                         } else {
-                            $this->session->set_flashdata('MSG', ShowAlert("Quiz not submitted please contact admin OR try again.", "SS"));
+                            $this->session->set_flashdata('MSG', ShowAlert("Quiz not submitted please contact admin OR try agen.", "SS"));
                             redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
                         }
                     }

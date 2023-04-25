@@ -523,33 +523,9 @@ class Quiz extends CI_Controller
         else 
         {
             $this->session->set_flashdata('MSG', ShowAlert("Failed to Send for Approve admin,Please try again", "DD"));
-            redirect(base_url() . "quiz/manage_quiz_list", 'refresh');
+            redirect(base_url() . "quiz/quiz_reg", 'refresh');
         }
     }
-    public function sendToCreate($id)
-    {
-            
-        $encAdminId = $this->session->userdata('admin_id');
-        $modify_by = encryptids("D", $encAdminId);
-
-        $formdata['modify_by'] = $modify_by;
-        $formdata['modify_on'] = date('Y-m-d : h:i:s');
-        $formdata['status']=10;
-        
-        $quiz_id = $this->Quiz_model->sendToCreate($id,$formdata);
-        if ($quiz_id==1) 
-        {
-            $this->session->set_flashdata('MSG', ShowAlert("Quiz Sent for Approval", "SS"));
-            redirect(base_url() . "quiz/quiz_list", 'refresh');
-        }
-        else 
-        {
-            $this->session->set_flashdata('MSG', ShowAlert("Failed to Send for Approve admin,Please try again", "DD"));
-            redirect(base_url() . "quiz/quiz_list", 'refresh');
-        }
-    }
-
-
 
     public function publishQuiz($id)
     {
@@ -665,9 +641,9 @@ class Quiz extends CI_Controller
     public function answer_key_list($user_id,$quiz_id){
         $answerKey = $this->Quiz_model->getAnswerKeyForUser($user_id,$quiz_id); 
         $data['answerKey']=$answerKey; 
-        //echo json_encode($answerKey);exit();
+        echo json_encode($answerKey);exit();
         $this->load->view('admin/headers/admin_header');;
-        $this->load->view('Quiz/answer_key_list',$data);
+        $this->load->view('Quiz/answer_key_list');
         $this->load->view('admin/footers/admin_footer');
     }
 

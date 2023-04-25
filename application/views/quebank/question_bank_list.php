@@ -6,8 +6,12 @@
             <h1 class="h3 mb-0 text-gray-800">Question Bank List</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Question Bank</li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Admin/dashboard';?>" >Sub Admin Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/organizing_quiz';?>" >Competitions</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/quiz_dashboard';?>" >Quiz Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Question Bank List</li>
+                
                 </ol>
             </nav>
         </div>
@@ -32,7 +36,7 @@
         ?>
         <div class="row">
             <div class="col-12 mt-3">
-                <div class="card border-top card-body">
+                <div class="card border-top card-body table-responsive">
                     <table id="listView" class="table-bordered display nowrap" style="width:100%">
                         <thead>
                             <tr>
@@ -76,24 +80,15 @@
                                         <td>--</td>
                                         <?php } ?>
                                         <td class="d-flex border-bottom-0">
-
-                                        <?php if (encryptids("D", $_SESSION['admin_type']) == 2) { ?>
-                                            <?php if (($row['status'] == 2) ) {  ?>
-                                            <a class="btn btn-primary btn-sm mr-2" href="<?php echo base_url(); ?>subadmin/viewQuestionBank?id=<?php echo encryptids('E', $row['que_bank_id']) ?>" title="View">Approve / Reject</a> 
-
-                                            <?php } else{ ?>
-                                                <a class="btn btn-primary btn-sm mr-2" href="<?php echo base_url(); ?>subadmin/viewQuestionBank?id=<?php echo encryptids('E', $row['que_bank_id']) ?>" title="View">View</a> 
-
-                                                <?php } ?>
-                                        <?php }?>
-                                        <?php if (encryptids("D", $_SESSION['admin_type']) == 3)  { ?>
-                                            <a class="btn btn-primary btn-sm mr-2" href="<?php echo base_url(); ?>subadmin/viewQuestionBank?id=<?php echo encryptids('E', $row['que_bank_id']) ?>" title="View">View</a> 
-                                            <?php } ?>
+                                            <a class="btn btn-primary btn-sm mr-2" href="<?php echo base_url(); ?>subadmin/viewQuestionBank?id=<?php echo encryptids('E', $row['que_bank_id']) ?>" title="View">View</a>
                                            
                                             <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
 
-                                                <a class="btn btn-success btn-sm mr-2" href="<?php echo base_url(); ?>subadmin/replicateQuestionBank?id=<?php echo encryptids('E', $row['que_bank_id']) ?>" >Replicate</a>                                           
-                                                <?php if (($row['status'] == 1) || ($row['status'] == 3) ||  ($row['status'] == 4 )) { 
+                                                <a class="btn btn-success btn-sm mr-2" href="<?php echo base_url(); ?>subadmin/replicateQuestionBank?id=<?php echo encryptids('E', $row['que_bank_id']) ?>" >Replicate</a>
+
+                                                
+
+                                                <?php if (($row['status'] == 1) || ($row['status'] == 4 )) { 
                                                     
                                                     if($row['quiz_title'] == "" ){ ?>
                                                      
@@ -103,8 +98,12 @@
                                                     <button class="btn btn-danger btn-sm mr-2" onclick="deleteRecord(<?php echo $row['que_bank_id']; ?>)">Delete</button>
 
                                                     <button type="button" class="btn btn-info btn-sm mr-2" data-id="<?php echo $row['que_bank_id']; ?>" id="archiveQueBank">Archive</button>
+
+
                                             <?php } } } ?>
                                             
+                                           
+
                                             <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
                                                 <?php if (($row['status'] == 1) || ($row['status'] == 4 ))  { ?>
                                                     <button type="button" class="btn btn-info btn-sm mr-2" data-id="<?php echo $row['que_bank_id']; ?>" id="sendForApproval">Send For Approval</button>
@@ -128,7 +127,7 @@
     <script>
          $(document).ready(function () {
     $('#listView').DataTable({
-        scrollX: true,
+        // scrollX: true,
     });
     });
         function deleteRecord(que_bank_id) {

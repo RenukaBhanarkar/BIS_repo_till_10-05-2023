@@ -44,7 +44,7 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
                 <div class="quiz-left-side-main shadow">
                     <h3 class="quiz_title_heading"><?= $quizdata['title'] ?></h3>
                     <form id="regForm" action="<?= base_url() . 'Users/quiz_submit' ?>" method="post" enctype="multipart/form-data">
-                    <?php $setLang =$_SESSION["quiz_lang_id"]; ?>
+                    <?php $setLang =$_SESSION["quiz_lang_id"]; ;?>
                         <div class="inner-section " id="qustions-tab">
                            <?php // echo  $user_id; ?>
                             <input type="hidden" value="<?= $quiz_start_time; ?>" name="start_time">
@@ -60,17 +60,20 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
                             foreach ($que_details as $key => $details) { 
                                
                                 ?>
-                                <div class="tab">
+                                <div class="tab p-3">
                                     <div class="quiz-ans-section">
-                                    <?php if ($quizdata['language_id'] == 1 || $setLang == 1) { ?>
+                                        <div class="d-flex mb-2">
+                                            <?php if ($quizdata['language_id'] == 1 || $setLang == 1) { ?>
                                         <p class="qustion-ans"> <?= $i++ . " . " .  $details['que'] ?> </p>        
                                         <?php } else{ ?> 
                                          <p class="qustion-ans"> <?= $i++ . " . " .  $details['que_h'] ?> </p>
                                          <?php }   ?>
                                          <?php if ($details['que_type'] == 2 || $details['que_type'] == 3) { ?>
                                                            
-                                                            <img width="100" src="<?php echo base_url(); ?>uploads/que_img/bankid<?php echo $details['que_bank_id']; ?>/<?php echo $details['image']; ?>">
+                                                            <img width="200" src="<?php echo base_url(); ?>uploads/que_img/bankid<?php echo $details['que_bank_id']; ?>/<?php echo $details['image']; ?>">
                                                         <?php }  ?>
+                                        </div>
+                                    
                                         <div class="quiz-option">
                                             <input type="hidden" value="<?= $details['que_id'] ?>" name="que_id[]">
                                             <input type="hidden" value="<?= $details['corr_opt_e'] ?>" name="corr_opt[]">
@@ -183,6 +186,7 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
                                                 }
                                             }
                                             ?>
+                                            <input hidden=true type="text" value="<?= $details['que_id'] ?>" class="active_question_id">
                                             <ul>
                                                 <?php if (
                                                     $details['no_of_options'] == 2 || $details['no_of_options'] == 3 ||
@@ -238,13 +242,13 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
                                             </ul>
                                         </div>
                                     </div>
-                                    <input type="checkbox" id="review" name="review[]" value="<?= $details['que_id'] ?>" /> <label for="subscribeNews">Mark For Review</label>
                                 </div>
                             <?php $k++;
                             } ?>
 
-                            <div class="d-flex float-end my-4">
-                              
+                            <div class="d-flex justify-content-between my-4 w-100 px-3">
+                                <button type="button" id="review" class="btn btn-primary text-nowrap" style="margin-right: 838px;"
+                                 value="<?= $details['que_id'] ?>" name="mark_for_review[]">Mark For Review</button>
 
                                 <button type="button" id="prevBtn" class="btn btn-primary startQuiz me-2" onclick="nextPrev(-1)">Previous</button>
 
@@ -282,8 +286,8 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
                         </div>
                         <div Id="right-bar-ans-none">
 
-                            <h6 class="quiz-title mb-4"><?= $quizdata['title'] ?></h2>
-                                <ul id="afterSubmitHide">
+                            <h6 class="quiz-title mb-4"><?= $quizdata['title'] ?></h6>
+                                <div id="afterSubmitHide">
                                     <!-- <li class="ans-green">1</li>
                                     <li class="ans-red">2</li>
                                     <li class="ans-blue">3</li>
@@ -291,9 +295,9 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
                                     <?php
                                     foreach ($que_details as $key => $details) {
                                         $key++; ?>
-                                        <li id="counter<?= $details['que_id'] ?>" class="ans-red"><?= $key; ?></li>
+                                        <span id="counter<?= $details['que_id'] ?>" class="ans-red"><?= $key; ?></span>
                                     <?php } ?>
-                                </ul>
+                                </div>
 
                         </div>
                         <div class="as-color">
@@ -325,7 +329,7 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
     </script>
     <script>
         $('#submit_button').hide();
-      
+        $('#thankYou').hide();
 
         var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the current tab
@@ -336,6 +340,10 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
             // This function will display the specified tab of the form...
             var x = document.getElementsByClassName("tab");
             x[n].style.display = "block";
+            // x.classList.remove("viewedQuestion");
+            x[n].classList.add("viewedQuestion");
+
+            alert($(".viewedQuestion .quiz-option .active_question_id").val());
 
             //... and fix the Previous/Next buttons:
             if (n == 0) {
@@ -349,6 +357,7 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
                 document.getElementById("submit_button").style.display = "block";
 
             } else {
+                document.getElementById("nextBtn").style.display = "block";
                 document.getElementById("nextBtn").innerHTML = "Next";
             }
             //... and run a function that will display the correct step indicator:
@@ -356,6 +365,8 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
         }
 
         function nextPrev(n) {
+
+            $(".tab.viewedQuestion").removeClass("viewedQuestion");
             var valid = true;
             // This function will figure out which tab to display
             var x = document.getElementsByClassName("tab");
@@ -381,6 +392,8 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
             if (valid) {
                 document.getElementsByClassName("step")[currentTab].className += " finish";
             }
+
+            
         }
 
         function validateForm() {
@@ -403,7 +416,7 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
         $('#submit_button').click(function() {
 
             $('#qustions-tab').hide();
-           
+            $('#thankYou').show();
             $('#submit_button').hide();
             $('#right-bar-ans-none').hide();
 
