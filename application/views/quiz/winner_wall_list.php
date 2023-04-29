@@ -20,6 +20,7 @@
                  <div class="card border-top card-body">
                     <div>
                            <button type="button" class="btn btn-primary btn-sm mr-2" onclick="location.href='<?php echo base_url();?>subadmin/winner_wall_form'">Create New Winner Wall</button> 
+                           <button type="button" class="btn btn-primary btn-sm mr-2" onclick="location.href='<?php echo base_url();?>subadmin/winner_wall_archive'">Archive</button> 
                     </div>
                  </div>   
             </div>     
@@ -27,19 +28,38 @@
         <div class="row">
             <div class="col-12 mt-3">
             <div class="card border-top card-body">
-                <table id="example" class="hover table-bordered" style="width:100%">
+                <table id="example" class="table-bordered display nowrap" style="width:100%">
                     <thead>
                         <tr>
                             <th>Sr. No.</th>
-                            <th>Name of winners</th>
-                            <th>Location</th>
-                            <th>Contact</th>
-                            <th>Email</th>
-                            <th>Rank/Prize</th>
+                            <th>Name of Competition</th>
+                            <th>Date of Competion</th>
+                            <th>Title</th>
+                            <th>Created on</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                                <td>1</td>
+                                <td>Poster Making</td>
+                                <td>12/03/2023</td>
+                                <td>Winners of Poster Making</td>
+                                <td>12/032023 12:00:00</td>
+                                 <td class="d-flex border-bottom-0">
+                                    <button onclick="submit()" class="btn btn-primary btn-sm mr-2">View</button>
+                                    <button onClick="location.href='#'" class="btn btn-info btn-sm mr-2">Edit</button>
+                                    <button onClick="location.href='#'" class="btn btn-success btn-sm mr-2">PUblish</button>
+                                    <button onClick="location.href='#'" class="btn btn-primary btn-sm mr-2">Archive</button>
+                                    <button onClick="location.href='#'" class="btn btn-info btn-sm mr-2">Unpublish</button>
+                                    <button  class="btn btn-danger btn-sm mr-2">Delete</button>
+                                 </td>
+                                  
+                            
+                                    <!-- Modal -->
+                        </tr>
+                    </tbody>
+                    <!-- <tbody>
                       <?php $i=1; foreach($winner_wall_list as $list){ ?>
                                 <tr>
                                 <td><?php echo $i; ?></td>
@@ -55,12 +75,12 @@
                                  </td>
                                   
                             
-                                    <!-- Modal -->
+                                   
                         </tr>
                         <?php $i++; } ?>
                         
                            
-                    </tbody>
+                    </tbody> -->
                 </table>
             </div>    
           </div>

@@ -169,9 +169,9 @@
                             <!-- <?php echo $wow['title']; ?> -->
                                 <!-- Lorem ipsum dolor sit amet, consectetur -->
                             </h6>
-                            <p class="Your_Wall_Description_view">
+                            <div class="Your_Wall_Description_view">
                             <?php echo $wow['description']; ?>
-                            </p>
+                            </div>
                             <p>
                                 <b>Likes -</b><?php echo $wow['likes']; ?>
                             </p>
@@ -188,7 +188,7 @@
                         <div class="title_right">
                             <h6>What's New</h6>
                             <div class="banner_image">
-                                <img src="<?php echo base_url();?>/assets/images/1.jpg" class="w-100">
+                                <img src="<?php echo base_url();?>/assets/images/whats_news.jpg" class="w-100">
                                 <p>Photography Competition- Share the unknown spots of Mizoram</p>
                             </div>
                         </div>

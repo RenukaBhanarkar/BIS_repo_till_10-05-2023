@@ -10,7 +10,7 @@
                             <ul>
                                 <li><a href="<?php echo base_url(); ?>users/feedback_form">Feedback</a></li>
                                 <li><a href="#">Help</a></li>
-                                <li><a href="sitemap.html">Sitemap</a></li>
+                                <li><a href="#">Sitemap</a></li>
                                 <!-- <li><a href="#">Accessibility</a></li> -->
                             </ul>
                         </div>
@@ -42,7 +42,7 @@
                                     
                                     <li><a href="<?php echo base_url(); ?>users/about_exchange_forum">About Exchange
                                             Forum</a></li>
-                                    <li><a href="<?php echo base_url(); ?>users/standard">Know your Standars</a></li>
+                                    <li><a href="https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails" onclick="know_pop()" target="blank">Know your Standards</a></li>
 
                                 </ul>
                             </div>
@@ -76,11 +76,13 @@
                     </div>
 
                 </div>
-
-                <div class="col-md-12">
-                    <hr>
+                
+<div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                <hr>  
                     <p>Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2023 - Bureau of Indian Standards.
                         All rights reserved</p>
+                </div>
                 </div>
             </div>
         </div>
@@ -139,6 +141,43 @@ $('#carouselExampleControls').owlCarousel({
     }
     }
 });
+
+$('.carouselExampleControlswinner').owlCarousel({
+        loop: true,
+        margin: 30,
+        dots: true,
+        nav: false,
+        responsiveClass: true,
+        autoplay: true,
+        autoPlaySpeed: 1000,
+        autoPlayTimeout: 1000,
+        autoplayHoverPause: true,
+  responsive: {
+    0: {
+      items: 2,
+    //   margin: 10,
+    //   stagePadding: 20,
+    },
+    600: {
+      items: 3,
+    //   margin: 20,
+    //   stagePadding: 50,
+    },
+    1000: {
+      items: 4
+    },
+    1200: {
+      items: 4
+    },
+    1400: {
+      items: 4
+    },
+    1600: {
+      items: 4
+    }
+    }
+});
+
 
 $('#owl-caraousal_1').owlCarousel({
     loop:true,
@@ -204,6 +243,22 @@ $('#owl-caraousal_4').owlCarousel({
         }
     }
 })
+$('#owl-caraousal_standard').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:1
+        }
+    }
+})
 $('.login_details').hide()
 jQuery('.show').on('click', function() {
     jQuery('.login_details').toggle();
@@ -219,13 +274,11 @@ $(document).ready(function(){
     method:"get",    
     success:function(result){      
          var res = JSON.parse(result);        
-        data = res;
-        console.log(data);
+        data = res; 
                 var row = '';
                 
-                for (i in data) {
-                    console.log(data);
-                    row += '<li><a href="https://'+data[i].link+'" class="jquery-once" id="'+data[i].id+'"><img src="<?php echo base_url(); ?>uploads/'+data[i].image +'"></a></li>';       
+                for (i in data) { 
+                    row += '<li><a href="https://'+data[i].link+'" target="_blank" class="jquery-once" id="'+data[i].id+'"><img src="<?php echo base_url(); ?>uploads/'+data[i].image +'"></a></li>';       
                                     
                 }
                 
@@ -245,14 +298,13 @@ $(document).ready(function(){
     method:"get",    
     success:function(result){      
          var res = JSON.parse(result);        
-        data = res;
-        console.log(data);
+        data = res; 
                 var row = '';
                 
                 for (i in data) {
                             
                      
-row += '<a href="https://' +data[i].link + '"target="_blank" title="Twitter" onclick="follow_pop()" class="jquery-once-4-processed"><img src="<?php echo base_url(); ?>uploads/'+data[i].icon +'"class="social_image">Twitter</a>';            
+row += '<a href="https://' +data[i].link + '"target="_blank" title="'+data[i].title+'" onclick="follow_pop()" class="jquery-once-4-processed"><img src="<?php echo base_url(); ?>uploads/'+data[i].icon +'"class="social_image">Twitter</a>';            
                 }
                 $(".social-content").html(row);
     },
@@ -270,6 +322,11 @@ row += '<a href="https://' +data[i].link + '"target="_blank" title="Twitter" onc
     </script>
     <script>
         function follow_pop(){
+            alert("You are being redirected to an external website. Please note that BIS Website cannot be held responsible for external websites content & privacy policies.");
+        }
+    </script>
+      <script>
+        function know_pop(){
             alert("You are being redirected to an external website. Please note that BIS Website cannot be held responsible for external websites content & privacy policies.");
         }
     </script>

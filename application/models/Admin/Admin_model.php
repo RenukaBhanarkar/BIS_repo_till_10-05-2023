@@ -419,7 +419,7 @@ class Admin_model extends CI_Model {
     public function getAllManageQuiz()
     { 
         $this->db->select('tbl_quiz_details.*,tbl_mst_status.status_name'); 
-        $this->db->where_in('tbl_quiz_details.status',array(2,3,4,5,6,10));
+        $this->db->where_in('tbl_quiz_details.status',array(2,3,4,5,6,1));
         $this->db->join('tbl_mst_status','tbl_mst_status.id = tbl_quiz_details.status'); 
         return $this->db->get('tbl_quiz_details')->result_array(); 
 
@@ -442,8 +442,10 @@ class Admin_model extends CI_Model {
         $this->db->from('tbl_quiz_details quiz');
         $this->db->join('tbl_mst_status st','st.id = quiz.status'); 
         $this->db->join('tbl_que_bank que','que.que_bank_id = quiz.que_bank_id'); 
-        $this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)'); 
-        // $this->db->where('('.$current_time.' BETWEEN quiz.start_time AND quiz.end_time)'); 
+        //$this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)'); 
+        // $this->db->where('('.$current_time.' BETWEEN quiz.start_time AND quiz.end_time)');
+        $this->db->where('quiz.start_date <=' ,date("Y-m-d")); 
+        $this->db->where('quiz.end_date >=' ,date("Y-m-d"));  
         $this->db->where('quiz.start_time <=' ,$current_time); 
         $this->db->where('quiz.end_time >=' ,$current_time); 
         $this->db->where('quiz.status',5); 

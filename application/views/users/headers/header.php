@@ -190,13 +190,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 </li>
                                 <li class="nav-item">
                                     <!-- <a class="nav-link active" target="_blank" aria-current="page" href="https://www.bis.gov.in/" style="color: white;">BIS</a> -->
-                                     <a class="nav-link active" target="_blank" aria-current="page" onclick="bis_pop()" style="color: white;">BIS</a>
+                                     <a class="nav-link active" href="https://www.bis.gov.in/" target="_blank" aria-current="page" onclick="bis_pop()" style="color: white;">BIS</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?php echo base_url(); ?>users/about_exchange_forum" style="color: white;">About Exchange Forum</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" target="_blank" href="https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails" style="color: white;">Know Your Standards</a>
+                                    <a class="nav-link" target="_blank" href="https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/knowyourstandards/indian_standards/isdetails" onclick="know_pop()" style="color: white;">Know Your Standards</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?php echo base_url(); ?>users/contact_us" style="color: white;">Contact Us</a>
@@ -211,7 +211,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <a class="nav-link" target="_blank" href="https://www.bis.gov.in/standards-national-action-plan-snap-2022/" style="color: white;">SNAP 2022 - 27</a>
                                 </li>
                                 <li class="nav-item guidance_quest">
-                                    <a class="nav-link"  target="_blank" href="https://www.bis.gov.in/wp-content/uploads/2023/03/Brochure_CC_NEC_merged.pdf" style="color: white;">Guidance Quest</a>
+                                    <a class="nav-link"  target="_blank" href="https://www.bis.gov.in/wp-content/uploads/2023/03/Brochure_CC_NEC_merged.pdf" style="color: white;">User Manual</a>
                                 </li>
                             </ul>
                         </div>

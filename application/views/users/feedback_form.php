@@ -35,9 +35,9 @@
     </div>
     <div class="row">
             <div class="col-md-12 p-3 text-end">
-                <button class="btn btn-primary" type="button" onclick="return validateForm();">Submit</button>
-                <button class="btn btn-danger" type="button" onclick="location.href='feedback'">Cancel</button>
-                <button class="btn btn-warning" type="reset" fdprocessedid="42ijcx">Reset</button>
+                <button class="btn btn-success" type="button">Submit</button>
+                <button class="btn btn-danger" type="button" onclick="location.href='#'">Cancel</button>
+                <button class="btn btn-warning" type="reset">Reset</button>
             </div>
     </div>
     </div>

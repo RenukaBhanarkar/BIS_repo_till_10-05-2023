@@ -1763,6 +1763,7 @@ button.btn_common {
 .card.image-card:hover {
     transition: all .5s;
     transform: scale(1.2);
+	z-index: 1;
 }
 p.card-text {
     font-size: 14px;
@@ -2476,4 +2477,114 @@ label.d-block.text-font {
 }
 .about .nav-pills li+li {
     margin-left: 40px;
+}
+
+.creative-discussion {
+    background-color: #EFF5F9;
+}
+.creative-discussion .container {
+    padding-top: 100px;
+    padding-bottom: 120px;
+    background: url(../images/create-task_bg.png) 0 0 no-repeat;
+    background-size: contain;
+}
+.creative-discussion .creative-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+.creative-discussion .creative-content {
+    background: #FFFFFF;
+    padding: 30px;
+    width: 49%;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+.creative-discussion .creative-wrapper .section-title {
+    margin-bottom: 25px;
+}
+.section-title h2 {
+    font-family: "montserratbold", sans-serif;
+    font-size: 1.714em;
+    background: linear-gradient(92.61deg, #9AC461 0%, #548BC5 0%, #59B59A 116.86%, #B45D97 182.36%, #DC763B 246.57%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.section-title span {
+    color: #3E4F5A;
+    font-family: "montserratregular", sans-serif;
+    letter-spacing: 1px;
+}
+.creative-discussion .creative-list .view-content, .creative-discussion .discussion-list .view-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -2%;
+}
+.creative-discussion .creative-list .view-content .views-row, .creative-discussion .discussion-list .view-content .views-row {
+    width: 48%;
+    position: relative;
+    margin-left: 2%;
+    margin-bottom: 20px;
+}
+.creative-discussion .creative-list .view-content .views-row .views-field-nothing, .creative-discussion .discussion-list .view-content .views-row .views-field-nothing {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative;
+}
+.creative-discussion .creative-list .view-content .views-row .views-field-nothing a, .creative-discussion .discussion-list .view-content .views-row .views-field-nothing a {
+    position: absolute;
+    background: linear-gradient(92.61deg, #9AC461 0%, #548BC5 0%, #59B59A 116.86%, #B45D97 182.36%, #DC763B 246.57%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(0) translateY(-50%);
+    text-align: center;
+    z-index: 2;
+    border-radius: 4px;
+    padding: 10px;
+    left: 0px;
+    right: 0px;
+    top: 50%;
+    margin: 0 auto;
+    color: #fff;
+    width: 180px;
+    text-align: center;
+}
+.creative-discussion .creative-list .views-field-field-deadline, .creative-discussion .discussion-list .views-field-field-deadline {
+    display: flex;
+    align-items: center;
+    margin-top: 7px;
+    font-size: 0.857em;
+    font-family: "montserratregular", sans-serif;
+}
+.creative-discussion .creative-list .views-field-field-deadline .views-label-field-deadline, .creative-discussion .discussion-list .views-field-field-deadline .views-label-field-deadline {
+    margin-right: 5px;
+}
+.creative-discussion .creative-wrapper .seeMore {
+    position: absolute;
+    left: 50%;
+	transform: translate(-50%, 0px);
+    bottom: 47px;
+    font-family: "montserratsemibold", sans-serif;
+}
+.creative-discussion .discussion-content {
+    background: #FFFFFF;
+    padding: 30px;
+    width: 49%;
+    position: relative;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.12);
+}
+.creative-discussion img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+#events_slider .views-row, #news_slider .views-row{
+	width: 100% !important;
+}
+
+.stand_img{
+	/* width: 300px; */
+	height: 260px;
 }

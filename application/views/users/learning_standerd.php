@@ -106,10 +106,10 @@ section.background_coming {
 </style>
 <section id="photo">
 <div class="container-fluid" id="pic" style="height:300px; width:100%">
-<img src="<?php echo base_url(); ?>assets/images/banner1.jpg" style="height: 100%;
+<img src="<?php echo base_url(); ?>assets/images/learning_new.jpeg" style="height: 100%;
    width: 100%;" class="img-fluid" alt="...">
 
-<div class="centered">Learning and Science of standerd</div>
+<!-- <div class="centered">Learning and Science of standerd</div> -->
 
 </div>
 
@@ -182,7 +182,7 @@ section.background_coming {
             <div class="col-lg-6 col-md-6 " style="background: linear-gradient(180.83deg, rgb(229 186 0 / 73%) 1.43%, rgba(194, 87, 155, 0.1) 98.57%);">
                 <div class="live_content" style="padding: 47px;">
                     <div class="live_section_title">
-                        <h2 style="font-weight: 600;">Informative Vedios</h2>
+                        <h2 style="font-weight: 600;">Informative Videos</h2>
                     </div>
                     <div class="owl-carousel owl-theme" id="owl-caraousal_3" style="padding: 25px 60px 0px 60px;">
                         <?php foreach ($InformativeVideo as $key => $value) {?>

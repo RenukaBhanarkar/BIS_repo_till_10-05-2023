@@ -81,14 +81,14 @@
                     <a class="collapse-item" href="<?php echo base_url(); ?>quiz/organizing_quiz">Competitions</a>
                     <a class="collapse-item" href="<?php echo base_url(); ?>wall_of_wisdom">Wall of Wisdom</a>
                     <a class="collapse-item" href="<?php echo base_url(); ?>admin/yourwall/">Your Wall</a>
-                    <a class="collapse-item" href="#">learning Science via Standards</a>
+                    <a class="collapse-item" href="<?php echo base_url(); ?>learningscience/lsv_standards_dashboard/">Classroom</a>
                     <a class="collapse-item" href="<?php echo base_url(); ?>admin/byTheMentors">By the Mentors</a>
                     <a class="collapse-item" href="<?php echo base_url(); ?>admin/cmsManagenent_dashboard">CMS</a>
                     <a class="collapse-item" href="<?php echo base_url(); ?>subadmin/winner_wall">Winners Wall</a>
                     <h6 class="collapse-header">Standards Making</h6>
                     <a class="collapse-item" href="#">Shared your through</a>
-                    <a class="collapse-item" href="#">Join the Class Room</a>
-                    <a class="collapse-item" href="#">In Conversation with Expert</a>
+                    <a class="collapse-item" href="<?php echo base_url(); ?>Standardsmaking/join_the_classroom_dashboard">Join the Class Room</a>
+                    <a class="collapse-item" href="<?php echo base_url(); ?>Standardsmaking/conversation_dashboard">In Conversation with Expert</a>
                 </div>
             </div>
         </li>

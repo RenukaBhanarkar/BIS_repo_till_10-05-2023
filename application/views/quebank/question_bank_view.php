@@ -2,6 +2,17 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Question Bank View</h1>
+        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Admin/dashboard';?>" >Sub Admin Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/organizing_quiz';?>" >Competitions</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/quiz_dashboard';?>" >Quiz Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'subadmin/questionBankList';?>" >Question Bank List</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Question Bank View</li>
+                
+                </ol>
+            </nav>
     </div>
     <!-- Content Row -->
     <div class="row">
@@ -38,8 +49,8 @@
                                 </div>
                             </div>
                             <div class="row mt-3">
-                                <div class="mb-2 col-md-12">
-                                    <table id="example" class="hover table-bordered" style="width:100%">
+                                <div class="mb-2 col-md-12 table-responsive">
+                                    <table id="example" class="table-bordered" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Sr.No.</th>
@@ -247,8 +258,8 @@
                                     <span class="err_reason"> </span>
                                 </div>
                                 <div class="col-md-12 submit_btn p-3">
-                                    <button type="button" class="btn btn-primary btn-sm mr-2 changeStatus" data-id="<?php echo $row['que_bank_id']; ?>" data-status="3">Approve</button>
-                                    <button type="button" class="btn btn-primary btn-sm mr-2 changeStatus" data-id="<?php echo $row['que_bank_id']; ?>" data-status="4">Reject</button>
+                                    <button type="button" class="btn btn-success btn-sm mr-2 changeStatus" data-id="<?php echo $row['que_bank_id']; ?>" data-status="3">Approve</button>
+                                    <button type="button" class="btn btn-danger btn-sm mr-2 changeStatus" data-id="<?php echo $row['que_bank_id']; ?>" data-status="4">Reject</button>
                                 </div>
 
                             <?php  } ?>

@@ -218,24 +218,60 @@
         }
         return $rs;  
     }
+    // public function isQuizForThisUser($user_id,$quiz_id)
+    // {   
+    //     $t=time();
+    //     $current_time = (date("H:i:s",$t));
+
+    //     $user_region_id = encryptids("D", $this->session->userdata('region_id'));
+    //    // $user_branch_id = encryptids("D", $this->session->userdata('branch_id'));
+
+    //     $this->db->select('quiz.*,st.status_name'); 
+    //     $this->db->from('tbl_quiz_details quiz');
+    //     $this->db->join('tbl_mst_status st','st.id = quiz.status'); 
+    //     $this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)'); 
+    //     // $this->db->where('('.$current_time.' BETWEEN quiz.start_time AND quiz.end_time)'); 
+    //     $this->db->where('quiz.start_time <=' ,$current_time); 
+    //     $this->db->where('quiz.end_time >=' ,$current_time); 
+    //     $this->db->where('quiz.status',5); 
+      
+    //     //$this->db->where_in('quiz.branch_id',array($user_branch_id,0));
+    //     $this->db->where_in('quiz.region_id',array($user_region_id,0));
+    //     $this->db->where('quiz.id',$quiz_id); 
+    //     $rs = array();
+    //     $query=$this->db->get();
+    //     if($query->num_rows() > 0){
+    //         $rs = $query->result_array();
+    //     }
+    //     return $rs;  
+    // }
     public function isQuizForThisUser($user_id,$quiz_id)
     {   
         $t=time();
-        $current_time = (date("H:i:s",$t));
-
+        $current_time = (date("H:i:s",$t));      
+        
         $user_region_id = encryptids("D", $this->session->userdata('region_id'));
-       // $user_branch_id = encryptids("D", $this->session->userdata('branch_id'));
-
+        $user_branch_id = encryptids("D", $this->session->userdata('branch_id'));
+        $user_standard_club_category= encryptids("D", $this->session->userdata('standard_club_category'));
+        if($user_standard_club_category == 1){
+            $ava = 1;
+        }else {
+            $ava = 2;
+        }
         $this->db->select('quiz.*,st.status_name'); 
         $this->db->from('tbl_quiz_details quiz');
         $this->db->join('tbl_mst_status st','st.id = quiz.status'); 
-        $this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)'); 
+        //$this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)'); 
+         $this->db->where('quiz.start_date <=' ,date("Y-m-d")); 
+        $this->db->where('quiz.end_date >=' ,date("Y-m-d")); 
         // $this->db->where('('.$current_time.' BETWEEN quiz.start_time AND quiz.end_time)'); 
-        $this->db->where('quiz.start_time <=' ,$current_time); 
+
+        $this->db->where('quiz.start_time <=' ,$current_time);        
         $this->db->where('quiz.end_time >=' ,$current_time); 
         $this->db->where('quiz.status',5); 
-      
-        //$this->db->where_in('quiz.branch_id',array($user_branch_id,0));
+        
+       $this->db->where_in('quiz.availability_id',$ava); 
+        $this->db->where_in('quiz.branch_id',array($user_branch_id,0));
         $this->db->where_in('quiz.region_id',array($user_region_id,0));
         $this->db->where('quiz.id',$quiz_id); 
         $rs = array();
@@ -254,7 +290,9 @@
         $this->db->select('quiz.*,st.status_name'); 
         $this->db->from('tbl_quiz_details quiz');
         $this->db->join('tbl_mst_status st','st.id = quiz.status'); 
-        $this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)'); 
+        //$this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)'); 
+        $this->db->where('quiz.start_date <=' ,date("Y-m-d")); 
+        $this->db->where('quiz.end_date >=' ,date("Y-m-d")); 
        
         $this->db->where('quiz.start_time <=' ,$current_time); 
         $this->db->where('quiz.end_time >=' ,$current_time); 
@@ -374,6 +412,21 @@
         }
     }
 
+    public function CheckLiveSessionlike($id,$admin_id)
+     { 
+
+        $this->db->where('classroom_id',$id); 
+        $this->db->where('admin_id',$admin_id); 
+       return $info = $this->db->get('tbl_join_the_classroom_info')->row_array(); 
+    }
+
+    public function getLikes($id,$ip_address)
+    { 
+        $this->db->where('conversation_id',$id); 
+        $this->db->where('ip_address',$ip_address); 
+        return $info = $this->db->get('tbl_conversation_video_info')->row_array(); 
+    }
+
      public function updateLikes($id,$ip_address)
      {
         $this->db->where('conversation_id', $id);
@@ -386,6 +439,30 @@
             $formdata2['likes']=$viewcount;
             $this->db->where('id',$id); 
             $update = $this->db->update('tbl_inconversation_with_expert', $formdata2);
+            if ($update) 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        } 
+        else  { return false; }
+    }
+    public function updateLiveSessionLikes($id,$admin_id)
+     {
+        $this->db->where('classroom_id', $id);
+        $this->db->where('admin_id', $admin_id);
+        $data['user_likes']=1;
+        if ($this->db->update('tbl_join_the_classroom_info', $data)) 
+        {
+            $query = $this->db->query("SELECT * FROM tbl_join_the_classroom_info WHERE user_likes=1 AND classroom_id=$id");
+            $viewcount=$query->num_rows();
+            $formdata2['likes']=$viewcount;
+            $this->db->where('id',$id); 
+            $update = $this->db->update('tbl_join_the_classroom', $formdata2);
             if ($update) 
             {
                 return true;
@@ -486,6 +563,89 @@
     // learning Standerd Function End For FrontEnd
 
 
+public function checkClassroomView($id,$admin_id)
+    {
+        $this->db->where('classroom_id',$id); 
+        $this->db->where('admin_id',$admin_id); 
+        $info = $this->db->get('tbl_join_the_classroom_info')->row_array();
+        if (empty($info))
+        {
+            $formdata['classroom_id']=$id;
+            $formdata['admin_id']=$admin_id;
+            $formdata['user_view']=1; 
+             $this->db->insert('tbl_join_the_classroom_info',$formdata); 
+             $insert_id = $this->db->insert_id();
+             if ($insert_id) {
+                $query = $this->db->query("SELECT * FROM tbl_join_the_classroom_info WHERE classroom_id='$id'");
+                $viewcount=$query->num_rows();
+                $formdata2['views']=$viewcount;
+                $this->db->where('id',$id); 
+                return $update = $this->db->update('tbl_join_the_classroom', $formdata2); 
+            }
+        }
+        else
+        {   
+            return 0;  
+        }
+    }
 
+
+    public function checkleasrningView($id,$admin_id)
+    {
+        $this->db->where('learning_id',$id); 
+        $this->db->where('admin_id',$admin_id); 
+        $info = $this->db->get('tbl_learning_science_info')->row_array();
+        if (empty($info))
+        {
+            $formdata['learning_id']=$id;
+            $formdata['admin_id']=$admin_id;
+            $formdata['user_view']=1; 
+             $this->db->insert('tbl_learning_science_info',$formdata); 
+             $insert_id = $this->db->insert_id();
+             if ($insert_id) {
+                $query = $this->db->query("SELECT * FROM tbl_learning_science_info WHERE learning_id='$id'");
+                $viewcount=$query->num_rows();
+                $formdata2['views']=$viewcount;
+                $this->db->where('id',$id); 
+                return $update = $this->db->update('tbl_learning_science_via_standards', $formdata2); 
+            }
+        }
+        else
+        {   
+            return 0;  
+        }
+    }
+
+
+public function Checkleasrninglike($id,$admin_id)
+    { 
+        $this->db->where('learning_id',$id); 
+        $this->db->where('admin_id',$admin_id); 
+        return $info = $this->db->get('tbl_learning_science_info')->row_array(); 
+    }
+     public function updateUpdateleasrningLikes($id,$admin_id)
+     {
+        $this->db->where('learning_id', $id);
+        $this->db->where('admin_id', $admin_id);
+        $data['user_like']=1;
+        if ($this->db->update('tbl_learning_science_info', $data)) 
+        {
+            $query = $this->db->query("SELECT * FROM tbl_learning_science_info WHERE user_like=1 AND learning_id=$id");
+            $viewcount=$query->num_rows();
+            $formdata2['likes']=$viewcount;
+            $this->db->where('id',$id); 
+            $update = $this->db->update('tbl_learning_science_via_standards', $formdata2);
+            if ($update) 
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        } 
+        else  { return false; }
+    }
      
 }

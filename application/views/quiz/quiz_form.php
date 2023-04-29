@@ -10,12 +10,16 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Quiz Creation</h1>
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="quiz_list">Quiz Creation List</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="#">Quiz Creation</a></li>
-            </ol>
-        </nav>
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Admin/dashboard';?>" >Sub Admin Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/organizing_quiz';?>" >Competitions</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/quiz_dashboard';?>" >Quiz Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Quiz/quiz_list';?>" >Quiz Creation</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Quiz Creation</li>
+                
+                </ol>
+            </nav>
 
     </div>
     <?php
@@ -95,7 +99,7 @@
                             </div>
                             <div class="mb-2 col-md-4">
                                 <label class="d-block text-font">Start Time<sup class="text-danger">*</sup></label>
-                                <input type="time" class="form-control input-font" name="start_time" id="start_time" placeholder="Select Date" value="<?php echo set_value('start_time'); ?>">
+                                <input type="text" class="form-control input-font timepicker" name="start_time" id="start_time" placeholder="Select Date" value="<?php echo set_value('start_time'); ?>">
                                 <span class="error_text"><?php echo form_error('start_time'); ?></span>
                             </div>
                         </div>
@@ -107,7 +111,7 @@
                             </div>
                             <div class="mb-2 col-md-4">
                                 <label class="d-block text-font"> End Time<sup class="text-danger">*</sup></label>
-                                <input type="time" class="form-control input-font" name="end_time" id="end_time" placeholder="Select Date" value="<?php echo set_value('end_time'); ?>">
+                                <input type="text" class="form-control input-font timepicker" name="end_time" id="end_time" placeholder="Select Date" value="<?php echo set_value('end_time'); ?>">
                                 <span class="error_text"><?php echo form_error('end_time'); ?></span>
                             </div>
                         </div>
@@ -131,6 +135,14 @@
 
                                 </select>
                                 <span class="error_text"><?php echo form_error('region_id'); ?></span>
+
+                            </div>
+                            <div class="mb-2 col-md-4" id="branch_id_blk">
+                                <label class="d-block text-font" id="branch_title">Branch<sup class="text-danger">*</sup></label>
+                                <select id="branch_id" name="branch_id" class="form-control input-font">
+                                 
+                                </select>
+                                <span class="error_text"><?php echo form_error('branch_id'); ?></span>
 
                             </div>
 
@@ -457,8 +469,8 @@
                             </div>
                         </div>
                         <div class="row mt-2">
-                            <div class="mb-2 col-md-12">
-                                <table id="example" class="table-bordered display nowrap" style="width:100%">
+                            <div class="mb-2 col-md-12 table-responsive">
+                                <table id="example" class="table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>Question No.</th>
@@ -624,19 +636,24 @@
         $("#outputConsol").hide();
     }
     $(document).ready(function() {
+        $(".timepicker").timepicker();
         $("#terms_conditions_error").hide();
         $("#description_error").hide();
 
         $("#region_id_blk").hide();
+        $("#branch_id_blk").hide();
         $(document).on("change", "#quiz_level_id", function(e) {
             e.preventDefault();
             var quiz_level_id = $("#quiz_level_id :selected").val();
             if (quiz_level_id == 1) {
                 $("#region_id_blk").hide();
+                $("#branch_id_blk").hide();
             } else if (quiz_level_id == 2) {
                 $("#region_id_blk").show();
+                $("#branch_id_blk").hide();
                 $("#region_title").text("Regional Level");
-                var postdata = "id=2";         
+                var postdata = "id=2";  
+
 
             $.ajax({
                 url: "<?= base_url() ?>quiz/getAllRegions",
@@ -657,8 +674,28 @@
             });
 
             } else if (quiz_level_id == 3) {
-                $("#region_id_blk").show();
-                $("#region_title").text("Branch Level");
+                $("#region_id_blk").hide();
+                $("#branch_id_blk").show();
+                $("#branch_title").text("Branch Level");
+                var postdata = "id=3";  
+
+
+            $.ajax({
+                url: "<?= base_url() ?>quiz/getAllBranches",
+                data: postdata,
+                type: "JSON",
+                method: "post",
+                success: function(response) {
+                    var res = JSON.parse(response);
+                    var selectbox = $('#branch_id');
+                    selectbox.empty();
+                    $("#branch_id").next(".validation").remove();
+                    $('#branch_id').append('<option value="" selected disabled>Select Branch </option>');
+                    $.each(res.region, function(index, value) {
+                        $('#branch_id').append('<option value="' + value.pki_id + '">' + value.uvc_department_name + '</option>');
+                    });
+                }
+            });
             }
         });
 
@@ -667,31 +704,27 @@
             e.preventDefault();
             var total_question = $("#total_question").val();
             var language_id = $("#language_id :selected").val();
-            if (total_question> 0 && language_id != "") {
-               
-                      
+            if (total_question> 0 && language_id != "") {     
+                $.ajax({
+                    url: "<?= base_url() ?>quiz/fetchQueBankForQuiz",
+                    data: {'total_question':total_question,'language_id':language_id},
+                    type: "JSON",
+                    method: "post",
+                    success: function(response) {
+                        var res = JSON.parse(response);
+                        var selectbox = $('#que_bank_id');
+                        selectbox.empty();
+                        $("#que_bank_id").next(".validation").remove();
+                        $('#que_bank_id').append('<option value="" selected disabled>Select Question Bank</option>');
+                        $.each(res.queBanks, function(index, value) {
+                            $('#que_bank_id').append('<option value="' + value.que_bank_id + '">' + value.title + '</option>');
+                        });
 
-            $.ajax({
-                url: "<?= base_url() ?>quiz/fetchQueBankForQuiz",
-                data: {'total_question':total_question,'language_id':language_id},
-                type: "JSON",
-                method: "post",
-                success: function(response) {
-                    var res = JSON.parse(response);
-                    var selectbox = $('#que_bank_id');
-                    selectbox.empty();
-                    $("#que_bank_id").next(".validation").remove();
-                    $('#que_bank_id').append('<option value="" selected disabled>Select Question Bank</option>');
-                    $.each(res.queBanks, function(index, value) {
-                        $('#que_bank_id').append('<option value="' + value.que_bank_id + '">' + value.title + '</option>');
-                    });
+                    }
+                });
 
-                }
-            });
-
-            } else if (quiz_level_id == 3) {
-                $("#region_id_blk").show();
-                $("#region_title").text("Branch Level");
+            } else  {
+                alert("Please select language and enter value  of questions.  ")
             }
         });
 
@@ -1290,7 +1323,7 @@
         } else {
             $("#quiz_level_id").next(".validation").remove();
         }
-        if (quiz_level_id == 2 || quiz_level_id == 3) {
+        if (quiz_level_id == 2 ) {
             var region_id = $("#region_id :selected").val();
             if (region_id == "" || region_id == null) {
                 if ($("#region_id").next(".validation").length == 0) {
@@ -1302,6 +1335,20 @@
                 allfields = false;
             } else {
                 $("#region_id").next(".validation").remove();
+            }
+        }
+        if (quiz_level_id == 3) {
+            var branch_id = $("#branch_id :selected").val();
+            if (branch_id == "" || branch_id == null) {
+                if ($("#branch_id").next(".validation").length == 0) {
+                    $("#branch_id").after("<div class='validation' style='color:red;margin-bottom:15px;'>Please  select branch</div>");
+                }
+                if (!focusSet) {
+                    $("#branch_id").focus();
+                }
+                allfields = false;
+            } else {
+                $("#branch_id").next(".validation").remove();
             }
         }
 

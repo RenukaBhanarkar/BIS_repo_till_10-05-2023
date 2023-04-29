@@ -245,7 +245,7 @@ h1 {
 
       <!-- Videos Section -->
       <div class="videos ">
-        <h1>Recommended</h1>
+        <h1 style="font-weight: 600; font-size: 26px; color: brown;">In Conversation with Experts</h1>
 
         <div class="videos__container">
           <!-- Single Video starts -->
@@ -262,7 +262,7 @@ h1 {
                 <a href="<?php echo base_url().'users/conversation_video/'?><?php echo encryptids("E", $value['id'] )?>"> <?= $value['title']?></a>
                 </h3>
                 
-                <span>10M Views • <?= time_elapsed_string($value['created_on'])?></span>
+                <span><?= $value['views']?> Views • <?= time_elapsed_string($value['created_on'])?></span>
               </div>
             </div>
           </div>

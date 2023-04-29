@@ -164,11 +164,11 @@
     }
 
     .join_img {
-        object-fit: cover;
-        height: 100%;
-        width: 80%;
-        border-radius: 5px;
-    }
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
 
     .title_join {
         text-align: center;
@@ -266,14 +266,16 @@
                             <span class="start-end-time-title">End Date <span class="quiz-text-date m-2"><?= date("d-m-Y", strtotime($quizdata['end_date'])); ?><span style="margin-left: 12px;"><?= $quizdata['end_time'];?></span></span>
                             </span>
                         </p>
+                        <?php if($quizdata['region'] !="") { ?> 
                         <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
                             <span class="start-end-time-title">Region<span class="quiz-text-date m-2"><?= $quizdata['region'];?></span>
                             </span>
                         </p>
-                        <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
+                        <?php }?>
+                       <!--  <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
                             <span class="start-end-time-title">Branch<span class="quiz-text-date m-2">12</span>
                             </span>
-                        </p>
+                        </p> -->
                     </div>
                     <?php
 
@@ -324,8 +326,9 @@
         <div class="bloginfo">
             <h3 style="margin-bottom: 14px; /* margin-top: 20px; */ color: #0086b2!important; font-weight: 600; margin-left: 24px;">Prize Details</h3>
         </div>
-        <?php foreach($prizeDetails as $row) { ?> 
+        
         <div class="join_container">
+            <?php foreach($prizeDetails as $row) { ?> 
             <?php if ($row['prize_id'] == 1) { ?> 
             <div class="view_join_content">
                 <h3>First Prize</h3>

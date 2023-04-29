@@ -10,7 +10,21 @@ class Quiz_model extends CI_Model {
 		}else{
 			return false;
 		}
-       
+        
+    }
+     public function sendToCreate($id,$formdata)
+    {
+        $this->db->where('id',$id); 
+        $quiz = $this->db->get('tbl_quiz_details')->row_array();
+        if ($quiz) 
+        {
+            $this->db->where('id', $id);
+            return $this->db->update('tbl_quiz_details', $formdata);
+        }
+        else
+        {
+            return false;
+        } 
     }
     public function getQuiz($id)
     {
@@ -24,13 +38,23 @@ class Quiz_model extends CI_Model {
         $this->db->where('quiz_id',$quiz_id); 
         return $quiz = $this->db->get('tbl_prizes')->row_array();
     }
+    public function deleteData($id)
+    {
+        $this->db->where('id', $id);
+        if ($this->db->delete('tbl_quiz_details')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getAllQuize()
     {   
         $this->db->select('tbl_quiz_details.*,tbl_mst_status.status_name'); 
         $this->db->join('tbl_mst_status','tbl_mst_status.id = tbl_quiz_details.status'); 
       
         //$this->db->where_in('tbl_quiz_details.status',array(1,2,3,4,5,6)); 
-        $this->db->where_in('tbl_quiz_details.status',array(1)); 
+        $this->db->where_in('tbl_quiz_details.status',array(10)); 
         return $this->db->get('tbl_quiz_details')->result_array();  
     }
    /*  public function getAllQuizeCreated()
@@ -129,8 +153,8 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
         } 
     }
     public function getAnswerKeyForUser($user_id,$quiz_id){
-        
-        $this->db->select(' 
+
+         $this->db->select(' 
         tbl_user_quiz.selected_op,tbl_user_quiz.quiz_id,tbl_user_quiz.user_id,tbl_user_quiz.mark_review,
         tbl_que_details.*,
         tbl_quiz_details.language_id,
@@ -142,6 +166,10 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
         $this->db->join('tbl_quiz_submission_details','tbl_quiz_submission_details.user_id = tbl_user_quiz.user_id AND tbl_quiz_submission_details.quiz_id = tbl_user_quiz.quiz_id');      
         $this->db->where('tbl_user_quiz.user_id',$user_id);
         $this->db->where('tbl_user_quiz.quiz_id',$quiz_id);
+        
+        
+        
+
         $query = $this->db->get();
         $rs=array();
         if ($query->num_rows() > 0) {
@@ -149,23 +177,10 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
                 array_push($rs,$row);
             }
         }
-        //echo json_encode($rs); exit();
+      //  echo json_encode($rs); exit();
         return $rs;
     } 
-    public function sendToCreate($id,$formdata)
-    {
-        $this->db->where('id',$id); 
-        $quiz = $this->db->get('tbl_quiz_details')->row_array();
-        if ($quiz) 
-        {
-            $this->db->where('id', $id);
-            return $this->db->update('tbl_quiz_details', $formdata);
-        }
-        else
-        {
-            return false;
-        } 
-    }
+    
 
     public function updatepublish($id,$formdata)
     {
@@ -181,6 +196,22 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
             return 2;
         } 
     }
+
+     // public function updateResultDeclaredStatus($quizId){
+     //     $formdata = array(
+     //        'status' =>11
+     //     );
+     //    $this->db->where('id',$quizId); 
+               
+     //    if($this->db->update('tbl_quiz_details', $formdata)){
+     //        return true;
+     //    } else
+     //    {
+     //        return false;
+     //    } 
+
+         
+     // }
 
 
 // SELECT `tbl_quiz_details`.*, `tbl_mst_status`.`status_name` FROM `tbl_quiz_details` JOIN `tbl_mst_status` ON `tbl_mst_status`.`id` = `tbl_quiz_details`.`status` WHERE `end_date` <= now() AND `end_time` >= TIME(now());
@@ -204,7 +235,7 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
         $this->db->from('tbl_quiz_details quiz');
         $this->db->join('tbl_mst_status st','st.id = quiz.status'); 
         $this->db->join('tbl_que_bank que','que.que_bank_id = quiz.que_bank_id'); 
-        $this->db->where('quiz.end_date <=', $current_date); 
+        $this->db->where('quiz.end_date <', $current_date); 
       
         
         //$this->db->where('quiz.end_time <=' ,$current_time); 
@@ -242,6 +273,8 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
         $this->db->order_by('score', 'desc');    
         return $this->db->get('tbl_quiz_submission_details')->result_array(); 
     }
+
+
     
     public function published_quiz(){
         $this->db->select('title,id');
@@ -310,6 +343,93 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
         } else {
             return false;
         }
+    }
+    public function getAllBranches()
+    { 
+         return $this->db->get("tbl_mst_branch")->result_array();
+    }
+
+     public function insertResultDesc($data)
+    {
+        if($this->db->insert('tbl_result_declaration',$data)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+       
+    }
+
+    public function getMstResultDeclaration($quiz_id)
+    { 
+        $this->db->where('quiz_id', $quiz_id);
+        return $this->db->get("tbl_mst_result_declaration")->result_array();
+    }
+    public function getSubmission($quiz_id)
+    { 
+        $this->db->where('quiz_id', $quiz_id);
+        return $this->db->get("tbl_result_declaration")->result_array();
+    }
+
+    public function getWinners($quiz_id)
+    { 
+        $this->db->where('quiz_id', $quiz_id);
+        $this->db->where_not_in('prize', 0);
+        return $this->db->get("tbl_result_declaration")->result_array();
+    }
+    public function insertMstResultDeclaration($data)
+    {
+        if($this->db->insert('tbl_mst_result_declaration',$data)){
+            return $this->db->insert_id();
+        }else{
+            return false;
+        }
+       
+    }
+    public function resultDeclarationListdata()
+    { 
+       $this->db->select('tbl_mst_result_declaration.*,
+            tbl_quiz_details.title,
+            tbl_quiz_details.quiz_id as quizId,
+            tbl_quiz_details.start_date as startDate,
+            tbl_quiz_details.total_mark'); 
+        $this->db->join('tbl_quiz_details','tbl_quiz_details.id = tbl_mst_result_declaration.quiz_id'); 
+        return $this->db->get('tbl_mst_result_declaration')->result_array(); 
+    }
+
+    public function getResultDeclarationList($id)
+    { 
+       $this->db->select('tbl_mst_result_declaration.*,
+            tbl_quiz_details.title,
+            tbl_quiz_details.quiz_id as quizId,
+            tbl_quiz_details.start_date as startDate,
+            tbl_quiz_details.total_mark');
+        $this->db->where('tbl_mst_result_declaration.id', $id);
+        $this->db->join('tbl_quiz_details','tbl_quiz_details.id = tbl_mst_result_declaration.quiz_id'); 
+        return $quiz =$this->db->get('tbl_mst_result_declaration')->row_array(); 
+
+        // $this->db->where('id',$id); 
+        // return $quiz = $this->db->get('tbl_quiz_details')->row_array();
+    }
+
+    public function resultDeclareUser($id)
+    { 
+       $this->db->select('tbl_quiz_submission_details.*,
+            tbl_users.user_name,
+            tbl_result_declaration.prize as userprize,
+            tbl_users.email,
+            tbl_users.user_mobile'); 
+        $this->db->where('tbl_quiz_submission_details.quiz_id',$id); 
+        $this->db->where_not_in('tbl_result_declaration.prize',0); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_quiz_submission_details.user_id');
+        $this->db->join('tbl_result_declaration','tbl_result_declaration.user_id = tbl_quiz_submission_details.user_id');
+        $this->db->order_by('score', 'desc');    
+        return $this->db->get('tbl_quiz_submission_details')->result_array(); 
+    }
+
+      public function getQuizinfo($id)
+    {
+        $this->db->where('id',$id); 
+        return $quiz = $this->db->get('tbl_quiz_details')->row_array();
     }
      
 }

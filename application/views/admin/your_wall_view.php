@@ -18,6 +18,15 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Manage Your Wall</h1>
+                        <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Admin/dashboard';?>" >Sub Admin Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/your_wall_list';?>" >Your Wall</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Your Wall View</li>
+                
+                </ol>
+            </nav>
                         
                     </div>
 <!-- Content Row -->
@@ -47,7 +56,7 @@
                                 <div class="mb-2 col-md-4">
                                     <label class="d-block text-font">Contact</label>
                                     <div>
-                                        <p>Not Available</p>
+                                        <p><?php  echo $data['user_mobile']; ?></p>
                                     </div>    
                                 </div>
                                 <!-- <div class="mb-2 col-md-4">
@@ -82,17 +91,19 @@
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font">Document<sup class="text-danger">*</sup></label>
                                                                         <div>
+                                                                            <?php if(!empty($data['document'])){  ?>
                                         <a href="<?php echo base_url().$data['document']; ?>" target="_blank">
                                         <img src="<?php echo base_url(); ?>assets/admin/img/pdf.png" width="25px">
                                         </a>
+                                    <?php }else{ echo "No Document"; } ?>
                                     </div> 
                                                                 </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                     <label class="d-block text-font">Status<sup class="text-danger">*</sup></label>
                                     <div>
-                                        <p><?php echo $data['status_name']; ?></p>
+                                        <p><?php //echo $data['status_name']; ?></p>
                                     </div> 
-                            </div>
+                            </div> -->
                             
 
                             <!-- <div class="col-md-4">

@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-6 mt-5">
                     <div class="mapouter shadow-sm">
-                        <div class="gmap_canvas"><iframe width="100%" height="97%" id="gmap_canvas" src="https://maps.google.com/maps?q=Bureau%20of%20Indian%20Standards,%20A%2020&21,%20Institutional%20Area,%20Sector%2062,%20NOIDA%20201309&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        <div class="gmap_canvas"><iframe width="100%" height="97%" id="gmap_canvas" src="https://maps.google.com/maps?q=bis delhi&t=&z=10&ie=UTF8&iwloc=&output=embed"
                                 frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                             <style>
                                 .mapouter {

@@ -1,7 +1,7 @@
 <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">learning Science via Standards</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Classroom</h1>
                         
                     </div>
 <!-- Content Row -->
@@ -98,7 +98,7 @@
                         <?php } ?>
                     </div>
                           <div class="col-md-12 submit_btn p-3">
-                               <a class="btn btn-primary btn-sm text-white" onclick="location.href='<?php echo base_url();?>Standardsmaking/live_session_list'">Back</a>
+                               <a class="btn btn-primary btn-sm text-white" onclick="location.href='<?php echo base_url();?>learningscience/lsv_standards_list'">Back</a>
                           </div>  
                         </div> 
                       </div>

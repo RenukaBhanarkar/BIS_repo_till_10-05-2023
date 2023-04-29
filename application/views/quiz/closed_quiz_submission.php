@@ -16,7 +16,7 @@
         
         <div class="row">
             <div class="col-12 mt-3">
-            <div class="card border-top card-body">
+            <div class="card border-top card-body table-responsive">
                 <table id="example" class="hover table-bordered" style="width:100%">
                     <thead>
                         <tr>

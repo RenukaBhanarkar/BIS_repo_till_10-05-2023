@@ -17,8 +17,11 @@ section.background_coming {
     background: #000000e8;
     color: white;
 }
-.owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
+ .owl-carousel .owl-nav.disabled {
     display: inherit;
+}
+.owl-carousel .owl-dots.disabled{
+	display:none;
 }
 .live_section_title {
     text-align: center;
@@ -53,78 +56,98 @@ a.view-btn {
     transition: opacity 200ms ease;
     border-radius: 30px;
 }
-.owl-theme .owl-dots {
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
-    display: none;
-}
-#owl-caraousal_2 .owl-dots {
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
-    display: none;
-}
-#owl-caraousal_2 button.owl-prev {
-    background: 0 0;
-    color: inherit;
-    border: none;
-    padding: 0!important;
-    font: inherit;
-    margin-left: -335px;
-    margin-right: 412px; 
-    /* margin-bottom: -57px; */
-    margin-bottom: 153px;
-}
-#owl-caraousal_2 .owl-nav {
-    margin-top: 10px;
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
+
+/**/
+/*#owl-caraousal_1 .owl-nav .owl-prev {
+    width: 15px;
+    height: 100px;
     position: absolute;
-}
-#owl-caraousal_3 .owl-dots {
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
-    display: none;
-}
-#owl-caraousal_3 button.owl-prev {
-    background: 0 0;
-    color: inherit;
-    border: none;
-    padding: 0!important;
-    font: inherit;
-    margin-left: -335px;
-    margin-right: 412px; 
-    /* margin-bottom: -57px; */
-    margin-bottom: 153px;
-}
-#owl-caraousal_3 .owl-nav {
-    margin-top: 10px;
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
-    position: absolute;
-}
-#owl-caraousal_4 .owl-dots {
-    text-align: center; 
-    -webkit-tap-highlight-color: transparent;
-    display: none;
-}
-#owl-caraousal_4 button.owl-prev {
-    background: 0 0;
-    color: inherit;
-    border: none;
-    padding: 0!important;
-    font: inherit;
-    margin-left: -335px;
-    margin-right: 412px;
-    /* margin-bottom: -57px; */
-    margin-bottom: 153px;
-}
-#owl-caraousal_4 .owl-nav {
-    margin-top: 10px;
-    text-align: center;
-    -webkit-tap-highlight-color: transparent;
-    position: absolute;
+    top:20%;
+    margin-left: -20px;
+    display: block !important;
+    border:0px solid black;
 }
 
+#owl-caraousal_1 .owl-nav .owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top:20%;
+    right: -25px;
+    display: block !important;
+    border:0px solid black;
+}*/
+
+ #owl-caraousal_2 .owl-nav .owl-prev {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top:40%;
+    left: 0px;
+    display: block !important;
+    border:0px solid black;
+}
+
+ #owl-caraousal_2 .owl-nav .owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top:40%;
+
+    right: 0px;
+    display: block !important;
+    border:0px solid black;
+}
+#owl-caraousal_2 .owl-nav .owl-prev i, #owl-caraousal_2 .owl-nav .owl-next i {transform : scale(1,6); color: #ccc;}
+.owl-dots {
+ display:none;
+}
+.owl-dots  .active{
+	display:none;
+}
+#owl-caraousal_3 .owl-nav .owl-prev {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top:40%;
+    left: 0px;
+    display: block !important;
+    border:0px solid black;
+}
+
+ #owl-caraousal_3 .owl-nav .owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top:40%;
+
+    right: 0px;
+    display: block !important;
+    border:0px solid black;
+}
+#owl-caraousal_3 .owl-nav .owl-prev i, #owl-caraousal_3 .owl-nav .owl-next i {transform : scale(1,6); color: #ccc;}
+
+#owl-caraousal_4 .owl-nav .owl-prev {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top:40%;
+    left: 0px;
+    display: block !important;
+    border:0px solid black;
+}
+
+ #owl-caraousal_4 .owl-nav .owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top:40%;
+
+    right: 0px;
+    display: block !important;
+    border:0px solid black;
+}
+#owl-caraousal_4 .owl-nav .owl-prev i, #owl-caraousal_4 .owl-nav .owl-next i {transform : scale(1,6); color: #ccc;}
 </style>
 <section class="background_coming">
     <div class="container">

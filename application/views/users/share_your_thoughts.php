@@ -9,8 +9,8 @@
     padding: 8px 8px 8px;
     border-radius: 2%;
     margin-right: 2%;
-
-    position:relative;
+    transition: all 1s linear;
+    position: relative;
 
 }
 .Title_Section_thoughts {
@@ -31,8 +31,8 @@
     width: 100%;
 }
 .World_of_standers_inner_Box:hover {
-    transition: all 1s;
-    box-shadow: 0 0 10px 10px #e62b03;
+    
+    box-shadow: 0 0 10px 0px #6e6e6e;
 }
 </style>
 <section id="quality-outer my-5">
@@ -90,6 +90,17 @@
                        
                     </div>
                     <p class="Title_Section_thoughts">Standards Revised</p>
+                    </a>
+                  
+                       
+                </div>
+                <div class="World_of_standers_inner_Box">
+                    <a href="<?php echo base_url().'users/standard_revised_list' ?>">
+                    <div class="World_of_standers_image_box">
+                        <img src="<?=base_url();?>assets/images/world_stander/revised.png" class="card-img-top" alt="Discussion Forum">
+                       
+                    </div>
+                    <p class="Title_Section_thoughts">Discussion Forum</p>
                     </a>
                   
                        

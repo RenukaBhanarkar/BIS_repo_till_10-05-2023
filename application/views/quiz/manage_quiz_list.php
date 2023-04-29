@@ -5,11 +5,15 @@
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Manage Quiz</h1>
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Manage Quiz</li>
-          </ol>
-        </nav>
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Admin/dashboard';?>" >Sub Admin Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/organizing_quiz';?>" >Competitions</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'quiz/quiz_dashboard';?>" >Quiz Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Manage Quiz</li>
+                
+                </ol>
+            </nav>
       </div>
       <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
         <div class="row">
@@ -30,7 +34,7 @@
       <div class="row">
         <div class="col-12 mt-3">
           <div class="card border-top card-body">
-            <table id="listView" class="hover table-bordered table-responsive" style="width:100%">
+            <table id="listView" class="table-bordered nowrap table-responsive" style="width:100%">
               <thead>
                 <tr>
                   <th>Sr. No.</th>
@@ -49,7 +53,7 @@
                 <?php if (!empty($allquize)) {
                   $i = 1;
                   foreach ($allquize as $quiz) { ?>
-                    <tr>
+                    <tr id="row<?= $quiz['id'];?>">
                       <td><?= $i++ ?></td>
                       <td><?= $quiz['quiz_id'] ?></td>
                       <td><?= $quiz['title'] ?></td>
@@ -79,7 +83,7 @@
 
                         <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
                            
-                          <?php if ($quiz['status'] == 10 ) { ?>
+                          <?php if ($quiz['status'] == 1 ) { ?>
                             <a href="sendApprove/<?= $quiz['id'] ?>" class="btn btn-success btn-sm mr-2">Send To Approve</a>
 
                           <?php } ?>
@@ -144,8 +148,32 @@
     <script>
       $(document).ready(function() {
         $('#listView').DataTable({
-        scrollX: true,
+        // scrollX: true,
     });
+        function deleteRecord(quiz_id) {
+            var c = confirm("Are you sure to delete this record ?");
+            if (c == true) {
+                // const $loader = $('.igr-ajax-loader');
+                //$loader.show();
+                $.ajax({
+                    type: 'POST',
+                    url: '<?php echo base_url(); ?>quiz/deleteQuiz',
+                    data: {
+                        id: quiz_id,
+                    },
+                    success: function(result) {
+                        $('#row' + quiz_id).css({
+                            'display': 'none'
+                        });
+                    },
+                    error: function(result) {
+                        alert("Error,Please try again.");
+                    }
+                });
+
+            }
+        }
+
         $('#listView').on('click', '#archiveQuiz', function(e) {
           e.preventDefault();
           const $root = $(this);

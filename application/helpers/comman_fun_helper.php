@@ -136,8 +136,12 @@ if( ! function_exists('encryptids'))
 			$output = base64_encode($output);
 			$output = urlencode($output);
 		} else if( $action == "D" ) {
-			$string = urldecode($string);
-			$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+			if($string != ""){
+				$string = urldecode($string);
+				$output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+			}
+			
+			
 		}
 		return $output;
 	}

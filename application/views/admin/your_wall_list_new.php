@@ -4,10 +4,12 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Your Wall</h1>
-            <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/';?>">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url().'admin/exchange_forum';?>">Exchange Forum</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Admin/dashboard';?>" >Sub Admin Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Your Wall</li>
+                
                 </ol>
             </nav>
         </div>
@@ -16,7 +18,7 @@
 		<nav>
 			<div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
 				<button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">New Requests</button>
-				<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Approve Requests</button>
+				<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Approved Requests</button>
 				<button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Rejected Requests</button>
                 <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#archive-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Archive Requests</button>
 			</div>
@@ -24,7 +26,7 @@
 		<div class="tab-content p-3 border bg-light" id="nav-tabContent" style="padding: 0px !important;">
 			<div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class="col-12 mt-3">
-                <div class="card border-top card-body">
+                <div class="card border-top card-body table-responsive">
                     <table id="example_1" class="table-bordered display nowrap" style="width:100%">
                         <thead>
                         <tr>
@@ -83,7 +85,7 @@
 			</div>
 			<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <div class="col-12 mt-3">
-                <div class="card border-top card-body">
+                <div class="card border-top card-body table-responsive">
                     <table id="example_2" class="table-bordered display nowrap" style="width:100%">
                         <thead>
                         <tr>
@@ -142,7 +144,7 @@
 			</div>
 			<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
             <div class="col-12 mt-3">
-                <div class="card border-top card-body">
+                <div class="card border-top card-body table-responsive">
                     <table id="example_3" class="table-bordered display nowrap" style="width:100%">
                         <thead>
                         <tr>
@@ -193,7 +195,7 @@
 			</div>
             <div class="tab-pane fade" id="archive-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
             <div class="col-12 mt-3">
-                <div class="card border-top card-body">
+                <div class="card border-top card-body table-responsive">
                     <table id="example_4" class="table-bordered display nowrap" style="width:100%">
                         <thead>
                         <tr>
@@ -244,8 +246,12 @@
 	</div>
 </div>
         <!-- Content Row -->
+        <div class="col-md-12 submit_btn p-3">
+        <a class="btn btn-primary btn-sm text-white" onclick="location.href='<?php echo base_url();?>admin/exchange_forum'">Back</a>
+    </div>
        
     </div>
+    
     <!-- End of Main Content -->
  </body>
                                   <!-- Modal -->
@@ -324,9 +330,7 @@
                                         </div>
                                     </div>
  
-    <div class="col-md-12 submit_btn p-3">
-        <a class="btn btn-primary btn-sm text-white" onclick="location.href='<?php echo base_url();?>admin/exchange_forum'">Back</a>
-    </div>      
+         
     
     <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -481,31 +485,25 @@
     
     <!-- Modal -->
 <script>
-    // $(document).ready(function () {
-    // $('#example_1').DataTable();
-    // $('#example_2').DataTable();
-    // $('#example_3').DataTable();
-    // scrollX: true,
-
-    // });
+ 
 $(document).ready(function () {
     $('#example_1').DataTable({
-        scrollX: true,
+        // scrollX: true,
     });
 });
 $(document).ready(function () {
     $('#example_2').DataTable({
-        scrollX: true,
+        // scrollX: true,
     });
 });
 $(document).ready(function () {
     $('#example_3').DataTable({
-        scrollX: true,
+        // scrollX: true,
     });
 });
 $(document).ready(function () {
     $('#example_4').DataTable({
-        scrollX: true,
+        // scrollX: true,
     });
 });
 </script>   

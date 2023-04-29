@@ -1,3 +1,8 @@
+<style>
+    table.dataTable.nowrap th, table.dataTable.nowrap td {
+    white-space: normal;
+}
+</style>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -13,21 +18,7 @@
         </nav>
     </div>
     <!-- Content Row -->
-    <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
-            <!-- Content Row -->
-
-            <!-- Content Row -->
-            <!-- <div class="row">
-                <div class="col-12">
-                    <div class="card border-top card-body">
-                        <div>
-                            <a href="<?=base_url()?>admin/bythementor_archivelist" class="btn btn-primary btn-sm mr-2" >Archive</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-        <?php }  ?>
+   
         <div class="row" style="padding:10px;">
         <div class="card p-3 shadow" style="width: -webkit-fill-available;">
                 <nav>
@@ -41,11 +32,13 @@
             <div class="tab-content p-3 border bg-light" id="nav-tabContent">
               <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="col-12 mt-3">
-                   <div class="card border-top card-body">
-                    <table id="example" class="table table-bordered display now" style="width:100%">
+                   <div class="card border-top card-body table-responsive">
+                    <table id="example5" class="table dataTable table-bordered display now" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Sr. No.</th>                               
+                                <th>Sr. No.</th>
+                                <th>Name</th> 
+                                <th>Email</th>                              
                                 <th>Title</th>
                                 <th>Created On</th>
                                 <th>Image</th>
@@ -60,7 +53,9 @@
                                 foreach ($created as $list_btm1) { ?>
 
                                     <tr>
-                                        <td><?php echo $i++ ?></td>                                        
+                                        <td><?php echo $i++ ?></td> 
+                                        <td><?php echo $list_btm1['user_name']; ?></td>  
+                                        <td><?php echo $list_btm1['email']; ?></td>                                     
                                         <td><?php echo $list_btm1['title']; ?></td>                                        
                                         <td><?php echo $list_btm1['created_on']; ?></td>                                        
                                         <td><?php if ($list_btm1['image']) { ?>
@@ -104,7 +99,7 @@
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="col-12 mt-3">
-                   <div class="card border-top card-body">
+                   <div class="card border-top card-body table-responsive">
                     <table id="example1" class="table-bordered display nowrap" style="width:100%;" >
                         <thead>
                             <tr>
@@ -165,7 +160,7 @@
             </div>
             <div class="tab-pane fade show" id="nav-contact" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="col-12 mt-3">
-                   <div class="card border-top card-body">
+                   <div class="card border-top card-body table-responsive">
                     <table id="example2" class="table table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -209,7 +204,7 @@
                                                 <button class="btn btn-primary btn-sm ml-2" onclick="sendArchive('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Archive</button>
                                           
                                                 <!-- <button class="btn btn-primary btn-sm" onclick="sendUnPublish('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>UnPublish</button> -->
-                                                
+                                        </td>   
                                  <?php } ?>
                                         
                                             <!-- Modal -->
@@ -225,7 +220,7 @@
             </div>
             <div class="tab-pane fade show" id="nav-archive" role="tabpanel" aria-labelledby="nav-archive-tab">
                 <div class="col-12 mt-3">
-                   <div class="card border-top card-body">
+                   <div class="card border-top card-body table-responsive">
                     <table id="example3" class="table table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -267,6 +262,7 @@
                                         <button class="btn btn-info btn-sm" onclick="sendUnArchive('<?php echo $list_btm1['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Restore</button>                                        
                                             <!-- Modal -->
                                             <?php } ?>
+                                        </td>
                                     </tr>
                             <?php }
                             } ?>
@@ -443,15 +439,18 @@
         //     $('#delete').modal('show');
         // })
         $('#example1').DataTable({
-            scrollx:true,
+            // scrollx:true,
            // responsive: true
         });
         $('#example2').DataTable({
-            scrollx:true,
+            // scrollx:true,
           //  responsive: true
         });
         $('#example3').DataTable({
-            scrollx:true
+            // scrollx:true
+        });
+        $('#example5').DataTable({
+            // scrollx:true
         });
         // $('#example').DataTable({
         //     scrollx:true

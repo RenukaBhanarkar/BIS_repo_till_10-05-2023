@@ -60,3 +60,6 @@ a:hover {
     background: antiquewhite;
     padding: 14px;
 }
+.card.shadow{
+    width: 100% !important;
+}

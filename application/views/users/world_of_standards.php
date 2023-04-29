@@ -83,7 +83,7 @@
                 <div class="World_of_standers_inner_Box  shadow">
                     <a href="item_proposal_list">
                     <div class="World_of_standers_image_box">
-                        <img src="<?=base_url();?>assets/images/world_stander/New_work_item.png" class="card-img-top" alt="Discussion Forum">
+                        <img src="<?=base_url();?>assets/images/item_proposal.jpeg" class="card-img-top" alt="Discussion Forum">
                        
                     </div>
                     <p class="Title_Section">New Work Item Proposals</p>
@@ -94,7 +94,7 @@
                 <div class="World_of_standers_inner_Box  shadow">
                     <a href="important_draft">
                     <div class="World_of_standers_image_box">
-                        <img src="<?=base_url();?>assets/images/world_stander/Draft1.png" class="card-img-top" alt="Discussion Forum">
+                        <img src="<?=base_url();?>assets/images/draft.jpeg" class="card-img-top" alt="Discussion Forum">
                        
                     </div>
                     <p class="Title_Section">Important Draft Standards</p>
@@ -103,9 +103,9 @@
                        
                 </div>
                 <div class="World_of_standers_inner_Box  shadow">
-                    <a href="https://www.services.bis.gov.in/php/BIS_2.0/dgdashboard/Published_Standards_new/new_standards">
+                    <a href="https://www.services.bis.gov.in/php/BIS_2.0/dgdashboard/Published_Standards_new/new_standards" onclick="publish_pop()" target="blank">
                     <div class="World_of_standers_image_box">
-                        <img src="<?=base_url();?>assets/images/world_stander/PUBLISHED.png" class="card-img-top" alt="Discussion Forum">
+                        <img src="<?=base_url();?>assets/images/new-standard-published.jpg" class="card-img-top" alt="Discussion Forum">
                        
                     </div>
                     <p class="Title_Section">New Standards Published</p>
@@ -114,9 +114,9 @@
                        
                 </div>
                 <div class="World_of_standers_inner_Box  shadow">
-                    <a href="https://www.services.bis.gov.in/php/BIS_2.0/dgdashboard/review/">
+                    <a href="https://www.services.bis.gov.in/php/BIS_2.0/dgdashboard/review/"  onclick="review_pop()" target="blank">
                     <div class="World_of_standers_image_box">
-                        <img src="<?=base_url();?>assets/images/world_stander/REVIEW.png" class="card-img-top" alt="Discussion Forum">
+                        <img src="<?=base_url();?>assets/images/standard_under.jpeg" class="card-img-top" alt="Discussion Forum">
                        
                     </div>
                     <p class="Title_Section">Standards Under Review</p>
@@ -125,7 +125,7 @@
                        
                 </div>
                 <div class="World_of_standers_inner_Box  shadow">
-                    <a href="https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/standard_review/Standard_review/">
+                    <a href="https://www.services.bis.gov.in/php/BIS_2.0/bisconnect/standard_review/Standard_review/" onclick="standard_pop()" target="blank">
                     <div class="World_of_standers_image_box">
                         <img src="<?=base_url();?>assets/images/world_stander/revised.png" class="card-img-top" alt="Discussion Forum">
                        
@@ -138,7 +138,7 @@
                 <div class="World_of_standers_inner_Box  shadow">
                     <a href="<?php echo base_url().'users/share_your_thoughts'?>">
                     <div class="World_of_standers_image_box">
-                        <img src="<?=base_url();?>assets/images/world_stander/shareYourthoughts.png" class="card-img-top" alt="Discussion Forum">
+                        <img src="<?=base_url();?>assets/images/share_thoughts.jpg" class="card-img-top" alt="Discussion Forum">
                        
                     </div>
                     <p class="Title_Section">Share Your Thoughts</p>
@@ -149,7 +149,7 @@
                 <div class="World_of_standers_inner_Box  shadow">
                 <a href="<?php echo base_url().'users/join_the_classroom'?>">
                     <div class="World_of_standers_image_box">
-                        <img src="<?=base_url();?>assets/images/world_stander/classroom.png" class="card-img-top" alt="Discussion Forum">
+                        <img src="<?=base_url();?>assets/images/join-classroom.jpg" class="card-img-top" alt="Discussion Forum">
                        
                     </div>
                     <p class="Title_Section">Join The Classroom</p>
@@ -160,7 +160,7 @@
                 <div class="World_of_standers_inner_Box  shadow">
                     <a href="<?php echo base_url().'users/conversation_with_experts'?>">
                     <div class="World_of_standers_image_box">
-                        <img src="<?=base_url();?>assets/images/world_stander/Experts.png" class="card-img-top" alt="Discussion Forum">
+                        <img src="<?=base_url();?>assets/images/experts-conversation.jpg" class="card-img-top" alt="Discussion Forum">
                        
                     </div>
                     <p class="Title_Section">In Conversation with Experts</p>
@@ -191,7 +191,7 @@
                   <?php if(!empty($images)){ foreach($images as $list){ ?>
                       <div class="item selfie col-lg-3 col-md-4 col-6 col-sm">
                           <a href="<?php echo base_url().'uploads/'.$list['image'];?>" class="fancylight popup-btn" data-fancybox-group="light"> 
-                          <img class="img-fluid" src="<?php echo base_url().'uploads/'.$list['image'];?>" style="height:180px; width:280px; padding:20px;"; alt="">
+                          <img class="img-fluid" src="<?php echo base_url().'uploads/'.$list['image'];?>" style="height:180px; width:280px;"; alt="">
                           </a>
                       </div>
                   <?php } ?>
@@ -226,7 +226,21 @@
     <script src="<?=base_url();?>assets/js/font_resize.js"></script>
     <script src="<?=base_url();?>assets/js/dark_mode.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js"></script>
-
+    <script>
+        function publish_pop(){
+            alert("You are being redirected to an external website. Please note that BIS Website cannot be held responsible for external websites content & privacy policies.");
+        }
+    </script>
+    <script>
+        function review_pop(){
+            alert("You are being redirected to an external website. Please note that BIS Website cannot be held responsible for external websites content & privacy policies.");
+        }
+    </script>
+    <script>
+        function standard_pop(){
+            alert("You are being redirected to an external website. Please note that BIS Website cannot be held responsible for external websites content & privacy policies.");
+        }
+    </script>
 <script>
      $('#photo_gallary').show();
       function abcd(){         

@@ -840,9 +840,9 @@
                         if ($("#que_image").val() != '') {
                             var fileSize = $('#que_image')[0].files[0].size;
 
-                            if (fileSize > 204800 ) {
+                            if (fileSize > 102400) {
                                 if ($("#imgError").next(".validation").length == 0) {
-                                    $("#imgError").after("<div class='validation' style='color:red;margin-bottom:15px;'>Please select file size less than 200 KB </div>");
+                                    $("#imgError").after("<div class='validation' style='color:red;margin-bottom:15px;'>Please select file size less than 100 KB </div>");
                                 }
                                 allFields = false;
                                 if (!focusSet) {

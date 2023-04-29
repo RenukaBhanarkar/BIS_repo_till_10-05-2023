@@ -4,6 +4,16 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Create new post/ live session</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Admin/dashboard';?>" >Sub Admin Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Standardsmaking/join_the_classroom_dashboard';?>" >Join the Class Room</a></li>
+                <li class="breadcrumb-item"><a href="<?php echo base_url().'Standardsmaking/live_session_list';?>" >Create new post/ live session</a></li>
+                <!-- <li class="breadcrumb-item active" aria-current="page">Create new post/ live session</li> -->
+                
+                </ol>
+            </nav> 
         </div>
 
         <form name="live_session_form" id="live_session_form" action="<?php echo base_url().'Standardsmaking/live_session_form'?>" method="post"enctype="multipart/form-data">
@@ -11,7 +21,7 @@
         <div class="row">
             <div class="col-12 mt-3">
                 <div class="card border-top">
-                    <div class="card-body">
+                    <div class="card-body"> 
                         <div id="english_div">
                         <div class="row">
                                 <div class="mb-2 col-md-4">
@@ -27,13 +37,13 @@
                         <div class="row">
                                 <div class="mb-2 col-md-8">
                                     <label class="d-block text-font">Title<sup class="text-danger">*</sup></label>
-                                    <input type="text" class="form-control input-font" name="title" id="title" placeholder="Enter Title">
+                                    <input type="text" class="form-control input-font" name="title" id="title" placeholder="Enter Title" maxlength="200">
                                 </div>
                         </div>
                         <div class="row">
                              <div class="mb-2 col-md-12">
                                 <label class="d-block text-font" text-font>Description<sup class="text-danger">*</sup></label>
-                                <textarea class="form-control input-font" placeholder="Enter Description" name="description" id="description"></textarea>
+                                <textarea class="form-control input-font" placeholder="Enter Description" name="description" id="description" maxlength="2000"></textarea>
                                 
                             </div>
                         </div>
@@ -50,8 +60,8 @@
                                 <label class="d-block">Upload Image<sup class="text-danger">*</sup></label>
                                 <div class="d-flex">
                                 <div>
-                                    <input type="file" id="image" name="image" class="form-control-file"  accept="image/png, image/jpeg,image/jpg">
-                                    <span class="error_text"></span>
+                                    <input type="file" id="image" name="image" onchange="loadImage(event)" class="form-control-file"  accept="image/png, image/jpeg,image/jpg">
+                                    
                                 </div>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ImageModal">
                                     Preview 
@@ -64,14 +74,13 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                         <h5 class="modal-title" id="imageModalLabel">Upload Image</h5>
-
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
+                                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
                                         </div>
                                         <div class="modal-body">
                                         <img id="outpuimage"width="100%"/>
                                         </div>
                                         <div class="modal-footer">
-                                        <button type="button"  onclick="resetbanner()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
+                                        <button type="button"  onclick="resetimg()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
                                         <button type="button" class="btn btn-primary"data-bs-dismiss="modal">Save changes</button>
                                         </div>
                                     </div>
@@ -85,7 +94,7 @@
                                 <label class="d-block">Upload Thumbnail<sup class="text-danger">*</sup></label>
                                 <div class="d-flex">
                                 <div>
-                                    <input type="file" id="thumbnail" name="thumbnail" class="form-control-file"  accept="image/png, image/jpeg,image/jpg">
+                                    <input type="file" id="thumbnail" name="thumbnail" class="form-control-file"  accept="image/png, image/jpeg,image/jpg"onchange="loadThumbnail(event)">
                                     <span class="error_text"></span>
                                 </div>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#ThumbnailModal">
@@ -100,13 +109,13 @@
                                         <div class="modal-header">
                                         <h5 class="modal-title" id="ThumbnailModalLabel">Upload Thumbnail</h5>
 
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
+                                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
                                         </div>
                                         <div class="modal-body">
-                                        <img id="outputThumbnail"width="100%"/>
+                                       <img id="outputhumbnail"width="100%"/>
                                         </div>
                                         <div class="modal-footer">
-                                        <button type="button"  onclick="resetbanner()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
+                                         <button type="button"  onclick="resethumbnail()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
                                         <button type="button" class="btn btn-primary"data-bs-dismiss="modal">Save changes</button>
                                         </div>
                                     </div>
@@ -124,9 +133,9 @@
                                     <input type="file" id="doc_pdf" name="doc_pdf" class="form-control-file"accept="application/pdf" / >
                                     <span class="error_text"></span>
                                 </div>
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#PDFModal">
+                               <!--  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#PDFModal">
                                     Preview 
-                                </button>
+                                </button> -->
                                 </div>
                         </div> 
                           <!-- Modal -->
@@ -136,7 +145,7 @@
                                         <div class="modal-header">
                                         <h5 class="modal-title" id="PDFModalLabel">Upload Thumbnail</h5>
 
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
+                                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
                                         </div>
                                         <div class="modal-body">
                                         <img id="outputbanner"width="100%"/>
@@ -156,7 +165,7 @@
                                 <label class="d-block">Upload Video<sup class="text-danger">*</sup></label>
                                 <div class="d-flex">
                                 <div>
-                                    <input type="file" id="video" name="video" class="form-control-file"accept="video/mp4,video/mkv"/ >
+                                    <input type="file" id="video" name="video" class="form-control-file"accept="video/mp4,video/mkv"/onchange="loadVideo(event)"  >
                                     <span class="error_text"></span>
                                 </div>
                                 <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#videoModal">
@@ -171,13 +180,15 @@
                                         <div class="modal-header">
                                         <h5 class="modal-title" id="videoModalLabel">Upload Video</h5>
 
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
+                                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
                                         </div>
-                                        <div class="modal-body">
-                                        <img id="outputbanner"width="100%"/>
+                                        <div class="modal-body"> 
+
+                                        <video width="320" height="240" controls id="outputvideo"width="100%"/>  </video>
+
                                         </div>
                                         <div class="modal-footer">
-                                        <button type="button"  onclick="resetbanner()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
+                                        <button type="button"  onclick="resetvideo()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
                                         <button type="button" class="btn btn-primary"data-bs-dismiss="modal">Save changes</button>
                                         </div>
                                     </div>
@@ -188,7 +199,7 @@
                     </div>
                     </div>
                     <div class="col-md-12 submit_btn p-3">
-                                 <a class="btn btn-success btn-sm text-white" data-toggle="modal" data-target="#submitForm">Submit</a>
+                                 <a class="btn btn-success btn-sm text-white" data-toggle="modal" data-target="#" id="btnsubmitdata">Submit</a>
                                  <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#cancelForm">Cancel</a>
                     </div> 
                    <!-- Modal -->
@@ -197,7 +208,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Submit Form</h5>
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
+                                                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to Submit?</p>
@@ -216,7 +227,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
+                                                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"> <span aria-hidden="true">×</span></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Are you sure you want to cancel?</p>
@@ -234,9 +245,13 @@
         </form>
         </div>
 
+        </form>
+        </div>
+
         <script>
             $(document).ready(function () 
             {
+                CKEDITOR.replace('description');
                 $("#text_image").hide();
                 $("#pdf_upload").hide();
                 $("#link_session").hide();
@@ -313,7 +328,7 @@ var loadFileThumbnail = function(event)
         </script>
 
         <script type="text/javascript">
-    $('#live_session_form').submit(function(e) { 
+    $('#btnsubmitdata').click(function(e) { 
                     e.preventDefault();
                     var focusSet = false;
                     var allfields = true;
@@ -392,15 +407,8 @@ var loadFileThumbnail = function(event)
                         $("#session_link").next(".validation").remove(); // remove it
                     }
                 }
-// type_of_post--3 end
-                    
 
-
-
-
-
-
-                    var title = $("#title").val(); 
+                var title = $("#title").val(); 
                     if (title == "" || title== null) {
                         if ($("#title").next(".validation").length == 0) // only add if not added
                         {
@@ -411,8 +419,8 @@ var loadFileThumbnail = function(event)
                     } else {
                         $("#title").next(".validation").remove(); // remove it
                     } 
-
-                    var description = $("#description").val();  
+ 
+                   var description = CKEDITOR.instances['description'].getData(); 
                     if (description == "" || description== null) {
                         if ($("#description").next(".validation").length == 0) // only add if not added
                         {
@@ -456,7 +464,7 @@ var loadFileThumbnail = function(event)
                     {
                         $("#image").next(".validation").remove(); // remove it
                     }
-                    var validExtensions = ['Jpeg','jpg','png']; //array of valid extensions
+                    var validExtensions = ['jpeg','jpg','png']; //array of valid extensions
                     var fileName = $("#image").val();;
                     var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
                     $("#image").next(".validation").remove();
@@ -498,7 +506,7 @@ var loadFileThumbnail = function(event)
                     {
                         $("#thumbnail").next(".validation").remove(); // remove it
                     }
-                    var validExtensions = ['Jpeg','jpg','png']; //array of valid extensions
+                    var validExtensions = ['jpeg','jpg','png']; //array of valid extensions
                     var fileName = $("#thumbnail").val();;
                     var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
                     $("#thumbnail").next(".validation").remove();
@@ -591,9 +599,61 @@ var loadFileThumbnail = function(event)
                      
                     console.log(allfields)
                     if (allfields) { 
+                         $("#submitForm").show();
                         $('#live_session_form').submit();
                     } else {
                         $('#closeform').trigger('click');
                         return false; 
                     }
                 });</script>
+
+
+                <script type="text/javascript">
+var loadImage = function(event) 
+    {
+        $("#image").show();
+        var loadImage = document.getElementById('outpuimage');
+        loadImage.src = URL.createObjectURL(event.target.files[0]);
+        loadImage.onload = function()
+        {
+            URL.revokeObjectURL(loadImage.src);
+        }
+    };
+    function resetimg()
+    {
+        $("#image").val(''); 
+        $("#outputThumbnail").hide(); 
+    }
+
+var loadThumbnail = function(event) 
+    {
+        $("#thumbnail").show();
+        var loadThumbnail = document.getElementById('outputhumbnail');
+        loadThumbnail.src = URL.createObjectURL(event.target.files[0]);
+        loadThumbnail.onload = function()
+        {
+            URL.revokeObjectURL(loadThumbnail.src);
+        }
+    };
+    function resethumbnail()
+    {
+        $("#thumbnail").val(''); 
+        $("#outputThumbnail").hide(); 
+    }
+
+    var loadVideo = function(event) 
+    {
+        $("#video").show();
+        var loadVideo = document.getElementById('outputvideo');
+        loadVideo.src = URL.createObjectURL(event.target.files[0]);
+        loadVideo.onload = function()
+        {
+            URL.revokeObjectURL(loadVideo.src);
+        }
+    };
+    function resetvideo()
+    {
+        $("#video").val(''); 
+        $("#outputvideo").hide(); 
+    }
+        </script>
