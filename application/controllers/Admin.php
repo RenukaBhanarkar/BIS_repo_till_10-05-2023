@@ -499,8 +499,11 @@ class Admin extends CI_Controller
     }
 
     public function add_about_exchange_forum(){
+        if (!file_exists('uploads/cms/about_exchange_forum')) { mkdir('uploads/cms/about_exchange_forum', 0777, true); }
+
+
         $banner_img = "about_exchange_forum" . time() . '.jpg';
-        $config['upload_path'] = './uploads';
+        $config['upload_path'] = './uploads/cms/about_exchange_forum';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['max_size']    = '10000';
         $config['max_width']  = '3024';
@@ -523,6 +526,7 @@ class Admin extends CI_Controller
         redirect(base_url() . "admin/about_exchange_forum", 'refresh'); 
     }
     public function update_about_exchange_forum(){
+        if (!file_exists('uploads/cms/about_exchange_forum')) { mkdir('uploads/cms/about_exchange_forum', 0777, true); }
         //print_r([$_POST['old_image']]); die;
         $formdata['id'] = $this->input->post('id');
         //$formdata['title'] = $this->input->post('title');
@@ -535,7 +539,7 @@ class Admin extends CI_Controller
 
             if (!empty($_FILES['image']['tmp_name'])) {
                 $document = "banner_image" . time() . '.jpg';
-                $config['upload_path'] = './uploads';
+                $config['upload_path'] = './uploads/cms/about_exchange_forum';
                 $config['allowed_types'] = 'jpg|png|jpeg';
                 $config['max_size']    = '250';
                 $config['max_width']  = '3024';
