@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <div class="mb-2 col-md-4">
                                             <label class="d-block text-font">Contact Number<sup class="text-danger">*</sup></label>
-                                            <input type="text" class="form-control input-font" name="contact_no" id="" required="" minlength="10" maxlength="100" value="">
+                                            <input type="text" class="form-control input-font" name="contact_no" id="contact" required="" minlength="10" maxlength="100" value="">
                                             <span class="error_text">
                                                 <?php //echo form_error('title'); 
                                                 ?>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="mb-2 col-md-4">
                                             <label class="d-block text-font">Address<sup class="text-danger">*</sup></label>
-                                            <input type="text" class="form-control input-font" name="address" id="" required="" minlength="10" maxlength="100" value="">
+                                            <input type="text" class="form-control input-font" name="address" id="address" required="" minlength="10" maxlength="100" value="">
                                             <span class="error_text">
                                                 <?php //echo form_error('title'); 
                                                 ?>
@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="mb-2 col-md-4">
                                             <label class="d-block text-font">TELE FAX<sup class="text-danger">*</sup></label>
-                                            <input type="text" class="form-control input-font" name="tele_tax" id="" required="" minlength="6" maxlength="20" value="">
+                                            <input type="text" class="form-control input-font" name="tele_tax" id="tele_fax" required="" minlength="6" maxlength="20" value="">
                                             <span class="error_text">
                                                 <?php //echo form_error('title'); 
                                                 ?>
@@ -72,15 +72,16 @@
                                         </div>
                                         <div class="mb-2 col-md-4">
                                             <label class="d-block text-font">Email<sup class="text-danger">*</sup></label>
-                                            <input type="email" class="form-control input-font" name="email" id="" required="">
+                                            <input type="email" class="form-control input-font" name="email" id="email" required="">
                                             <span class="error_text">
                                                 <?php //echo form_error('title'); 
                                                 ?>
                                             </span>
-                                        </div>
-                                        <div class="invalid-feedback">
+                                            <div class="invalid-feedback">
                                             Enter Valid email address
                                             </div>
+                                        </div>
+                                        
                                         <!-- <div class="mb-2 col-md-4">
                                             <label class="d-block text-font">Location URL</label>
                                             <input type="text" class="form-control input-font" name="location_url" id="">
@@ -92,7 +93,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                        <button class="btn btn-primary">Submit</button>
+                                        <button onclick="return addContact(event)" class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +112,7 @@
         ?>
         <div class="row">
             <div class="col-12 mt-3">
-                <div class="card border-top card-body">
+                <div class="card border-top card-body table-responsive">
                     <table id="example" class="table table-bordered" style="width:100%">
                         <thead>
                             <tr>
@@ -214,7 +215,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                                <button onclick="submitButton()" class="btn btn-primary">Update</button>
+                                                                <button onclick="return submitButton(event)" class="btn btn-primary">Update</button>
                                                             </div>
                                                             </form>
                                                         </div>
@@ -288,7 +289,8 @@
                         });          
         }
 
-        function submitButton() {
+        function submitButton(event) {
+            event.preventDefault();
              var contact = $("#contact1").val();
              var address= $("#address1").val();
              var tele_fax= $("#tele_fax1").val();
@@ -349,31 +351,176 @@
 
              if (is_valid) { 
                 $('#updateform').attr('action','<?php echo base_url(); ?>admin/update_contactus');                
-                 return true;
+                //  return true;
+                 Swal.fire({
+                            title: 'Do you want to Submit?',
+                            showDenyButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: 'Submit',
+                            denyButtonText: `Cancel`,
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                Swal.fire('Saved!', '', 'success')
+                                // return true;
+                                $('#updateform').submit();
+                                // return true
+                            } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                            })
+
+
+
              } else {
                  return false;
              }
-         };
+        };
+
+
+        function addContact(event){
+            event.preventDefault();
+
+            is_valid = true;
+                //  var id =   $('#id1').val();
+                 var contact =    $('#contact_no').val();
+                 var address =    $('#address').val();
+                 var email =    $('#email').val();
+                //  var url =    $('#location_url1').val();
+                 var tele_fax =   $('#tele_fax').val();
+
+                            
+             if (address == "") {
+                 $("#err_address").text("This value is required");
+                 $("#address").focus();
+                 is_valid = false;
+             
+             } else if (!(address.length > 2)) {
+                 $("#err_address").text("Please Enter minimum 3 Characters");
+                 $("#address").focus();
+                 is_valid = false;
+             } else {
+                 $("#err_address").text("");
+             }
+
+             if (contact=="") {
+                //  $("#err_contact").text("This value is required");
+                 $("#contact").focus();
+                 is_valid = false;
+             
+             } else {
+                 $("#err_contact").text("");
+             } 
+             if (tele_fax=="") {
+                 $("#err_tele").text("This value is required");
+                 $("#tele_fax").focus();
+                 is_valid = false;
+             
+             } else {
+                 $("#err_tele").text("");
+             }
+
+             if (email=="") {
+                 $("#err_email").text("This value is required");
+                 $("#email").focus();
+                 is_valid = false;
+             
+             } else {
+                 $("#err_email").text("");
+             }
+
+            //  if (url=="") {
+            //      $("#err_url").text("This value is required");
+            //      $("#location_url1").focus();
+            //      is_valid = false;
+             
+            //  } else {
+            //      $("#err_url").text("");
+            //  }
+            if (is_valid) { 
+                // $('#updateform').attr('action','<?php echo base_url(); ?>admin/update_contactus');                
+                //  return true;
+                 Swal.fire({
+                            title: 'Do you want to Submit?',
+                            showDenyButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: 'Submit',
+                            denyButtonText: `Cancel`,
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                Swal.fire('Saved!', '', 'success')
+                                // return true;
+                                $('#add_admin').submit();
+                                // return true
+                            } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                            })
+
+
+
+             } else {
+                 return false;
+             }
+        }
+        
 
          function deleteContactus(que_id) {
         // var c = confirm("Are you sure to delete this survey details? ");
-        $('#delete').modal('show');
-        $('.abcd').on('click', function() {
+        // $('#delete').modal('show');
+        // $('.abcd').on('click', function() {
 
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>admin/deletContactus',
-                data: {
-                    que_id: que_id,
-                },
-                success: function(result) {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>admin/deletContactus',
+        //         data: {
+        //             que_id: que_id,
+        //         },
+        //         success: function(result) {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+        // });
+
+
+
+        Swal.fire({
+                            title: 'Do you want to Delete?',
+                            showDenyButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: 'Delete',
+                            denyButtonText: `Cancel`,
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                
+                                $.ajax({
+                                        type: 'POST',
+                                        url: '<?php echo base_url(); ?>admin/deletContactus',
+                                        data: {
+                                            que_id: que_id,
+                                        },
+                                        success: function(result) {
+                                            location.reload();
+                                        },
+                                        error: function(result) {
+                                            alert("Error,Please try again.");
+                                        }
+                                    });
+                                
+
+                                Swal.fire('Saved!', '', 'success')
+                                // return true;
+                                // $('#updateform').submit();
+                                // return true
+                            } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                            })
     }
 
          (() => {
