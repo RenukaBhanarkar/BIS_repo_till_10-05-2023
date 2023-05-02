@@ -59,7 +59,10 @@
                                  <?php $id= encryptids("E", $value['id'] )?>
 
                                 <a href="live_session_view/<?= $id;?>" class="btn btn-primary btn-sm mr-2" title="View">View</a>
+                                 <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
+                                    <button onclick="updateStatusLiveSession('<?= $value['id']?>',6);" data-id='<?php echo $value['id']; ?>' class="btn btn-warning btn-sm mr-2 delete_img">Unpublish</button>
                                 <button onclick="updateStatusLiveSession('<?= $value['id']?>',9);" data-id='<?php echo $value['id']; ?>' class="btn btn-secondary btn-sm mr-2 delete_img">Archives</button> 
+                                <?php }?>
 
                               </td>
                               
@@ -78,5 +81,79 @@
     <!-- /.container-fluid -->
 
     </div>
+  <div class="modal fade" id="updatemodel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><span class="sms"></span> Record</h5>
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to <span class="sms"> </span> ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary updatestatus" data-bs-dismiss="modal"><span class="sms"> </span></button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- /.container-fluid -->
+
+    </div>
+<script type="text/javascript">
+    function deleteLiveSession(id) 
+    {
+        $('#delete').modal('show');
+        $('.deletecall').on('click', function() 
+        {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url(); ?>Standardsmaking/deleteLiveSession',
+                data: {
+                    id: id,
+                },
+                success: function(result) 
+                {
+                    location.reload();
+                },
+                error: function(result) {
+                    alert("Error,Please try again.");
+                }
+            });
+        });
+    }
+
+    function updateStatusLiveSession(id,status) 
+    { 
+        if (status==2)  { $(".sms").text('Send For Approval'); }
+        if (status==5)  { $(".sms").text('Publish'); }
+        if (status==6)  { $(".sms").text('UnPublish'); }
+        if (status==9)  { $(".sms").text('Archives'); }
+        $('#updatemodel').modal('show');
+        $('.updatestatus').on('click', function() 
+        {
+            $.ajax({
+                type: 'POST',
+                url: '<?php echo base_url(); ?>Standardsmaking/updateStatusLiveSession',
+                data: {
+                    id: id,
+                    status: status,
+                },
+                success: function(result) 
+                {
+                    location.reload();
+                },
+                error: function(result) {
+                    alert("Error,Please try again.");
+                }
+            });
+        });
+    }
+
+
+    </script>
     <!-- End of Main Content -->
  </body>
