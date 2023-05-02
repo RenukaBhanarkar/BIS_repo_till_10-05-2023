@@ -73,7 +73,7 @@
                                             <?php 
                                             if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
                                             <!-- <button class="btn btn-primary btn-sm ml-2" onclick="sendArchive('<?php echo $list_wow['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Archive</button> -->
-                                            <button class="btn btn-info btn-sm" onclick="sendUnArchive('<?php echo $list_wow['id']; ?>')" data-id ='<?php echo $list_wow['id']; ?>'>Restore</button> 
+                                            <button class="btn btn-info btn-sm restore" onclick="sendUnArchive('<?php echo $list_wow['id']; ?>')" data-id ='<?php echo $list_wow['id']; ?>'>Restore</button> 
                                             
                                            
                                            
@@ -187,29 +187,29 @@
     
 
     <script type="text/javascript">
-        function sendUnArchive(que_id) {
-            console.log(que_id);
-            // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
-            // if (c == true) {     
-                $('#restore').modal('show');
-                $('.restore').on('click', function() {          
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>Wall_of_wisdom/restore',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) { 
-                        console.log(result);                      
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
-                    }
-                });
+        // function sendUnArchive(que_id) {
+        //     console.log(que_id);
+        //     // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
+        //     // if (c == true) {     
+        //         $('#restore').modal('show');
+        //         $('.restore').on('click', function() {          
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>Wall_of_wisdom/restore',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) { 
+        //                 console.log(result);                      
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
 
-            });
-        }
+        //     });
+        // }
 var loadFileThumbnail = function(event) 
     {
        //  $("#Previewimg").show();
@@ -709,5 +709,40 @@ var loadFileThumbnail = function(event)
                     }
                     // $('#addwall').submit();
                 });
+
+        $('#wow_table').on('click','.restore',function(){
+            var id=$(this).attr('data-id');
+            
+            Swal.fire({
+                    title: 'Are you sure you want to Restore ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Restore',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>wall_of_wisdom/restore',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Restored Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+        });
+
     </script>
     </body>

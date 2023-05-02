@@ -453,7 +453,7 @@ console.log('clicked');
 
     $("#notauthorise").click(function(){
 //         $("#notauthorise_alert").modal('show');
-        Swal.fire("You are not authorise");
+        Swal.fire("You are not authorised mentor to post here");
      });
   </script>
   <script type="text/javascript"> 

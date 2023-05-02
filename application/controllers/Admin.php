@@ -98,8 +98,10 @@ class Admin extends CI_Controller
     }
     public function feedback()
     {
+        $this->load->model('Users/Users_model');
+        $data['feedback']=$this->Users_model->get_feedback_data();
         $this->load->view('admin/headers/admin_header');
-        $this->load->view('admin/feedback');
+        $this->load->view('admin/feedback',$data);
         $this->load->view('admin/footers/admin_footer');
     }
     public function feedback_view()
@@ -107,6 +109,25 @@ class Admin extends CI_Controller
         $this->load->view('admin/headers/admin_header');
         $this->load->view('admin/feedback_view');
         $this->load->view('admin/footers/admin_footer');
+    }
+    public function feedback_detail($id){
+        $f_id=encryptids("D",$id);
+        // echo $f_id; die;
+        $this->load->model('Users/Users_model');
+        $data['feedback']=$this->Users_model->get_feedback_detail($f_id);
+        $this->load->view('admin/headers/admin_header');
+        // print_r($data); die;
+        $this->load->view('admin/feedback_detail',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function delete_feedback($id){
+        $this->load->model('Users/Users_model');
+        $result=$this->Users_model->delete_feedback($id);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
     }
     //ajax call 
     public function getDetailsByuserId()
@@ -1072,8 +1093,10 @@ class Admin extends CI_Controller
             }
         }
         public function add_video(){
+            if (!file_exists('uploads/cms/gallary/video')) { mkdir('uploads/cms/gallary/video', 0777, true); }
+
             $banner_img = "video" . time() . '.mp4';
-                $config['upload_path'] = './uploads';
+                $config['upload_path'] = './uploads/cms/gallary/video';
                 $config['allowed_types'] = 'avi|mp4|3gp|mpeg|mpg|mov|mp3|flv|wmv';
                 $config['max_size']    = '';
                
@@ -1096,11 +1119,12 @@ class Admin extends CI_Controller
                 redirect(base_url() . "admin/videos", 'refresh');
         }
         public function delete_video($que_id){
+            $id=encryptids("D",$que_id);
             try {
                 //$encUserId = $this->session->userdata('user_id');
                 //$user = encryptids("D", $encUserId);
                 $que_id = $this->input->post('que_id');
-                $id = $this->Admin_model->deleteVideos($que_id);
+                $id = $this->Admin_model->deleteVideos($id);
                 if ($id) {
                     $data['status'] = 1;
                     $data['message'] = 'Deleted successfully.';

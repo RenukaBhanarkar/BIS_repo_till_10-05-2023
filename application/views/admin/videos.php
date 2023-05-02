@@ -22,7 +22,7 @@
         <?php if (encryptids("D", $_SESSION['admin_type']) == 3) {   ?>
             <div class="card border-top card-body">
                 <div>
-                    <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#newform">Add New Video</button>
+                    <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#newform" id="addvideo">Add New Video</button>
                     <div class="modal fade " id="newform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
@@ -37,16 +37,16 @@
                                         <div class="row">
                                             <div class="mb-2 col-md-4">
                                                 <label class="d-block text-font">Upload Video<sup class="text-danger">*</sup></label>
-                                                <input type="file" class="form-control input-font" name="video" id="" required="" accept="video/mp4,video/x-m4v,video/*">
-                                                <span class="error_text">
+                                                <input type="file" class="form-control input-font" name="video" id="video" required="" accept="video/mp4,video/x-m4v,video/*" onchange="loadFileThumbnail1(event)">
+                                                <span class="text-danger" id="err_video">
                                                     <?php //echo form_error('title'); 
                                                     ?>
                                                 </span>
                                             </div>
                                             <div class="mb-2 col-md-4">
                                                 <label class="d-block text-font">Caption</label>
-                                                <input type="text" class="form-control input-font" name="title" id="" required="">
-                                                <span class="error_text">
+                                                <input type="text" class="form-control input-font" name="title" id="caption" required="">
+                                                <span class="text-danger" id="err_caption">
                                                     <?php //echo form_error('title'); 
                                                     ?>
                                                 </span>
@@ -95,20 +95,20 @@
                                         <td class="d-flex border-bottom-0">
                                             <!-- <button onClick="" class="btn btn-info btn-sm mr-2 text-white" data-toggle="modal" data-target="#editform"><i class="fa fa-edit" aria-hidden="true"></i></button> -->
                                             <!-- <button onclick="deleteVideo('<?php echo $list_v['id']; ?>')" data-id="<?php echo $list_v['id']; ?>" class="btn btn-danger btn-sm mr-2"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
-                                            <button  data-id="<?php echo $list_v['id']; ?>" class="btn btn-danger btn-sm mr-2 delete"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            <button  data-id="<?php echo encryptids("E", $list_v['id']); ?>" class="btn btn-danger btn-sm mr-2 delete">Delete</button>
                                             <!-- Modal -->
                                             <div class="modal fade" id="viewImage" tabindex="-1" role="dialog" aria-labelledby="viewImageLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="viewImageLabel">Image Preview</h5>
+                                                            <h5 class="modal-title" id="viewImageLabel">Video Preview</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <video width="320" height="240" controls>
-                                                                <source src="<?php echo base_url() . 'uploads/' . $list_v['video']; ?>" type=video/mp4>
+                                                                <source src="<?php echo base_url() . 'uploads/cms/gallary/video/' . $list_v['video']; ?>" type=video/mp4>
                                                             </video>
                                                         </div>
 
@@ -189,34 +189,64 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="invalidfiletype" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:red;">Warning!</h5>
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Only mp4 files accepted.</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-primary ok" data-bs-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- End of Main Content -->
 <script>
-    // function deleteVideo(que_id) {
-    //     var c = confirm("Are you sure to delete this video details? ");
-    //     if (c == true) {
-    //         // const $loader = $('.igr-ajax-loader');
-    //         //$loader.show();
-    //         $.ajax({
-    //             type: 'POST',
-    //             url: '<?php echo base_url(); ?>admin/delete_video',
-    //             data: {
-    //                 que_id: que_id,
-    //             },
-    //             success: function(result) {
-    //                 // $('#row' + que_id).css({
-    //                 //     'display': 'none'
-    //                 // });
-    //                 // alert('success' 'refresh');
-    //                 location.reload();
-    //             },
-    //             error: function(result) {
-    //                 alert("Error,Please try again.");
-    //             }
-    //         });
-
-    //     }
+    // function deleteBanner(id){
+    //     $('#delete').modal('show');
+    //     var id=$(this).attr('data-id');  
+        
+    //     $('#abcd').attr('href','<?php echo base_url(); ?>admin/delete_video/'+id); 
     // }
+    var loadFileThumbnail1 = function(event) 
+    {
+        var fileSize = $('#video')[0].files[0].size;
+       var validExtensions = ['mp4']; //array of valid extensions
+        var fileName = $("#video").val();
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+                   
+            console.log(fileSize);
+            if(fileName=="" || fileName==null){
+                $('#err_video').text('This value is required');
+            }else if($.inArray(fileNameExt, validExtensions) == -1){
+            $('#video').val('');
+            $('#invalidfiletype').modal('show');
+            $('#err_video').text('This value is required');
+        }else{
+            $('#err_video').text(''); 
+        }
+
+
+
+       //  $("#Previewimg").show();
+        var outputThumbnail = document.getElementById('outputThumbnail');
+        
+        outputThumbnail.src = URL.createObjectURL(event.target.files[0]);
+        console.log(outputThumbnail.src);
+        outputThumbnail.onload = function()
+        {
+            URL.revokeObjectURL(outputThumbnail.src);
+        }
+    };
 
     $(document).ready(function(){
         $('#videos').DataTable();
@@ -226,11 +256,61 @@
         $('#add_videos').addClass('was-validated');
     })
 
-$('#example').on('click','.delete',function() { 
-        $('#delete').modal('show');
+    $('#addvideo').on('click', function(){
+        $('#add_videos')[0].reset();
+
+    }) 
+
+$('#videos').on('click','.delete',function() { 
+    // alert('delete clicked');
+      //  $('#delete').modal('show');
         var id=$(this).attr('data-id');  
-        
-        $('#abcd').attr('href','<?php echo base_url(); ?>admin/delete_video/'+id);
+        // var eid=encryptids("D",$id);        
+       // $('#abcd').attr('href','<?php echo base_url(); ?>admin/delete_video/'+id);
+
+
+        Swal.fire({
+                    title: 'Do you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                               
+
+                        $.ajax({
+                            // type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/delete_video/'+id,
+                            // data: {
+                            //     que_id: que_id,
+                            // },
+                            success: function(result) {
+                                Swal.fire("Record Deleted Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
     });
+});
+$('#newform').on('click','.save',function(){
+    video = $("#video").val();
+    caption = $("#caption").val();
+
+    if(video=="" || video==null){
+        $('#err_video').text('This value is required');
+    }else if(caption=="" || caption==null){
+        $('#err_caption').text('This value is required');
+    }else{
+        $('#err_caption').text('');
+        $('#err_video').text('');
+    }
 });
 </script>

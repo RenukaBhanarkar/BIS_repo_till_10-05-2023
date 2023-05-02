@@ -62,9 +62,9 @@
                                 <?php }else{ ?>                                    
                                     <a href="<?php echo base_url(); ?>admin/your_wall_view/<?php echo encryptids("E", $list_yw['id'] )?>"><button class="btn btn-primary btn-sm mr-2" title="View">View</button></a>    
                               <button onclick="deleteYourwall(' <?php echo $list_yw['id']; ?> ');" data-id='<?php echo $list_yw['id']; ?>' class="btn btn-danger btn-sm mr-2 delete_img">Delete</button>
-                              <button onclick="approve('<?php echo $list_yw['id']; ?>')" class="btn btn-success btn-sm mr-2 ">Approve</button>
+                              <button onclick="approve('<?php echo $list_yw['id']; ?>')" data-id='<?php echo $list_yw['id']; ?>' class="btn btn-success btn-sm mr-2 approve">Approve</button>
                               <button onclick="reject('<?php echo $list_yw['id']; ?>')" class="btn btn-danger btn-sm mr-2 text-white">Reject</button>
-                                                <button class="btn btn-secondary btn-sm " onclick="sendArchive('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>'>Archive</button>
+                                                <button class="btn btn-secondary btn-sm archive" onclick="sendArchive('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>'>Archive</button>
                                                 <?php } ?>
                                  <!-- <a href="conversation_view" class="btn btn-primary btn-sm mr-2" title="View">View</a> -->
                                   <!-- <a href="conversation_edit" class="btn btn-info btn-sm mr-2" title="View">Sent for Approval</a>
@@ -119,10 +119,10 @@
                                  <?php }else{ ?>  
                                     <a href="<?php echo base_url(); ?>admin/your_wall_view/<?php echo encryptids("E", $list_yw['id'] )?>"><button class="btn btn-primary btn-sm mr-2" title="View">View</button></a>
                                  <?php if($list_yw['status']=="5"){ ?>
-                                    <button class="btn btn-warning btn-sm mr-2" onclick="sendUnPublish('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>' title="View">UnPublish</button>
+                                    <button class="btn btn-warning btn-sm mr-2 unpublish" onclick="sendUnPublish('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>' title="View">UnPublish</button>
                                     <?php }else if($list_yw['status']=="6" || $list_yw['status']=="3"){ ?>
-                                        <button class="btn btn-success btn-sm mr-2" onclick="sendPublish('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>' title="View">Publish</button>
-                                        <button class="btn btn-secondary btn-sm " onclick="sendArchive('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>'>Archive</button>
+                                        <button class="btn btn-success btn-sm mr-2 publish" onclick="sendPublish('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>' title="View">Publish</button>
+                                        <button class="btn btn-secondary btn-sm archive" onclick="sendArchive('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>'>Archive</button>
                                         <?php } ?>
                                         <?php } ?>
                                  <!-- <button class="btn btn-info btn-sm" onclick="sendUnArchive('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>'>Restore</button>    -->
@@ -224,7 +224,7 @@
                               <td class="" style="width:559px;">
                               <a href="<?php echo base_url(); ?>admin/your_wall_view/<?php echo encryptids("E", $list_yw['id'] )?>"><button class="btn btn-primary btn-sm mr-2" title="View">View</button></a>
                               <?php if (encryptids("D", $_SESSION['admin_type']) == 3) {  ?>
-                              <button class="btn btn-info btn-sm" onclick="sendUnArchive('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>'>Restore</button>   
+                              <button class="btn btn-info btn-sm restore" onclick="sendUnArchive('<?php echo $list_yw['id']; ?>')" data-id ='<?php echo $list_yw['id']; ?>'>Restore</button>   
                               <?php } ?>
                                  <!-- <a href="conversation_view" class="btn btn-primary btn-sm mr-2" title="View">View</a>
                                   <a href="conversation_edit" class="btn btn-info btn-sm mr-2" title="View">Sent for Approval</a>
@@ -518,144 +518,413 @@ $(document).ready(function () {
             $('#id2').val(que_id);
         }
 
-    function deleteYourwall(que_id) {
-        // var c = confirm("Are you sure to delete this survey details? ");
-        $('#delete').modal('show');
-        $('.abcd').on('click', function() {
+    $('#example_1').on('click','.delete_img',function(){            
+        var id=$(this).attr('data-id'); 
 
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>admin/deletYourwall',
-                data: {
-                    que_id: que_id,
-                },
-                success: function(result) {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
-    }
-
-    function sendPublish(que_id) {
-            $('#publish').modal('show');
-            $('.publish').on('click', function() {
-            // var c = confirm("Are you sure to Publish this survey details? ");
-            // if (c == true) {
-                // const $loader = $('.igr-ajax-loader');
-                //$loader.show();
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/yourwallPublish',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
-                        // $('#row' + que_id).css({
-                        //     'display': 'none'
-                        // });
-                        // alert('success' 'refresh');
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+        Swal.fire({
+                    title: 'Do you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {                   
+                    if (result.isConfirmed) {
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/deletYourwall/',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Deleted Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
 
-            });
-        }
+    });
 
-        function sendUnPublish(que_id) {
-            // var c = confirm("Are you sure to Unpublish this survey details? ");
-            // if (c == true) {            
-                $('#unpublish').modal('show');
-                $('.unpublish').on('click', function() {   
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/yourwallUnpublish',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {                       
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+    // function deleteYourwall(que_id) {
+    //     // var c = confirm("Are you sure to delete this survey details? ");
+    //     // $('#delete').modal('show');
+    //     // $('.abcd').on('click', function() {
+
+    //     //     $.ajax({
+    //     //         type: 'POST',
+    //     //         url: '<?php echo base_url(); ?>admin/deletYourwall',
+    //     //         data: {
+    //     //             que_id: que_id,
+    //     //         },
+    //     //         success: function(result) {
+    //     //             location.reload();
+    //     //         },
+    //     //         error: function(result) {
+    //     //             alert("Error,Please try again.");
+    //     //         }
+    //     //     });
+    //     // });
+
+        
+
+    //     Swal.fire({
+    //                 title: 'Do you want to Delete?',
+    //                 showDenyButton: true,
+    //                 showCancelButton: false,
+    //                 confirmButtonText: 'Delete',
+    //                 denyButtonText: `Cancel`,
+    //                 }).then((result) => {
+    //                 /* Read more about isConfirmed, isDenied below */
+    //                 if (result.isConfirmed) {                               
+
+    //                     $.ajax({
+    //                          type: 'POST',
+    //                         url: '<?php echo base_url(); ?>admin/deletYourwall/',
+    //                         data: {
+    //                             que_id: que_id,
+    //                         },
+    //                         success: function(result) {
+    //                             Swal.fire("Record Deleted Successfully.");
+    //                             location.reload();
+    //                         },
+    //                         error: function(result) {
+    //                             alert("Error,Please try again.");
+    //                         }
+    //                     });
+    //                     Swal.fire('Saved!', '', 'success')                                
+    //                 } else if (result.isDenied) {
+    //                     // Swal.fire('Changes are not saved', '', 'info')
+    //                 }
+    //                 })
+    // }
+
+    $('#example_2').on('click','.publish',function(){            
+        var id=$(this).attr('data-id'); 
+
+        Swal.fire({
+                    title: 'Are you sure you want to Publish ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Publish',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {                   
+                    if (result.isConfirmed) {
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/yourwallPublish/',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Published Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
 
-            })
-        }
+    });
 
-        function sendUnArchive(que_id) {
-            // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
-            // if (c == true) {     
-                $('#restore').modal('show');
-                $('.restore').on('click', function() {          
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/restore_yourwall',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) { 
-                        console.log(result);                      
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+
+    $('#example_2').on('click','.unpublish',function(){            
+        var id=$(this).attr('data-id'); 
+
+        Swal.fire({
+                    title: 'Are you sure you want to Unublish ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Unublish',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {                   
+                    if (result.isConfirmed) {
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/yourwallUnpublish/',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Unublished Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
 
-            });
-        }
+    });
+    
 
-    function approve(que_id){            
-                $('#approve').modal('show');
-                $('.approve').on('click', function() {                
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/approve_yourwall',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+    // function sendPublish(que_id) {
+    //         $('#publish').modal('show');
+    //         $('.publish').on('click', function() {
+    //         // var c = confirm("Are you sure to Publish this survey details? ");
+    //         // if (c == true) {
+    //             // const $loader = $('.igr-ajax-loader');
+    //             //$loader.show();
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '<?php echo base_url(); ?>admin/yourwallPublish',
+    //                 data: {
+    //                     que_id: que_id,
+    //                 },
+    //                 success: function(result) {
+    //                     // $('#row' + que_id).css({
+    //                     //     'display': 'none'
+    //                     // });
+    //                     // alert('success' 'refresh');
+    //                     location.reload();
+    //                 },
+    //                 error: function(result) {
+    //                     alert("Error,Please try again.");
+    //                 }
+    //             });
+
+    //         });
+    //     }
+
+        // function sendUnPublish(que_id) {
+        //     // var c = confirm("Are you sure to Unpublish this survey details? ");
+        //     // if (c == true) {            
+        //         $('#unpublish').modal('show');
+        //         $('.unpublish').on('click', function() {   
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>admin/yourwallUnpublish',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) {                       
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
+
+        //     })
+        // }
+
+        $('#example_4').on('click','.restore',function(){            
+        var id=$(this).attr('data-id'); 
+
+        Swal.fire({
+                    title: 'Are you sure you want to Restore ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Restore',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {                   
+                    if (result.isConfirmed) {
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/restore_yourwall/',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Restored Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
-            })
-        }
+                    })
 
-    function sendArchive(que_id) {
-            // var c = confirm("Are you sure to Publish By The Mentor details? ");
-            // if (c == true) {
-                // const $loader = $('.igr-ajax-loader');
-                //$loader.show();
-                $('#archive').modal('show');
-                $('.archive').on('click', function() {
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/archive_yourwall',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
-                        // $('#row' + que_id).css({
-                        //     'display': 'none'
-                        // });
-                        // alert('success' 'refresh');
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+    });
+
+        // function sendUnArchive(que_id) {
+        //     // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
+        //     // if (c == true) {     
+        //         $('#restore').modal('show');
+        //         $('.restore').on('click', function() {          
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>admin/restore_yourwall',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) { 
+        //                 console.log(result);                      
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
+
+        //     });
+        // }
+
+    // function approve(que_id){            
+    //             $('#approve').modal('show');
+    //             $('.approve').on('click', function() {                
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '<?php echo base_url(); ?>admin/approve_yourwall',
+    //                 data: {
+    //                     que_id: que_id,
+    //                 },
+    //                 success: function(result) {
+    //                     location.reload();
+    //                 },
+    //                 error: function(result) {
+    //                     alert("Error,Please try again.");
+    //                 }
+    //             });
+    //         })
+    //     }
+    
+        $('#example_1').on('click','.approve',function(){            
+        var id=$(this).attr('data-id'); 
+
+        Swal.fire({
+                    title: 'Are you sure you want to Approve ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Approve',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {                   
+                    if (result.isConfirmed) {
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/approve_yourwall/',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Approved Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
 
-            });
-        }
+    });
+
+    // function sendArchive(que_id) {
+    //         // var c = confirm("Are you sure to Publish By The Mentor details? ");
+    //         // if (c == true) {
+    //             // const $loader = $('.igr-ajax-loader');
+    //             //$loader.show();
+    //             $('#archive').modal('show');
+    //             $('.archive').on('click', function() {
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '<?php echo base_url(); ?>admin/archive_yourwall',
+    //                 data: {
+    //                     que_id: que_id,
+    //                 },
+    //                 success: function(result) {
+    //                     // $('#row' + que_id).css({
+    //                     //     'display': 'none'
+    //                     // });
+    //                     // alert('success' 'refresh');
+    //                     location.reload();
+    //                 },
+    //                 error: function(result) {
+    //                     alert("Error,Please try again.");
+    //                 }
+    //             });
+
+    //         });
+    //     }
+
+
+        $('#example_2').on('click','.archive',function(){            
+        var id=$(this).attr('data-id'); 
+
+        Swal.fire({
+                    title: 'Are you sure you want to Archive ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Archive',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {                   
+                    if (result.isConfirmed) {
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/archive_yourwall/',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Archived Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+    });
+
+    $('#example_1').on('click','.archive',function(){            
+        var id=$(this).attr('data-id'); 
+
+        Swal.fire({
+                    title: 'Are you sure you want to Archive ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Archive',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {                   
+                    if (result.isConfirmed) {
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/archive_yourwall/',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Archived Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+    });
+
+
+
 </script>                                 

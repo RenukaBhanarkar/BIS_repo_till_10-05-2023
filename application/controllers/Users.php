@@ -836,6 +836,7 @@ class Users extends CI_Controller
     // }
     public function add_your_wall()
     {
+        if (!file_exists('uploads/your_wall')) { mkdir('uploads/your_wall', 0777, true); }
         // print_r($_FILES); die;
         if (isset($_SESSION['admin_id'])) {
             // $formdata['user_id']=$_SESSION['admin_id'];
@@ -1911,6 +1912,20 @@ class Users extends CI_Controller
         $this->load->view('users/footers/footer');
     }
     //AJAX
+    public function add_feedback_form_data(){
+        // print_r($_POST); die;
+        $formdata['name']=$this->input->post('name');
+        $formdata['mobile']=$this->input->post('mobile_no');
+        $formdata['email']=$this->input->post('email');
+        $formdata['subject']=$this->input->post('subject');
+        $formdata['description']=$this->input->post('description');
+        $this->load->model('Users/Users_model');
+        $id=$this->Users_model->add_feedback_data($formdata);
+        if($id){
+            $this->session->set_flashdata('MSG', ShowAlert("Feedback recorded successfully.", "SS"));
+            redirect(base_url() . "users/feedback_form", 'refresh');
+        }
+    }
     
     public function setSelectedLang(){
         $lang_id = $this->input->post('lang');

@@ -647,5 +647,35 @@ public function Checkleasrninglike($id,$admin_id)
         } 
         else  { return false; }
     }
+    public function add_feedback_data($data){
+        if ($this->db->insert('tbl_mst_feedback_data', $data)) {
+            return $this->db->insert_id();
+        } else {
+            return false;
+        }
+    }
+    public function get_feedback_data(){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_feedback_data');
+        $query=$this->db->get();
+        $res=$query->result_array();
+        return $res;
+    }
+    public function get_feedback_detail($id){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_feedback_data');
+        $this->db->where('id',$id);
+        $query=$this->db->get();
+        $res=$query->result_array();
+        return $res[0];
+    }
+    public function delete_feedback($id){
+        $id=$this->db->delete('tbl_mst_feedback_data',['id'=>$id]);
+        if($id){
+            return true;
+        }else{
+            return false;
+        }
+    }
      
 }
