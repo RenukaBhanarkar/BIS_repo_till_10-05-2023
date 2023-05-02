@@ -110,6 +110,24 @@ class Admin extends CI_Controller
         $this->load->view('admin/feedback_view');
         $this->load->view('admin/footers/admin_footer');
     }
+    public function letest_news()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/letest_news');
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function letest_news_view()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/letest_news_view');
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function upcoming_events()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/upcoming_events');
+        $this->load->view('admin/footers/admin_footer');
+    }
     public function feedback_detail($id){
         $f_id=encryptids("D",$id);
         // echo $f_id; die;
