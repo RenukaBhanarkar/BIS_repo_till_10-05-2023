@@ -109,7 +109,7 @@
                                     <!-- <button onclick="submitButton()" class="btn btn-primary mb-2" type="submit">Submit</button>
                                     <button onclick="" class="btn btn-danger mb-2" type="submit">Submit</button> -->
 
-                                    <button onclick="return submitButton()" class="btn btn-primary mb-2" type="submit">Submit</button>
+                                    <button onclick="return submitButton(event)" class="btn btn-primary mb-2" type="submit">Submit</button>
                                     <!-- <button onclick="location.reload('<?php echo base_url(); ?>admin/footer_links')"  class="btn btn-danger mb-2" type="cancle">Cancle</button> -->
                                     <a href="<?php echo base_url(); ?>admin/footer_links" class="btn btn-danger mb-2">Cancle</a>
                                 </td>
@@ -165,7 +165,8 @@
 //     });
 // });
 
-function submitButton() {
+function submitButton(event) {
+    event.preventDefault();
     // CKEDITOR.instances[**fieldname**].setData(**your data**)
     var terms_condition = CKEDITOR.instances['terms_condition'].getData();
     var copyright_policy = CKEDITOR.instances['copyright_policy'].getData();
@@ -233,11 +234,41 @@ function submitButton() {
                 
             //     });
 
-             if (is_valid) { 
-              
-                $('#updateform').attr('action','<?php echo base_url(); ?>subadmin/update_legal'); 
-                              
+             if (is_valid) {
+                $('#updateform').attr('action','<?php echo base_url(); ?>subadmin/update_legal');  
+                Swal.fire({
+                    title: 'Are you sure you want to Submit ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Submit',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        // $('#updateform').attr('action','<?php echo base_url(); ?>subadmin/update_legal'); 
+                        $('#updateform').submit();
                 return true; 
+                        // $.ajax({
+                        //     //  type: 'POST',
+                        //     url: '<?php echo base_url(); ?>admin/archive_feedback/'+id,
+                        //     // data: {
+                        //     //     que_id: id,
+                        //     // },
+                        //     success: function(result) {
+                        //         Swal.fire("Record Archived Successfully.");
+                        //         location.reload();
+                        //     },
+                        //     error: function(result) {
+                        //         alert("Error,Please try again.");
+                        //     }
+                        // });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+              
+                
              } else {
                  return false;
              }

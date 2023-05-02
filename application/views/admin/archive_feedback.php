@@ -3,7 +3,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Feedback List</h1>
+        <h1 class="h3 mb-0 text-gray-800">Archived Feedback List</h1>
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?php echo base_url() . 'admin/'; ?>">Home</a></li>
@@ -19,7 +19,7 @@
     <!-- Content Row -->
 
     <div class="col-12">
-    
+    <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
             <!-- Content Row -->
 
             <!-- Content Row -->
@@ -28,12 +28,12 @@
                     <div class="card border-top card-body">
                         <div>
                             <!-- <button type="button" class="btn btn-primary btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-bs-whatever="@mdo">Add New Post</button> -->
-                            <a href="<?php echo base_url(); ?>admin/feedback_archive" type="button" class="btn btn-primary btn-sm mr-2" >Archive</a>
+                            <a href="<?php echo base_url(); ?>admin/feedback" type="button" class="btn btn-primary btn-sm mr-2" >Feedback</a>
                         </div>
                     </div>
                 </div>
             </div>
-    
+        <?php } ?>
          <!-- <div class="card border-top card-body">
                 <div>
                     <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#newform">Add New Feedback</button>
@@ -102,10 +102,7 @@
                                 <th>Email</th>
                                 <th>Subject</th>
                                 <th>Date</th>
-                                <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
                                 <th>Action</th>
-                                <?php } ?>
-
                                 
                             </tr>
                         </thead>
@@ -122,16 +119,14 @@
                                         <td><?php echo $list['email']; ?></td>
                                         <td><?php echo $list['subject']; ?></td>
                                         <td><?php echo date("d-m-Y", strtotime($list['created_on'])); ?></td>
-                                        <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
                                         <td class="d-flex border-bottom-0">
                                         
                                             <a href="<?php echo base_url().'admin/feedback_detail/'.encryptids("E",$list['id']); ?>"  class="btn btn-primary btn-sm mr-2 text-white" >View</a>
                                             <button onclick="return delete_feedback('<?=$list['id']?>')" class="btn btn-danger btn-sm mr-2">Delete</button>
-                                            <button onclick="return archive('<?=$list['id']?>')" class="btn btn-info btn-sm mr-2 archive" data-id="<?=$list['id']?>">Archive</button>
-
+                                            <!-- <button onclick="return archive('<?=$list['id']?>')" class="btn btn-info btn-sm mr-2">Archive</button> -->
+                                            <button  class="btn btn-info btn-sm mr-2 restore" data-id="<?=$list['id']?>">Restore</button>
                                             
                                         </td>
-                                        <?php } ?>
                                       
                                 </tr>
                                 <?php $i++;
@@ -410,10 +405,10 @@
                     })
        
     }
-    // function archive(que_id){
-    //     $('#archive').modal('show');
-    //     $('#archive_record').attr('href','<?php echo base_url(); ?>admin/archive_feedback/'+que_id);
-    // }
+    function archive(que_id){
+        $('#archive').modal('show');
+        $('#archive_record').attr('href','<?php echo base_url(); ?>admin/archive_feedback/'+que_id);
+    }
 
 
 
@@ -437,25 +432,26 @@
         });
     });
 
-$('#photos').on('click','.archive',function(){
+
+    $('#photos').on('click','.restore',function(){
  var id=$(this).attr('data-id');
  Swal.fire({
-                    title: 'Are you sure you want to Archive ?',
+                    title: 'Are you sure you want to Restore ?',
                     showDenyButton: true,
                     showCancelButton: false,
-                    confirmButtonText: 'Archive',
+                    confirmButtonText: 'Restore',
                     denyButtonText: `Cancel`,
                     }).then((result) => {
                     /* Read more about isConfirmed, isDenied below */
                     if (result.isConfirmed) {   
                         $.ajax({
                             //  type: 'POST',
-                            url: '<?php echo base_url(); ?>admin/archive_feedback/'+id,
+                            url: '<?php echo base_url(); ?>admin/restore_feedback/'+id,
                             // data: {
                             //     que_id: id,
                             // },
                             success: function(result) {
-                                Swal.fire("Record Archived Successfully.");
+                                Swal.fire("Record Restored Successfully.");
                                 location.reload();
                             },
                             error: function(result) {

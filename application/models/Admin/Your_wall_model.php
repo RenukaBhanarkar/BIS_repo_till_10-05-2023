@@ -81,7 +81,7 @@ class Your_wall_model extends CI_Model {
         $this->db->where('tu.user_id',$user_id);
         // $this->db->select('*');
         // $this->db->from('tbl_your_wall');        
-        $this->db->where('tyw.status','5');
+        // $this->db->where('tyw.status','5');
         $this->db->order_by('created_on','desc');
         $query=$this->db->get();
         $res=$query->result_array();
