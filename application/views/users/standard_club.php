@@ -258,7 +258,22 @@
 
 
             <div class="view-content">
-              <div class="views-row views-row-1 views-row-odd views-row-first">
+              <?php if(!empty($news)){ 
+                foreach($news as $list){ ?>
+                    <div class="views-row views-row-1 views-row-odd views-row-first">
+
+                    <div class="views-field views-field-nothing"> <span class="field-content"><img src="<?php echo base_url().'uploads/letest_news/'.$list['thumbnail']; ?>" width="510" height="340" alt=" ODOP Wall Grand Challenge" title=" ODOP Wall Grand Challenge">
+                        <a href="/task/odop-wall-grand-challenge/" title="Make Your Contribution">Make Your Contribution</a></span> </div>
+                    <div class="views-field views-field-title-field">
+                      <div class="field-content"><a href="/task/odop-wall-grand-challenge/" title=" ODOP Wall Grand Challenge"> <?php echo $list['title'];  ?></a></div>
+                    </div>
+                    <div class="views-field views-field-field-deadline"> <span class="views-label views-label-field-deadline">Last Date: </span>
+                      <div class="field-content nodtranslate"><span class="date-display-single">May 11 2023 - 5:15am</span></div>
+                    </div>
+                    </div> 
+
+            <?php } } ?>
+              <!-- <div class="views-row views-row-1 views-row-odd views-row-first">
 
                 <div class="views-field views-field-nothing"> <span class="field-content"><img src="https://mygov.in/sites/default/files/master_image/odopthumbnail.jpg" width="510" height="340" alt=" ODOP Wall Grand Challenge" title=" ODOP Wall Grand Challenge">
                     <a href="/task/odop-wall-grand-challenge/" title="Make Your Contribution">Make Your Contribution</a></span> </div>
@@ -279,7 +294,7 @@
                 <div class="views-field views-field-field-deadline"> <span class="views-label views-label-field-deadline">Last Date: </span>
                   <div class="field-content nodtranslate"><span class="date-display-single">May 1 2023 - 10:45am</span></div>
                 </div>
-              </div>
+              </div> -->
               <!-- <div class="views-row views-row-3 views-row-odd">
 
                 <div class="views-field views-field-nothing"> <span class="field-content"><img src="https://mygov.in/sites/default/files/master_image/slogan_thumbnail.png" width="510" height="340" alt="Suggest a Slogan for Khelo India University Games 2022" title="Suggest a Slogan for Khelo India University Games 2022">

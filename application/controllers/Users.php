@@ -501,6 +501,7 @@ class Users extends CI_Controller
         $data['banner_data'] = $this->Admin_model->bannerAllData();
         $data['images'] = $this->Admin_model->images();
         $data['videos'] = $this->Admin_model->videos();
+        $data['news'] = $this->Admin_model->news();
         $allquize = $this->Users_model->getStdClubQuizAll();
         $data['allquize'] = $allquize;
         $this->load->view('users/headers/header');

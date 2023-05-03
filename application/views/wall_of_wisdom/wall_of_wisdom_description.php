@@ -38,7 +38,7 @@
     font-size: 15px;
     color: #424242;
 
-    display: -webkit-box;
+    /* display: -webkit-box; */
 
 }
 

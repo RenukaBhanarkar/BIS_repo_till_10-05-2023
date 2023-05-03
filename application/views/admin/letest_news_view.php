@@ -22,19 +22,19 @@
                                <div class="mb-2 col-md-4">
                                     <label class="d-block text-font">Title</label>
                                     <div>
-                                        <p>IT Services</p>
+                                        <p><?php echo $result['title']; ?></p>
                                     </div>    
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label class="d-block text-font">Image</label>
                                     <div>
-                                        <img src="#" alt="" class="" width="50%">
+                                        <img src="<?php echo base_url().'uploads/letest_news/'.$result['thumbnail']; ?>" alt="Thumbnail Image" class="" width="50%">
                                     </div>    
                                 </div>
                                 <div class="mb-2 col-md-4">
                                     <label class="d-block text-font">Posted on</label>
                                     <div>
-                                        <p>12/03/2023</p>
+                                        <p><?php echo $result['created_on']; ?></p>
                                     </div>    
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                 <div class="mb-2 col-md-12">
                                     <label class="d-block text-font">Description</label>
                                     <div>
-                                        <p>BIS HQ</p>
+                                        <p><?php echo $result['description']; ?></p>
                                     </div>    
                                 </div>
                             </div>

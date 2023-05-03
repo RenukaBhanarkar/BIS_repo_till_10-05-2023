@@ -137,16 +137,170 @@ class Admin extends CI_Controller
     }
     public function letest_news()
     {
+        // echo "hiiii"; die;
+        $data['news']=$this->Admin_model->getLetestNews();
+        // print_r($data); die;
         $this->load->view('admin/headers/admin_header');
-        $this->load->view('admin/letest_news');
+        $this->load->view('admin/letest_news',$data);
         $this->load->view('admin/footers/admin_footer');
     }
-    public function letest_news_view()
+    public function editLetestNews($id){
+        $f_id=encryptids("D",$id); 
+        // return $f_id;die;
+        $result=$this->Admin_model->editLetestNews($f_id);
+        echo $result;
+
+    }
+    public function archived_news(){
+        $data['news']=$this->Admin_model->archivedLetestNews();
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/archived_news',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function addLetestNews(){
+      $title =  $this->input->post('title');
+      $description =  $this->input->post('description');
+
+      if (!file_exists('uploads/letest_news')) { mkdir('uploads/letest_news', 0777, true); }
+
+      $banner_img = "news" . time() . '.jpg';
+        $config['upload_path'] = './uploads/letest_news';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size']    = '204800';
+        $config['max_width']  = '3024';
+        $config['max_height']  = '2024';
+   
+        $config['file_name'] = $banner_img;
+       
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('thumbnail')) 
+        {
+            $data['status'] = 0;
+            $data['message'] = $this->upload->display_errors();
+        }
+        
+        $formdata['thumbnail'] = $banner_img;
+        $formdata['title'] = $title;
+        $formdata['description'] = $description;
+
+        $id=$this->Admin_model->addLetestNews($formdata);
+        if($id){
+            $this->session->set_flashdata('MSG',  ShowAlert("Letest news recorded successfully.", "DD"));
+            redirect(base_url() . "Admin/letest_news", 'refresh');
+        }
+
+    }
+    public function restoreLetestNews($id){
+        $f_id=encryptids("D",$id); 
+        $data=$this->Admin_model->restoreLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function letest_news_view($id)
     {
+        $f_id=encryptids("D",$id); 
+        $data['result']=$this->Admin_model->getLetestNewsDetail($f_id);
+        // print_r($data); die;
         $this->load->view('admin/headers/admin_header');
-        $this->load->view('admin/letest_news_view');
+        $this->load->view('admin/letest_news_view',$data);
         $this->load->view('admin/footers/admin_footer');
     }
+    public function deleteLetestNews($id){
+        $f_id=encryptids("D",$id); 
+        $data=$this->Admin_model->deleteLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function publishLetestNews($id){
+        $f_id=encryptids("D",$id); 
+        // echo $f_id; die;
+        // return $f_id; die;
+        $data=$this->Admin_model->publishLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function unpublishLetestNews($id){
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->unpublishLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function archiveLetestNews($id){
+        // echo $id; die;
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->archiveLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function updateNews(){
+        // print_r($_FILES); die;
+        if (!file_exists('uploads/letest_news')) { mkdir('uploads/letest_news', 0777, true); }
+        //print_r([$_POST['old_image']]); die;
+        $formdata['id'] = $this->input->post('edit_id');
+        //$formdata['title'] = $this->input->post('title');
+        $formdata['description'] = $this->input->post('description');  
+        $formdata['title'] = $this->input->post('banner_caption');  
+        $formdata['status'] = '1';
+
+       $oldDocument = "";
+       $oldDocument = $this->input->post('old_doc');
+       $document = "";
+
+            if (!empty($_FILES['document']['tmp_name'])) {
+                $document = "letest_news" . time() . '.jpg';
+                $config['upload_path'] = './uploads/letest_news';
+                $config['allowed_types'] = 'jpg|png|jpeg';
+                $config['max_size']    = '204800';
+                $config['max_width']  = '3024';
+                $config['max_height']  = '2024';
+                $config['file_name'] = $document;
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('document')) {
+                    //$err[]=$this->upload->display_errors();
+                    $data['status'] = 0;
+                    $data['message'] = $this->upload->display_errors();
+                }
+                } else {
+                    if (!empty($oldDocument)) {
+                        $document =  $oldDocument;
+                    }
+                }   
+                // print_r($formdata); die;
+        if($document){          
+            $formdata['thumbnail']=$document;
+        }
+        // $formdata['status']="1";
+        $id = $this->Admin_model->updateLetestNews($formdata);
+        if($id){
+            $this->session->set_flashdata('MSG', ShowAlert("Record Updated Successfully", "SS"));
+            redirect(base_url() . "admin/letest_news", 'refresh');
+        } else {
+            $this->session->set_flashdata('MSG', ShowAlert("Failed to update record,Please try again", "DD"));
+            redirect(base_url() . "admin/letest_news", 'refresh');
+        }
+    }
+
+
+
+
+
     public function upcoming_events()
     {
         $this->load->view('admin/headers/admin_header');
