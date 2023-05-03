@@ -36,6 +36,7 @@
                 </div>
                 </a>
             </div>
+              <?php }?>
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
@@ -77,23 +78,9 @@
                 </div>
                 </a>
             </div>
-        <?php }?>
+      
 
-          <?php if (encryptids("D", $_SESSION['admin_type']) == 2) { ?>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <a href="<?php echo base_url(); ?>admin/manage_lsv_standards_list">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center d-flex">
-                            <h5 class="font-weight-bold text-warning mb-1">Manage session/Post</h5>
-                            
-
-                        </div>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <?php }?>
+          
 
 </div>
        </div>

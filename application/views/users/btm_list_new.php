@@ -69,10 +69,10 @@
                                             <?php if($list_btm1['status'] == '1'){ ?>
                                                 <button onclick="deleteByTheMentor(' <?php echo $list_btm1['id']; ?> ');" data-id='<?php echo $list_btm1['id']; ?>' class="btn btn-danger btn-sm mr-2 delete_img">Delete</button>
                                                 <!-- <button class="btn btn-primary btn-sm mr-2" onclick="sendPublish('<?php echo $list_btm1['id']; ?>')" data-id ='<?php echo $list_btm1['id']; ?>'>Publish</button> -->
-                                                <button onclick="approve('<?php echo $list_btm1['id']; ?>')" class="btn btn-success btn-sm mr-2 text-white">Approve</button>
+                                                <button onclick="approve('<?php echo $list_btm1['id']; ?>')" class="btn btn-success btn-sm mr-2 text-white approve" data-id='<?php echo $list_btm1['id']; ?>'>Approve</button>
                                                 <!-- <button class="btn btn-primary btn-sm" onclick="sendReject('<?php echo $list_btm1['id']; ?>')" data-id ='<?php echo $list_btm1['id']; ?>'>Reject</button> -->
                                                 <button onclick="reject('<?php echo $list_btm1['id']; ?>')" class="btn btn-danger btn-sm mr-2 text-white">Reject</button>
-                                                <button class="btn btn-primary btn-sm ml-2" onclick="sendArchive('<?php echo $list_btm1['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Archive</button>
+                                                <button class="btn btn-primary btn-sm ml-2 archive" onclick="sendArchive('<?php echo $list_btm1['id']; ?>')" data-id ='<?php echo $list_btm1['id']; ?>'>Archive</button>
                                           
                                                 <!-- <button class="btn btn-primary btn-sm" onclick="sendUnPublish('<?php echo $list_btm1['id']; ?>')" data-id ='<?php echo $list_btm1['id']; ?>'>UnPublish</button> -->
                                          <?php } ?>
@@ -134,10 +134,10 @@
                                         <?php if (encryptids("D", $_SESSION['admin_type']) == 3) {  ?>
                                             <?php if(!($list_btm['status_name'] == 'Published')){ ?>
                                                 <!-- <button onclick="deleteByTheMentor(' <?php echo $list_btm['id']; ?> ');" data-id='<?php echo $list_btm['id']; ?>' class="btn btn-danger btn-sm mr-2 delete_img">Delete</button> -->
-                                                <button class="btn btn-success btn-sm" onclick="sendPublish('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Publish</button>
-                                                <button class="btn btn-primary btn-sm ml-2" onclick="sendArchive('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Archive</button>
+                                                <button class="btn btn-success btn-sm publish" onclick="sendPublish('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Publish</button>
+                                                <button class="btn btn-primary btn-sm ml-2 archive" onclick="sendArchive('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Archive</button>
                                             <?php }else if($list_btm['status_name'] == 'Published'){ ?>
-                                                <button class="btn btn-primary btn-sm" onclick="sendUnPublish('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>UnPublish</button>
+                                                <button class="btn btn-primary btn-sm unpublish" onclick="sendUnPublish('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>UnPublish</button>
                                          <?php } }?>
                                         
                                             <!-- Modal -->
@@ -196,7 +196,7 @@
                                            
                                                 <button onclick="deleteByTheMentor(' <?php echo $list_btm['id']; ?> ');" data-id='<?php echo $list_btm['id']; ?>' class="btn btn-danger btn-sm mr-2 delete_img">Delete</button>
                                                 <!-- <button class="btn btn-primary btn-sm" onclick="sendPublish('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Publish</button> -->
-                                                <button class="btn btn-primary btn-sm ml-2" onclick="sendArchive('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Archive</button>
+                                                <button class="btn btn-primary btn-sm ml-2 archive" onclick="sendArchive('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Archive</button>
                                           
                                                 <!-- <button class="btn btn-primary btn-sm" onclick="sendUnPublish('<?php echo $list_btm['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>UnPublish</button> -->
                                                 <?php } ?>
@@ -251,7 +251,7 @@
                                         data-target="#editform"><i class="fa fa-edit" aria-hidden="true"></i></button> -->
                                         <a href="<?php echo base_url(); ?>admin/view_btm/<?php echo $list_btm1['id'] ?>"><button class="btn btn-info btn-sm mr-2">View</button></a>
                                         <?php if (encryptids("D", $_SESSION['admin_type']) == 3) {  ?>
-                                        <button class="btn btn-info btn-sm" onclick="sendUnArchive('<?php echo $list_btm1['id']; ?>')" data-id ='<?php echo $list_btm['id']; ?>'>Restore</button>                                        
+                                        <button class="btn btn-info btn-sm restore" onclick="sendUnArchive('<?php echo $list_btm1['id']; ?>')" data-id ='<?php echo $list_btm1['id']; ?>'>Restore</button>                                        
                                             <!-- Modal -->
                                             <?php } ?>
                                         </td>
@@ -466,155 +466,443 @@ function reject(que_id){
             $('#rejectModal1').modal('show');
             $('#id2').val(que_id);
         }
-    function deleteByTheMentor(que_id) {
-        // var c = confirm("Are you sure to delete this survey details? ");
-        $('#delete').modal('show');
-        $('.abcd').on('click', function() {
+    // function deleteByTheMentor(que_id) {
+    //     // var c = confirm("Are you sure to delete this survey details? ");
+    //     $('#delete').modal('show');
+    //     $('.abcd').on('click', function() {
 
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>admin/deleteByTheMentor',
-                data: {
-                    que_id: que_id,
-                },
-                success: function(result) {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
-    }
-    function sendUnArchive(que_id) {
-            // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
-            // if (c == true) {     
-                $('#restore').modal('show');
-                $('.restore').on('click', function() {          
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/btm_unarchive',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) { 
-                        console.log(result);                      
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '<?php echo base_url(); ?>admin/deleteByTheMentor',
+    //             data: {
+    //                 que_id: que_id,
+    //             },
+    //             success: function(result) {
+    //                 location.reload();
+    //             },
+    //             error: function(result) {
+    //                 alert("Error,Please try again.");
+    //             }
+    //         });
+    //     });
+    // }
+    // function sendUnArchive(que_id) {
+    //         // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
+    //         // if (c == true) {     
+    //             $('#restore').modal('show');
+    //             $('.restore').on('click', function() {          
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '<?php echo base_url(); ?>admin/btm_unarchive',
+    //                 data: {
+    //                     que_id: que_id,
+    //                 },
+    //                 success: function(result) { 
+    //                     console.log(result);                      
+    //                     location.reload();
+    //                 },
+    //                 error: function(result) {
+    //                     alert("Error,Please try again.");
+    //                 }
+    //             });
+
+    //         });
+    //     }
+
+    // function approve(que_id){
+    //         // var c = confirm("Are you sure to Approve activity? ");
+    //         // if (c == true) {
+    //             $('#approve').modal('show');
+    //             $('.approve').on('click', function() {
+    //             // const $loader = $('.igr-ajax-loader');
+    //             //$loader.show();
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '<?php echo base_url(); ?>admin/approve_btm',
+    //                 data: {
+    //                     que_id: que_id,
+    //                 },
+    //                 success: function(result) {
+
+    //                     location.reload();
+    //                 },
+    //                 error: function(result) {
+    //                     alert("Error,Please try again.");
+    //                 }
+    //             });
+
+    //         })
+    //     }
+
+    // function sendArchive(que_id) {
+    //         // var c = confirm("Are you sure to Publish By The Mentor details? ");
+    //         // if (c == true) {
+    //             // const $loader = $('.igr-ajax-loader');
+    //             //$loader.show();
+    //             $('#archive').modal('show');
+    //             $('.archive').on('click', function() {
+    //             $.ajax({
+    //                 type: 'POST',
+    //                 url: '<?php echo base_url(); ?>admin/btm_archive',
+    //                 data: {
+    //                     que_id: que_id,
+    //                 },
+    //                 success: function(result) {
+    //                     // $('#row' + que_id).css({
+    //                     //     'display': 'none'
+    //                     // });
+    //                     // alert('success' 'refresh');
+    //                     location.reload();
+    //                 },
+    //                 error: function(result) {
+    //                     alert("Error,Please try again.");
+    //                 }
+    //             });
+
+    //         });
+    //     }
+
+
+        // function sendPublish(que_id) {
+        //     // var c = confirm("Are you sure to Publish By The Mentor details? ");
+        //     // if (c == true) {
+        //         // const $loader = $('.igr-ajax-loader');
+        //         //$loader.show();
+        //         $('#publish').modal('show');
+        //         $('.publish').on('click', function() {
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>admin/btm_publish',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) {
+        //                 // $('#row' + que_id).css({
+        //                 //     'display': 'none'
+        //                 // });
+        //                 // alert('success' 'refresh');
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
+
+        //     });
+        // }
+        // function sendUnPublish(que_id) {
+        //     // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
+        //     // if (c == true) {     
+        //         $('#unpublish').modal('show');
+        //         $('.unpublish').on('click', function() {          
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>admin/btm_unpublish',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) {                       
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
+
+        //     });
+        // }
+
+
+
+
+
+
+</script>
+<script>
+    $('#example_3').on('click','.restore',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Restore ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Restore',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/btm_unarchive',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Restored Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
+    })
 
-            });
-        }
-
-    function approve(que_id){
-            // var c = confirm("Are you sure to Approve activity? ");
-            // if (c == true) {
-                $('#approve').modal('show');
-                $('.approve').on('click', function() {
-                // const $loader = $('.igr-ajax-loader');
-                //$loader.show();
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/approve_btm',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
-
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+    $('#example').on('click','.delete_img',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Delete ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/deleteByTheMentor',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Deleted Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
+    })
 
-            })
-        }
-
-    function sendArchive(que_id) {
-            // var c = confirm("Are you sure to Publish By The Mentor details? ");
-            // if (c == true) {
-                // const $loader = $('.igr-ajax-loader');
-                //$loader.show();
-                $('#archive').modal('show');
-                $('.archive').on('click', function() {
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/btm_archive',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
-                        // $('#row' + que_id).css({
-                        //     'display': 'none'
-                        // });
-                        // alert('success' 'refresh');
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+    $('#example').on('click','.approve',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Approve ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Approve',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/approve_btm',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Approved Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
+    })
 
-            });
-        }
-
-
-        function sendPublish(que_id) {
-            // var c = confirm("Are you sure to Publish By The Mentor details? ");
-            // if (c == true) {
-                // const $loader = $('.igr-ajax-loader');
-                //$loader.show();
-                $('#publish').modal('show');
-                $('.publish').on('click', function() {
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/btm_publish',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
-                        // $('#row' + que_id).css({
-                        //     'display': 'none'
-                        // });
-                        // alert('success' 'refresh');
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+    $('#example').on('click','.archive',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Archive ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Archive',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/btm_archive',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Archived Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
+    })
 
-            });
-        }
-        function sendUnPublish(que_id) {
-            // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
-            // if (c == true) {     
-                $('#unpublish').modal('show');
-                $('.unpublish').on('click', function() {          
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>admin/btm_unpublish',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {                       
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
+    $('#example_1').on('click','.archive',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Archive ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Archive',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/btm_archive',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Archived Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
+                    })
+    })
 
-            });
-        }
+    $('#example_1').on('click','.publish',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Publish ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Publish',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/btm_publish',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Published Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+    })
+    $('#example_1').on('click','.unpublish',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Unpublish ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Unpublish',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/btm_unpublish',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Unpublished Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+    })
 
+    $('#example_2').on('click','.archive',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Archive ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Archive',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/btm_archive',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Archived Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+    })
 
-
-
-
-
-</script>                                    
+    $('#example_2').on('click','.delete_img',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Delete ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/deleteByTheMentor',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Deleted Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+    })
+</script>

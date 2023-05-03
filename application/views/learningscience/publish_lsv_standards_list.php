@@ -57,7 +57,11 @@
                                  <?php $id= encryptids("E", $value['id'] )?>
 
                                 <a href="live_session_view/<?= $id;?>" class="btn btn-primary btn-sm mr-2" title="View">View</a>
-                                <button onclick="updateLsvStandards('<?= $value['id']?>',6);" data-id='<?php echo $value['id']; ?>' class="btn btn-warning btn-sm mr-2 delete_img">Unpublish</button> 
+                                
+                                <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
+
+                                <button onclick="updateLsvStandards('<?= $value['id']?>',6);" data-id='<?php echo $value['id']; ?>' class="btn btn-warning btn-sm mr-2 delete_img">Unpublish</button>
+                                 <?php }?> 
 
                               </td>
                               

@@ -657,6 +657,7 @@ public function Checkleasrninglike($id,$admin_id)
     public function get_feedback_data(){
         $this->db->select('*');
         $this->db->from('tbl_mst_feedback_data');
+        $this->db->where('status!=','9');
         $query=$this->db->get();
         $res=$query->result_array();
         return $res;
@@ -671,6 +672,30 @@ public function Checkleasrninglike($id,$admin_id)
     }
     public function delete_feedback($id){
         $id=$this->db->delete('tbl_mst_feedback_data',['id'=>$id]);
+        if($id){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function getArchivedFeedback(){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_feedback_data');
+        $this->db->where('status','9');
+        $query=$this->db->get();
+        $res=$query->result_array();
+        return $res;
+    }
+    public function feedback_archive($id){
+        $id=$this->db->update('tbl_mst_feedback_data',['status'=>'9'],['id'=>$id]);
+        if($id){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function restore_feedback($id){
+        $id=$this->db->update('tbl_mst_feedback_data',['status'=>'0'],['id'=>$id]);
         if($id){
             return true;
         }else{

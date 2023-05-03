@@ -104,6 +104,31 @@ class Admin extends CI_Controller
         $this->load->view('admin/feedback',$data);
         $this->load->view('admin/footers/admin_footer');
     }
+    public function feedback_archive(){
+        $this->load->model('Users/Users_model');
+        $data['feedback']=$this->Users_model->getArchivedFeedback();
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/archive_feedback',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function archive_feedback($id){
+        $this->load->model('Users/Users_model');
+        $result=$this->Users_model->feedback_archive($id);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function restore_feedback($id){
+        $this->load->model('Users/Users_model');
+        $result=$this->Users_model->restore_feedback($id);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function feedback_view()
     {
         $this->load->view('admin/headers/admin_header');
