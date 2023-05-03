@@ -307,6 +307,12 @@ class Admin extends CI_Controller
         $this->load->view('admin/upcoming_events');
         $this->load->view('admin/footers/admin_footer');
     }
+    public function set_permission()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/set_permission');
+        $this->load->view('admin/footers/admin_footer');
+    }
     public function feedback_detail($id){
         $f_id=encryptids("D",$id);
         // echo $f_id; die;
@@ -1939,6 +1945,91 @@ class Admin extends CI_Controller
     public function join_the_classroom_dashboard(){
         $this->load->view('admin/headers/admin_header');
          $this->load->view('admin/join_the_classroom_dashboard');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function share_your_dashboard(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/share_your_dashboard');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function discussion_forum_dashboard(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/discussion_forum_dashboard');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function create_discussion_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/create_discussion_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function Manage_discussion_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/Manage_discussion_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function ongoing_discussion_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/ongoing_discussion_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function closed_discussion_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/closed_discussion_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function create_discussion_form(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/create_discussion_form');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function item_proposal_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/item_proposal_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function item_proposal_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/item_proposal_view');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function important_draft_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/important_draft_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function important_draft_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/important_draft_view');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_publish_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_publish_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_publish_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_publish_view');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_under_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_under_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_under_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_under_view');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_revised_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_revised_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_revised_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_revised_view');
          $this->load->view('admin/footers/admin_footer');
     } 
     public function Manage_session_list(){

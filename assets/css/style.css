@@ -1609,9 +1609,10 @@ footer .main_footer .f_contact ul li i {
 	padding: 0px;
 }
 .jquery-once {
-	height: 100%;
-	display: flex;
-	padding: 0 10px;
+    height: 100%;
+    /* display: flex; */
+    /* padding: 0 10px; */
+    width: 100%;
 }
 .social-content {
 	display: -webkit-box;
