@@ -249,7 +249,7 @@
     <div class="creative-wrapper">
       <div class="creative-content">
         <div class="section-title">
-          <h2>Letest News</h2>
+          <h2>Latest News</h2>
           <span>Your creativity can make a big impact</span>
         </div>
         <div class="creative-list">
@@ -342,20 +342,23 @@
             <div class="view-content">
 
               <div class="owl-carousel owl-theme" id="events_slider">
+              <?php if(!empty($events)){ 
+                foreach($events as $list){ ?>
                 <div class="item">
                   <div class="views-row views-row-1 views-row-odd views-row-first">
 
-                    <div class="views-field views-field-nothing"> <span class="field-content"><img src="https://mygov.in/sites/default/files/master_image/thumbnail_2_1.png" width="510" height="340" alt="Inviting ideas for preparing India’s workforce for the Future of Work" title="Inviting ideas for preparing India’s workforce for the Future of Work">
+                    <div class="views-field views-field-nothing"> <span class="field-content"><img src="<?php echo base_url().'uploads/cms/events/'.$list['thumbnail']; ?>" width="510" height="340" alt="Inviting ideas for preparing India’s workforce for the Future of Work" title="Inviting ideas for preparing India’s workforce for the Future of Work">
                         <a href="/group-issue/inviting-ideas-preparing-india%E2%80%99s-workforce-future-work/" title="Share your views">Share your views</a></span> </div>
                     <div class="views-field views-field-title-field">
-                      <div class="field-content">Inviting ideas for preparing India’s workforce for the Future of Work</div>
+                      <div class="field-content"><?php echo $list['title']; ?></div>
                     </div>
                     <div class="views-field views-field-field-deadline"> <span class="views-label views-label-field-deadline">Last Date: </span>
                       <div class="field-content nodtranslate"><span class="date-display-single">Jun 1 2023 - 10:45am</span></div>
                     </div>
                   </div>
                 </div>
-                <div class="item">
+                <?php } } ?>
+                <!-- <div class="item">
                   <div class="views-row views-row-2 views-row-even">
 
                     <div class="views-field views-field-nothing"> <span class="field-content"><img src="https://mygov.in/sites/default/files/master_image/thumbnail_5.jpg" width="510" height="340" alt="Share your inputs on the Role of Manthan in empowering women entrepreneurs and startups to scale up innovation for a larger social Impact" title="Share your inputs on the Role of Manthan in empowering women entrepreneurs and startups to scale up innovation for a larger social Impact">
@@ -393,7 +396,7 @@
                       <div class="field-content nodtranslate"><span class="date-display-single">May 1 2023 - 5:15am</span></div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
 
 

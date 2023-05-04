@@ -116,7 +116,7 @@
                                               <tr>
                                     <td><?php echo $i; ?></td>
                                     <td><?php echo $list['title']; ?></td>
-                                    <td><img src="<?php echo base_url().'uploads/letest_news/'.$list['thumbnail']; ?>" alt="#" class="" width="50%"></td>
+                                    <td><img src="<?php echo base_url().'uploads/letest_news/'.$list['thumbnail']; ?>" alt="#" class="" width="100%" style="height:75px;"></td>
                                     <td><?php echo $list['created_on']; ?></td>
                                     
                                     <td class="d-flex border-bottom-0">

@@ -2343,8 +2343,11 @@ textarea {
 .view_content {
     padding: 16px;
 }
-.artical-comment:hover {
+.artical-comment {
     background: #80808047;
+}
+.artical-comment-view:hover{
+	background: #80808047;
 }
 .standard_banner_scroll{
 	object-fit: fill;

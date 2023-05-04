@@ -303,10 +303,173 @@ class Admin extends CI_Controller
 
     public function upcoming_events()
     {
+        $data['events']=$this->Admin_model->getEvent();
         $this->load->view('admin/headers/admin_header');
-        $this->load->view('admin/upcoming_events');
+        $this->load->view('admin/upcoming_events',$data);
         $this->load->view('admin/footers/admin_footer');
     }
+
+    public function addEvents(){
+
+        $data['title'] =  $this->input->post('title');
+        $data['link'] =  $this->input->post('link');
+
+        if (!file_exists('uploads/cms/events')) { mkdir('uploads/cms/events', 0777, true); }
+
+        $banner_img = "events" . time() . '.jpg';
+        $config['upload_path'] = './uploads/cms/events';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size']    = '204800';
+        $config['max_width']  = '3024';
+        $config['max_height']  = '2024';
+   
+        $config['file_name'] = $banner_img;
+       
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('thumbnail')) 
+        {
+            $data['status'] = 0;
+            $data['message'] = $this->upload->display_errors();
+        }
+
+        $data['thumbnail']=$banner_img;
+        $data['status']='1';
+       // print_r($data); die;
+
+        $id=$this->Admin_model->addEvent($data);
+        if($id){
+            $this->session->set_flashdata('MSG',  ShowAlert("Letest event recorded successfully.", "DD"));
+            redirect(base_url() . "admin/upcoming_events", 'refresh');
+        }
+
+    }
+    public function deleteEvents($id){
+        $f_id=encryptids("D",$id); 
+        $data=$this->Admin_model->deleteEvents($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function publishEvent($id){
+        $f_id=encryptids("D",$id); 
+        // echo $f_id; die;
+        // return $f_id; die;
+        $data=$this->Admin_model->publishEvent($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function unpublishEvent($id){
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->unpublishEvent($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function archiveEvent($id){
+        // echo $id; die;
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->archiveEvent($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function restoreEvent($id){
+        // echo $id; die;
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->restoreEvent($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function archived_events(){
+        $data['events']=$this->Admin_model->archivedEvents();
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/archived_events',$data);
+        $this->load->view('admin/footers/admin_footer'); 
+    }
+    public function editEvents($id){
+        $f_id=encryptids("D",$id); 
+        // return $f_id;die;
+        $result=$this->Admin_model->editEvents($f_id);
+        echo $result;
+    }
+    public function updateEvents(){
+        // print_r($_POST); 
+        // print_r($_FILES); die;
+        $formdata['title'] =  $this->input->post('title1');
+        $formdata['link'] =  $this->input->post('link');
+
+        if (!file_exists('uploads/cms/events')) { mkdir('uploads/cms/events', 0777, true); }
+
+        //print_r([$_POST['old_image']]); die;
+        $formdata['id'] = $this->input->post('id');
+        
+        $formdata['status'] = '1';
+
+       $oldDocument = "";
+       $oldDocument = $this->input->post('old_doc');
+       $document = "";
+
+            if (!empty($_FILES['document']['tmp_name'])) {
+                $document = "events" . time() . '.jpg';
+                $config['upload_path'] = './uploads/cms/events';
+                $config['allowed_types'] = 'jpg|png|jpeg';
+                $config['max_size']    = '204800';
+                $config['max_width']  = '3024';
+                $config['max_height']  = '2024';
+                $config['file_name'] = $document;
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('document')) {
+                    //$err[]=$this->upload->display_errors();
+                    $data['status'] = 0;
+                    $data['message'] = $this->upload->display_errors();
+                }
+                } else {
+                    if (!empty($oldDocument)) {
+                        $document =  $oldDocument;
+                    }
+                }   
+               
+        if($document){          
+            $formdata['thumbnail']=$document;
+        }
+        // print_r($formdata); die;
+        // $formdata['status']="1";
+        $id = $this->Admin_model->updateEvents($formdata);
+        if($id){
+            $this->session->set_flashdata('MSG', ShowAlert("Record Updated Successfully", "SS"));
+            redirect(base_url() . "admin/upcoming_events", 'refresh');
+        } else {
+            $this->session->set_flashdata('MSG', ShowAlert("Failed to update record,Please try again", "DD"));
+            redirect(base_url() . "admin/upcoming_events", 'refresh');
+        }
+    
+    }
+    public function events_view($id)
+    {
+        $f_id=encryptids("D",$id); 
+        $data['result']=$this->Admin_model->getEventDetail($f_id);
+        // print_r($data); die;
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/events_view',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+
+
+
     public function set_permission()
     {
         $this->load->view('admin/headers/admin_header');
