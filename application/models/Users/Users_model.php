@@ -702,5 +702,50 @@ public function Checkleasrninglike($id,$admin_id)
             return false;
         }
     }
+
+     public function insertImportantDraft($formdata)
+    { 
+        $this->db->replace('tbl_important_draft_standards',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function ImportantDraftCount()
+    {
+        return $quiz = $this->db->get('tbl_important_draft_standards')->result_array(); 
+    }
+    public function getImportantDraft($doc_no)
+    {   
+        $this->db->where('doc_no',$doc_no); 
+        return $quiz = $this->db->get('tbl_important_draft_standards')->row_array();
+    }
+
+    public function insertNewStandardsPublished($formdata)
+    { 
+        $this->db->replace('tbl_new_standards_published',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function NewStandardsPublishedCount()
+    {
+        return $quiz = $this->db->get('tbl_new_standards_published')->result_array(); 
+    }
+    public function getNewStandardsPublished($pk_is_id)
+    {   
+        $this->db->where('pk_is_id',$pk_is_id); 
+        return $quiz = $this->db->get('tbl_new_standards_published')->row_array();
+    }
+
+    public function insertStandardsRevised($formdata)
+    { 
+        $this->db->replace('tbl_standards_revised',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function StandardsRevisedCount()
+    {
+        return $quiz = $this->db->get('tbl_standards_revised')->result_array(); 
+    }
+    public function getStandardsRevised($pk_is_id)
+    {   
+        $this->db->where('pk_is_id',$pk_is_id); 
+        return $quiz = $this->db->get('tbl_standards_revised')->row_array();
+    }
      
 }

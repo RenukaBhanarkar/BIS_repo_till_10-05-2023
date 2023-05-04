@@ -23,17 +23,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                      
+                      <?php foreach ($getAll as $key => $value) {?>
                                 <tr>
-                                 <td>1</td>
-                                 <td>Title</td>
-                                 <td>Share Your Thought</td>
+                                 <td><?= $key+1?></td>
+                                 <td><?= $value['is_title']?></td>
+                                 <td><?= $value['depName']?></td>
                                  <td class="border-bottom-0">
-                                    <button onClick="location.href='standard_revised_view'" class="btn btn-primary btn-sm mr-2">View Details</button>
-                                    <button onClick="location.href='new_work_view_comments'" class="btn btn-success btn-sm mr-2">Join Discussion</button>
+                                    
+
+                                     <a href="standard_revised_view/<?= $value['pk_is_id']?>" class="btn btn-primary btn-sm mr-2">View Details</a>
+                                <a href="new_work_view_comments/<?= $value['pk_is_id']?>" class="btn btn-success btn-sm mr-2">Join Discussion</a>
                                     
                                  </td>
                                  </tr>
+                                  <?php }?>
+                                
  
                     </tbody>
                 </table>

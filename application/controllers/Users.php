@@ -538,30 +538,102 @@ class Users extends CI_Controller
     }
     public function important_draft_list()
     {
+        $curl_req1 = curl_init(); 
+        curl_setopt_array($curl_req1, array(
+            CURLOPT_URL => 'http://203.153.41.213:8071/php/BIS_2.0/dgdashboard/Standards_master/get_standards_documents_stage_data',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_SSL_VERIFYPEER => false, 
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Accept: application/json'
+            ),
+        ));
+        $responseNew = curl_exec($curl_req1);
+        $responseNew = json_decode($responseNew, true); 
+        $newCount =count($responseNew['stage_data']);
+        $arr=array();
+        $getAll= $this->Users_model->ImportantDraftCount();
+        $arr['getAll']=$getAll;
+        $insertedCount = count($getAll); 
+        if ($newCount > $insertedCount ) 
+        {
+            foreach($responseNew['stage_data'] as $data)
+                { 
+                    $this->Users_model->insertImportantDraft($data);
+                }
+        }
+
         $this->load->view('users/headers/header');
-        $this->load->view('users/important_draft_list');
+        $this->load->view('users/important_draft_list',$arr);
         $this->load->view('users/footers/footer');
+    }
+
+     public function important_draft_comments($id){
+        $data['getData']=$this->Users_model->getImportantDraft($id);
+        $this->load->view('users/headers/header');
+        $this->load->view('users/important_draft_comments',$data);
+        $this->load->view('users/footers/footer'); 
     }
     public function discussion_list(){
         $this->load->view('users/headers/header');
         $this->load->view('users/discussion_list');
         $this->load->view('users/footers/footer'); 
     }
-    public function important_draft_view(){
+    public function important_draft_view($id)
+    {
+        $data['getData']=$this->Users_model->getImportantDraft($id);
         $this->load->view('users/headers/header');
-        $this->load->view('users/important_draft_view');
+        $this->load->view('users/important_draft_view',$data);
         $this->load->view('users/footers/footer');
     }
     public function standard_publish_List()
     {
+        $curl_req1 = curl_init(); 
+        curl_setopt_array($curl_req1, array(
+            CURLOPT_URL => 'http://203.153.41.213:8071/php/BIS_2.0/dgdashboard/Standards_master/get_new_standards_data',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_SSL_VERIFYPEER => false, 
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Accept: application/json'
+            ),
+        ));
+        $responseNew = curl_exec($curl_req1);
+        $responseNew = json_decode($responseNew, true); 
+        $newCount =count($responseNew['new_stndrds_data']);
+        $arr=array();
+        $getAll= $this->Users_model->NewStandardsPublishedCount();
+        $arr['getAll']=$getAll;
+        $insertedCount = count($getAll); 
+        if ($newCount > $insertedCount ) 
+        {
+            foreach($responseNew['new_stndrds_data'] as $data)
+                { 
+                    $this->Users_model->insertNewStandardsPublished($data);
+                }
+        }
         $this->load->view('users/headers/header');
-        $this->load->view('users/standard_publish_List');
+        $this->load->view('users/standard_publish_List',$arr);
         $this->load->view('users/footers/footer');
     }
-    public function standard_publish_view()
+    public function standard_publish_view($id)
     {
+        $data['getData']=$this->Users_model->getNewStandardsPublished($id);
+
         $this->load->view('users/headers/header');
-        $this->load->view('users/standard_publish_view');
+        $this->load->view('users/standard_publish_view',$data);
         $this->load->view('users/footers/footer');
     }
     public function standard_under_list()
@@ -578,19 +650,49 @@ class Users extends CI_Controller
     }
     public function standard_revised_list()
     {
+        $curl_req1 = curl_init(); 
+        curl_setopt_array($curl_req1, array(
+            CURLOPT_URL => 'http://203.153.41.213:8071/php/BIS_2.0/dgdashboard/Standards_master/get_revised_standards_data',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_SSL_VERIFYPEER => false, 
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json',
+                'Accept: application/json'
+            ),
+        ));
+        $responseNew = curl_exec($curl_req1);
+        $responseNew = json_decode($responseNew, true); 
+        $newCount =count($responseNew['revised_stndrds_data']);
+        $arr=array();
+        $getAll= $this->Users_model->StandardsRevisedCount();
+        $arr['getAll']=$getAll;
+        $insertedCount = count($getAll); 
+        if ($newCount > $insertedCount ) 
+        {
+            foreach($responseNew['revised_stndrds_data'] as $data)
+                {  
+                    $this->Users_model->insertStandardsRevised($data);
+                }
+        }
         $this->load->view('users/headers/header');
-        $this->load->view('users/standard_revised_list');
+        $this->load->view('users/standard_revised_list',$arr);
         $this->load->view('users/footers/footer');
     }
-    public function standard_revised_view()
+    public function standard_revised_view($id)
     {
+        $data['getData']=$this->Users_model->getStandardsRevised($id);
         $this->load->view('users/headers/header');
-        $this->load->view('users/standard_revised_view');
+        $this->load->view('users/standard_revised_view',$data);
         $this->load->view('users/footers/footer');
     }
     public function new_work_list()
-    {
-        $this->load->view('users/headers/header');
+    { 
         $curl_req1 = curl_init(); 
         curl_setopt_array($curl_req1, array(
             CURLOPT_URL => 'http://203.153.41.213:8071/php/BIS_2.0/dgdashboard/Standards_master/get_nwip_report_data',
