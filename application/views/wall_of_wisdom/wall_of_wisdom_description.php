@@ -155,6 +155,9 @@
     align-items: stretch;
     width: 28%;
 }
+.owl-nav{
+    display: none;
+}
 </style>
 <div class="container">
 <div class="row mt-5">
@@ -204,10 +207,52 @@
                     <div class="right_side">
                         <div class="title_right">
                             <h6>Upcomming Events</h6>
-                            <div class="banner_image">
+                            <div class="owl-carousel owl-theme" id="owl-caraousal_news">
+                                <div class="item">
+                                    <div class="quiz-section">
+                                        <div class="quiz-box_live">
+                                            <a href="#"><img src="<?php echo base_url();?>/assets/images/whats_news.jpg"></a>
+                                        </div>
+                                        <p class="quiz-text overflow-hidden p-1" > <a href="#">Photography Competition- Share the unknown spots of Mizoram</a></p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="quiz-section">
+                                        <div class="quiz-box_live">
+                                            <a href="#"><img src="<?php echo base_url();?>/assets/images/whats_news.jpg"></a>
+                                        </div>
+                                        <p class="quiz-text overflow-hidden p-1" > <a href="#">Photography Competition- Share the unknown spots of Mizoram</a></p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="quiz-section">
+                                        <div class="quiz-box_live">
+                                            <a href="#"><img src="<?php echo base_url();?>/assets/images/whats_news.jpg"></a>
+                                        </div>
+                                        <p class="quiz-text overflow-hidden p-1" > <a href="#">Photography Competition- Share the unknown spots of Mizoram</a></p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="quiz-section">
+                                        <div class="quiz-box_live">
+                                            <a href="#"><img src="<?php echo base_url();?>/assets/images/whats_news.jpg"></a>
+                                        </div>
+                                        <p class="quiz-text overflow-hidden p-1" > <a href="#">Photography Competition- Share the unknown spots of Mizoram</a></p>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="quiz-section">
+                                        <div class="quiz-box_live">
+                                            <a href="#"><img src="<?php echo base_url();?>/assets/images/whats_news.jpg"></a>
+                                        </div>
+                                        <p class="quiz-text overflow-hidden p-1" > <a href="#">Photography Competition- Share the unknown spots of Mizoram</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="banner_image">
                                 <img src="<?php echo base_url();?>/assets/images/whats_news.jpg" class="w-100">
                                 <p>Photography Competition- Share the unknown spots of Mizoram</p>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="title_right mt-3">
                             <h6>Latest News</h6>
