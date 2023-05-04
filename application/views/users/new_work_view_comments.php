@@ -74,6 +74,21 @@
         </div>
        </div>
        <div class="container">
+            <div class="artical-comment">
+                <div class="view_content">
+                    <a href="">
+                    <div class="common_content">
+                        <div class="comment_user">
+                              <img src="http://localhost/BIS/BIS_repo/assets/images/user_1.png" alt="Default Profile Picture" width="5%"><span style="margin-left: 15px; font-size: 17px;">Login</span>            
+                        </div>
+
+                    </div>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+       <div class="container">
   
                         <form>
                 <h2 class="YourWallForm">Important Draft Standards</h2>
@@ -90,11 +105,11 @@
                                     
                                 </div>
                         </div>
-                        <div class="col-sm-6 mt-3">
+                        <!-- <div class="col-sm-6 mt-3">
                             <div class="file-upload-wrapper" data-text="Select your file">
                                 <input type="file" class="file-upload-field" name="image" value="">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="button-group  mt-3" style="text-align:end;">
                                         <button type="submit" class="btn btn-success">Save</button>
                                     </div>
@@ -109,18 +124,6 @@
             <ul class="posts">
             </ul>
         </div>
-        <div class="container">
-            <div class="artical-comment">
-                <div class="view_content">
-                    <div class="common_content">
-                        <div class="comment_user">
-                              <img src="http://localhost/BIS/BIS_repo/assets/images/user_1.png" alt="Default Profile Picture" width="5%">            
-                        </div>
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+        
     <!-- /.container-fluid -->
    

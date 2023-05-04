@@ -304,7 +304,7 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
                                     <?php
                                     foreach ($que_details as $key => $details) {
                                         $key++; ?>
-                                        <span id="counter<?= $details['que_id'] ?>" class="ans-red"><?= $key; ?></span>
+                                        <span id="counter<?= $details['que_id'] ?>" class="ans-red"  onclick="que(<?= $key; ?>)"><?= $key; ?></span>
                                     <?php } ?>
                                 </div>
 
@@ -408,6 +408,54 @@ $quiz_start_time = $_SESSION['quiz_start_time'] = date('h:i:s');
             showTab(currentTab);
             if (valid) {
                 document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+        }else{
+            alert('It is mandetory to answer the question.')
+        }
+
+        
+
+        }
+
+        function que(n) {
+            // var res = $(".viewedQuestion .quiz-option .active_question_id").val();
+            var n = n-1;
+            //alert(n);
+            var k = $(".viewedQuestion .quiz-option .k_value").val();
+            var switching_type = $(".viewedQuestion .quiz-option .switching_type").val();
+            var is_valid = true;
+            if(switching_type == 2){
+                var sel_option = $('input[name="option'+n+'"]').val();
+                if(sel_option == undefined){
+                    is_valid = false;
+                }
+            }
+            if(is_valid == true){
+            $(".tab.viewedQuestion").removeClass("viewedQuestion");
+            var valid = true;
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("tab");
+            // Exit the function if any field in the current tab is invalid:
+            // if (n == 1 && !validateForm()) return false;
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            currentTab = n;
+            // if you have reached the end of the form...
+            // if (currentTab >= x.length) {
+            //     // ... the form gets submitted:
+            //     // $("#myForm").submit();
+            //     // document.getElementById("regForm").submit();
+            //     document.getElementById("afterSubmitHide").style.display = "none";
+            //     // $('#afterSubmitHide').hide();
+            //     console.log('hello')
+            //     return false;
+
+            // }
+            // Otherwise, display the correct tab:
+            showTab(currentTab);
+            if (valid) {
+                // document.getElementsByClassName("step")[currentTab].className += " finish";
             }
         }else{
             alert('It is mandetory to answer the question.')
