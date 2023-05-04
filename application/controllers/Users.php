@@ -502,6 +502,7 @@ class Users extends CI_Controller
         $data['images'] = $this->Admin_model->images();
         $data['videos'] = $this->Admin_model->videos();
         $data['news'] = $this->Admin_model->news();
+        $data['events'] = $this->Admin_model->events();
         $allquize = $this->Users_model->getStdClubQuizAll();
         $data['allquize'] = $allquize;
         $this->load->view('users/headers/header');
@@ -660,6 +661,8 @@ class Users extends CI_Controller
         // $this->load->model('Admin/Wall_of_wisdom_model wow');
         $data['wow'] = $this->wow->get_wow($id);
         // print_r($data['wow']); die;
+        $data['news'] = $this->Admin_model->news();
+        $data['events'] = $this->Admin_model->events();
         $this->load->view('users/headers/header');
         $this->load->view('wall_of_wisdom/wall_of_wisdom_description', $data);
         $this->load->view('users/footers/footer');
@@ -782,6 +785,8 @@ class Users extends CI_Controller
     }
     public function yourwallview($id)
     {
+        $data['news'] = $this->Admin_model->news();
+        $data['events'] = $this->Admin_model->events();
         $this->load->model('admin/your_wall_model');
         $data['published_wall'] = $this->your_wall_model->get_yourwallData($id);
         $this->load->view('users/headers/header');
@@ -1511,6 +1516,8 @@ class Users extends CI_Controller
     }
     public function by_the_mentor_detail($id)
     {
+        $data['news'] = $this->Admin_model->news();
+        $data['events'] = $this->Admin_model->events();
         $this->load->model('Admin/by_the_mentor_model');
         $data['by_the_mentor'] = $this->by_the_mentor_model->get_btm($id);
         $this->load->view('users/headers/header');
