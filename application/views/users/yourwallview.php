@@ -77,9 +77,14 @@
     height: 62px;
 }
 
-.text_container_tranding {
+/* .text_container_tranding {
     width: 74%;
     line-height: 20px;
+    padding: 0px 14px;
+} */
+.text_container_tranding {
+    width: 74%;
+    line-height: 24px;
     padding: 0px 14px;
 }
 
@@ -89,7 +94,7 @@
     border-radius: 5px;
 }
 
-.tending_para {
+/* .tending_para {
     padding: 2px 0px 0px;
     font-size: 13px;
     font-weight: 600;
@@ -99,6 +104,18 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
     -webkit-box-orient: vertical;
+} */
+.tending_para {
+    /* padding: 2px 0px 0px; */
+    font-size: 13px;
+    font-weight: 600;
+    display: -webkit-box;
+    max-width: 100%;
+    height: 78px;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
 }
 .img_mentor {
     padding: 8px;
@@ -194,16 +211,27 @@
                 <div class="col-sm-3">
                     <div class="right_side">
                         <div class="title_right">
-                            <h6>What's New</h6>
+                            <h6>Upcomming Events</h6>
                             <div class="banner_image">
                                 <img src="<?php echo base_url();?>/assets/images/whats_news.jpg" class="w-100">
                                 <p>Photography Competition- Share the unknown spots of Mizoram</p>
                             </div>
                         </div>
                         <div class="title_right mt-3">
-                            <h6>Trending</h6>
+                            <h6>Latest News</h6>
                             <div class="banner_image_tending">
+                            <?php if(!(empty($news))){ foreach($news as $list){ ?>
                                 <div class="tranding_outer_box">
+                                    <div class="image_tranding">
+                                    <img src="<?php echo base_url().'uploads/letest_news/'.$list['thumbnail'];?>" class="w-100 h-100">
+                                    </div>
+                                    <div class="text_container_tranding">
+                                        <!-- <span class="bg-success text-white Btn-do">Do</span> -->
+                                        <a href="#" class="tending_para "><?php echo $list['description']; ?></a>
+                                    </div>
+                                </div>
+                                <?php } } ?>
+                                <!-- <div class="tranding_outer_box">
                                     <div class="image_tranding">
                                         <img src="<?php echo base_url();?>/assets/images/2.jpg" class="w-100 h-100">
                                     </div>
@@ -214,19 +242,7 @@
                                             spots of
                                             Mizoram</a>
                                     </div>
-                                </div>
-                                <div class="tranding_outer_box">
-                                    <div class="image_tranding">
-                                        <img src="<?php echo base_url();?>/assets/images/2.jpg" class="w-100 h-100">
-                                    </div>
-                                    <div class="text_container_tranding">
-                                        <span class="bg-success text-white Btn-do">Do</span>
-                                        <a href="#" class="tending_para d-block">Photography Competition- Share the
-                                            unknown
-                                            spots of
-                                            Mizoram</a>
-                                    </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
