@@ -36,25 +36,31 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="mb-2 col-md-4">
-                                            <div class="row">
-                                                <div class="col-9">
-                                            <label class="d-block text-font">Upload Image<sup class="text-danger">*</sup></label>
-                                            <input type="file" class="form-control input-font" name="image" id="image"  accept="image/*" required="required" onchange="loadFileThumbnail1(event)">
-                                            <span class="error_text">
+                                            <div class="row">                                                
+                                            <label class="d-block text-font ml-3">Upload Image<sup class="text-danger">*</sup></label>
+                                            <div class="col-9">
+                                            <div class="row"></div>
+                                            <input type="file" class="form-control input-font" name="image" id="image1"  accept="image/*" required="required" onchange="loadFileThumbnail1(event)">
+                                            <span class="text-danger" id="err_image">
                                                 <?php //echo form_error('title'); 
                                                 ?>
                                             </span>
                                             </div>
-                                            <button type="button" class="btn btn-primary btn-sm mb-4" data-bs-toggle="modal" data-bs-target="#Previewimg"> Preview 
-                                                            </button>
 
+
+                                            <div class="col-3">
+                                            <button type="button" class="btn btn-primary btn-sm mb-4" data-bs-toggle="modal" data-bs-target="#Previewimg"> 
+                                                Preview 
+                                            </button>
+                                            </div>
+                                            
                                             </div>
 
                                         </div>
                                         <div class="mb-2 col-md-8">
                                             <label class="d-block text-font">Description</label>
                                             <textarea class="form-control" id="description" name="description" rows="5" required="" minlength="5" maxlength="1000"></textarea>
-                                            <span class="error_text">
+                                            <span class="text-danger" id="err_descriptions">
                                                 <?php //echo form_error('title'); 
                                                 ?>
                                             </span>
@@ -62,7 +68,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                        <button class="btn btn-primary">Submit</button>
+                                        <button onclick="return submitForm(event)" class="btn btn-primary">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -75,8 +81,9 @@
         <?php } ?>
         
         <?php
-        if ($this->session->flashdata('MSG')) {
+        if ($this->session->flashdata('MSG')) {          
             echo $this->session->flashdata('MSG');
+            // echo "<script>Swal.fire('Success')</script>";
         }
         ?>
         <?php } ?>
@@ -102,7 +109,7 @@
                                     <tr>
                                         <td><?php echo $i++ ?></td>
                                         <td><?php if ($list_aef['image']) { ?>
-                                                <img src="<?php echo base_url(); ?>uploads/<?php echo $list_aef['image'] ?>" data-toggle="modal" data-target="#viewImage" width="40px">
+                                                <img src="<?php echo base_url(); ?>uploads/cms/about_exchange_forum/<?php echo $list_aef['image'] ?>" data-toggle="modal" data-target="#viewImage" width="40px">
                                             <?php } else {
                                                 echo "No Uploaded";
                                             } ?>
@@ -124,7 +131,7 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <img src="<?php echo base_url(); ?>uploads/<?php echo $list_aef['image'] ?>" alt="" width="100%">
+                                                            <img src="<?php echo base_url(); ?>uploads/cms/about_exchange_forum/<?php echo $list_aef['image'] ?>" alt="" width="100%">
                                                         </div>
 
                                                     </div>
@@ -164,12 +171,12 @@
                                                                                         </button>
                                                                                         </div>
                                                                                         <div class="modal-body">
-                                                                                        <img src="<?php echo base_url(); ?>uploads/<?php echo $about_exchange_forum[0]['image'] ?>" id="outputicon" width="100%"/>
+                                                                                        <img src="<?php echo base_url(); ?>uploads/cms/about_exchange_forum/<?php echo $about_exchange_forum[0]['image'] ?>" id="outputicon" width="100%"/>
                                                                                         </div>
-                                                                                        <div class="modal-footer">
+                                                                                        <!-- <div class="modal-footer">
                                                                                         <button type="button"  onclick="resetbanner()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
                                                                                         <button type="button" class="btn btn-primary"data-bs-dismiss="modal">Save changes</button>
-                                                                                        </div> 
+                                                                                        </div>  -->
                                                                                     </div>
                                                                                     </div>
                                                                                 </div>  
@@ -183,7 +190,7 @@
                                                             <input type="file" class="form-control input-font" name="image" id="icon_file" value=""  accept="image/*" onchange="loadFileThumbnail(event)">
                                                                     <input type="hidden" class="form-control input-font" name="old_image" id="image" value="<?php echo $about_exchange_forum[0]['image']; ?>">
                                                                     <input type="hidden" id="id" name="id" value="<?php echo $about_exchange_forum[0]['id']; ?>" >
-                                                                    <span class="error_text">
+                                                                    <span class="text-danger" id="err_icon_file">
                                                                         <?php //echo form_error('title'); 
                                                                         ?>
                                                                     </span>
@@ -214,7 +221,7 @@
                                                                 <div class="mb-2 col-md-12">
                                                                     <label class="d-block text-font">Description</label>
                                                                     <textarea name="description" class="form-control" id="description1" rows="8" maxlength="1000" minlength="6" required=""><?php echo $about_exchange_forum[0]['description']; ?></textarea>
-                                                                    <span class="error_text" id="err_description">
+                                                                    <span class="text-danger" id="err_description">
                                                                         <?php //echo form_error('title'); 
                                                                         ?>
                                                                     </span>
@@ -225,7 +232,7 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                                <button onclick="updateButton()" class="btn btn-primary" type="submit">Update</button>
+                                                                <button onclick="return updateButton(event)" type="submit" class="btn btn-primary" >Update</button>
                                                             </div>
                                                             </form>
                                                         </div>
@@ -282,16 +289,40 @@
         <div class="modal-body">
         <img id="outputThumbnail" width="100%"/>
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
         <button type="button"  onclick="resetbanner()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
         <button type="button" class="btn btn-primary"data-bs-dismiss="modal">Save</button>
-        </div>
+        </div> -->
     </div>
     </div>
 </div> 
 <script type="text/javascript">
 var loadFileThumbnail = function(event) 
     {
+        var fileSize = $('#icon_file')[0].files[0].size;
+       var validExtensions = ['jpg', 'jpeg', 'png']; //array of valid extensions
+        var fileName = $("#icon_file").val();;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+                   
+            console.log(fileSize);
+        if(fileSize < 20000){
+            $('#icon_file').val('');
+            // $('#lessSize').modal('show');
+            $('#err_icon_file').text('This value is required');
+            Swal.fire('File size should be greater than 20KB')
+        }else if(fileSize > 204800){
+            $('#icon_file').val('');
+            // $('#greaterSize').modal('show');
+            Swal.fire('File size should be less than 200KB')
+            $('#err_icon_file').text('This value is required');
+        }else if($.inArray(fileNameExt, validExtensions) == -1){
+            $('#icon_file').val('');
+            // $('#invalidfiletype').modal('show');
+            Swal.fire('Only jpg,jpeg,png allowed')
+            $('#err_icon_file').text('This value is required');
+        }else{
+            $('#err_icon_file').text('');
+        }
        //  $("#Previewimg").show();
         var outputThumbnail = document.getElementById('outputThumbnail');
         
@@ -302,32 +333,171 @@ var loadFileThumbnail = function(event)
             URL.revokeObjectURL(outputThumbnail.src);
         }
     };
+
+    var loadFileThumbnail1 = function (event){
+        var fileSize = $('#image1')[0].files[0].size;
+       var validExtensions = ['jpg', 'jpeg', 'png']; //array of valid extensions
+        var fileName = $("#image1").val();;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+                   
+            console.log(fileSize);
+        if(fileSize < 20000){
+            $('#image1').val('');
+            // $('#lessSize').modal('show');
+            $('#err_image').text('This value is required');
+            Swal.fire('File size should be greater than 20KB');
+        }else if(fileSize > 204800){
+            $('#image1').val('');
+            // $('#greaterSize').modal('show');
+            Swal.fire('File size should be less than 200KB')
+            $('#err_image').text('This value is required');
+        }else if($.inArray(fileNameExt, validExtensions) == -1){
+            $('#image1').val('');
+            // $('#invalidfiletype').modal('show');
+            Swal.fire('Only jpg,jpeg,png allowed')
+            $('#err_image').text('This value is required');
+        }else{
+            $('#err_image').text('');
+        }
+       //  $("#Previewimg").show();
+        var outputThumbnail = document.getElementById('outputThumbnail');
+        
+        outputThumbnail.src = URL.createObjectURL(event.target.files[0]);
+        console.log(outputThumbnail.src);
+        outputThumbnail.onload = function()
+        {
+            URL.revokeObjectURL(outputThumbnail.src);
+        }
+    }
+
+
+    function submitForm(event){
+        event.preventDefault();
+        is_valid=true;
+        var description = CKEDITOR.instances['description'].getData();
+        var image = $('#image1').val();
+
+        if (description == "") {                
+                $("#err_descriptions").text("This value is required");
+                $("#description1").focus();
+                is_valid = false;   
+                          
+            } else if(!(description.length > 5)){
+               $("#err_descriptions").text("Enter atleast 5 character");
+                // $("#description").focus();
+               
+                is_valid = false;  
+            } else if((description.length) > 1000){
+               $("#err_descriptions").text("Only 1000 Characters Allowed");                
+                is_valid = false;  
+            }else{
+                $("#err_descriptions").text("");   
+            }
+
+
+                if(image=="" || image==null){
+                is_valid = false;   
+                    Swal.fire('Please select file')
+                    $('#err_image').text('This value is required');
+                }else{
+
+                }
+
+                if(is_valid){
+                    Swal.fire({
+                            title: 'Do you want to Submit?',
+                            showDenyButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: 'Submit',
+                            denyButtonText: `Cancel`,
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                Swal.fire('Saved!', '', 'success')
+                                // return true;
+                                $('#add_admin').submit();
+                                // return true
+                            } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                            })
+                }
+
+
+
+
+
+    }
+
+
     function resetimg()
     {    
         $("#outputThumbnail").hide(); 
     }
-    </script>
-<!-- End of Main Content -->
-<script>
+   
     function deleteExngForum(que_id) {
         // var c = confirm("Are you sure to delete this survey details? ");
-        $('#delete').modal('show');
-        $('.abcd').on('click', function() {
 
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>admin/deletExngForum',
-                data: {
-                    que_id: que_id,
-                },
-                success: function(result) {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        Swal.fire({
+                            title: 'Do you want to Delete?',
+                            showDenyButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: 'Delete',
+                            denyButtonText: `Cancel`,
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                
+
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '<?php echo base_url(); ?>admin/deletExngForum',
+                                    data: {
+                                        que_id: que_id,
+                                    },
+                                    success: function(result) {
+                                        location.reload();
+                                    },
+                                    error: function(result) {
+                                        alert("Error,Please try again.");
+                                    }
+                                });
+
+                                Swal.fire('Saved!', '', 'success')
+                                // return true;
+                                // $('#updateform').submit();
+                                // return true
+                            } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                            })
+
+
+
+
+
+
+
+
+
+
+        // $('#delete').modal('show');
+        // $('.abcd').on('click', function() {
+
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>admin/deletExngForum',
+        //         data: {
+        //             que_id: que_id,
+        //         },
+        //         success: function(result) {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+        // });
     }
 
     function abcd(){
@@ -346,11 +516,13 @@ var loadFileThumbnail = function(event)
             });
     });
 }
-    function updateButton() {
+    function updateButton(event) {
+        event.preventDefault();
        
 
 
-             var description = $("#description1").val();
+            //  var description = $("#description1").val();
+             var description = CKEDITOR.instances['description1'].getData();
             //  var privacy_policy= $("#privacy_policy").val();
             //  var hlp= $("#hlp").val();
             //  var disclamer= $("#disclamer").val();
@@ -364,7 +536,8 @@ console.log(description.length);
              
                         
              if (description == "") {
-                 $(".invalid-feedback").text("This value is required");
+                
+                 $("#err_description").text("This value is required");
                  $("#description1").focus();
                  is_valid = false;   
                            
@@ -379,6 +552,20 @@ console.log(description.length);
                  is_valid = false;  
              }
              
+             var abc=$('#icon_file').attr('required');
+             console.log(abc);
+             if(abc=="required"){
+                var image = $('#icon_file').val();
+                if(image=="" || image==null){
+                    is_valid = false;   
+                    Swal.fire('Please select file')
+                    $('#err_icon_file').text('This value is required');
+                }else{
+
+                }
+             }else{
+
+             }
              
 
 
@@ -386,7 +573,28 @@ console.log(description.length);
              if (is_valid) { 
            
                 $('#updateform').attr('action','<?php echo base_url(); ?>admin/update_about_exchange_forum');                
-                 return true;
+                //  return true;
+
+                 Swal.fire({
+                            title: 'Do you want to Submit?',
+                            showDenyButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: 'Submit',
+                            denyButtonText: `Cancel`,
+                            }).then((result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                                Swal.fire('Saved!', '', 'success')
+                                // return true;
+                                $('#updateform').submit();
+                                // return true
+                            } else if (result.isDenied) {
+                                Swal.fire('Changes are not saved', '', 'info')
+                            }
+                            })
+
+
+
              } else {
                  return false;
              }
@@ -412,3 +620,9 @@ console.log(description.length);
   })
 })()
 </script>
+<script>
+                        CKEDITOR.replace( 'description1' );
+                        CKEDITOR.replace( 'description' );
+
+</script> 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

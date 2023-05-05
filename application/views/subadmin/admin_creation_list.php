@@ -70,7 +70,7 @@
                           <a class="btn btn-primary btn-sm mr-2" ><i class="fa fa-eye" aria-hidden="true"></i></a>
                           <a class="btn btn-info btn-sm mr-2 text-white" data-bs-toggle="modal" data-bs-target="#edit"><i class="fa fa-edit" aria-hidden="true"></i></a>
                           <a class="btn btn-danger btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                          <a class="btn btn-primary btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#delete">Set Permission</a>
+                          <a class="btn btn-primary btn-sm mr-2" onclick="location.href='<?php echo base_url(); ?>admin/set_permission'">Set Permission</a>
 
                         </td>
                       </tr>

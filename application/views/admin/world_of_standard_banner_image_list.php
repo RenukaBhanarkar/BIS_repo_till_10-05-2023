@@ -33,15 +33,25 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="mb-2 col-md-4">
+                                            <div class="mb-2 col-md-6">
                                                 <label class="d-block text-font">Upload Image<sup class="text-danger">*</sup></label>
-                                                <input type="file" class="form-control input-font" accept="image/jpeg,image/png,image/jpg" name="bannerimg" id="bannerimg" required="">
-                                                <span class="error_text">
+                                                <div class="row">
+                                                <div class="col-6">
+                                                <input type="file" class="form-control input-font" accept="image/jpeg,image/png,image/jpg" name="bannerimg" id="bannerimg" onchange="loadFileThumbnail1(event)" required="">
+                                                <span class="text-danger">
                                                     only jpg jpeg and png formats allowed
                                                     <?php //echo form_error('title'); 
                                                     ?>
                                                 </span>
+                                                </div>
+                                                <div class="col-md-4">
+                                            <button type="button" id="preview123456" class="btn btn-primary btn-sm ml-2" data-bs-toggle="modal" data-bs-target="#Previewimg1">
+                                            Preview
+                                        </button>
                                             </div>
+                                            </div>
+                                            </div>
+                                            
                                             <div class="mb-2 col-md-4">
                                                 <label class="d-block text-font">Caption</label>
                                                 <input type="text" class="form-control input-font" name="banner_caption" id="banner_caption" required="">
@@ -143,6 +153,26 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="Previewimg1" tabindex="-1" aria-labelledby="PreviewimgLabel" aria-hidden="true">
+                                    <div class="modal-dialog" style="max-width:700px;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Image Preview</h5>
+
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <img src="" id="outputThumbnail1" width="100%"/>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <!-- <button type="button"  onclick="resetbanner()" class="btn btn-secondary" data-bs-dismiss="modal">ReSet</button>
+                                        <button type="button" class="btn btn-primary"data-bs-dismiss="modal">Save changes</button> -->
+                                        </div> 
+                                    </div>
+                                    </div>
+                                </div>
 <div class="modal fade " id="editform" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
@@ -295,6 +325,18 @@ var loadFileThumbnail = function(event)
             URL.revokeObjectURL(outputThumbnail.src);
         }
     };
+    var loadFileThumbnail1 = function(event) 
+    {
+       //  $("#Previewimg").show();
+        var outputThumbnail = document.getElementById('outputThumbnail1');
+        
+        outputThumbnail.src = URL.createObjectURL(event.target.files[0]);
+        console.log(outputThumbnail.src);
+        outputThumbnail.onload = function()
+        {
+            URL.revokeObjectURL(outputThumbnail.src);
+        }
+    };
     function resetimg()
     {
          
@@ -302,26 +344,26 @@ var loadFileThumbnail = function(event)
     }
     </script>
 <script>
-    function deleteBanner(que_id) {
-        // var c = confirm("Are you sure to delete this survey details? ");
-        $('#delete').modal('show');
-        $('.abcd').on('click', function() {
-            console.log("jhgjhgjh");
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>subadmin/deleteBanner',
-                data: {
-                    que_id: que_id,
-                },
-                success: function(result) {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
-    }
+    // function deleteBanner(que_id) {
+    //     // var c = confirm("Are you sure to delete this survey details? ");
+    //     $('#delete').modal('show');
+    //     $('.abcd').on('click', function() {
+    //         console.log("jhgjhgjh");
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '<?php echo base_url(); ?>subadmin/deleteBanner',
+    //             data: {
+    //                 que_id: que_id,
+    //             },
+    //             success: function(result) {
+    //                 location.reload();
+    //             },
+    //             error: function(result) {
+    //                 alert("Error,Please try again.");
+    //             }
+    //         });
+    //     });
+    // }
 
    
     function edit(que_id){
@@ -357,5 +399,38 @@ var loadFileThumbnail = function(event)
                             }
                         });          
         }
+
+    $('#banner_image').on('click','.delete_img',function(){
+        var id=$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Do you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>subadmin/deleteBanner',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Deleted Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+    })
 
 </script>

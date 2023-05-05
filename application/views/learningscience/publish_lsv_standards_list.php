@@ -57,7 +57,11 @@
                                  <?php $id= encryptids("E", $value['id'] )?>
 
                                 <a href="live_session_view/<?= $id;?>" class="btn btn-primary btn-sm mr-2" title="View">View</a>
-                                <button onclick="updateLsvStandards('<?= $value['id']?>',6);" data-id='<?php echo $value['id']; ?>' class="btn btn-warning btn-sm mr-2 delete_img">Unpublish</button> 
+                                
+                                <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
+
+                                <button onclick="updateLsvStandards('<?= $value['id']?>',6);" data-id='<?php echo $value['id']; ?>' class="btn btn-warning btn-sm mr-2 delete_img">Unpublish</button>
+                                 <?php }?> 
 
                               </td>
                               
@@ -96,31 +100,64 @@
 
     </div>
     <script type="text/javascript">
-        function updateLsvStandards(id,status) 
-    {
-        console.log(status)
-        if (status==6)  { $(".sms").text('Unpublish'); } 
-        $('#updatemodel').modal('show');
-        $('.updatestatus').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
-                data: {
-                    id: id,
-                    status: status,
-                },
-                success: function(result) 
-                {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
-    }
+    //     function updateLsvStandards(id,status) 
+    // {
+    //     console.log(status)
+    //     if (status==6)  { $(".sms").text('Unpublish'); } 
+    //     $('#updatemodel').modal('show');
+    //     $('.updatestatus').on('click', function() 
+    //     {
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
+    //             data: {
+    //                 id: id,
+    //                 status: status,
+    //             },
+    //             success: function(result) 
+    //             {
+    //                 location.reload();
+    //             },
+    //             error: function(result) {
+    //                 alert("Error,Please try again.");
+    //             }
+    //         });
+    //     });
+    // }
 
+    function updateLsvStandards(id,status) 
+    {
+        if (status==6)  { var title1= 'Do you want to Unpublish?'; var buttonText = 'Unpublish' } 
+        Swal.fire({
+                    title: title1,
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: buttonText,
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
+                                data: {
+                                    id: id,
+                                    status: status,
+                                },
+                                success: function(result) 
+                                {
+                                    location.reload();
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+    }
     </script>
     <!-- End of Main Content -->
- </body>
+ </body> 

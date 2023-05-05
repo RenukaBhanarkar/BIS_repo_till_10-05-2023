@@ -648,4 +648,231 @@ class Admin_model extends CI_Model {
         } 
     }
 
+    public function addLetestNews($data){
+        $result=$this->db->insert('tbl_mst_letest_news',$data);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function getLetestNews(){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_letest_news');
+        $this->db->order_by('created_on','desc');
+       $this->db->where('status!=','9');
+        $query= $this->db->get();       
+        $result=$query->result_array();
+       
+        return $result;
+    }
+    public function getLetestNewsDetail($id){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_letest_news');
+       $this->db->where('id',$id);
+        $query= $this->db->get();       
+        $result=$query->result_array();
+       
+        return $result[0];
+    }
+
+    public function deleteLetestNews($id){
+        $result=$this->db->delete('tbl_mst_letest_news',['id'=>$id]);
+        if($result){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function publishLetestNews($id){
+        //echo $id; die;
+        $this->db->where('id',$id);
+        $result=$this->db->update('tbl_mst_letest_news',['status'=>'5']);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function unpublishLetestNews($id){
+
+        $this->db->where('id',$id);
+        $result=$this->db->update('tbl_mst_letest_news',['status'=>'6']);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function archiveLetestNews($id){
+        $this->db->where('id',$id);
+        $result=$this->db->update('tbl_mst_letest_news',['status'=>'9']);
+        if($result){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function archivedLetestNews(){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_letest_news');
+       $this->db->where('status','9');
+       $this->db->order_by('created_on','desc');
+        $query= $this->db->get();       
+        $result=$query->result_array();
+       
+        return $result;
+    }
+    public function restoreLetestNews($id){
+        $this->db->where('id',$id);
+        $result=$this->db->update('tbl_mst_letest_news',['status'=>'1']);
+        if($result){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function news(){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_letest_news');
+       $this->db->where('status','5');
+       $this->db->order_by('created_on','desc');
+       $this->db->limit('2');
+        $query= $this->db->get();       
+        $result=$query->result_array();
+       
+        return $result;
+    }
+    public function editLetestNews($id){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_letest_news');   
+        $this->db->where('id',$id);   
+        $query= $this->db->get();       
+        $result=$query->result_array();
+
+       return json_encode($result[0]);
+       
+    }
+    public function updateLetestNews($data){
+        $this->db->where('id', $data['id']);
+        if ($this->db->update('tbl_mst_letest_news', $data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function addEvent($data){
+        $result=$this->db->insert('tbl_mst_events',$data);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function getEvent(){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_events');
+       $this->db->where('status!=','9');
+       $this->db->order_by('created_on','desc');
+        $query= $this->db->get();       
+        $result=$query->result_array();
+       
+        return $result;
+    }
+    public function deleteEvents($id){
+        $result=$this->db->delete('tbl_mst_events',['id'=>$id]);
+        if($result){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
+    public function publishEvent($id){
+        //echo $id; die;
+        $this->db->where('id',$id);
+        $result=$this->db->update('tbl_mst_events',['status'=>'5']);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function unpublishEvent($id){
+
+        $this->db->where('id',$id);
+        $result=$this->db->update('tbl_mst_events',['status'=>'6']);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function archiveEvent($id){
+        $this->db->where('id',$id);
+        $result=$this->db->update('tbl_mst_events',['status'=>'9']);
+        if($result){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function restoreEvent($id){
+        $this->db->where('id',$id);
+        $result=$this->db->update('tbl_mst_events',['status'=>'1']);
+        if($result){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function archivedEvents(){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_events');
+       $this->db->where('status','9');
+       $this->db->order_by('created_on','desc');
+        $query= $this->db->get();       
+        $result=$query->result_array();
+       
+        return $result;
+    }
+    public function events(){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_events');
+       $this->db->where('status','5');
+       $this->db->order_by('created_on','desc');
+    //    $this->db->limit('2');
+        $query= $this->db->get();       
+        $result=$query->result_array();
+       
+        return $result;
+    }
+    public function editEvents($id){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_events');   
+        $this->db->where('id',$id);   
+        $query= $this->db->get();       
+        $result=$query->result_array();
+
+       return json_encode($result[0]);
+    }
+    public function updateEvents($data){
+        $this->db->where('id', $data['id']);
+        if ($this->db->update('tbl_mst_events', $data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function getEventDetail($id){
+        $this->db->select('*');
+        $this->db->from('tbl_mst_events');   
+        $this->db->where('id',$id);   
+        $query= $this->db->get();       
+        $result=$query->result_array();
+        return $result[0];
+    }
+
+
 }

@@ -98,15 +98,420 @@ class Admin extends CI_Controller
     }
     public function feedback()
     {
+        $this->load->model('Users/Users_model');
+        $data['feedback']=$this->Users_model->get_feedback_data();
         $this->load->view('admin/headers/admin_header');
-        $this->load->view('admin/feedback');
+        $this->load->view('admin/feedback',$data);
         $this->load->view('admin/footers/admin_footer');
+    }
+    public function feedback_archive(){
+        $this->load->model('Users/Users_model');
+        $data['feedback']=$this->Users_model->getArchivedFeedback();
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/archive_feedback',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function archive_feedback($id){
+        $this->load->model('Users/Users_model');
+        $result=$this->Users_model->feedback_archive($id);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function restore_feedback($id){
+        $this->load->model('Users/Users_model');
+        $result=$this->Users_model->restore_feedback($id);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
     }
     public function feedback_view()
     {
         $this->load->view('admin/headers/admin_header');
         $this->load->view('admin/feedback_view');
         $this->load->view('admin/footers/admin_footer');
+    }
+    public function letest_news()
+    {
+        // echo "hiiii"; die;
+        $data['news']=$this->Admin_model->getLetestNews();
+        // print_r($data); die;
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/letest_news',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function editLetestNews($id){
+        $f_id=encryptids("D",$id); 
+        // return $f_id;die;
+        $result=$this->Admin_model->editLetestNews($f_id);
+        echo $result;
+
+    }
+    public function archived_news(){
+        $data['news']=$this->Admin_model->archivedLetestNews();
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/archived_news',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function addLetestNews(){
+      $title =  $this->input->post('title');
+      $description =  $this->input->post('description');
+
+      if (!file_exists('uploads/letest_news')) { mkdir('uploads/letest_news', 0777, true); }
+
+      $banner_img = "news" . time() . '.jpg';
+        $config['upload_path'] = './uploads/letest_news';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size']    = '204800';
+        $config['max_width']  = '3024';
+        $config['max_height']  = '2024';
+   
+        $config['file_name'] = $banner_img;
+       
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('thumbnail')) 
+        {
+            $data['status'] = 0;
+            $data['message'] = $this->upload->display_errors();
+        }
+        
+        $formdata['thumbnail'] = $banner_img;
+        $formdata['title'] = $title;
+        $formdata['description'] = $description;
+
+        $id=$this->Admin_model->addLetestNews($formdata);
+        if($id){
+            $this->session->set_flashdata('MSG',  ShowAlert("Letest news recorded successfully.", "DD"));
+            redirect(base_url() . "Admin/letest_news", 'refresh');
+        }
+
+    }
+    public function restoreLetestNews($id){
+        $f_id=encryptids("D",$id); 
+        $data=$this->Admin_model->restoreLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function letest_news_view($id)
+    {
+        $f_id=encryptids("D",$id); 
+        $data['result']=$this->Admin_model->getLetestNewsDetail($f_id);
+        // print_r($data); die;
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/letest_news_view',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function deleteLetestNews($id){
+        $f_id=encryptids("D",$id); 
+        $data=$this->Admin_model->deleteLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function publishLetestNews($id){
+        $f_id=encryptids("D",$id); 
+        // echo $f_id; die;
+        // return $f_id; die;
+        $data=$this->Admin_model->publishLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function unpublishLetestNews($id){
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->unpublishLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function archiveLetestNews($id){
+        // echo $id; die;
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->archiveLetestNews($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function updateNews(){
+        // print_r($_FILES); die;
+        if (!file_exists('uploads/letest_news')) { mkdir('uploads/letest_news', 0777, true); }
+        //print_r([$_POST['old_image']]); die;
+        $formdata['id'] = $this->input->post('edit_id');
+        //$formdata['title'] = $this->input->post('title');
+        $formdata['description'] = $this->input->post('description');  
+        $formdata['title'] = $this->input->post('banner_caption');  
+        $formdata['status'] = '1';
+
+       $oldDocument = "";
+       $oldDocument = $this->input->post('old_doc');
+       $document = "";
+
+            if (!empty($_FILES['document']['tmp_name'])) {
+                $document = "letest_news" . time() . '.jpg';
+                $config['upload_path'] = './uploads/letest_news';
+                $config['allowed_types'] = 'jpg|png|jpeg';
+                $config['max_size']    = '204800';
+                $config['max_width']  = '3024';
+                $config['max_height']  = '2024';
+                $config['file_name'] = $document;
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('document')) {
+                    //$err[]=$this->upload->display_errors();
+                    $data['status'] = 0;
+                    $data['message'] = $this->upload->display_errors();
+                }
+                } else {
+                    if (!empty($oldDocument)) {
+                        $document =  $oldDocument;
+                    }
+                }   
+                // print_r($formdata); die;
+        if($document){          
+            $formdata['thumbnail']=$document;
+        }
+        // $formdata['status']="1";
+        $id = $this->Admin_model->updateLetestNews($formdata);
+        if($id){
+            $this->session->set_flashdata('MSG', ShowAlert("Record Updated Successfully", "SS"));
+            redirect(base_url() . "admin/letest_news", 'refresh');
+        } else {
+            $this->session->set_flashdata('MSG', ShowAlert("Failed to update record,Please try again", "DD"));
+            redirect(base_url() . "admin/letest_news", 'refresh');
+        }
+    }
+
+
+
+
+
+    public function upcoming_events()
+    {
+        $data['events']=$this->Admin_model->getEvent();
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/upcoming_events',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+
+    public function addEvents(){
+
+        $data['title'] =  $this->input->post('title');
+        $data['link'] =  $this->input->post('link');
+
+        if (!file_exists('uploads/cms/events')) { mkdir('uploads/cms/events', 0777, true); }
+
+        $banner_img = "events" . time() . '.jpg';
+        $config['upload_path'] = './uploads/cms/events';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size']    = '204800';
+        $config['max_width']  = '3024';
+        $config['max_height']  = '2024';
+   
+        $config['file_name'] = $banner_img;
+       
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload('thumbnail')) 
+        {
+            $data['status'] = 0;
+            $data['message'] = $this->upload->display_errors();
+        }
+
+        $data['thumbnail']=$banner_img;
+        $data['status']='1';
+       // print_r($data); die;
+
+        $id=$this->Admin_model->addEvent($data);
+        if($id){
+            $this->session->set_flashdata('MSG',  ShowAlert("Letest event recorded successfully.", "DD"));
+            redirect(base_url() . "admin/upcoming_events", 'refresh');
+        }
+
+    }
+    public function deleteEvents($id){
+        $f_id=encryptids("D",$id); 
+        $data=$this->Admin_model->deleteEvents($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function publishEvent($id){
+        $f_id=encryptids("D",$id); 
+        // echo $f_id; die;
+        // return $f_id; die;
+        $data=$this->Admin_model->publishEvent($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function unpublishEvent($id){
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->unpublishEvent($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function archiveEvent($id){
+        // echo $id; die;
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->archiveEvent($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function restoreEvent($id){
+        // echo $id; die;
+        $f_id=encryptids("D",$id);        
+        $data=$this->Admin_model->restoreEvent($f_id);
+        if($data){
+            return true;
+        }else{
+            return false;
+        } 
+    }
+    public function archived_events(){
+        $data['events']=$this->Admin_model->archivedEvents();
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/archived_events',$data);
+        $this->load->view('admin/footers/admin_footer'); 
+    }
+    public function editEvents($id){
+        $f_id=encryptids("D",$id); 
+        // return $f_id;die;
+        $result=$this->Admin_model->editEvents($f_id);
+        echo $result;
+    }
+    public function updateEvents(){
+        // print_r($_POST); 
+        // print_r($_FILES); die;
+        $formdata['title'] =  $this->input->post('title1');
+        $formdata['link'] =  $this->input->post('link');
+
+        if (!file_exists('uploads/cms/events')) { mkdir('uploads/cms/events', 0777, true); }
+
+        //print_r([$_POST['old_image']]); die;
+        $formdata['id'] = $this->input->post('id');
+        
+        $formdata['status'] = '1';
+
+       $oldDocument = "";
+       $oldDocument = $this->input->post('old_doc');
+       $document = "";
+
+            if (!empty($_FILES['document']['tmp_name'])) {
+                $document = "events" . time() . '.jpg';
+                $config['upload_path'] = './uploads/cms/events';
+                $config['allowed_types'] = 'jpg|png|jpeg';
+                $config['max_size']    = '204800';
+                $config['max_width']  = '3024';
+                $config['max_height']  = '2024';
+                $config['file_name'] = $document;
+
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('document')) {
+                    //$err[]=$this->upload->display_errors();
+                    $data['status'] = 0;
+                    $data['message'] = $this->upload->display_errors();
+                }
+                } else {
+                    if (!empty($oldDocument)) {
+                        $document =  $oldDocument;
+                    }
+                }   
+               
+        if($document){          
+            $formdata['thumbnail']=$document;
+        }
+        // print_r($formdata); die;
+        // $formdata['status']="1";
+        $id = $this->Admin_model->updateEvents($formdata);
+        if($id){
+            $this->session->set_flashdata('MSG', ShowAlert("Record Updated Successfully", "SS"));
+            redirect(base_url() . "admin/upcoming_events", 'refresh');
+        } else {
+            $this->session->set_flashdata('MSG', ShowAlert("Failed to update record,Please try again", "DD"));
+            redirect(base_url() . "admin/upcoming_events", 'refresh');
+        }
+    
+    }
+    public function events_view($id)
+    {
+        $f_id=encryptids("D",$id); 
+        $data['result']=$this->Admin_model->getEventDetail($f_id);
+        // print_r($data); die;
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/events_view',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+
+
+
+    public function set_permission()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/set_permission');
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function log_dashboard()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/log_dashboard');
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function login_report_list()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/login_report_list');
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function log_report_list()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/log_report_list');
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function feedback_detail($id){
+        $f_id=encryptids("D",$id);
+        // echo $f_id; die;
+        $this->load->model('Users/Users_model');
+        $data['feedback']=$this->Users_model->get_feedback_detail($f_id);
+        $this->load->view('admin/headers/admin_header');
+        // print_r($data); die;
+        $this->load->view('admin/feedback_detail',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function delete_feedback($id){
+        $this->load->model('Users/Users_model');
+        $result=$this->Users_model->delete_feedback($id);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
     }
     //ajax call 
     public function getDetailsByuserId()
@@ -499,8 +904,11 @@ class Admin extends CI_Controller
     }
 
     public function add_about_exchange_forum(){
+        if (!file_exists('uploads/cms/about_exchange_forum')) { mkdir('uploads/cms/about_exchange_forum', 0777, true); }
+
+
         $banner_img = "about_exchange_forum" . time() . '.jpg';
-        $config['upload_path'] = './uploads';
+        $config['upload_path'] = './uploads/cms/about_exchange_forum';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['max_size']    = '10000';
         $config['max_width']  = '3024';
@@ -523,6 +931,7 @@ class Admin extends CI_Controller
         redirect(base_url() . "admin/about_exchange_forum", 'refresh'); 
     }
     public function update_about_exchange_forum(){
+        if (!file_exists('uploads/cms/about_exchange_forum')) { mkdir('uploads/cms/about_exchange_forum', 0777, true); }
         //print_r([$_POST['old_image']]); die;
         $formdata['id'] = $this->input->post('id');
         //$formdata['title'] = $this->input->post('title');
@@ -535,7 +944,7 @@ class Admin extends CI_Controller
 
             if (!empty($_FILES['image']['tmp_name'])) {
                 $document = "banner_image" . time() . '.jpg';
-                $config['upload_path'] = './uploads';
+                $config['upload_path'] = './uploads/cms/about_exchange_forum';
                 $config['allowed_types'] = 'jpg|png|jpeg';
                 $config['max_size']    = '250';
                 $config['max_width']  = '3024';
@@ -1068,8 +1477,10 @@ class Admin extends CI_Controller
             }
         }
         public function add_video(){
+            if (!file_exists('uploads/cms/gallary/video')) { mkdir('uploads/cms/gallary/video', 0777, true); }
+
             $banner_img = "video" . time() . '.mp4';
-                $config['upload_path'] = './uploads';
+                $config['upload_path'] = './uploads/cms/gallary/video';
                 $config['allowed_types'] = 'avi|mp4|3gp|mpeg|mpg|mov|mp3|flv|wmv';
                 $config['max_size']    = '';
                
@@ -1092,11 +1503,12 @@ class Admin extends CI_Controller
                 redirect(base_url() . "admin/videos", 'refresh');
         }
         public function delete_video($que_id){
+            $id=encryptids("D",$que_id);
             try {
                 //$encUserId = $this->session->userdata('user_id');
                 //$user = encryptids("D", $encUserId);
                 $que_id = $this->input->post('que_id');
-                $id = $this->Admin_model->deleteVideos($que_id);
+                $id = $this->Admin_model->deleteVideos($id);
                 if ($id) {
                     $data['status'] = 1;
                     $data['message'] = 'Deleted successfully.';
@@ -1714,6 +2126,91 @@ class Admin extends CI_Controller
     public function join_the_classroom_dashboard(){
         $this->load->view('admin/headers/admin_header');
          $this->load->view('admin/join_the_classroom_dashboard');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function share_your_dashboard(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/share_your_dashboard');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function discussion_forum_dashboard(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/discussion_forum_dashboard');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function create_discussion_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/create_discussion_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function Manage_discussion_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/Manage_discussion_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function ongoing_discussion_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/ongoing_discussion_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function closed_discussion_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/closed_discussion_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function create_discussion_form(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/create_discussion_form');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function item_proposal_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/item_proposal_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function item_proposal_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/item_proposal_view');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function important_draft_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/important_draft_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function important_draft_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/important_draft_view');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_publish_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_publish_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_publish_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_publish_view');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_under_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_under_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_under_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_under_view');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_revised_list(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_revised_list');
+         $this->load->view('admin/footers/admin_footer');
+    }
+    public function standard_revised_view(){
+        $this->load->view('admin/headers/admin_header');
+         $this->load->view('admin/standard_revised_view');
          $this->load->view('admin/footers/admin_footer');
     } 
     public function Manage_session_list(){

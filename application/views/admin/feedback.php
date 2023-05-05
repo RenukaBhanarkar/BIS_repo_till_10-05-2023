@@ -19,6 +19,21 @@
     <!-- Content Row -->
 
     <div class="col-12">
+    
+            <!-- Content Row -->
+
+            <!-- Content Row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card border-top card-body">
+                        <div>
+                            <!-- <button type="button" class="btn btn-primary btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#exampleModal1" data-bs-whatever="@mdo">Add New Post</button> -->
+                            <a href="<?php echo base_url(); ?>admin/feedback_archive" type="button" class="btn btn-primary btn-sm mr-2" >Archive</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
          <!-- <div class="card border-top card-body">
                 <div>
                     <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#newform">Add New Feedback</button>
@@ -76,8 +91,8 @@
 
         <div class="row">
             <div class="col-12 mt-3">
-                <div class="card border-top card-body">
-                    <table id="photos" class="table table-bordered">
+                <div class="card border-top card-body table-responsive">
+                    <table id="photos" class="table-bordered display nowrap">
                         <thead>
                             <tr>
                                 <th>Sr. No.</th>
@@ -87,29 +102,41 @@
                                 <th>Email</th>
                                 <th>Subject</th>
                                 <th>Date</th>
+                                <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
                                 <th>Action</th>
+                                <?php } ?>
+
                                 
                             </tr>
                         </thead>
                         <tbody>
+                            <?php if(!empty($feedback)){ 
+                                $i=1;
+                                foreach($feedback as $list){
+                                    ?>
                                 <tr>
-                                        <td>1</td>
-                                        <td>12345</td>
-                                        <td>Name</td>
-                                        <td>Contact</td>
-                                        <td>anismulani1999@gmail.com</td>
-                                        <td>Subject</td>
-                                        <td>12/02/2023</td>
+                                        <td><?php echo $i; ?></td>
+                                        <td><?php echo $list['id']; ?></td>
+                                        <td><?php echo $list['name']; ?></td>
+                                        <td><?php echo $list['mobile']; ?></td>
+                                        <td><?php echo $list['email']; ?></td>
+                                        <td><?php echo $list['subject']; ?></td>
+                                        <td><?php echo date("d-m-Y", strtotime($list['created_on'])); ?></td>
+                                        <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
                                         <td class="d-flex border-bottom-0">
                                         
-                                            <button  class="btn btn-primary btn-sm mr-2 text-white" data-toggle="modal" data-target="#editform">View</button>
-                                            <button  class="btn btn-danger btn-sm mr-2">Delete</button>
-                                            <button  class="btn btn-info btn-sm mr-2">Archive</button>
+                                            <a href="<?php echo base_url().'admin/feedback_detail/'.encryptids("E",$list['id']); ?>"  class="btn btn-primary btn-sm mr-2 text-white" >View</a>
+                                            <button onclick="return delete_feedback('<?=$list['id']?>')" class="btn btn-danger btn-sm mr-2">Delete</button>
+                                            <button onclick="return archive('<?=$list['id']?>')" class="btn btn-info btn-sm mr-2 archive" data-id="<?=$list['id']?>">Archive</button>
 
                                             
                                         </td>
+                                        <?php } ?>
                                       
                                 </tr>
+                                <?php $i++;
+                                }
+                             } ?>
                          </tbody>
                     </table>
                 </div>
@@ -117,10 +144,10 @@
         </div>
     </div>
     <div class="col-md-12 submit_btn p-3">
-        <a class="btn btn-primary btn-sm text-white" onclick="location.href='<?php echo base_url(); ?>admin/gallery'">Back</a>
+        <a class="btn btn-primary btn-sm text-white" onclick="location.href='<?php echo base_url(); ?>admin/cmsManagenent_dashboard'">Back</a>
     </div>
     <!-- /.container-fluid -->
-    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="delete_preview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -134,7 +161,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a href="javascript:;" id="abcd"><button type="button" class="btn btn-primary abcd" data-bs-dismiss="modal">Delete</button></a>
+                    <a href="javascript:;" id="abcd"><button type="button" class="btn btn-danger abcd" data-bs-dismiss="modal">Delete</button></a>
                 </div>
             </div>
         </div>
@@ -240,6 +267,25 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="archive" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Archive Record</h5>
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to archive?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="javascript:;" id="archive_record"><button type="button" class="btn btn-success abcd" data-bs-dismiss="modal">Archive</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- End of Main Content -->
 <script>
     $(document).ready(function() {
@@ -320,6 +366,55 @@
         });
     }
 
+    function delete_feedback(que_id) {
+       // $('#delete_preview').modal('show');
+        // $('#add_file').hide();
+        // $('#icon_file').attr('required', false);
+        // $('#outputicon').attr('src',)
+        // $('.del_icon').on('click', function() {
+            // $('#delete_preview').hide();
+            // $('#add_file').show();
+            // // $('#icon_file').add('attr','required');
+            // $('#icon_file').attr('required', true);
+          //  $('#abcd').attr('href','<?php echo base_url(); ?>admin/delete_feedback/'+que_id);
+        // });
+        //  $('#editform').modal('show');
+        Swal.fire({
+                    title: 'Do you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                               
+
+                        $.ajax({
+                            // type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/delete_feedback/'+que_id,
+                            // data: {
+                            //     que_id: que_id,
+                            // },
+                            success: function(result) {
+                                Swal.fire("Record Deleted Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+       
+    }
+    // function archive(que_id){
+    //     $('#archive').modal('show');
+    //     $('#archive_record').attr('href','<?php echo base_url(); ?>admin/archive_feedback/'+que_id);
+    // }
+
 
 
 
@@ -337,6 +432,40 @@
             $('#add_photo').addClass('was-validated');
         })
 
-        $('#photos').DataTable();
+        $('#photos').DataTable({
+           // scrollX:true,
+        });
     });
+
+$('#photos').on('click','.archive',function(){
+ var id=$(this).attr('data-id');
+ Swal.fire({
+                    title: 'Are you sure you want to Archive ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Archive',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                            //  type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/archive_feedback/'+id,
+                            // data: {
+                            //     que_id: id,
+                            // },
+                            success: function(result) {
+                                Swal.fire("Record Archived Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+});
 </script>

@@ -297,11 +297,11 @@ class Wall_of_wisdom extends CI_Controller
              $que_id = $this->input->post('que_id');
              $id = $this->wow->restore($que_id);
              if ($id) {
-                 $this->session->set_flashdata('MSG', ShowAlert("Record Approved Successfully", "SS"));
+                 $this->session->set_flashdata('MSG', ShowAlert("Record Restored Successfully", "SS"));
                  return true;
                  
              } else {
-                 $this->session->set_flashdata('MSG', ShowAlert("Record Deleted Successfully", "SS"));   
+                 $this->session->set_flashdata('MSG', ShowAlert("Failed! Unable to perform action", "DD"));   
                  return false;            
              }
              

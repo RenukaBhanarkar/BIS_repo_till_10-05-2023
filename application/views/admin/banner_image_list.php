@@ -202,8 +202,7 @@
 
                                                             <div class="col-9">
                                                             <input type="file" class="form-control input-font" accept="image/jpeg,image/png,image/jpg" name="bannerimg" id="icon_file" onchange="loadFileThumbnail(event)">
-                                                            <span class="error_text">      
-                                                                accept only jpg,jpeg,png                      
+                                                            <span class="text-danger" id="err_update_banner">
                                                             </span>
                                                             <input type="hidden" name="old_img" value="" id="bannerimg1">
                                                             <input type="hidden" name="id" value="" id="id1">
@@ -342,6 +341,30 @@
                                         });
 var loadFileThumbnail = function(event) 
     {
+        var fileSize = $('#icon_file')[0].files[0].size;
+       var validExtensions = ['jpg', 'jpeg', 'png']; //array of valid extensions
+        var fileName = $("#icon_file").val();;
+        var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
+                   
+            console.log(fileSize);
+        if(fileSize < 20480){
+            $('#icon_file').val('');
+            // $('#lessSize').modal('show');
+            Swal.fire("File size should be more than 20KB")
+            $('#err_update_banner').text('This value is required');
+        }else if(fileSize > 204800){
+            $('#icon_file').val('');
+            // $('#greaterSize').modal('show');
+            Swal.fire("File size should be less than 200KB")
+            $('#err_update_banner').text('This value is required');
+        }else if($.inArray(fileNameExt, validExtensions) == -1){
+            $('#icon_file').val('');
+            // $('#invalidfiletype').modal('show');
+            Swal.fire("Only jpg,jpeg,png files allowed")
+            $('#err_update_banner').text('This value is required');
+        }else{
+            $('#err_update_banner').text('');
+        }
        //  $("#Previewimg").show();
         var outputThumbnail = document.getElementById('outputThumbnail');
         
@@ -359,26 +382,26 @@ var loadFileThumbnail = function(event)
     }
     </script>
 <script>
-    function deleteBanner(que_id) {
-        // var c = confirm("Are you sure to delete this survey details? ");
-        $('#delete').modal('show');
-        $('.abcd').on('click', function() {
-            console.log("jhgjhgjh");
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>admin/deleteBanner',
-                data: {
-                    que_id: que_id,
-                },
-                success: function(result) {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
-    }
+    // function deleteBanner(que_id) {
+    //     // var c = confirm("Are you sure to delete this survey details? ");
+    //     $('#delete').modal('show');
+    //     $('.abcd').on('click', function() {
+    //         console.log("jhgjhgjh");
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '<?php echo base_url(); ?>admin/deleteBanner',
+    //             data: {
+    //                 que_id: que_id,
+    //             },
+    //             success: function(result) {
+    //                 location.reload();
+    //             },
+    //             error: function(result) {
+    //                 alert("Error,Please try again.");
+    //             }
+    //         });
+    //     });
+    // }
 
    
     function edit(que_id){
@@ -485,15 +508,16 @@ function addbanner(e){
                          is_valid = false;
                         allfields = false;
                         $("#bannerimg").val('');
-                        $('#greaterSize').modal('show');
-                       
+                        // $('#greaterSize').modal('show');
+                       Swal.fire('File size should be less than 200KB')
                         if (!focusSet) {
                             $("#image").focus();
                         }
                         return false;
                     } else if(fileSize < 20480){
                         $("#bannerimg").val('');
-                        $('#lessSize').modal('show');
+                        // $('#lessSize').modal('show');
+                        Swal.fire('File size should be greater than 200KB')
                         is_valid = false;
                         allfields = false;   
                     }else{                        
@@ -505,7 +529,8 @@ function addbanner(e){
                     var fileNameExt = fileName.substr(fileName.lastIndexOf('.') + 1);
                     if ($.inArray(fileNameExt, validExtensions) == -1) {
                         $('#bannerimg').val('');                     
-                        // $('#invalidfiletype').modal('show');                   
+                        // $('#invalidfiletype').modal('show');     
+                        Swal.fire('Only jpg,jpeg,png files allowed')              
                         allFields = false;
                         $("#err_image").text("Only Jpg,Jpeg,png files allowed");
                       
@@ -522,6 +547,52 @@ function addbanner(e){
             });
 
         })
+
+    $('#banner').on('click','.delete_img',function(){
+        var id =$(this).attr('data-id');
+        Swal.fire({
+                    title: 'Are you sure you want to Delete ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>admin/deleteBanner',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Deleted Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+        // $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>admin/deleteBanner',
+        //         data: {
+        //             que_id: id,
+        //         },
+        //         success: function(result) {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+    })
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

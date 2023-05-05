@@ -77,13 +77,14 @@
                                             <?php 
                                             if (encryptids("D", $_SESSION['admin_type']) == 3) { ?>
                                             <?php if($list_wow['status'] == 1){ ?>
-                                            <button onclick="sendapproval('<?php echo $list_wow['id']; ?>')" class="btn btn-info btn-sm mr-2 text-white">Send For Approval</button>
-                                            <button class="btn btn-primary btn-sm mr-2" onclick="sendArchive('<?php echo $list_wow['id']; ?>')" data-id ='<?php echo $list_wow['id']; ?>'>Archive</button>
+                                            <button onclick="sendapproval('<?php echo $list_wow['id']; ?>')" class="btn btn-info btn-sm mr-2 text-white send_approval" data-id ='<?php echo $list_wow['id']; ?>'>Send For Approval</button>
+                                            <button class="btn btn-primary btn-sm mr-2 archive" onclick="sendArchive('<?php echo $list_wow['id']; ?>')" data-id ='<?php echo $list_wow['id']; ?>'>Archive</button>
                                            <?php } ?>
                                            
                                             <?php if (!($list_wow['status'] == 5 || $list_wow['status'] == 2)) { ?>
                                                 <button onclick="edit('<?php echo $list_wow['id']; ?>')" class="btn btn-warning btn-sm mr-2 text-white">Edit</button>
-                                                <button onclick="deleteWOW('<?php echo $list_wow['id']; ?>')" class="btn btn-danger btn-sm mr-2" data-bs-toggle="modal" data-bs-target="#delete">Delete</button>
+                                                <!-- <button onclick="deleteWOW('<?php echo $list_wow['id']; ?>')" data-id ='<?php echo $list_wow['id']; ?>' class="btn btn-danger btn-sm mr-2 delete" data-bs-toggle="modal" data-bs-target="#delete">Delete</button> -->
+                                                <button onclick="deleteWOW('<?php echo $list_wow['id']; ?>')" data-id ='<?php echo $list_wow['id']; ?>' class="btn btn-danger btn-sm mr-2 delete" >Delete</button>
                                             <?php } } ?>
 
 
@@ -99,7 +100,7 @@
                                                     <?php if($list_wow['status'] == 3){ ?>
                                                                   
                                                   <?php  }else if($list_wow['status'] == 2) { ?>
-                                                <button onclick="approve('<?php echo $list_wow['id']; ?>')" class="btn btn-info btn-sm mr-2 text-white">Approve</button>
+                                                <button onclick="approve('<?php echo $list_wow['id']; ?>')" class="btn btn-info btn-sm mr-2 text-white approve" data-id='<?php echo $list_wow['id']; ?>'>Approve</button>
                                                 <button onclick="reject('<?php echo $list_wow['id']; ?>')" class="btn btn-danger btn-sm mr-2 text-white">Reject</button>
                                           <?php }  } ?>
                                         </td>
@@ -527,26 +528,26 @@ $('.save').on('click',function(){
     $('#addpostform').addClass('was-validated');
 })
 
-function sendArchive(que_id) {
+// function sendArchive(que_id) {
             
-                $('#archive').modal('show');
-                $('.archive').on('click', function() {
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>Wall_of_wisdom/sendarchive',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {                        
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
-                    }
-                });
+//                 $('#archive').modal('show');
+//                 $('.archive').on('click', function() {
+//                 $.ajax({
+//                     type: 'POST',
+//                     url: '<?php echo base_url(); ?>Wall_of_wisdom/sendarchive',
+//                     data: {
+//                         que_id: que_id,
+//                     },
+//                     success: function(result) {                        
+//                         location.reload();
+//                     },
+//                     error: function(result) {
+//                         alert("Error,Please try again.");
+//                     }
+//                 });
 
-            });
-        }
+//             });
+//         }
 
 
 
@@ -908,30 +909,30 @@ var loadFileThumbnail = function(event)
 
 
 
-        function sendapproval(que_id) {
-            // var c = confirm("Are you sure to Approve this survey details? ");
-            // if (c == true) {
-                $('#sendforapproval').modal('show');
-                $('.sendforapproval').on('click', function() {
-                // const $loader = $('.igr-ajax-loader');
-                //$loader.show();
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>Wall_of_wisdom/approvewall_of_wisdom',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
+        // function sendapproval(que_id) {
+        //     // var c = confirm("Are you sure to Approve this survey details? ");
+        //     // if (c == true) {
+        //         $('#sendforapproval').modal('show');
+        //         $('.sendforapproval').on('click', function() {
+        //         // const $loader = $('.igr-ajax-loader');
+        //         //$loader.show();
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>Wall_of_wisdom/approvewall_of_wisdom',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) {
 
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
-                    }
-                });
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
 
-            })
-        }
+        //     })
+        // }
 
         function approve(que_id){
             // var c = confirm("Are you sure to Approve activity? ");
@@ -958,68 +959,68 @@ var loadFileThumbnail = function(event)
             })
         }
 
-        function sendPublish(que_id) {           
-                $('#publish').modal('show');
-                $('.publish').on('click', function() {
+        // function sendPublish(que_id) {           
+        //         $('#publish').modal('show');
+        //         $('.publish').on('click', function() {
 
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>wall_of_wisdom/wowPublish',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>wall_of_wisdom/wowPublish',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) {
 
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
-                    }
-                });
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
 
-           });
-        }
+        //    });
+        // }
 
-        function sendUnPublish(que_id) {
+        // function sendUnPublish(que_id) {
 
-            // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
-            // if (c == true) {
-                $('#unpublish').modal('show');
-                $('.unpublish').on('click', function() {
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>wall_of_wisdom/wowUnpublish',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
-                    }
-                });
+        //     // var c = confirm("Are you sure to Unpublish By The Mentor details? ");
+        //     // if (c == true) {
+        //         $('#unpublish').modal('show');
+        //         $('.unpublish').on('click', function() {
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>wall_of_wisdom/wowUnpublish',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) {
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
 
-                })
-        }
+        //         })
+        // }
 
-        function deleteWOW(que_id) {
-            $('.delete').on('click', function() {
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>wall_of_wisdom/wowDelete',
-                    data: {
-                        que_id: que_id,
-                    },
-                    success: function(result) {
-                        location.reload();
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
-                    }
-                });
-            });
-        }
+        // function deleteWOW(que_id) {
+        //     $('.delete').on('click', function() {
+        //         $.ajax({
+        //             type: 'POST',
+        //             url: '<?php echo base_url(); ?>wall_of_wisdom/wowDelete',
+        //             data: {
+        //                 que_id: que_id,
+        //             },
+        //             success: function(result) {
+        //                 location.reload();
+        //             },
+        //             error: function(result) {
+        //                 alert("Error,Please try again.");
+        //             }
+        //         });
+        //     });
+        // }
     </script>
     <script>
         // $(document).ready(function() {
@@ -1089,10 +1090,185 @@ var loadFileThumbnail = function(event)
     <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
     <!-- <script src="<?php echo base_url().'assets/admin/js/ckeditor.js'; ?>"></script> -->
     
-<script>
+                <script>
                         CKEDITOR.replace( 'description' );
                         CKEDITOR.replace( 'description1' );
-                        </script>
+                </script>
+
+    <script>
+        $('#wow_table').on('click','.delete',function(){
+            var id=$(this).attr('data-id');
+            
+            Swal.fire({
+                    title: 'Do you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>wall_of_wisdom/wowDelete',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Deleted Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+        });
+
+        $('#wow_table').on('click','.unpublish_record',function(){
+            var id=$(this).attr('data-id');
+            
+            Swal.fire({
+                    title: 'Are you sure you want to Unpublish activity?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Unpublish',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>wall_of_wisdom/wowUnpublish',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Unpublished Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+        });
+
+        $('#wow_table').on('click','.publish',function(){
+            var id=$(this).attr('data-id');
+            
+            Swal.fire({
+                    title: 'Are you sure you want to publish activity?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Publish',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>wall_of_wisdom/wowPublish',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Published Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+        });
+
+        $('#wow_table').on('click','.archive',function(){
+            var id=$(this).attr('data-id');
+            
+            Swal.fire({
+                    title: 'Are you sure you want to Archive ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Archive',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>wall_of_wisdom/sendarchive',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Archived Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+        });
+
+        $('#wow_table').on('click','.send_approval',function(){
+            var id=$(this).attr('data-id');
+            
+            Swal.fire({
+                    title: 'Are you sure you want to Send For Approval ?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Send For Approval',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {   
+                        $.ajax({
+                             type: 'POST',
+                            url: '<?php echo base_url(); ?>Wall_of_wisdom/approvewall_of_wisdom',
+                            data: {
+                                que_id: id,
+                            },
+                            success: function(result) {
+                                Swal.fire("Record Send For Approval Successfully.");
+                                location.reload();
+                            },
+                            error: function(result) {
+                                alert("Error,Please try again.");
+                            }
+                        });
+                        Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+        });
+
+
+    
+    </script>
 
 
     </body>

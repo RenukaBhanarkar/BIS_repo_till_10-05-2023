@@ -13,7 +13,7 @@
     </div>
     <div class="row">
             <div class="col-md-12">
-            <img src="<?php echo base_url().'uploads/'.$about_exchange_forum['image']; ?>" id="about_new">
+            <img src="<?php echo base_url().'uploads/cms/about_exchange_forum/'.$about_exchange_forum['image']; ?>" id="about_new">
             <p style="text-align: justify;"> <?php echo $about_exchange_forum['description']; ?></p>
             </div>
         
