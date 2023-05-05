@@ -50,9 +50,9 @@ class Quiz_model extends CI_Model {
 
     public function getAllQuize()
     {   
-        $this->db->select('tbl_quiz_details.*,tbl_mst_status.status_name'); 
+        $this->db->select('tbl_quiz_details.*,tbl_mst_status.status_name,tbl_que_bank.no_of_ques'); 
         $this->db->join('tbl_mst_status','tbl_mst_status.id = tbl_quiz_details.status'); 
-      
+        $this->db->join('tbl_que_bank','tbl_que_bank.quiz_linked_id = tbl_quiz_details.id'); 
         //$this->db->where_in('tbl_quiz_details.status',array(1,2,3,4,5,6)); 
         $this->db->where_in('tbl_quiz_details.status',array(10)); 
         return $this->db->get('tbl_quiz_details')->result_array();  
@@ -137,7 +137,22 @@ public function updatePrize($prize_id,$quiz_id,$formdata)
         $this->db->where('que_bank_id ',$id); 
         return $this->db->get("tbl_que_bank")->row_array(); 
     }
+    public function getLinkedQueBankId($quiz_id){
+        $this->db->select('*'); 
+        $this->db->where('id ',$quiz_id); 
+        $query = $this->db->get('tbl_quiz_details' );
+        $rs=array();
+        if ($query->num_rows() > 0) {
+            $rs = $query->row_array() ;
+            return $rs['que_bank_id'];
+        }else {
+            return false; 
+        }
+        
+    }
+    public function  updateStatusQueBank($linked_que_bank_id){
 
+    }
     public function sendToApprove($id,$formdata)
     {
         $this->db->where('id',$id); 

@@ -20,6 +20,14 @@ class Quiz extends CI_Controller
     {
         try {
             $id = $this->input->post('id');
+
+            $linked_que_bank_id = $this->Quiz_model->getLinkedQueBankId($id);
+            $data=array(
+                'quiz_linked_id' => 0,
+                'status'=> 1
+            );
+            $updateStatus = $this->Que_bank_model->updateData($linked_que_bank_id,$data);
+            
             $res = $this->Quiz_model->deleteData($id);
            
             if ($res) {

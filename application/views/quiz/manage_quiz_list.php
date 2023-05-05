@@ -104,12 +104,8 @@
                           <?php } ?>
 
                           <?php if ($quiz['status'] == 1 || $quiz['status'] == 4 || $quiz['status'] == 10) { ?>
-                            <a href="editquiz/<?= $quiz['id'] ?>" class="btn btn-info btn-sm mr-2 text-white">Edit</a>
-
-                            <!-- <a href="sendApprove/<?= $quiz['id'] ?>" class="btn btn-primary btn-sm mr-2">Create</a> -->
-
-                            <button onClick="" class="btn btn-danger btn-sm mr-2">Delete</button>
-
+                            <a href="editquiz/<?= $quiz['id'] ?>" class="btn btn-info btn-sm mr-2 text-white">Edit</a>      
+                            <button onclick="deleteRecord(<?= $quiz['id'] ?>)" class="btn btn-danger btn-sm mr-2">Delete</button> 
                           <?php } ?>
                         <?php } ?>
                       </td>
@@ -145,11 +141,63 @@
       </div>
     </div>
     <!-- Modal -->
+    <div class="modal fade" id="publish" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Publish Quiz</h5>
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to Publish Quiz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="" id="publishquiz"><button type="button" class="btn btn-primary abcd" data-bs-dismiss="modal">Publish</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="unpublish" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Unublish Quiz</h5>
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to Unublish Quiz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="" id="unpublishquiz"><button type="button" class="btn btn-primary abcd" data-bs-dismiss="modal">Unublish</button></a>
+            </div>
+        </div>
+    </div>
+</div>
     <script>
       $(document).ready(function() {
         $('#listView').DataTable({
         // scrollX: true,
     });
+    function publishQuiz(que_id){
+      $('#publish').modal('show');  
+      $('#publishquiz').attr('href','publishQuiz/'+que_id);
+    }
+
+    function unpublishQuiz(que_id){
+      $('#unpublish').modal('show');  
+      $('#unpublishquiz').attr('href','unPublishQuiz/'+que_id);
+    }
+
+    function create(que_id){
+      $('#create').modal('show');  
+      $('#createquiz').attr('href','sendApprove/'+que_id);
+    }
         function deleteRecord(quiz_id) {
             var c = confirm("Are you sure to delete this record ?");
             if (c == true) {
