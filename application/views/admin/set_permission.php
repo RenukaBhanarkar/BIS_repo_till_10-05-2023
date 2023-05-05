@@ -4,7 +4,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Latest News</h1>
-        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <nav  aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?php echo base_url().'admin/';?>" >Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="<?php echo base_url().'admin/exchange_forum';?>" >Exchange Forum</a></li>
@@ -33,7 +33,7 @@
               	<tbody> 
               	
                         <tr> 
-							<td rowspan="3">
+							<td rowspan="6">
                                     <div class="custom-control custom-checkbox mr-3">
                                         <input type="checkbox" class="custom-control-input" id="163_mainModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="163_mainModuleChk">
                                         <label class="custom-control-label" for="163_mainModuleChk">Quiz Competition</label>
@@ -59,7 +59,7 @@
                         <td>
                                 <div class="custom-control custom-checkbox mr-3">
                                     <input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="174_subModuleChk">
-                                    <label class="custom-control-label" for="174_subModuleChk">Poster Making Competition</label>
+                                    <label class="custom-control-label" for="174_subModuleChk">Manage Quiz</label>
                                 </div>
                         </td>
                         <td>
@@ -91,7 +91,103 @@
                         <td>
                                 <div class="custom-control custom-checkbox mr-3">
                                     <input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="175_subModuleChk" id="175_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="175_subModuleChk">
-                                    <label class="custom-control-label" for="175_subModuleChk">Standard Writting Competition</label>
+                                    <label class="custom-control-label" for="175_subModuleChk">On Going Quiz</label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_viewChk" onclick="checkAccess(this);" value="174#View" data-parsley-multiple="174_viewChk">
+                                    <label class="custom-control-label" for="174_viewChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_addChk" onclick="checkAccess(this);" value="174#Add" data-parsley-multiple="174_addChk">
+                                    <label class="custom-control-label" for="174_addChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_updateChk" onclick="checkAccess(this);" value="174#Update" data-parsley-multiple="174_updateChk">
+                                    <label class="custom-control-label" for="174_updateChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_deleteChk" onclick="checkAccess(this);" value="174#Delete" data-parsley-multiple="174_deleteChk">
+                                    <label class="custom-control-label" for="174_deleteChk"></label>
+                                </div>
+                        </td>
+                    </tr>
+					<tr>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="175_subModuleChk" id="175_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="175_subModuleChk">
+                                    <label class="custom-control-label" for="175_subModuleChk">Closed Quiz</label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_viewChk" onclick="checkAccess(this);" value="174#View" data-parsley-multiple="174_viewChk">
+                                    <label class="custom-control-label" for="174_viewChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_addChk" onclick="checkAccess(this);" value="174#Add" data-parsley-multiple="174_addChk">
+                                    <label class="custom-control-label" for="174_addChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_updateChk" onclick="checkAccess(this);" value="174#Update" data-parsley-multiple="174_updateChk">
+                                    <label class="custom-control-label" for="174_updateChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_deleteChk" onclick="checkAccess(this);" value="174#Delete" data-parsley-multiple="174_deleteChk">
+                                    <label class="custom-control-label" for="174_deleteChk"></label>
+                                </div>
+                        </td>
+                    </tr>
+					<tr>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="175_subModuleChk" id="175_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="175_subModuleChk">
+                                    <label class="custom-control-label" for="175_subModuleChk">Question Bank</label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_viewChk" onclick="checkAccess(this);" value="174#View" data-parsley-multiple="174_viewChk">
+                                    <label class="custom-control-label" for="174_viewChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_addChk" onclick="checkAccess(this);" value="174#Add" data-parsley-multiple="174_addChk">
+                                    <label class="custom-control-label" for="174_addChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_updateChk" onclick="checkAccess(this);" value="174#Update" data-parsley-multiple="174_updateChk">
+                                    <label class="custom-control-label" for="174_updateChk"></label>
+                                </div>
+                        </td>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk 174_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="174_subModuleChk" id="174_deleteChk" onclick="checkAccess(this);" value="174#Delete" data-parsley-multiple="174_deleteChk">
+                                    <label class="custom-control-label" for="174_deleteChk"></label>
+                                </div>
+                        </td>
+                    </tr>
+					<tr>
+                        <td>
+                                <div class="custom-control custom-checkbox mr-3">
+                                    <input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="175_subModuleChk" id="175_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="175_subModuleChk">
+                                    <label class="custom-control-label" for="175_subModuleChk">Result Declared</label>
                                 </div>
                         </td>
                         <td>
@@ -123,7 +219,7 @@
                         <td>
                                 <div class="custom-control custom-checkbox mr-3">
                                     <input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="177_subModuleChk" id="177_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="177_subModuleChk">
-                                    <label class="custom-control-label" for="177_subModuleChk">Wall of Wisdom</label>
+                                    <label class="custom-control-label" for="177_subModuleChk">Standard Writting</label>
                                 </div>
                         </td>
 
@@ -159,453 +255,884 @@
                                         </div> 
                                    </td> 
                     </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="178_subModuleChk" id="178_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="178_subModuleChk">
+									<label class="custom-control-label" for="178_subModuleChk">Miscellaneous Competition</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 178_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="178_subModuleChk" id="178_viewChk" onclick="checkAccess(this);" value="178#View" data-parsley-multiple="178_viewChk">
+									<label class="custom-control-label" for="178_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 178_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="178_subModuleChk" id="178_viewChk" onclick="checkAccess(this);" value="178#View" data-parsley-multiple="178_viewChk">
+									<label class="custom-control-label" for="178_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 178_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="178_subModuleChk" id="178_viewChk" onclick="checkAccess(this);" value="178#View" data-parsley-multiple="178_viewChk">
+									<label class="custom-control-label" for="178_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 178_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="178_subModuleChk" id="178_viewChk" onclick="checkAccess(this);" value="178#View" data-parsley-multiple="178_viewChk">
+									<label class="custom-control-label" for="178_viewChk"></label>
+								</div>
+						</td>
+						<td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 178_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="178_subModuleChk" id="178_viewChk" onclick="checkAccess(this);" value="178#View" data-parsley-multiple="178_viewChk">
+									<label class="custom-control-label" for="178_viewChk"></label>
+								</div>
+						</td> 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="179_subModuleChk">
+									<label class="custom-control-label" for="179_subModuleChk">Wall of Wisdom</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_viewChk" onclick="checkAccess(this);" value="179#View" data-parsley-multiple="179_viewChk">
+									<label class="custom-control-label" for="179_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_addChk" onclick="checkAccess(this);" value="179#Add" data-parsley-multiple="179_addChk">
+									<label class="custom-control-label" for="179_addChk"></label>
+								</div>
+						</td>
+                            <td>
+									<div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_updateChk" onclick="checkAccess(this);" value="179#Update" data-parsley-multiple="179_updateChk">
+										<label class="custom-control-label" for="179_updateChk"></label>
+									</div>
+							</td>
+                            <td>
+									<div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_deleteChk" onclick="checkAccess(this);" value="179#Delete" data-parsley-multiple="179_deleteChk">
+										<label class="custom-control-label" for="179_deleteChk"></label>
+									</div>
+							</td>
+							<td>
+									<div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_deleteChk" onclick="checkAccess(this);" value="179#Delete" data-parsley-multiple="179_deleteChk">
+										<label class="custom-control-label" for="179_deleteChk"></label>
+									</div>
+							</td>
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="180_subModuleChk" id="180_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="180_subModuleChk">
+									<label class="custom-control-label" for="180_subModuleChk">Your Wall</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 180_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="180_subModuleChk" id="180_viewChk" onclick="checkAccess(this);" value="180#View" data-parsley-multiple="180_viewChk">
+									<label class="custom-control-label" for="180_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 180_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="180_subModuleChk" id="180_viewChk" onclick="checkAccess(this);" value="180#View" data-parsley-multiple="180_viewChk">
+									<label class="custom-control-label" for="180_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 180_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="180_subModuleChk" id="180_viewChk" onclick="checkAccess(this);" value="180#View" data-parsley-multiple="180_viewChk">
+									<label class="custom-control-label" for="180_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 180_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="180_subModuleChk" id="180_viewChk" onclick="checkAccess(this);" value="180#View" data-parsley-multiple="180_viewChk">
+									<label class="custom-control-label" for="180_viewChk"></label>
+								</div>
+						</td>
+						<td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 180_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="180_subModuleChk" id="180_viewChk" onclick="checkAccess(this);" value="180#View" data-parsley-multiple="180_viewChk">
+									<label class="custom-control-label" for="180_viewChk"></label>
+								</div>
+						</td> 
+                    </tr>
+					<tr>
+                        <td rowspan="4">
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="181_subModuleChk">
+									<label class="custom-control-label" for="181_subModuleChk">Classroom</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 181_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_viewChk" onclick="checkAccess(this);" value="181#View" data-parsley-multiple="181_viewChk">
+									<label class="custom-control-label" for="181_viewChk">Create new post/ live session</label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+						
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="181_subModuleChk">
+									<label class="custom-control-label" for="181_subModuleChk">Manage session/Post</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 181_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_viewChk" onclick="checkAccess(this);" value="181#View" data-parsley-multiple="181_viewChk">
+									<label class="custom-control-label" for="181_viewChk"></label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+						 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="181_subModuleChk">
+									<label class="custom-control-label" for="181_subModuleChk">Published Posts</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 181_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_viewChk" onclick="checkAccess(this);" value="181#View" data-parsley-multiple="181_viewChk">
+									<label class="custom-control-label" for="181_viewChk"></label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+						
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="181_subModuleChk">
+									<label class="custom-control-label" for="181_subModuleChk">Archived Posts</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 181_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_viewChk" onclick="checkAccess(this);" value="181#View" data-parsley-multiple="181_viewChk">
+									<label class="custom-control-label" for="181_viewChk"></label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+						
+                    </tr>
+					<tr>
+							<td>
+									<div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="182_subModuleChk" id="182_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="182_subModuleChk">
+										<label class="custom-control-label" for="182_subModuleChk">By the Mentors</label>
+									</div>
+							</td>
+                            <td>
+									<div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk 182_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="182_subModuleChk" id="182_viewChk" onclick="checkAccess(this);" value="182#View" data-parsley-multiple="182_viewChk">
+										<label class="custom-control-label" for="182_viewChk"></label>
+									</div>
+							</td>
+                            <td>
+							        <div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk 182_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="182_subModuleChk" id="182_viewChk" onclick="checkAccess(this);" value="182#View" data-parsley-multiple="182_viewChk">
+										<label class="custom-control-label" for="182_viewChk"></label>
+									</div>
+							</td> 
+                            <td>
+							        <div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk 182_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="182_subModuleChk" id="182_viewChk" onclick="checkAccess(this);" value="182#View" data-parsley-multiple="182_viewChk">
+										<label class="custom-control-label" for="182_viewChk"></label>
+									</div>
+							</td> 
+                            <td>
+							        <div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk 182_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="182_subModuleChk" id="182_viewChk" onclick="checkAccess(this);" value="182#View" data-parsley-multiple="182_viewChk">
+										<label class="custom-control-label" for="182_viewChk"></label>
+									</div>
+							</td>
+							<td>
+							        <div class="custom-control custom-checkbox mr-3">
+										<input type="checkbox" class="custom-control-input 163_mainModuleChk 182_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="182_subModuleChk" id="182_viewChk" onclick="checkAccess(this);" value="182#View" data-parsley-multiple="182_viewChk">
+										<label class="custom-control-label" for="182_viewChk"></label>
+									</div>
+							</td> 
+                    </tr>
+					<tr>
+                        <td rowspan="8">
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
+									<label class="custom-control-label" for="183_subModuleChk">Content Management System</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk">Banner Image</label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+						<td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+						
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
+									<label class="custom-control-label" for="183_subModuleChk">About Exchange forum</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+							 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
+									<label class="custom-control-label" for="183_subModuleChk">Contact Us</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+							 
+                    </tr>
+<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
+									<label class="custom-control-label" for="183_subModuleChk">Footer Links</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+							 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
+									<label class="custom-control-label" for="183_subModuleChk">Gallery</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+							 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
+									<label class="custom-control-label" for="183_subModuleChk">Feedback</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+							 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
+									<label class="custom-control-label" for="183_subModuleChk">Letest News</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        
+							 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
+									<label class="custom-control-label" for="183_subModuleChk">Upcoming Events</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
+									<label class="custom-control-label" for="183_viewChk"></label>
+								</div>
+						</td>
+							 
+                    </tr>				
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="188_subModuleChk" id="188_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="188_subModuleChk">
+									<label class="custom-control-label" for="188_subModuleChk">Winners Wall</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 188_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="188_subModuleChk" id="188_viewChk" onclick="checkAccess(this);" value="188#View" data-parsley-multiple="188_viewChk">
+									<label class="custom-control-label" for="188_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 188_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="188_subModuleChk" id="188_viewChk" onclick="checkAccess(this);" value="188#View" data-parsley-multiple="188_viewChk">
+									<label class="custom-control-label" for="188_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 188_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="188_subModuleChk" id="188_viewChk" onclick="checkAccess(this);" value="188#View" data-parsley-multiple="188_viewChk">
+									<label class="custom-control-label" for="188_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						       <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 188_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="188_subModuleChk" id="188_viewChk" onclick="checkAccess(this);" value="188#View" data-parsley-multiple="188_viewChk">
+									<label class="custom-control-label" for="188_viewChk"></label>
+								</div>
+						</td>
+						<td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 188_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="188_subModuleChk" id="188_viewChk" onclick="checkAccess(this);" value="188#View" data-parsley-multiple="188_viewChk">
+									<label class="custom-control-label" for="188_viewChk"></label>
+								</div>
+						</td> 
+                    </tr>
+					<tr>
+                        <td rowspan="6">
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="189_subModuleChk">
+									<label class="custom-control-label" for="189_subModuleChk">Share your thoughts</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk">New Work item Proposal</label>
+								</div>
+						</td>
+                        <td>
+						       <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+						<td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="189_subModuleChk">
+									<label class="custom-control-label" for="189_subModuleChk">Important Draft Standards</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						       <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+						
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="189_subModuleChk">
+									<label class="custom-control-label" for="189_subModuleChk">New Standards Published</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						       <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+						
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="189_subModuleChk">
+									<label class="custom-control-label" for="189_subModuleChk">Standards Under Review</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						       <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+						
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="189_subModuleChk">
+									<label class="custom-control-label" for="189_subModuleChk">Revised Standards</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						       <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+						
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="189_subModuleChk">
+									<label class="custom-control-label" for="189_subModuleChk">Discussion Forum</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+                        <td>
+						       <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
+									<label class="custom-control-label" for="189_viewChk"></label>
+								</div>
+						</td>
+						
+                    </tr>
+					<tr>
+                        <td rowspan="4">
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="191_subModuleChk">
+									<label class="custom-control-label" for="191_subModuleChk">Join the Class Room</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
+									<label class="custom-control-label" for="191_viewChk">Create new post/ live session</label>
+								</div>
+						</td>
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
+									<label class="custom-control-label" for="191_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
+									<label class="custom-control-label" for="191_viewChk"></label>
+								</div>
+						</td> 
+                        <td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
+									<label class="custom-control-label" for="191_viewChk"></label>
+								</div>
+						</td> 
+						<td>
+						        <div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
+									<label class="custom-control-label" for="191_viewChk"></label>
+								</div>
+						</td> 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="191_subModuleChk">
+									<label class="custom-control-label" for="191_subModuleChk">Manage session/Post</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
+									<label class="custom-control-label" for="191_viewChk"></label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+						 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="191_subModuleChk">
+									<label class="custom-control-label" for="191_subModuleChk">Published Posts</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
+									<label class="custom-control-label" for="191_viewChk"></label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+						 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="191_subModuleChk">
+									<label class="custom-control-label" for="191_subModuleChk">Archived Posts</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
+									<label class="custom-control-label" for="191_viewChk"></label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+						 
+                    </tr>
+					<tr>
+                        <td rowspan="2">
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="192_subModuleChk" id="192_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="192_subModuleChk">
+									<label class="custom-control-label" for="192_subModuleChk">In Conversation with Expert</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 192_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="192_subModuleChk" id="192_viewChk" onclick="checkAccess(this);" value="192#View" data-parsley-multiple="192_viewChk">
+									<label class="custom-control-label" for="192_viewChk">In Conversation with Expert</label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+						<td></td> 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="192_subModuleChk" id="192_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="192_subModuleChk">
+									<label class="custom-control-label" for="192_subModuleChk">In Conversation with Expert Archives</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 192_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="192_subModuleChk" id="192_viewChk" onclick="checkAccess(this);" value="192#View" data-parsley-multiple="192_viewChk">
+									<label class="custom-control-label" for="192_viewChk"></label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+                    </tr>
+					<tr>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="164_subModuleChk" id="164_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="164_subModuleChk">
+									<label class="custom-control-label" for="164_subModuleChk">Banner Image world of standard</label>
+								</div>
+						</td>
+                        <td>
+								<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 163_mainModuleChk 164_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="164_subModuleChk" id="164_viewChk" onclick="checkAccess(this);" value="164#View" data-parsley-multiple="164_viewChk">
+									<label class="custom-control-label" for="164_viewChk"></label>
+								</div>
+						</td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+						<td></td> 
+                    </tr>
 									
 
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="178_subModuleChk" id="178_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="178_subModuleChk">
-												<label class="custom-control-label" for="178_subModuleChk">TA/DA BILLS</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 178_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="178_subModuleChk" id="178_viewChk" onclick="checkAccess(this);" value="178#View" data-parsley-multiple="178_viewChk">
-												<label class="custom-control-label" for="178_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="179_subModuleChk">
-												<label class="custom-control-label" for="179_subModuleChk">COMPLETED INSPECTION</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_viewChk" onclick="checkAccess(this);" value="179#View" data-parsley-multiple="179_viewChk">
-												<label class="custom-control-label" for="179_viewChk"></label>
-											</div>
-									</td>
-
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_addChk" onclick="checkAccess(this);" value="179#Add" data-parsley-multiple="179_addChk">
-												<label class="custom-control-label" for="179_addChk"></label>
-											</div>
-									</td>
-
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_updateChk" onclick="checkAccess(this);" value="179#Update" data-parsley-multiple="179_updateChk">
-												<label class="custom-control-label" for="179_updateChk"></label>
-											</div>
-									</td>
-
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 179_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="179_subModuleChk" id="179_deleteChk" onclick="checkAccess(this);" value="179#Delete" data-parsley-multiple="179_deleteChk">
-												<label class="custom-control-label" for="179_deleteChk"></label>
-											</div>
-									</td>
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="180_subModuleChk" id="180_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="180_subModuleChk">
-												<label class="custom-control-label" for="180_subModuleChk">FINANCE DETAILS</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 180_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="180_subModuleChk" id="180_viewChk" onclick="checkAccess(this);" value="180#View" data-parsley-multiple="180_viewChk">
-												<label class="custom-control-label" for="180_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="181_subModuleChk">
-												<label class="custom-control-label" for="181_subModuleChk">INFRASTRUCTURE</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 181_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="181_subModuleChk" id="181_viewChk" onclick="checkAccess(this);" value="181#View" data-parsley-multiple="181_viewChk">
-												<label class="custom-control-label" for="181_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="182_subModuleChk" id="182_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="182_subModuleChk">
-												<label class="custom-control-label" for="182_subModuleChk">FACILITY</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 182_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="182_subModuleChk" id="182_viewChk" onclick="checkAccess(this);" value="182#View" data-parsley-multiple="182_viewChk">
-												<label class="custom-control-label" for="182_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="183_subModuleChk">
-												<label class="custom-control-label" for="183_subModuleChk">RESEARCH AND PROJECT</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 183_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="183_subModuleChk" id="183_viewChk" onclick="checkAccess(this);" value="183#View" data-parsley-multiple="183_viewChk">
-												<label class="custom-control-label" for="183_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="188_subModuleChk" id="188_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="188_subModuleChk">
-												<label class="custom-control-label" for="188_subModuleChk">COMMITTEE AND MEETING</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 188_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="188_subModuleChk" id="188_viewChk" onclick="checkAccess(this);" value="188#View" data-parsley-multiple="188_viewChk">
-												<label class="custom-control-label" for="188_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="189_subModuleChk">
-												<label class="custom-control-label" for="189_subModuleChk">PLACEMENT</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 189_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="189_subModuleChk" id="189_viewChk" onclick="checkAccess(this);" value="189#View" data-parsley-multiple="189_viewChk">
-												<label class="custom-control-label" for="189_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="191_subModuleChk">
-												<label class="custom-control-label" for="191_subModuleChk">LIBRARY DETAILS</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 191_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="191_subModuleChk" id="191_viewChk" onclick="checkAccess(this);" value="191#View" data-parsley-multiple="191_viewChk">
-												<label class="custom-control-label" for="191_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="192_subModuleChk" id="192_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="192_subModuleChk">
-												<label class="custom-control-label" for="192_subModuleChk">LIBRARY COLLECTION </label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 192_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="192_subModuleChk" id="192_viewChk" onclick="checkAccess(this);" value="192#View" data-parsley-multiple="192_viewChk">
-												<label class="custom-control-label" for="192_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
-
-									 
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="164_subModuleChk" id="164_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="164_subModuleChk">
-												<label class="custom-control-label" for="164_subModuleChk">UNIVERSITY DETAILS</label>
-											</div>
-									</td>
-
-
-									<td>
-											<div class="custom-control custom-checkbox mr-3">
-												<input type="checkbox" class="custom-control-input 163_mainModuleChk 164_subModuleChk accessSelected" data-moduleid="163_mainModuleChk" data-submoduleid="164_subModuleChk" id="164_viewChk" onclick="checkAccess(this);" value="164#View" data-parsley-multiple="164_viewChk">
-												<label class="custom-control-label" for="164_viewChk"></label>
-											</div>
-									</td>
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
-
-
-									<td></td> 
-
- 
-
-									
- 
-
- 							
-									 
-									</tr>
-									
-
-										<tr>
+										<!-- <tr>
 
 									 
 									<td>
@@ -2121,7 +2648,7 @@
 
  							
 									 
-									</tr>
+									</tr> -->
 									
 
 											
