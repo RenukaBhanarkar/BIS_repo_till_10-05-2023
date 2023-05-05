@@ -36,13 +36,13 @@
 							<td rowspan="3">
                                     <div class="custom-control custom-checkbox mr-3">
                                         <input type="checkbox" class="custom-control-input" id="163_mainModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="163_mainModuleChk">
-                                        <label class="custom-control-label" for="163_mainModuleChk">Competitions</label>
+                                        <label class="custom-control-label" for="163_mainModuleChk">Quiz Competition</label>
                                     </div>
                             </td>
                             <td>
                                     <div class="custom-control custom-checkbox mr-3">
                                         <input type="checkbox" class="custom-control-input 163_mainModuleChk" data-moduleid="163_mainModuleChk" data-submoduleid="173_subModuleChk" id="173_subModuleChk" onclick="checkSubmodules(this);" data-parsley-multiple="173_subModuleChk">
-                                        <label class="custom-control-label" for="173_subModuleChk">Quiz Competition</label>
+                                        <label class="custom-control-label" for="173_subModuleChk">Create Quiz</label>
                                     </div>
                             </td>
                             <td>

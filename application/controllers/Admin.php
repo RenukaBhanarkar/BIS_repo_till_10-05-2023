@@ -476,6 +476,24 @@ class Admin extends CI_Controller
         $this->load->view('admin/set_permission');
         $this->load->view('admin/footers/admin_footer');
     }
+    public function log_dashboard()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/log_dashboard');
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function login_report_list()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/login_report_list');
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function log_report_list()
+    {
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('admin/log_report_list');
+        $this->load->view('admin/footers/admin_footer');
+    }
     public function feedback_detail($id){
         $f_id=encryptids("D",$id);
         // echo $f_id; die;
