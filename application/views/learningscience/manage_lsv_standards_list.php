@@ -161,53 +161,144 @@
 
     </div>
 <script type="text/javascript">
-    function deleteLsvStandards(id) 
-    {
-        $('#delete').modal('show');
-        $('.deletecall').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>Learningscience/deleteLsvStandards',
-                data: {
-                    id: id,
-                },
-                success: function(result) 
-                {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
-    }
+    // function deleteLsvStandards(id) 
+    // {
+    //     $('#delete').modal('show');
+    //     $('.deletecall').on('click', function() 
+    //     {
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '<?php echo base_url(); ?>Learningscience/deleteLsvStandards',
+    //             data: {
+    //                 id: id,
+    //             },
+    //             success: function(result) 
+    //             {
+    //                 location.reload();
+    //             },
+    //             error: function(result) {
+    //                 alert("Error,Please try again.");
+    //             }
+    //         });
+    //     });
+    // }
+
+    // function updateLsvStandards(id,status) 
+    // { 
+    //     if (status==2)  { $(".sms").text('Send For Approval'); }
+    //     if (status==5)  { $(".sms").text('Publish'); }
+    //     if (status==6)  { $(".sms").text('UnPublish'); }
+    //     if (status==9)  { $(".sms").text('Archives'); }
+    //     $('#updatemodel').modal('show');
+    //     $('.updatestatus').on('click', function() 
+    //     {
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
+    //             data: {
+    //                 id: id,
+    //                 status: status,
+    //             },
+    //             success: function(result) 
+    //             {
+    //                 location.reload();
+    //             },
+    //             error: function(result) {
+    //                 alert("Error,Please try again.");
+    //             }
+    //         });
+    //     });
+    // }
 
     function updateLsvStandards(id,status) 
     { 
-        if (status==2)  { $(".sms").text('Send For Approval'); }
-        if (status==5)  { $(".sms").text('Publish'); }
-        if (status==6)  { $(".sms").text('UnPublish'); }
-        if (status==9)  { $(".sms").text('Archives'); }
-        $('#updatemodel').modal('show');
-        $('.updatestatus').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
-                data: {
-                    id: id,
-                    status: status,
-                },
-                success: function(result) 
-                {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        
+        if (status==2)  { var title1= 'Do you want to Send For Approval?'; var buttonText = 'Send For Approval' } 
+        if (status==5)  { var title1= 'Do you want to Publish?'; var buttonText = 'Publish' }
+        if (status==6)  { var title1= 'Do you want to UnPublish?'; var buttonText = 'UnPublish' }
+        if (status==9)  { var title1= 'Do you want to Archive?'; var buttonText = 'Archive' }
+        Swal.fire({
+                    title: title1,
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: buttonText,
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
+                                data: {
+                                    id: id,
+                                    status: status,
+                                },
+                                success: function(result) 
+                                {
+                                    location.reload();
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+    }
+
+
+    function deleteLsvStandards(id) 
+    {
+        // $('#delete').modal('show');
+        // $('.deletecall').on('click', function() 
+        // {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>Learningscience/deleteLsvStandards',
+        //         data: {
+        //             id: id,
+        //         },
+        //         success: function(result) 
+        //         {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+        // });
+
+
+        Swal.fire({
+                    title: 'Are you sure you want to Delete',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>Learningscience/deleteLsvStandards',
+                                data: {
+                                    id: id,
+                                },
+                                success: function(result) 
+                                {
+                                    location.reload();
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
     }
 
 

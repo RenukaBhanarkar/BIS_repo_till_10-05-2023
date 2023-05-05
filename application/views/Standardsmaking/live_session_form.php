@@ -597,14 +597,38 @@ var loadFileThumbnail = function(event)
 
 
                      
+                    // console.log(allfields)
+                    // if (allfields) { 
+                    //      $("#submitForm").show();
+                    //     $('#live_session_form').submit();
+                    // } else {
+                    //     $('#closeform').trigger('click');
+                    //     return false; 
+                    // }
+
+
                     console.log(allfields)
                     if (allfields) { 
-                         $("#submitForm").show();
-                        $('#live_session_form').submit();
+                        Swal.fire({
+                                    title: 'Do you want to Delete?',
+                                    showDenyButton: true,
+                                    showCancelButton: false,
+                                    confirmButtonText: 'Delete',
+                                    denyButtonText: `Cancel`,
+                        }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {  
+                                    $('#live_session_form').submit();        
+                                } else if (result.isDenied) {
+                    
+                                }
+                        })
                     } else {
-                        $('#closeform').trigger('click');
-                        return false; 
-                    }
+                            $('#closeform').trigger('click');
+                            return false; 
+                        }
+
+
                 });</script>
 
 

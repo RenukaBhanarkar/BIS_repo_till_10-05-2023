@@ -142,7 +142,7 @@ color: red;
                                 </div>
                             </div>
                             <div class="col-md-12 submit_btn p-3">
-                                <a class="btn btn-success btn-sm text-white" onclick="formubmit()">Submit</a>
+                                <a class="btn btn-success btn-sm text-white" onclick="return formubmit(event)">Submit</a>
                                 <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal" data-bs-target="#cancelForm">Cancel</a>
                                 <input type="reset" name="Reset" class="btn btn-warning btn-sm text-white">
                             </div>
@@ -502,29 +502,67 @@ var loadFileThumbnail = function(event)
         });
     }
 
-    function formubmit(id) 
+    // function formubmit(id) 
+    // {
+    //     var submit_id = $("#submit_id").val();
+    //     $('#submit').modal('show');
+    //     $('.submitcall').on('click', function() 
+    //     {
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '<?php echo base_url(); ?>winnerwall/submitWinnerWall',
+    //             data: {
+    //                 submit_id: submit_id,
+    //             },
+    //             success: function(result) 
+    //             { 
+    //                     $('.errorbox').show().text("Error,Please try again.");
+    //                     alert('Submitted Successfully');
+    //                     window.location.href = "winner_wall_list"; 
+    //             },
+    //             error: function(result) {
+    //                 alert("Error,Please try again.");
+    //             }
+    //         });
+    //     });
+    // }
+
+    function formubmit(event) 
     {
+        event.preventDefault();
+
         var submit_id = $("#submit_id").val();
-        $('#submit').modal('show');
-        $('.submitcall').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>winnerwall/submitWinnerWall',
-                data: {
-                    submit_id: submit_id,
-                },
-                success: function(result) 
-                { 
-                        $('.errorbox').show().text("Error,Please try again.");
-                        alert('Submitted Successfully');
-                        window.location.href = "winner_wall_list"; 
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        Swal.fire({
+                    title: 'Do you want to Submit?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Submit',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>winnerwall/submitWinnerWall',
+                                data: {
+                                    submit_id: submit_id,
+                                },
+                                success: function(result) 
+                                { 
+                                        // $('.errorbox').show().text("Error,Please try again.");
+                                        // alert('Submitted Successfully');
+                                        Swal.fire('Submitted Successfully');
+                                        window.location.href = "winner_wall_list"; 
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                                                   
+                    } else if (result.isDenied) {
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
     }
     
 
