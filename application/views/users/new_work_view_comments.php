@@ -73,13 +73,13 @@
              
         </div>
        </div>
-       <div class="container">
+       <div class="container mb-4">
             <div class="artical-comment">
                 <div class="view_content">
                     <a href="">
-                    <div class="common_content">
+                    <div class="common_content" style="background: white; border-radius: 10px;">
                         <div class="comment_user">
-                              <img src="http://localhost/BIS/BIS_repo/assets/images/user_1.png" alt="Default Profile Picture" width="5%"><span style="margin-left: 15px; font-size: 17px;">Login</span>            
+                              <img src="http://localhost/BIS/BIS_repo/assets/images/user_1.png" alt="Default Profile Picture" width="5%" style="margin-left: 8px; padding: 2px;"><span style="margin-left: 15px; font-size: 17px;">Login</span>            
                         </div>
 
                     </div>
@@ -88,10 +88,11 @@
                 </div>
             </div>
         </div>
+  <div class="" style="background-image: url(<?php echo base_url(); ?>/assets/images/whats-new-bg.png);">
        <div class="container">
   
                         <form>
-                <h2 class="YourWallForm">Important Draft Standards</h2>
+                <!-- <h2 class="YourWallForm">Important Draft Standards</h2> -->
                 <div class="bg-light-comment p-3">
                     <!-- <div class="Comment_image">
                         <img src="../assets/images/user_image.png">
@@ -123,6 +124,47 @@
 
             <ul class="posts">
             </ul>
+        </div>
+        </div>
+        <div class="" style="background-image: url(<?php echo base_url(); ?>/assets/images/whats-new-bg.png);">
+        <div class="container">
+            <div class="artical-comment-view">
+                <div class="view_content">
+                    <a href="">
+                    <div class="common_content">
+                        <div class="comment_user">
+                              <img src="<?php echo base_url(); ?>/assets/images/people.png" alt="Default Profile Picture" width="5%">
+                              <span style="margin-left: 15px; font-size: 17px; font-weight: 600;">Anis Mulani</span>
+                              <span class="float-right" style="float:right;">1 hour 47 minutes ago</span>
+                                         
+                        </div>
+                        <div class="mt-1">My name is Urvish Patel. From Gujarat. I have an idea how to grow green energy. And how to take the minimum charge to charge an EV vehicle. Please give me your appointment. My name is Urvish Patel. From Gujarat. I have an idea how to grow green energy. And how to take the minimum charge to charge an EV vehicle. Please give me your appointment. My name is Urvish Patel. From Gujarat. I have an idea how to grow green energy. And how to take the minimum charge to charge an EV vehicle. Please give me your appointment. My name is Urvish Patel. From Gujarat. I have an idea how to grow green energy. And how to take the minimum charge to charge an EV vehicle. Please give me your appointment.</div>
+
+                    </div>
+                    </a>
+                    
+                </div>
+            </div>
+            <hr>
+            <div class="artical-comment-view">
+                <div class="view_content">
+                    <a href="">
+                    <div class="common_content">
+                        <div class="comment_user">
+                              <img src="<?php echo base_url(); ?>/assets/images/people.png" alt="Default Profile Picture" width="5%">
+                              <span style="margin-left: 15px; font-size: 17px; font-weight: 600;">Anis Mulani</span>
+                              <span class="float-right" style="float:right;">1 hour 47 minutes ago</span>
+                                         
+                        </div>
+                        <div class="mt-1">My name is Urvish Patel. From Gujarat. I have an idea how to grow green energy. And how to take the minimum charge to charge an EV vehicle. Please give me your appointment. My name is Urvish Patel. From Gujarat. I have an idea how to grow green energy. And how to take the minimum charge to charge an EV vehicle. Please give me your appointment. My name is Urvish Patel. From Gujarat. I have an idea how to grow green energy. And how to take the minimum charge to charge an EV vehicle. Please give me your appointment. My name is Urvish Patel. From Gujarat. I have an idea how to grow green energy. And how to take the minimum charge to charge an EV vehicle. Please give me your appointment.</div>
+
+                    </div>
+                    </a>
+                    
+                </div>
+            </div>
+            <hr>
+        </div>
         </div>
         
     <!-- /.container-fluid -->
