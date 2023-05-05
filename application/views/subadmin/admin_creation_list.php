@@ -39,10 +39,11 @@
                       <th>Sr. No.</th>
                       <th>Name</th>
                       <th>Email id</th>
-                      <!-- <th>Designation</th>
-                      <th>Branch</th>
+                      <th>Department</th>
+                      <th>Role/Designation</th>
+                     <!-- <th>Branch</th>
                       <th>Post</th>
-                      <th>Department</th> -->
+                      -->
                       <th>Created On</th>
                       <th>Action</th>
                     </tr>
@@ -58,10 +59,11 @@
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['email_id']; ?></td>
-                        <!-- <td><?php echo $row['designation']; ?></td>
-                        <td><?php echo $row['branch']; ?></td>
+                        <td><?php echo $row['department']; ?>
+                         <td><?php echo $row['role']; ?></td>
+                        <!--<td><?php echo $row['branch']; ?></td>
                         <td><?php echo $row['post']; ?></td>
-                        <td><?php echo $row['department']; ?></td> -->
+                        </td> -->
                         <td><?php echo date('d-m-Y h:i:s', strtotime($row['created_on'])) ?></td>
                         <td class="d-flex border-bottom-0">
                           <!-- <a class="btn btn-primary btn-sm mr-2" onclick="location.href='<?php echo base_url(); ?>subadmin/admin_creation_view'"><i class="fa fa-eye" aria-hidden="true"></i></a>  -->
