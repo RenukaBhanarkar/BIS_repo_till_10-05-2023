@@ -500,7 +500,8 @@
                         <div class="col-md-12 submit_btn p-3">
                             <!-- <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#submitForm">Submit</a> -->
                             <input type="submit" name="Submit" class="btn btn-success btn-sm text-white" id="btnsubmit">
-                            <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal" data-bs-target="#cancelForm">Cancel</a>
+                            <!-- <a class="btn btn-danger btn-sm text-white cancelQuiz" data-bs-toggle="modal" data-bs-target="#cancelForm">Cancel</a> -->
+                            <a class="btn btn-danger btn-sm text-white cancelQuiz" >Cancel</a>
                             <input type="reset" name="Reset" class="btn btn-warning btn-sm text-white">
                         </div>
                         <!-- Modal -->
@@ -1353,9 +1354,43 @@
         }
 
         if (allfields) {
-            $('#quiz_reg').submit();
+            // $('#quiz_reg').submit();
+            Swal.fire({
+                    title: 'Are you sure you want to Create Quiz?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Submit',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $('#quiz_reg').submit();
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
         } else {
             return false;
         }
     });
+
+    $('.cancelQuiz').on('click',function(){
+        Swal.fire({
+                    title: 'Are you sure you want to Cancel?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Cancel',
+                    denyButtonText: `Close`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                    //    window.location('<?php echo base_url().'quiz/quiz_list' ?>');
+                       window.location.replace('<?php echo base_url().'quiz/quiz_list' ?>');
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+    })
 </script>
