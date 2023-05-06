@@ -132,47 +132,108 @@
 function updateStatusLiveSession(id,status) 
     {
         console.log(status)
-        if (status==1)  { $(".sms").text('Create'); } 
-        if (status==9)  { $(".sms").text('Archives'); }
-        $('#updatemodel').modal('show');
-        $('.updatestatus').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>Standardsmaking/updateStatusLiveSession',
-                data: {
-                    id: id,
-                    status: status,
-                },
-                success: function(result) 
-                {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        // if (status==1)  { $(".sms").text('Create'); } 
+        // if (status==9)  { $(".sms").text('Archives'); }
+        // $('#updatemodel').modal('show');
+        // $('.updatestatus').on('click', function() 
+        // {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>Standardsmaking/updateStatusLiveSession',
+        //         data: {
+        //             id: id,
+        //             status: status,
+        //         },
+        //         success: function(result) 
+        //         {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+        // });
+
+        if (status==1)  { var titletext ="Are you sur you want to Create ?"; var buttontext ="Create"; } 
+        if (status==9)  { var titletext ="Are you sur you want to Archives ?"; var buttontext ="Archive"; }
+
+        Swal.fire({
+                    title: titletext,
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: buttontext,
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>Standardsmaking/updateStatusLiveSession',
+                                data: {
+                                    id: id,
+                                    status: status,
+                                },
+                                success: function(result) 
+                                {
+                                    location.reload();
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
     }
      function deleteLiveSession(id) 
     {
-        $('#delete').modal('show');
-        $('.deletecall').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>Standardsmaking/deleteLiveSession',
-                data: {
-                    id: id,
-                },
-                success: function(result) 
-                {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        // $('#delete').modal('show');
+        // $('.deletecall').on('click', function() 
+        // {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>Standardsmaking/deleteLiveSession',
+        //         data: {
+        //             id: id,
+        //         },
+        //         success: function(result) 
+        //         {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+        // });
+        Swal.fire({
+                    title: 'Are you sure you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                   
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>Standardsmaking/deleteLiveSession',
+                                data: {
+                                    id: id,
+                                },
+                                success: function(result) 
+                                {
+                                    location.reload();
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
     }
 </script>

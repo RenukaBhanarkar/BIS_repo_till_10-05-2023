@@ -610,10 +610,10 @@ var loadFileThumbnail = function(event)
                     console.log(allfields)
                     if (allfields) { 
                         Swal.fire({
-                                    title: 'Do you want to Delete?',
+                                    title: 'Do you want to Submit?',
                                     showDenyButton: true,
                                     showCancelButton: false,
-                                    confirmButtonText: 'Delete',
+                                    confirmButtonText: 'Submit',
                                     denyButtonText: `Cancel`,
                         }).then((result) => {
                         /* Read more about isConfirmed, isDenied below */

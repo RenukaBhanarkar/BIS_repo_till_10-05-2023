@@ -162,51 +162,115 @@
 <script type="text/javascript">
     function deleteLiveSession(id) 
     {
-        $('#delete').modal('show');
-        $('.deletecall').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>Standardsmaking/deleteLiveSession',
-                data: {
-                    id: id,
-                },
-                success: function(result) 
-                {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        // $('#delete').modal('show');
+        // $('.deletecall').on('click', function() 
+        // {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>Standardsmaking/deleteLiveSession',
+        //         data: {
+        //             id: id,
+        //         },
+        //         success: function(result) 
+        //         {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+        // });
+
+        Swal.fire({
+                    title: 'Are you sure you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>Standardsmaking/deleteLiveSession',
+                                data: {
+                                    id: id,
+                                },
+                                success: function(result) 
+                                {
+                                    location.reload();
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
     }
 
     function updateStatusLiveSession(id,status) 
     { 
-        if (status==2)  { $(".sms").text('Send For Approval'); }
-        if (status==5)  { $(".sms").text('Publish'); }
-        if (status==6)  { $(".sms").text('UnPublish'); }
-        if (status==9)  { $(".sms").text('Archives'); }
-        $('#updatemodel').modal('show');
-        $('.updatestatus').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>Standardsmaking/updateStatusLiveSession',
-                data: {
-                    id: id,
-                    status: status,
-                },
-                success: function(result) 
-                {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        // if (status==2)  { $(".sms").text('Send For Approval'); }
+        // if (status==5)  { $(".sms").text('Publish'); }
+        // if (status==6)  { $(".sms").text('UnPublish'); }
+        // if (status==9)  { $(".sms").text('Archives'); }
+        // $('#updatemodel').modal('show');
+        // $('.updatestatus').on('click', function() 
+        // {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>Standardsmaking/updateStatusLiveSession',
+        //         data: {
+        //             id: id,
+        //             status: status,
+        //         },
+        //         success: function(result) 
+        //         {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+        // });
+
+
+        if (status==2)  { var titletext= "Are you sure you want to Send for Approval ?"; var buttontext ="Send for Approval"; }
+        if (status==5)  { var titletext= "Are you sure you want to Publish ?"; var buttontext ="Publish"; }
+        if (status==6)  { var titletext= "Are you sure you want to UnPublish ?"; var buttontext ="UnPublish"; }
+        if (status==9)  { var titletext= "Are you sure you want to Archives ?"; var buttontext ="Archives"; }
+        Swal.fire({
+                    title: titletext,
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: buttontext,
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>Standardsmaking/updateStatusLiveSession',
+                                data: {
+                                    id: id,
+                                    status: status,
+                                },
+                                success: function(result) 
+                                {
+                                    location.reload();
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
     }
 
 
