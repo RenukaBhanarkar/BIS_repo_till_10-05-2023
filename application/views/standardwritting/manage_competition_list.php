@@ -35,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           <tr>
+                           <!-- <tr>
                               <td>1</td>
                               <td>12345</td>
                               <td>Miscellaneous Competition</td>
@@ -53,7 +53,58 @@
                                  <a href="<?php echo base_url(); ?>" class="btn btn-success btn-sm mr-2" >Publish</a>
                                  <a href="<?php echo base_url(); ?>" class="btn btn-warning btn-sm mr-2" >Unpublish</a>
                               </td>
+                           </tr> -->
+                           <?php if(!empty($competition)){ $i=1;
+                            foreach($competition as $list){ ?>
+                            <tr>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo "123"; ?></td>
+                            <td><?php echo $list['competiton_name']; ?></td>
+                            <td><?php echo $list['start_date']; ?></td>
+                            <td><?php echo $list['end_date']; ?></td>
+                            <td><img src="<?php echo base_url().$list['thumbnail']; ?>" alt="#" class="" width="100%"></td>
+                            <td><?php echo $list['status_name'];  ?></td>
+                            <td><?php echo $list['reject_reason'];  ?></td>
+                            <td>
 
+                            <!-- <button href="<?php echo base_url(); ?>" class="btn btn-primary btn-sm mr-2" >View</button> -->
+                                 <!-- <button data-id="<?php echo $list['id']; ?>" class="btn btn-info btn-sm mr-2 restore">Restore</button> -->
+                                 <?php if (encryptids("D", $_SESSION['admin_type']) == 2) { ?>
+                                    <a href="<?php echo base_url().'Standardswritting/view_competition/'.$list['id']; ?>" class="btn btn-primary btn-sm mr-2">View</a>
+                        <?php  if ($list['status'] == 2) { ?>
+                            <a href="<?php echo base_url().'Standardswritting/view_competition/'.$list['id'] ?>" class="btn btn-primary btn-sm mr-2">Approve/ Reject</a>
+                        <?php }
+                        } ?>
+                        <!-- <?php if (encryptids("D", $_SESSION['admin_type']) == 2) { ?>
+                             
+                        
+                            <a href="<?php echo base_url().'Standardswritting/view_competition/'.$list['id']; ?>" class="btn btn-primary btn-sm mr-2">View</a>
+                        <?php 
+                        } ?> -->
+                        <?php if (encryptids("D", $_SESSION['admin_type']) == 3) { 
+                            if($list['status']==5){ ?>
+                            <button data-id="<?php echo $list['id']; ?>" class="btn btn-warning btn-sm mr-2 unpublish" >Unpublish</button>
+                          <?php  }else if(!(($list['status']==5) || ($list['status']==2) || ($list['status']==1))){ ?>
+                              
+                       
+
+                                 <button href="<?php echo base_url(); ?>" class="btn btn-info btn-sm mr-2" >Edit</button>
+                                 <button data-id="<?php echo $list['id']; ?>" class="btn btn-danger btn-sm mr-2 delete" >Delete</button>
+                                 <button data-id="<?php echo $list['id']; ?>" class="btn btn-primary btn-sm mr-2 archive" >Archive</button>
+                                 
+                                 <button data-id="<?php echo $list['id']; ?>" class="btn btn-success btn-sm mr-2 publish" >Publish</button>
+                                 <?php   }else if($list['status']==1){ ?>
+                                      
+                                        <button data-id="<?php echo $list['id']; ?>" class="btn btn-info btn-sm mr-2 send_for_approval" >Sent for Approval</button>
+                                        <button data-id="<?php echo $list['id']; ?>" class="btn btn-primary btn-sm mr-2 archive" >Archive</button>
+                                        <button href="<?php echo base_url(); ?>" class="btn btn-info btn-sm mr-2" >Edit</button>
+                                 <button data-id="<?php echo $list['id']; ?>" class="btn btn-danger btn-sm mr-2 delete" >Delete</button>
+                                   
+                                <?php }                            
+                            ?>
+                            </td>
+                            </tr>
+                            <?php  } $i++; } } ?>
                         </tbody>
                     </table>
                 </div>
@@ -140,4 +191,151 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Modal -->
+ <script>
+     $('#example').on('click','.archive', function(){
+    id =$(this).attr('data-id');
+    Swal.fire({
+                title: 'Are you sure you want to Archive?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Archive',
+                denyButtonText: `Cancel`,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {                       
+                    jQuery.ajax({
+                                type: "POST",
+                                url: '<?php echo base_url(); ?>Standardswritting/update_status',
+                                // dataType: 'json',
+                                data: {
+                                "id": id,
+                                "status": 9
+                                },
+                                success: function(res) {
+                                if (res) {
+                                    location.reload();
+                                } else {
+                                    alert("error");
+                                }
+                                },
+                                error: function(xhr, status, error) {
+                                console.log(error);
+                                }
+                            });
+                                            
+                } else if (result.isDenied) {
+                    // Swal.fire('Changes are not saved', '', 'info')
+                }
+                })
+});
+$('#example').on('click','.publish', function(){
+    id =$(this).attr('data-id');
+    Swal.fire({
+                title: 'Are you sure you want to Publish?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Publish',
+                denyButtonText: `Cancel`,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {                       
+                    jQuery.ajax({
+                                type: "POST",
+                                url: '<?php echo base_url(); ?>Standardswritting/update_status',
+                                // dataType: 'json',
+                                data: {
+                                "id": id,
+                                "status": 5
+                                },
+                                success: function(res) {
+                                if (res) {
+                                    location.reload();
+                                } else {
+                                    alert("error");
+                                }
+                                },
+                                error: function(xhr, status, error) {
+                                console.log(error);
+                                }
+                            });
+                                            
+                } else if (result.isDenied) {
+                    // Swal.fire('Changes are not saved', '', 'info')
+                }
+                })
+});
+
+$('#example').on('click','.unpublish', function(){
+    id =$(this).attr('data-id');
+    Swal.fire({
+                title: 'Are you sure you want to Unpublish?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Unpublish',
+                denyButtonText: `Cancel`,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {                       
+                    jQuery.ajax({
+                                type: "POST",
+                                url: '<?php echo base_url(); ?>Standardswritting/update_status',
+                                // dataType: 'json',
+                                data: {
+                                "id": id,
+                                "status": 6
+                                },
+                                success: function(res) {
+                                if (res) {
+                                    location.reload();
+                                } else {
+                                    alert("error");
+                                }
+                                },
+                                error: function(xhr, status, error) {
+                                console.log(error);
+                                }
+                            });
+                                            
+                } else if (result.isDenied) {
+                    // Swal.fire('Changes are not saved', '', 'info')
+                }
+                })
+});
+
+$('#example').on('click','.send_for_approval', function(){
+    id =$(this).attr('data-id');
+    Swal.fire({
+                title: 'Are you sure you want to Send for Approval?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Send for Approval',
+                denyButtonText: `Cancel`,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {                       
+                    jQuery.ajax({
+                                type: "POST",
+                                url: '<?php echo base_url(); ?>Standardswritting/update_status',
+                                // dataType: 'json',
+                                data: {
+                                "id": id,
+                                "status": 2
+                                },
+                                success: function(res) {
+                                if (res) {
+                                    location.reload();
+                                } else {
+                                    alert("error");
+                                }
+                                },
+                                error: function(xhr, status, error) {
+                                console.log(error);
+                                }
+                            });
+                                            
+                } else if (result.isDenied) {
+                    // Swal.fire('Changes are not saved', '', 'info')
+                }
+                })
+});
+ </script>                                   

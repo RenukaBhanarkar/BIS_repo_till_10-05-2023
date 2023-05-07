@@ -29,7 +29,7 @@
        <div class="row">
             <div class="col-12 mt-3">
                 <div class="card border-top card-body table-responsive">
-                    <table id="example" class="hover table-bordered" style="width:100%">
+                    <table id="example" class="hover table-bordered nowrap" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Sr. No.</th>
@@ -43,7 +43,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           <tr>
+                           <!-- <tr>
                               <td>1</td>
                               <td>12345</td>
                               <td>Miscellaneous Competition</td>
@@ -59,6 +59,26 @@
                                  <a href="<?php echo base_url(); ?>" class="btn btn-primary btn-sm mr-2" >Archive</a>
                                   
                             </td>
+                           </tr> -->
+                           <?php if(!empty($competition)){ $i=1;
+                            foreach($competition as $list){ ?>
+                            <tr>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo "123"; ?></td>
+                            <td><?php echo $list['competiton_name']; ?></td>
+                            <td><?php echo $list['start_date']; ?></td>
+                            <td><?php echo $list['end_date']; ?></td>
+                            <td><img src="<?php echo base_url().$list['thumbnail']; ?>" alt="#" class="" width="100%"></td>
+                            <td><?php if($list['status']==1){ echo "Created"; } ?></td>
+                            <td>
+                            <a href="<?php echo base_url().'standardswritting/view_competition' ?>" class="btn btn-primary btn-sm mr-2" >View</a>
+                                 <a href="<?php echo base_url(); ?>standardswritting/create_competition_edit/" class="btn btn-info btn-sm mr-2" >Edit</a>
+                                 <button data-id="<?php echo $list['id']; ?>" data-status="create" class="btn btn-success btn-sm mr-2 create" >Create</button>
+                                 <button class="btn btn-danger btn-sm mr-2 delete" >Delete</button>
+                                 <button data-id="<?php echo $list['id']; ?>" data-status="create" class="btn btn-primary btn-sm mr-2 archive" >Archive</button>
+                            </td>
+                            </tr>
+                        <?php $i++; } } ?>
 
                         </tbody>
                     </table>
@@ -147,3 +167,105 @@
                                         </div>
                                     </div>
                                     <!-- Modal -->
+<script>
+    $(document).ready(function(){
+
+        $('#example').on('click','.delete',function(){
+        id =$(this).attr('data-id');
+            Swal.fire({
+                        title: 'Do you want to Delete?',
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: 'Delete',
+                        denyButtonText: `Cancel`,
+                        }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {                       
+                            
+                        // Swal.fire('Saved!', '', 'success')                                
+                        } else if (result.isDenied) {
+                            // Swal.fire('Changes are not saved', '', 'info')
+                        }
+                        })
+    });
+
+    $('#example').on('click','.archive',function(){
+        id =$(this).attr('data-id');
+            Swal.fire({
+                        title: 'Are you sure you want to Archive?',
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: 'Archive',
+                        denyButtonText: `Cancel`,
+                        }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {                       
+                            jQuery.ajax({
+                                        type: "POST",
+                                        url: '<?php echo base_url(); ?>Standardswritting/update_status',
+                                        // dataType: 'json',
+                                        data: {
+                                        "id": id,
+                                        "status": 9
+                                        },
+                                        success: function(res) {
+                                        if (res) {
+                                            alert("success");
+
+                                        } else {
+                                            alert("error");
+                                        }
+                                        },
+                                        error: function(xhr, status, error) {
+                                        //toastr.error('Failed to add '+xData.name+' in wishlist.');
+                                        console.log(error);
+                                        }
+                                    });
+                        // Swal.fire('Saved!', '', 'success')                                
+                        } else if (result.isDenied) {
+                            // Swal.fire('Changes are not saved', '', 'info')
+                        }
+                        })
+    });
+
+    $('#example').on('click','.create',function(){
+        id =$(this).attr('data-id');
+            Swal.fire({
+                        title: 'Are you sure you want to Create?',
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: 'Create',
+                        denyButtonText: `Cancel`,
+                        }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {                       
+                            jQuery.ajax({
+                                        type: "POST",
+                                        url: '<?php echo base_url(); ?>Standardswritting/update_status',
+                                        // dataType: 'json',
+                                        data: {
+                                        "id": id,
+                                        "status": 1
+                                        },
+                                        success: function(res) {
+                                        if (res) {
+                                            location.reload();
+                                        } else {
+                                            alert("error");
+                                        }
+                                        },
+                                        error: function(xhr, status, error) {
+                                        //toastr.error('Failed to add '+xData.name+' in wishlist.');
+                                        console.log(error);
+                                        }
+                                    });
+                        // Swal.fire('Saved!', '', 'success')                                
+                        } else if (result.isDenied) {
+                            // Swal.fire('Changes are not saved', '', 'info')
+                        }
+                        })
+    });
+
+    });
+   
+</script>

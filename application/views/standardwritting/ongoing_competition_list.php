@@ -35,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                           <tr>
+                           <!-- <tr>
                               <td>1</td>
                               <td>12345</td>
                               <td>Miscellaneous Competition</td>
@@ -49,6 +49,22 @@
                                  <a href="<?php echo base_url(); ?>" class="btn btn-info btn-sm mr-2" >View Details</a>
                               </td>
 
+                           </tr> -->
+                           <?php if(!empty($competition)){ $i=1;
+                            foreach($competition as $list){ ?>
+                            <td><?php echo $i; ?></td>
+                            <td><?php echo "123"; ?></td>
+                            <td><?php echo $list['competiton_name']; ?></td>
+                            <td><?php echo $list['start_date']; ?></td>
+                            <td><?php echo $list['end_date']; ?></td>
+                            <td><img src="<?php echo base_url().$list['thumbnail']; ?>" alt="#" class="" width="100%"></td>
+                            <td><?php echo $list['status_name'];  ?></td>
+                            <td>Submited task</td>
+                            <td>
+                            <a href="<?php echo base_url(); ?>" class="btn btn-primary btn-sm mr-2" >View Submission</a>
+                                 <a href="<?php echo base_url().''; ?>" class="btn btn-info btn-sm mr-2" >View Details</a>
+                            </td>
+                            <?php } } ?>
                         </tbody>
                     </table>
                 </div>
