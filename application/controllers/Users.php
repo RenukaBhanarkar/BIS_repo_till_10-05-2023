@@ -1256,88 +1256,7 @@ class Users extends CI_Controller
         }
     }
 
-    public function about_quiz($id)
-    {
-
-        $data = array();
-        $quiz = $this->Users_model->viewQuiz($id);
-        
-        $data['quizdata'] = $quiz;
-
-        $prizeDetails = $this->Users_model->prizeDetails($id);
-        
-        $data['prizeDetails'] = $prizeDetails;
-        // echo json_encode($prizeDetails);exit();
-        $this->load->view('users/headers/header');
-        $this->load->view('users/about_quiz', $data);
-        $this->load->view('users/footers/footer');
-    }
-    public function quiz_start($quiz_id)
-    {
-        $UserId = $this->session->userdata('admin_id');
-        $user_id = encryptids("D", $UserId);
-        $data = array();
-        $userQuiz = array();
-        ///////////////////// check available quiz ////////////////
-       
-           
-            if (isset($_SESSION['admin_type']) && !empty($_SESSION['admin_type'])) {
-    
-                $sess_admin_type = encryptids("D", $this->session->userdata('admin_type'));
-                $sess_is_admin = encryptids("D", $this->session->userdata('is_admin'));
-                if ($sess_is_admin == 0) {
-                    //if Already login
-                   
-                    if ($this->Users_model->checkAdminLogin()) {
-                       
-                        if ($sess_admin_type == 2) {                    
-                             
-                            $userQuiz = $this->Users_model->isQuizForThisUser($user_id,$quiz_id);
-                            if(!empty($userQuiz)){
-                                $checkUserAvailable = $this->Users_model->checkUserAvailable($quiz_id, $user_id);
-                                if ($checkUserAvailable > 0) {
-                                    $this->session->set_flashdata('MSG', ShowAlert("You have already appeared for this Quiz.", "SS"));
-                                    redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-                                } else {
-                                   
-                                    $que_details = $this->Users_model->viewQuestion($quiz_id);
-                                    $data['que_details'] = $que_details;
-                                    $quiz = $this->Users_model->viewQuiz($quiz_id);
-                                    $data['quizdata'] = $quiz;
-                                    $data['user_id'] = $user_id;
-                                    $this->load->view('users/quiz_start', $data);
-                                }
-
-                            }else{
-                                $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
-                                redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-
-                            }
-                        }   else{
-                            $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
-                            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-
-                        }                  
-                        
-                    } else {
-                        redirect(base_url() . "Users/login", 'refresh');
-                    }
-                }else{
-                    $this->session->set_flashdata('MSG', ShowAlert("You can not appear for quiz as you are not authenticated.", "SS"));
-                    redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-                }
-        }else{
-            $this->session->set_flashdata('MSG', ShowAlert("Please Login.", "SS"));
-            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-        }
-
-
-
-
-        ///////////////////////////////////
-      
-       
-    }
+  
     // public function quiz_submit()
     // {
 
@@ -1422,92 +1341,7 @@ class Users extends CI_Controller
     // }
 
 
-    public function quiz_submit()
-    {
-
-        $que_id = $this->input->post("que_id");
-        $corr_opts = $this->input->post("corr_opt");
-        $selected_lang = $_SESSION["quiz_lang_id"];
-        //$mark_for_review = $this->input->post("mark_for_review");
-
-       // echo json_encode($mark_for_review);exit();
-        
-        $user_id = $this->input->post("user_id");
-      // echo  $user_id ;
-        $quiz_id = $this->input->post("quiz_id");
-        $start_time = $this->input->post("start_time");
-       // $review = $this->input->post("review");
-        $end_time = $this->input->post("end_time");
-        $number = count($que_id);
-        if ($number > 0) {
-            $successCount = 0;
-            $j = 1;
-            for ($i = 0; $i < $number; $i++) {
-                if (trim($que_id[$i] != '')) {
-                    $ques_id =  $que_id[$i];
-                    $corr_opt =  $corr_opts[$i];
-                    // if(!empty($review)){
-                    //     $setForReview = in_array($ques_id, $review);
-                    // }else{
-                    //     $setForReview = 0;
-                    // }
-                    
-                    if ($_POST['option' . $ques_id . $j] != "") {
-                        $selected_op = $_POST['option' . $ques_id . $j];
-                    } else {
-                        $selected_op = 0;
-                    }
-
-                    $formdata = array();
-                    $formdata['user_id'] = $user_id;
-                    $formdata['quiz_id'] = $quiz_id;
-                    $formdata['ques_id'] = $ques_id;
-                    $formdata['selected_op'] = $selected_op;
-                    $formdata['corr_opt'] = $corr_opt;
-                    //$formdata['mark_review'] = $setForReview;
-                   // print_r($formdata);exit();
-                    $this->Users_model->insertQuestion($formdata);
-                    $successCount++;
-                    if ($successCount == $number) {
-                        $wrong_ques = $this->Users_model->getWrongAns($quiz_id, $user_id);
-                        $correct_ques = $this->Users_model->getCorrectAns($quiz_id, $user_id);
-                        $not_ans_ques = $this->Users_model->getNotSelected($quiz_id, $user_id);
-                        $quiz = $this->Users_model->getTotalmarkAndQuestion($quiz_id);
-
-                        $formdata2 = array();
-                        $formdata2['user_id'] = $user_id;
-                        $formdata2['quiz_id'] = $quiz_id;
-                        $total_question = $quiz['total_question'];
-                        $total_mark = $quiz['total_mark'];
-
-                        $formdata2['total_question'] = $total_question;
-                        $formdata2['total_mark'] = $total_mark;
-                        $formdata2['start_time'] = $start_time;
-                        $formdata2['end_time'] = date('h:i:s');
-                        $formdata2['correct_ques'] = $correct_ques;
-                        $formdata2['wrong_ques'] = $wrong_ques;
-                        $formdata2['not_ans_ques'] = $not_ans_ques;
-                        $formdata2['selected_lang'] = $selected_lang;
-
-                        $ans = $total_mark / $total_question;
-                        
-                        $score = $ans * $correct_ques;
-                        
-                        $formdata2['score'] = $score;                    
-                        
-                        if ($this->Users_model->insertQuziSubmission($formdata2)) {
-                            $this->session->set_flashdata('MSG', ShowAlert("Submission Successfully", "SS"));
-                           redirect(base_url() . "users/quiz_submission", 'refresh');
-                        } else {
-                            $this->session->set_flashdata('MSG', ShowAlert("Quiz not submitted please contact admin OR try again.", "SS"));
-                            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-                        }
-                    }
-                }
-                $j++;
-            }
-        }
-    }
+   
     public function quiz_submission()
     {
         $this->load->view('users/headers/header');
@@ -2005,4 +1839,309 @@ class Users extends CI_Controller
             'data' => $data,    
         ]); 
     }
+
+
+
+    //////////////////// FRONT END QUIZ START ////////////////////
+    public function about_quiz($id)
+    {
+
+        $data = array();
+        $quiz = $this->Users_model->viewQuiz($id);
+        
+        $data['quizdata'] = $quiz;
+
+        $prizeDetails = $this->Users_model->prizeDetails($id);
+        
+        $data['prizeDetails'] = $prizeDetails;
+        // echo json_encode($prizeDetails);exit();
+        $this->load->view('users/headers/header');
+        $this->load->view('users/about_quiz', $data);
+        $this->load->view('users/footers/footer');
+    }
+    public function quiz_start($quiz_id)
+    {
+        $UserId = $this->session->userdata('admin_id');
+        $user_id = encryptids("D", $UserId);
+        $data = array();
+        $userQuiz = array();
+        ///////////////////// check available quiz ////////////////
+       
+           
+            if (isset($_SESSION['admin_type']) && !empty($_SESSION['admin_type'])) {
+    
+                $sess_admin_type = encryptids("D", $this->session->userdata('admin_type'));
+                $sess_is_admin = encryptids("D", $this->session->userdata('is_admin'));
+                 //if Already login
+                if ($sess_is_admin == 0) {                  
+                   
+                    if ($this->Users_model->checkAdminLogin()) {
+                       
+                        if ($sess_admin_type == 2) {                    
+                             
+                            $userQuiz = $this->Users_model->isQuizForThisUser($user_id,$quiz_id);
+                            if(!empty($userQuiz)){
+                                $checkUserAvailable = $this->Users_model->checkUserAvailable($quiz_id, $user_id);
+                                if ($checkUserAvailable > 0) {
+                                    $this->session->set_flashdata('MSG', ShowAlert("You have already appeared for this Quiz.", "SS"));
+                                    redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+                                } else {
+                                    
+                                    // this user can appear for this quiz 
+                                    // now check for replica que_bank_id 
+                                    //start 
+                                    $CheckUserCanAppear = $this->Users_model->checkUserQuizForReplicaQueBank($quiz_id, $user_id);
+                                    if($CheckUserCanAppear == 1 ){
+                                        // can appear
+
+                                        // to check has partially appeared 
+                                        $PartiallyAppeared = $this->Users_model->CheckUserPartiallyAppear($quiz_id, $user_id);
+                                        //echo json_encode( $PartiallyAppeared );exit();
+                                        if( !empty($PartiallyAppeared)){
+                                            if(count($PartiallyAppeared)> 0){
+                                            // already partially done quiz
+                                            // get que list of ques bank
+                                            $quiz = $this->Users_model->viewQuiz($quiz_id);
+                                            $data['quizdata'] = $quiz;
+                                            $data['user_id'] = $user_id;
+                                            $data['msg'] =  "Partial Time";
+                                            $user_duration = $PartiallyAppeared['user_quiz_duration'];
+                                            
+                                            $duration_sec = $quiz['duration'] * 60 -  $user_duration  ;
+                                            $minutes =    $duration_sec / 60;
+                                            $seconds =  $duration_sec % 60;
+                                            $data['minutes'] =  $minutes;
+                                            $data['seconds'] =  $seconds;
+                                            if( $duration_sec != 0){
+                                                 $question_list = explode(',',$PartiallyAppeared['question_list_id']);
+                                                // $que_details = $this->Users_model->oldgetQuestionDetailsForPartiallyAppered($question_list);
+                                                $que_details = $this->Users_model->getQuestionDetailsForPartiallyAppered($user_id,$quiz_id,$question_list);
+                                                $data['que_details'] = $que_details;
+                                                $this->load->view('users/quiz_start', $data);
+                                            }else{
+                                                $this->session->set_flashdata('MSG', ShowAlert("You have already appeared for this quiz.Please try another quiz.", "SS"));
+                                                redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+                                            }
+                                           
+                                             }
+                                        }else{
+                                            // first time
+                                            $que_details = $this->Users_model->viewQuestion($quiz_id);
+                                            $data['que_details'] = $que_details;
+                                            $quiz = $this->Users_model->viewQuiz($quiz_id);
+                                            $data['quizdata'] = $quiz;
+                                            $data['user_id'] = $user_id;
+                                           // $data['duration'] =  $quiz['duration'];
+                                           $data['minutes'] =  $quiz['duration'];
+                                           $data['seconds'] =  '01';
+                                            $data['msg'] =  "First Time";
+                                            // new code to save ques for future reference
+                                           
+                                            $que_id_array = array();
+                                            foreach ($que_details as $row){
+                                                array_push($que_id_array, $row['que_id']);
+                                            }
+                                            $quistions_list_id = implode(",",$que_id_array);
+                                            $quiz_details_new = $this->Users_model->quizDetailsByQuizId($quiz_id);
+                                            $dataObj = array(
+                                                'user_id'=> $user_id,
+                                                'quiz_id'=> $quiz_id,
+                                                'question_list_id'=> $quistions_list_id,
+                                                'que_bank_id'=> $quiz_details_new['que_bank_id'],
+                                                'quiz_duration'=> $quiz_details_new['duration'],
+                                            );
+                                            $result= $this->Users_model->insertQuizData($dataObj);
+                                            // end     
+                                           
+                                            $this->load->view('users/quiz_start', $data);
+                                        }
+                                      
+                                    }else{
+                                        // can not 
+                                        $this->session->set_flashdata('MSG', ShowAlert("You have already appeared similar type of quiz which consist of similar questions .", "SS"));
+                                        redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+                                    }
+
+
+
+                                    /// end
+
+                                   
+                                   
+                                }
+
+                            }else{
+                                $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
+                                redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+
+                            }
+                        }   else{
+                            $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
+                            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+
+                        }                  
+                        
+                    } else {
+                        redirect(base_url() . "Users/login", 'refresh');
+                    }
+                }else{
+                    $this->session->set_flashdata('MSG', ShowAlert("You can not appear for quiz as you are not authenticated.", "SS"));
+                    redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+                }
+        }else{
+            $this->session->set_flashdata('MSG', ShowAlert("Please Login.", "SS"));
+            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+        }
+
+
+
+
+        ///////////////////////////////////
+      
+       
+    }
+    public function quiz_submit()
+    {
+
+        $que_id = $this->input->post("que_id");
+        $corr_opts = $this->input->post("corr_opt");
+        $selected_lang = $_SESSION["quiz_lang_id"];
+        //$mark_for_review = $this->input->post("mark_for_review");
+
+       // echo json_encode($mark_for_review);exit();
+        
+        $user_id = $this->input->post("user_id");
+      // echo  $user_id ;
+        $quiz_id = $this->input->post("quiz_id");
+        $start_time = $this->input->post("start_time");
+       // $review = $this->input->post("review");
+        $end_time = $this->input->post("end_time");
+        $number = count($que_id);
+        if ($number > 0) {
+            $successCount = 0;
+            $j = 1;
+            for ($i = 0; $i < $number; $i++) {
+                if (trim($que_id[$i] != '')) {
+                    $ques_id =  $que_id[$i];
+                    $corr_opt =  $corr_opts[$i];
+                    // if(!empty($review)){
+                    //     $setForReview = in_array($ques_id, $review);
+                    // }else{
+                    //     $setForReview = 0;
+                    // }
+                    
+                    if ($_POST['option' . $ques_id . $j] != "") {
+                        $selected_op = $_POST['option' . $ques_id . $j];
+                    } else {
+                        $selected_op = 0;
+                    }
+
+                    $formdata = array();
+                    $formdata['user_id'] = $user_id;
+                    $formdata['quiz_id'] = $quiz_id;
+                    $formdata['ques_id'] = $ques_id;
+                    $formdata['selected_op'] = $selected_op;
+                    $formdata['corr_opt'] = $corr_opt;
+                    //$formdata['mark_review'] = $setForReview;
+                   // print_r($formdata);exit();
+                    $this->Users_model->insertQuestion($formdata);
+                    $successCount++;
+                    if ($successCount == $number) {
+                        $wrong_ques = $this->Users_model->getWrongAns($quiz_id, $user_id);
+                        $correct_ques = $this->Users_model->getCorrectAns($quiz_id, $user_id);
+                        $not_ans_ques = $this->Users_model->getNotSelected($quiz_id, $user_id);
+                        $quiz = $this->Users_model->getTotalmarkAndQuestion($quiz_id);
+
+                        $formdata2 = array();
+                        $formdata2['user_id'] = $user_id;
+                        $formdata2['quiz_id'] = $quiz_id;
+                        $total_question = $quiz['total_question'];
+                        $total_mark = $quiz['total_mark'];
+
+                        $formdata2['total_question'] = $total_question;
+                        $formdata2['total_mark'] = $total_mark;
+                        $formdata2['start_time'] = $start_time;
+                        $formdata2['end_time'] = date('h:i:s');
+                        $formdata2['correct_ques'] = $correct_ques;
+                        $formdata2['wrong_ques'] = $wrong_ques;
+                        $formdata2['not_ans_ques'] = $not_ans_ques;
+                        $formdata2['selected_lang'] = $selected_lang;
+
+                        $ans = $total_mark / $total_question;
+                        
+                        $score = $ans * $correct_ques;
+                        
+                        $formdata2['score'] = $score;                    
+                        
+                        if ($this->Users_model->insertQuziSubmission($formdata2)) {
+                            $this->session->set_flashdata('MSG', ShowAlert("Submission Successfully", "SS"));
+                           redirect(base_url() . "users/quiz_submission", 'refresh');
+                        } else {
+                            $this->session->set_flashdata('MSG', ShowAlert("Quiz not submitted please contact admin OR try again.", "SS"));
+                            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+                        }
+                    }
+                }
+                $j++;
+            }
+        }
+    }
+    //ajax call
+    public function updateUserTime()
+    {
+        $data = array();
+        $user_id = clearText($this->input->post('user_id'));
+        $quiz_id = clearText($this->input->post('quiz_id'));
+        $getusertime = $this->Users_model->getUserTimeOfAppearedQuiz($user_id,$quiz_id);  
+       // echo json_encode($getusertime);exit();
+        $user_quiz_duration =  $getusertime['user_quiz_duration'] + 5;
+
+      
+            $dbObj = array(
+                'user_quiz_duration' => $user_quiz_duration             
+            );
+            $id = $this->Users_model->updateUserTimeOfAppearedQuiz($user_id,$quiz_id, $dbObj);
+        
+        if ($id) {
+            $data['status'] = 1;
+            $data['message'] = 'Time updated successfully';
+            $data['id'] = $id;
+        } else {
+            $data['status'] = 0;
+            $data['message'] = 'Error, Please try again';
+        }
+        echo  json_encode($data);
+        exit();
+    }
+
+    //ajax call
+    public function saveAttemptedQuesDetailsOfUser()
+    {
+        $data = array();
+        $user_id = clearText($this->input->post('user_id'));
+        $quiz_id = clearText($this->input->post('quiz_id'));
+        $ques_id = clearText($this->input->post('ques_id'));
+        $selected_op = clearText($this->input->post('selected_op'));
+            $dbObj = array(
+                'user_id' => $user_id,
+                'quiz_id' => $quiz_id,
+                'ques_id' => $ques_id,             
+                'selected_op' => $selected_op,
+                'created_on' => GetCurrentDateTime('Y-m-d h:i:s')
+            );
+            $id = $this->Users_model->insertAttemptedQuesDetailsOfUser($dbObj);
+        
+        if ($id) {
+            $data['status'] = 1;
+            $data['message'] = 'Data inserted successfully';
+            $data['id'] = $id;
+        } else {
+            $data['status'] = 0;
+            $data['message'] = 'Error, Please try again';
+        }
+        echo  json_encode($data);
+        exit();
+    }
+    //////////////////// FRONT END QUIZ START ////////////////////
+    
 }

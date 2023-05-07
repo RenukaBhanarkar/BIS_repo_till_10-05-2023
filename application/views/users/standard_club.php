@@ -148,7 +148,116 @@
 
   </div>
 </section>
-<!-- <section id="cta" class="cta">
+<div class="" style="background-image: url(<?php echo base_url();?>assets/images/competition_bg.png);">
+<section style="background: #ffffffba;">
+  <div class="container-fluid pt-4 pb-5" id="start-quiz" style="padding: 66px;">
+    <div class="row text-center">
+      <h3 style="font-weight: 700; color: brown;">Creative Task</h3>
+      <p>Miscellaneous For You</p>
+    </div>
+   <div class="row">
+        
+          <div class="col-md-3">
+            <div class="quiz-section">
+              <div class="quiz-box">
+                <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="w-100 border-2">
+              </div>
+              <div class="Quiz-button">
+                  <a href="<?php echo base_url(); ?>users/about_competition" class="btn startQuiz"> <span>Start Competition</span></a>
+              </div>
+              <p class="quiz-text overflow-hidden p-1" style="font-weight: 600;">Competition Title</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="quiz-section">
+              <div class="quiz-box">
+                <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="w-100 border-2">
+              </div>
+              <div class="Quiz-button">
+                  <a href="<?php echo base_url(); ?>users/about_competition" class="btn startQuiz"> <span>Start Competition</span></a>
+              </div>
+              <p class="quiz-text overflow-hidden p-1" style="font-weight: 600;">Competition Title</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="quiz-section">
+              <div class="quiz-box">
+                <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="w-100 border-2">
+              </div>
+              <div class="Quiz-button">
+                  <a href="#" class="btn startQuiz"> <span>Start Competition</span></a>
+              </div>
+              <p class="quiz-text overflow-hidden p-1" style="font-weight: 600;">Competition Title</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="quiz-section">
+              <div class="quiz-box">
+                <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="w-100 border-2">
+              </div>
+              <div class="Quiz-button">
+                  <a href="#" class="btn startQuiz"> <span>Start Competition</span></a>
+              </div>
+              <p class="quiz-text overflow-hidden p-1" style="font-weight: 600;">Competition Title</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="quiz-section">
+              <div class="quiz-box">
+                <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="w-100 border-2">
+              </div>
+              <div class="Quiz-button">
+                  <a href="#" class="btn startQuiz"> <span>Start Competition</span></a>
+              </div>
+              <p class="quiz-text overflow-hidden p-1" style="font-weight: 600;">Competition Title</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="quiz-section">
+              <div class="quiz-box">
+                <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="w-100 border-2">
+              </div>
+              <div class="Quiz-button">
+                  <a href="#" class="btn startQuiz"> <span>Start Competition</span></a>
+              </div>
+              <p class="quiz-text overflow-hidden p-1" style="font-weight: 600;">Competition Title</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="quiz-section">
+              <div class="quiz-box">
+                <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="w-100 border-2">
+              </div>
+              <div class="Quiz-button">
+                  <a href="#" class="btn startQuiz"> <span>Start Competition</span></a>
+              </div>
+              <p class="quiz-text overflow-hidden p-1" style="font-weight: 600;">Competition Title</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="quiz-section">
+              <div class="quiz-box">
+                <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="w-100 border-2">
+              </div>
+              <div class="Quiz-button">
+                  <a href="#" class="btn startQuiz"> <span>Start Competition</span></a>
+              </div>
+              <p class="quiz-text overflow-hidden p-1" style="font-weight: 600;">Competition Title</p>
+            </div>
+          </div>
+          
+       
+      </div>
+      <div class="view-button">
+        <a href="#">View All</a>
+      </div>
+
+   
+
+  </div>
+</section>
+</div>
+<section id="cta" class="cta">
   
   <div class="container aos-init aos-animate" data-aos="zoom-out" style="background: #FFF9E9; padding: 0px !important" >
   <div style="background-image: url(<?php echo base_url();?>assets/images/whats-new-bg.png); padding: 80px">
@@ -177,17 +286,17 @@
       </div>
 
     </div>
-    <!-- <div class="img">
+     <!-- <div class="img">
           <img src="<?= base_url(); ?>assets/images/standard.avif" alt="" class="img-standard">
         </div> -->
-  <!-- </div>
+  </div>
 
 </div>
 
 </div>
   </div>
   
-</section> --> 
+</section> 
 
 <section style="background-color: #e3effb94;">
   <div class="container">

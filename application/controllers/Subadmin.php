@@ -710,6 +710,7 @@ class Subadmin extends CI_Controller
         $data = array();
         $admin_id = encryptids("D", $this->session->userdata('admin_id'));
         $qui_bank_id =   encryptids("D", $this->input->get('id'));
+        $original_que_bank_id = $qui_bank_id;
         $queBank= $this->Que_bank_model->replicateByQueBankId($qui_bank_id);
       //  echo json_encode($queBank).'<br>';
         if (!empty($queBank)) {
@@ -720,7 +721,8 @@ class Subadmin extends CI_Controller
                 //'total_marks' =>  $queBank['total_marks'],
                 'created_by' => $admin_id,
                 'is_active' => 1,
-                'status' => 0
+                'status' => 0,
+                'replica_of_qb_id' => $original_que_bank_id
                 //'created_on' => GetCurrentDateTime('Y-m-d h:i:s')
             );
            // echo json_encode($dbObj).'<br>';

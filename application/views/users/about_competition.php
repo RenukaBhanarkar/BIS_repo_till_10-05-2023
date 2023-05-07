@@ -164,7 +164,7 @@
     }
 
     .join_img {
-    object-fit: cover;
+    /* object-fit: cover; */
     height: 100%;
     width: 100%;
     border-radius: 5px;
@@ -226,84 +226,52 @@
 </style>
 <div class="container">
     <section id="banner-section">
-        <?php if ( $quizdata['language_id'] == 3){?>
-            <div class="float-end" id="QuizLang">
+       <div class="float-end" id="QuizLang">
             <label class="d-block text-font mr-3">Select Language</label>
             <select class="form-control input-font" id="selectedLang" id="selectedLang" placeholder="Language">                
                 <option value="1">English</option>
                 <option value="2">Hindi</option>
             </select>
         </div>
-        <?php } ?>
+        
         
         <div class="row">
             <div class="col-sm-5">
                 <div class="quiz-image shadow">
-                    <img src="../../<?= $quizdata['banner_img']; ?>" class="image-section" alt="Bis Quiz Images" />
+                    <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="image-section" alt="Bis Quiz Images" />
                 </div>
             </div>
             <div class="col-sm-7">
                 <div class="Quiz_text">
-                    <h3 class="main-title"><?= $quizdata['title']; ?></h3>
+                    <h3 class="main-title">Miscellaneous Competition</h3>
                     <p class="time-and-qus" style="color:white;">
-                        <span class="number-quiz"><span class="question_no"><?= $quizdata['total_question']; ?></span><span class="quiz-text">Questions</span>
+                        <span class="number-quiz"><span class="question_no">10</span><span class="quiz-text">Questions</span>
                         </span>
-                        <span class="number-quiz"><span class="question_no"><?= $quizdata['duration']; ?></span><span class="quiz-text">Minutes</span>
+                        <span class="number-quiz"><span class="question_no">50</span><span class="quiz-text">Minutes</span>
                         </span>
                     </p>
                     <div class="d-flex">
                         <p class="time-start-end d-flex" style="margin-bottom:0px;">
-                            <span class="start-end-time-title mr-2">Start Date<span class="quiz-text-date m-2"><?= date("d-m-Y", strtotime($quizdata['start_date'])); ?><span style="margin-left: 12px;"><?= $quizdata['start_time'];?></span></span>
+                            <span class="start-end-time-title mr-2">Start Date<span class="quiz-text-date m-2">12/03/2023<span style="margin-left: 12px;">12:00:00</span></span>
                             </span>
                         </p>
                         <p class="time-start-end d-flex" style="margin-bottom:0px; margin-left: 8px;">
-                            <span class="start-end-time-title">Marks<span class="quiz-text-date m-2"><?= $quizdata['total_mark'];?></span>
+                            <span class="start-end-time-title">Marks<span class="quiz-text-date m-2">50</span>
                             </span>
                         </p>
                     </div>
                     <div class="d-flex">
                         <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px;">
-                            <span class="start-end-time-title">End Date <span class="quiz-text-date m-2"><?= date("d-m-Y", strtotime($quizdata['end_date'])); ?><span style="margin-left: 12px;"><?= $quizdata['end_time'];?></span></span>
+                            <span class="start-end-time-title">End Date <span class="quiz-text-date m-2">12/03/2023<span style="margin-left: 12px;">12:00:00</span>
                             </span>
                         </p>
-                        <?php if($quizdata['region'] !="") { ?> 
-                        <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
-                            <span class="start-end-time-title">Region 
-                                <span class="quiz-text-date m-2"><?= $quizdata['region'];?></span>
+                       <!--  <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
+                            <span class="start-end-time-title">Branch<span class="quiz-text-date m-2">12</span>
                             </span>
-                            
-                        </p>
-                        <?php }?>
-                        <?php if($quizdata['branch'] !="") { ?> 
-                        <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
-                            <span class="start-end-time-title">Branch 
-                                <span class="quiz-text-date m-2"><?= $quizdata['region'];?></span>
-                            </span>
-                            
-                        </p>
-                        <?php }?>
+                        </p> -->
                     </div>
-                    <?php
-
-                    $user_type = encryptids("D", $this->session->userdata('admin_type'));
-                    
-                    if ($user_type != "") { 
-                         if($quizdata['language_id'] != 3){ ?>
-                             <a href="<?= base_url(); ?>users/quiz_start/<?= $quizdata['id']; ?>" class="btn startQuiz"> <span>Start Quiz</span></a>
-                        <?php  }else{ ?>
-                        
-                            <a href="#" class="btn startQuiz" id="startQuizLang"> <span>Start Quiz</span></a>
-                        <?php  } ?>
-                       
-
-                    <?php  } else { ?>
-                        <a href="<?= base_url(); ?>users/login" class="btn startQuiz"> <span>Login to Start Quiz</span></a>
-                    <?php } ?>
-                    <?php
-                    if ($this->session->flashdata('MSG')) {
-                        echo $this->session->flashdata('MSG');
-                    }
-                    ?>
+                      <a href="<?= base_url(); ?>users/login" class="btn startQuiz"> <span>Login to Participate</span></a>
+                   
                 </div>
             </div>
         </div>
@@ -311,17 +279,20 @@
     </section>
     <section id="quiz-about" class="mb-5">
         <div class="about-inner ">
-            <h2 class="about-section">About Quiz</h2>
+            <h2 class="about-section">About Competition</h2>
             <div class="About_point">
-                <?= $quizdata['description']; ?>
+            AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org
             </div>
+            <!-- <div class="col-md-12">
+                <h1>title of Competition
+            </div> -->
         </div>
     </section>
     <section id="quiz-about" class="mb-5">
         <div class="about-inner">
             <h2 class="about-section">Team's and Conditions</h2>
             <div class="About_point ">
-                <?= $quizdata['terms_conditions']; ?>
+            AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org
 
             </div>
     </section>
@@ -334,109 +305,63 @@
         </div>
         
         <div class="join_container">
-            <?php foreach($prizeDetails as $row) { ?> 
-            <?php if ($row['prize_id'] == 1) { ?> 
             <div class="view_join_content">
                 <h3>First Prize</h3>
 
                 <div class="start_content">
-                    <img src="<?php echo base_url(); ?><?php echo $row['prize_img'];?>" alt="" class="join_img">
+                    <img src="<?php echo base_url(); ?>/assets/images/prize_2.avif" alt="" class="join_img">
                 </div>
 
                 <div class="#">
                     <div class="title_join">
-                        <h3><?php echo $row['prize_details'];?></h3>
-                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;"><?php echo $row['no_of_prize'];?></span></span> 
+                        <h3>Laptop</h3>
+                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;">1</span></span> 
                     </div>
                 </div>
             </div>
-            <?php } ?>
-            <?php if ($row['prize_id'] == 2) { ?> 
             <div class="view_join_content">
                 <h3>Second Prize</h3>
 
                 <div class="start_content">
-                    <?php if ($row['prize_img'] == ""){ ?> 
-                    <img src="<?php echo base_url(); ?>assets/images/prize_2.avif" alt="" class="join_img">
-                    <?php } else { ?>
-                        <img src="<?php echo base_url(); ?><?php echo $row['prize_img'];?>" alt="" class="join_img">
-                    <?php } ?>
+                    <img src="<?php echo base_url(); ?>/assets/images/prize_2.avif" alt="" class="join_img">
                 </div>
 
                 <div class="#">
                     <div class="title_join">
-                        <h3><?php echo $row['prize_details'];?></h3>
-                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;"><?php echo $row['no_of_prize'];?></span></span>
-                      
+                        <h3>Laptop</h3>
+                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;">1</span></span> 
                     </div>
-
                 </div>
             </div>
-            <?php } ?>
-            <?php if ($row['prize_id'] == 3) { ?> 
             <div class="view_join_content">
                 <h3>Third Prize</h3>
 
                 <div class="start_content">
-                <?php if ($row['prize_img'] == ""){ ?> 
-                    <img src="<?php echo base_url(); ?>assets/images/prize_2.avif" alt="" class="join_img">
-                    <?php } else { ?>
-                        <img src="<?php echo base_url(); ?><?php echo $row['prize_img'];?>" alt="" class="join_img">
-                    <?php } ?>
-
+                    <img src="<?php echo base_url(); ?>/assets/images/prize_2.avif" alt="" class="join_img">
                 </div>
 
                 <div class="#">
                     <div class="title_join">
-                        <h3><?php echo $row['prize_details'];?></h3>
-                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;"><?php echo $row['no_of_prize'];?></span></span>                    
-
+                        <h3>Laptop</h3>
+                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;">1</span></span> 
                     </div>
                 </div>
             </div>
-            <?php } ?>
-            <?php if ($row['prize_id'] == 4) { ?> 
             <div class="view_join_content">
                 <h3>Consolation Prize</h3>
 
                 <div class="start_content">
-                <?php if ($row['prize_img'] == ""){ ?> 
-                    <img src="<?php echo base_url(); ?>assets/images/prize_2.avif" alt="" class="join_img">
-                    <?php } else { ?>
-                        <img src="<?php echo base_url(); ?><?php echo $row['prize_img'];?>" alt="" class="join_img">
-                    <?php } ?>
-
+                    <img src="<?php echo base_url(); ?>/assets/images/prize_2.avif" alt="" class="join_img">
                 </div>
 
                 <div class="#">
                     <div class="title_join">
-                        <h3><?php echo $row['prize_details'];?></h3>
-                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;"><?php echo $row['no_of_prize'];?></span></span>                       
+                        <h3>Laptop</h3>
+                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;">1</span></span> 
                     </div>
                 </div>
             </div>
-            <?php } ?>
-            <?php } ?>
         </div>
     </div>
 </section>
 
-<script>
-     $('.Quiz_text').on('click', '#startQuizLang', function(e) {
-			e.preventDefault();
-            var lang = $('#selectedLang').val();
-            
-            $.post("<?php echo base_url();?>users/setSelectedLang/", {
-                lang: lang,
-				}, function(res) {
-					if (res.status == 0) {
-						$('.errorbox').show().text("Error,Please try again.");
-					} else {
-                        
-                       window.location.replace("<?= base_url(); ?>users/quiz_start/<?= $quizdata['id']; ?>");
-					}
-				});
-            
-        });
-
-</script>
