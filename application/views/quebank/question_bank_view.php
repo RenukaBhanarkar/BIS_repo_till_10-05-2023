@@ -200,8 +200,8 @@
                                                         $opt4_h = '<img width="100" src='.base_url().'uploads/que_img/bankid'. $r['que_bank_id']. '/' .$op4_h_img.'>';
                                                     }else{
                                                         
-                                                        if($r['opt4_e']!=""){
-                                                            $opt4_h = $r['opt4_e'];
+                                                        if($r['opt4_h']!=""){
+                                                            $opt4_h = $r['opt4_h'];
                                                         }else{
                                                             $opt4_h = "NA";
                                                         }

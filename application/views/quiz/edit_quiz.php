@@ -300,7 +300,10 @@
           <div class="row mt-2">
             <div class="mb-2 col-md-4">
               <label class="d-block text-font">Number of Prizes<sup class="text-danger">*</sup></label>
-              <input type="text" class="form-control input-font" name="fprize" id="fprizes" placeholder="Enter Prizes" value="<?php echo set_value('fprize', $firstprize['no_of_prize']); ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')">
+              <!-- <input type="text" class="form-control input-font" name="fprize" id="fprizes" placeholder="Enter Prizes" value="<?php echo set_value('fprize', $firstprize['no_of_prize']); ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')"> -->
+              <input type="text" class="form-control input-font" name="fprize" id="fprizes" placeholder="Enter Prizes" value="<?php  if(!empty( $firstprize['no_of_prize']))
+                                      { echo  $firstprize['no_of_prize'];}
+                                      else{ echo 0 ;} ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')">
               <span class="error_text"><?php echo form_error('fprizes'); ?></span>
             </div>
             <div class="mb-2 col-md-4">
@@ -403,7 +406,11 @@
           <div class="row mt-2">
             <div class="mb-2 col-md-4">
               <label class="d-block text-font">Number of Prizes</label>
-              <input type="text" class="form-control input-font" name="sprize" id="sprizes" placeholder="Total Number of Questions" value="<?php echo set_value('sprizes', $secondprize['no_of_prize']) ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')">
+              <!-- <input type="text" class="form-control input-font" name="sprize" id="sprizes" placeholder="Total Number of Questions" value="<?php echo set_value('sprizes', $secondprize['no_of_prize']) ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')"> -->
+              <input type="text" class="form-control input-font" name="sprize" id="sprizes" placeholder="Enter Prizes" value="<?php  if(!empty( $secondprize['no_of_prize']))
+                                      { echo  $secondprize['no_of_prize'];}
+                                      else{ echo 0 ;} ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')">
+
               <span class="error_text"><?php echo form_error('sprizes'); ?></span>
             </div>
             <div class="mb-2 col-md-4">
@@ -485,7 +492,10 @@
           <div class="row mt-2">
             <div class="mb-2 col-md-4">
               <label class="d-block text-font">Number of Prizes</label>
-              <input type="text" class="form-control input-font" name="tprize" id="tprize" placeholder="Total Number of Questions" value="<?php echo set_value('tprize', $thirdprize['no_of_prize']) ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')">
+              <!-- <input type="text" class="form-control input-font" name="tprize" id="tprize" placeholder="Total Number of Questions" value="<?php echo set_value('tprize', $thirdprize['no_of_prize']) ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')"> -->
+              <input type="text" class="form-control input-font" name="tprize" id="tprize" placeholder="Enter Prizes" value="<?php  if(!empty( $thirdprize['no_of_prize']))
+                                      { echo  $thirdprize['no_of_prize'];}
+                                      else{ echo 0 ;} ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')">
               <span class="error_text"><?php echo form_error('tprize'); ?></span>
             </div>
             <div class="mb-2 col-md-4">
@@ -628,7 +638,10 @@
           <div class="row mt-2">
             <div class="mb-2 col-md-4">
               <label class="d-block text-font">Number of Prizes</label>
-              <input type="text" class="form-control input-font" name="cprize" id="cprize" placeholder="Enter Number of prizes" value="<?php echo set_value('cprize', $fourthprize['no_of_prize']) ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')">
+              <!-- <input type="text" class="form-control input-font" name="cprize" id="cprize" placeholder="Enter Number of prizes" value="<?php echo set_value('cprize', $fourthprize['no_of_prize']) ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')"> -->
+              <input type="text" class="form-control input-font" name="cprize" id="cprize" placeholder="Enter Prizes" value="<?php  if(!empty( $fourthprize['no_of_prize']))
+                                      { echo  $fourthprize['no_of_prize'];}
+                                      else{ echo 0 ;} ?>" oninput="this.value = this.value.replace(/[^0-9/]/, '')">
               <span class="error_text"><?php echo form_error('cprize'); ?></span>
             </div>
             <div class="mb-2 col-md-4">
@@ -702,11 +715,6 @@
                 </div>
               </div>
             </div>
-
-
-
-
-
 
 
 
