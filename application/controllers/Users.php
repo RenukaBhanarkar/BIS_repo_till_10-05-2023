@@ -1272,6 +1272,12 @@ class Users extends CI_Controller
         $this->load->view('users/about_quiz', $data);
         $this->load->view('users/footers/footer');
     }
+    public function about_competition()
+    {
+        $this->load->view('users/headers/header');
+        $this->load->view('users/about_competition');
+        $this->load->view('users/footers/footer');
+    }
     public function quiz_start($quiz_id)
     {
         $UserId = $this->session->userdata('admin_id');
