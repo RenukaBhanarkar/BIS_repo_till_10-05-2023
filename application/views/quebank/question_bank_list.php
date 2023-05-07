@@ -140,34 +140,97 @@
     });
     });
         function deleteRecord(que_bank_id) {
-            var c = confirm("Are you sure to delete this record ?");
-            if (c == true) {
-                // const $loader = $('.igr-ajax-loader');
-                //$loader.show();
-                $.ajax({
-                    type: 'POST',
-                    url: '<?php echo base_url(); ?>subadmin/deleteQueBank',
-                    data: {
-                        que_bank_id: que_bank_id,
-                    },
-                    success: function(result) {
-                        $('#row' + que_bank_id).css({
-                            'display': 'none'
-                        });
-                    },
-                    error: function(result) {
-                        alert("Error,Please try again.");
-                    }
-                });
+            // var c = confirm("Are you sure to delete this record ?");
+            // if (c == true) {
+            //     // const $loader = $('.igr-ajax-loader');
+            //     //$loader.show();
+            //     $.ajax({
+            //         type: 'POST',
+            //         url: '<?php echo base_url(); ?>subadmin/deleteQueBank',
+            //         data: {
+            //             que_bank_id: que_bank_id,
+            //         },
+            //         success: function(result) {
+            //             $('#row' + que_bank_id).css({
+            //                 'display': 'none'
+            //             });
+            //         },
+            //         error: function(result) {
+            //             alert("Error,Please try again.");
+            //         }
+            //     });
 
-            }
+            // }
+            Swal.fire({
+                    title: 'Do you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>subadmin/deleteQueBank',
+                                data: {
+                                    que_bank_id: que_bank_id,
+                                },
+                                success: function(result) {
+                                    $('#row' + que_bank_id).css({
+                                        'display': 'none'
+                                    });
+                                    Swal.fire('Questionbank deleted Successfully');
+                                },
+                                error: function(result) {
+                                    Swal.fire("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
         }
         $(document).ready(function() {
             $('#listView').on('click', '#sendForApproval', function(e) {
                 e.preventDefault();
                 const $root = $(this);
                 var id = $root.data('id');
-                jQuery.ajax({
+                // jQuery.ajax({
+                //     type: "POST",
+                //     url: '<?php echo base_url(); ?>subadmin/changeStatus',
+                //     dataType: 'json',
+                //     data: {
+                //         "id": id,
+                //         "status": 2
+                //     },
+                //     success: function(res) {
+                //         if (res.status == 0) {
+                //             alert(res.message);
+
+                //         } else {
+                //             alert(res.message);
+                //             window.location.replace("<?php echo base_url(); ?>subadmin/questionBankList");
+                //         }
+                //     },
+                //     error: function(xhr, status, error) {
+                //         //toastr.error('Failed to add '+xData.name+' in wishlist.');
+                //         console.log(error);
+                //     }
+                // });
+
+                // ------- sweet alert start ----
+                Swal.fire({
+                    title: 'Are you sure you want to Send for Approval?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Send for Approval',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        jQuery.ajax({
                     type: "POST",
                     url: '<?php echo base_url(); ?>subadmin/changeStatus',
                     dataType: 'json',
@@ -177,10 +240,10 @@
                     },
                     success: function(res) {
                         if (res.status == 0) {
-                            alert(res.message);
+                            Swal.fire(res.message);
 
                         } else {
-                            alert(res.message);
+                            Swal.fire(res.message);
                             window.location.replace("<?php echo base_url(); ?>subadmin/questionBankList");
                         }
                     },
@@ -189,35 +252,78 @@
                         console.log(error);
                     }
                 });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+                  // ------- sweet alert End ----
 
             });
             $('#listView').on('click', '#archiveQueBank', function(e) {
                 e.preventDefault();
                 const $root = $(this);
                 var id = $root.data('id');
-                jQuery.ajax({
-                    type: "POST",
-                    url: '<?php echo base_url(); ?>subadmin/changeStatus',
-                    dataType: 'json',
-                    data: {
-                        "id": id,
-                        "status": 9
-                    },
-                    success: function(res) {
-                        if (res.status == 0) {
-                            alert(res.message);
+                // jQuery.ajax({
+                //     type: "POST",
+                //     url: '<?php echo base_url(); ?>subadmin/changeStatus',
+                //     dataType: 'json',
+                //     data: {
+                //         "id": id,
+                //         "status": 9
+                //     },
+                //     success: function(res) {
+                //         if (res.status == 0) {
+                //             alert(res.message);
 
-                        } else {
-                            alert(res.message);
-                            window.location.replace("<?php echo base_url(); ?>subadmin/questionBankList");
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        //toastr.error('Failed to add '+xData.name+' in wishlist.');
-                        console.log(error);
+                //         } else {
+                //             alert(res.message);
+                //             window.location.replace("<?php echo base_url(); ?>subadmin/questionBankList");
+                //         }
+                //     },
+                //     error: function(xhr, status, error) {
+                //         //toastr.error('Failed to add '+xData.name+' in wishlist.');
+                //         console.log(error);
+                //     }
+                // });
+// -----sweet alert start ----
+                Swal.fire({
+                    title: 'Are you sure you want to Archive?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Archive',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        jQuery.ajax({
+                                    type: "POST",
+                                    url: '<?php echo base_url(); ?>subadmin/changeStatus',
+                                    dataType: 'json',
+                                    data: {
+                                        "id": id,
+                                        "status": 9
+                                    },
+                                    success: function(res) {
+                                        if (res.status == 0) {
+                                            Swal.fire(res.message);
+
+                                        } else {
+                                            Swal.fire(res.message);                                           
+                                            window.location.replace("<?php echo base_url(); ?>subadmin/questionBankList");
+                                        }
+                                    },
+                                    error: function(xhr, status, error) {
+                                        //toastr.error('Failed to add '+xData.name+' in wishlist.');
+                                        console.log(error);
+                                    }
+                                    });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
                     }
-                });
-
+                    })
+// -----sweet alert End ----
             });
         });
     </script>

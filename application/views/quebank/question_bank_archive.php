@@ -116,20 +116,53 @@
                 e.preventDefault();
                 const $root = $(this);
                 var id = $root.data('id');
-                jQuery.ajax({
-                    type: "POST",
-                    url: '<?php echo base_url(); ?>subadmin/changeStatus',
-                    dataType: 'json',
-                    data: {
-                        "id": id,
-                        "status": 1
+                // jQuery.ajax({
+                //     type: "POST",
+                //     url: '<?php echo base_url(); ?>subadmin/changeStatus',
+                //     dataType: 'json',
+                //     data: {
+                //         "id": id,
+                //         "status": 1
+                //     },
+                //     success: function(res) {
+                //         if (res.status == 0) {
+                //             alert(res.message);
+
+                //         } else {
+                //             alert(res.message);
+                //             window.location.replace("<?php echo base_url(); ?>subadmin/questionBankList");
+                //         }
+                //     },
+                //     error: function(xhr, status, error) {
+                //         //toastr.error('Failed to add '+xData.name+' in wishlist.');
+                //         console.log(error);
+                //     }
+                // });
+
+                // -- sweet alert start
+                Swal.fire({
+                    title: 'Are you sure you want to Restore?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Restore',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                                        jQuery.ajax({
+                                        type: "POST",
+                                        url: '<?php echo base_url(); ?>subadmin/changeStatus',
+                                        dataType: 'json',
+                                        data: {
+                                        "id": id,
+                                        "status": 1
                     },
                     success: function(res) {
                         if (res.status == 0) {
-                            alert(res.message);
+                            Swal.fire(res.message);
 
                         } else {
-                            alert(res.message);
+                            Swal.fire(res.message);
                             window.location.replace("<?php echo base_url(); ?>subadmin/questionBankList");
                         }
                     },
@@ -138,6 +171,12 @@
                         console.log(error);
                     }
                 });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+                // -- sweet alert end
 
             });
         });

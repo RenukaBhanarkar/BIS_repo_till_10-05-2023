@@ -397,7 +397,42 @@
                 }
             }
             if (allfields) {
-                jQuery.ajax({
+                // jQuery.ajax({
+                //     type: "POST",
+                //     url: '<?php echo base_url(); ?>subadmin/changeStatus',
+                //     dataType: 'json',
+                //     data: {
+                //         "id": id,
+                //         "status": status,
+                //         "reason": reason
+                //     },
+                //     success: function(res) {
+                //         if (res.status == 0) {
+                //             alert(res.message);
+                //         } else {
+                //             alert(res.message);
+                //             window.location.replace("<?php echo base_url(); ?>admin/questionBankList");
+                //         }
+                //     },
+                //     error: function(xhr, status, error) {
+                //         //toastr.error('Failed to add '+xData.name+' in wishlist.');
+                //         console.log(error);
+                //     }
+                // });
+
+                // --- sweet alert Start
+                if(status==4){  var title1 = 'Are you sure you want to reject ?'; var buttontext= 'Reject';}
+                if(status==3){  var title1 = 'Are you sure you want to Approve ?'; var buttontext= 'Approve';}
+                Swal.fire({
+                    title: title1,
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: buttontext,
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        jQuery.ajax({
                     type: "POST",
                     url: '<?php echo base_url(); ?>subadmin/changeStatus',
                     dataType: 'json',
@@ -408,9 +443,9 @@
                     },
                     success: function(res) {
                         if (res.status == 0) {
-                            alert(res.message);
+                            Swal.fire(res.message);
                         } else {
-                            alert(res.message);
+                            Swal.fire(res.message);
                             window.location.replace("<?php echo base_url(); ?>admin/questionBankList");
                         }
                     },
@@ -419,6 +454,13 @@
                         console.log(error);
                     }
                 });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+                /// ---- Sweet alert end
 
             }
         });
