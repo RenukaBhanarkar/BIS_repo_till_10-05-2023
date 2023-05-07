@@ -166,21 +166,43 @@
             $this->db->select('quiz.*,st.status_name');
             $this->db->from('tbl_quiz_details quiz');
             $this->db->join('tbl_mst_status st', 'st.id = quiz.status');
-            $this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)');
+           // $this->db->where('(date(now()) BETWEEN quiz.start_date AND quiz.end_date)');
             // $this->db->where('('.$current_time.' BETWEEN quiz.start_time AND quiz.end_time)'); 
-            $this->db->where('quiz.start_time <=', $current_time);
-            $this->db->where('quiz.end_time >=', $current_time);
+            $this->db->where('quiz.start_date <=' ,date("Y-m-d")); 
+            $this->db->where('quiz.end_date >=' ,date("Y-m-d"));  
+           // $this->db->where('quiz.start_time <=', $current_time);
+           // $this->db->where('quiz.end_time >=', $current_time);
             $this->db->where('quiz.status', 5);
 
-            //$this->db->where_in('quiz.branch_id',array($user_branch_id,0));
+            $this->db->where_in('quiz.branch_id',array($user_branch_id,0));
             $this->db->where_in('quiz.region_id', array($user_region_id, 0));
-            $rs = array();
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) {
-                $rs = $query->result_array();
-            }
-            return $rs;
-        }
+            // $rs = array();
+            // $query = $this->db->get();
+            // if ($query->num_rows() > 0) {
+            //     $rs = $query->result_array();
+            // }
+            // return $rs;
+            $res = array();
+                $rs = array();
+                $query=$this->db->get();
+                if($query->num_rows() > 0){
+                    $res = $query->result_array();
+                    foreach($res as $row){
+                        if($row['start_date'] == date("Y-m-d") ){
+                            if($row['start_time'] <= $current_time){
+                                array_push($rs,$row);
+                            }
+                        }else if($row['end_date'] == date("Y-m-d") ){
+                            if($row['end_time'] >= $current_time){
+                                array_push($rs,$row);
+                            }
+                        }else{
+                            array_push($rs,$row);
+                        }
+                    }
+                }
+                return $rs;  
+                }
        
         public function getStdClubQuizAll()
         {
@@ -194,16 +216,36 @@
             $this->db->where('quiz.start_date <=', date("Y-m-d"));
             $this->db->where('quiz.end_date >=', date("Y-m-d"));
 
-            $this->db->where('quiz.start_time <=', $current_time);
-            $this->db->where('quiz.end_time >=', $current_time);
+            // $this->db->where('quiz.start_time <=', $current_time);
+            // $this->db->where('quiz.end_time >=', $current_time);
             $this->db->where('quiz.status', 5);
 
+            // $rs = array();
+            // $query = $this->db->get();
+            // if ($query->num_rows() > 0) {
+            //     $rs = $query->result_array();
+            // }
+            // return $rs;
+            $res = array();
             $rs = array();
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) {
-                $rs = $query->result_array();
+            $query=$this->db->get();
+            if($query->num_rows() > 0){
+                $res = $query->result_array();
+                foreach($res as $row){
+                    if($row['start_date'] == date("Y-m-d") ){
+                        if($row['start_time'] <= $current_time){
+                            array_push($rs,$row);
+                        }
+                    }else if($row['end_date'] == date("Y-m-d") ){
+                        if($row['end_time'] >= $current_time){
+                            array_push($rs,$row);
+                        }
+                    }else{
+                        array_push($rs,$row);
+                    }
+                }
             }
-            return $rs;
+            return $rs;  
         }
 
         public function contact_us()
@@ -655,20 +697,41 @@
             $this->db->where('quiz.end_date >=', date("Y-m-d"));
             // $this->db->where('('.$current_time.' BETWEEN quiz.start_time AND quiz.end_time)'); 
 
-            $this->db->where('quiz.start_time <=', $current_time);
-            $this->db->where('quiz.end_time >=', $current_time);
+            //$this->db->where('quiz.start_time <=', $current_time);
+            //$this->db->where('quiz.end_time >=', $current_time);
             $this->db->where('quiz.status', 5);
 
             $this->db->where_in('quiz.availability_id', $ava);
             $this->db->where_in('quiz.branch_id', array($user_branch_id, 0));
             $this->db->where_in('quiz.region_id', array($user_region_id, 0));
             $this->db->where('quiz.id', $quiz_id);
+            // $rs = array();
+            // $query = $this->db->get();
+            // if ($query->num_rows() > 0) {
+            //     $rs = $query->result_array();
+            // }
+            // return $rs;
+
+            $res = array();
             $rs = array();
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) {
-                $rs = $query->result_array();
+            $query=$this->db->get();
+            if($query->num_rows() > 0){
+                $res = $query->result_array();
+                foreach($res as $row){
+                    if($row['start_date'] == date("Y-m-d") ){
+                        if($row['start_time'] <= $current_time){
+                            array_push($rs,$row);
+                        }
+                    }else if($row['end_date'] == date("Y-m-d") ){
+                        if($row['end_time'] >= $current_time){
+                            array_push($rs,$row);
+                        }
+                    }else{
+                        array_push($rs,$row);
+                    }
+                }
             }
-            return $rs;
+            return $rs;  
         }
         public function checkUserAvailable($quiz_id, $user_id)
         {

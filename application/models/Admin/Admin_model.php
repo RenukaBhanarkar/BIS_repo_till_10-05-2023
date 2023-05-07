@@ -463,15 +463,29 @@ class Admin_model extends CI_Model {
         // $this->db->where('('.$current_time.' BETWEEN quiz.start_time AND quiz.end_time)');
         $this->db->where('quiz.start_date <=' ,date("Y-m-d")); 
         $this->db->where('quiz.end_date >=' ,date("Y-m-d"));  
-        $this->db->where('quiz.start_time <=' ,$current_time); 
-        $this->db->where('quiz.end_time >=' ,$current_time); 
+        //$this->db->where('quiz.start_time <=' ,$current_time); 
+        //$this->db->where('quiz.end_time >=' ,$current_time); 
         $this->db->where('quiz.status',5); 
       
         
+        $res = array();
         $rs = array();
         $query=$this->db->get();
         if($query->num_rows() > 0){
-            $rs = $query->result_array();
+            $res = $query->result_array();
+            foreach($res as $row){
+                if($row['start_date'] == date("Y-m-d") ){
+                    if($row['start_time'] <= $current_time){
+                        array_push($rs,$row);
+                    }
+                }else if($row['end_date'] == date("Y-m-d") ){
+                    if($row['end_time'] >= $current_time){
+                        array_push($rs,$row);
+                    }
+                }else{
+                    array_push($rs,$row);
+                }
+            }
         }
         return $rs;  
     }
