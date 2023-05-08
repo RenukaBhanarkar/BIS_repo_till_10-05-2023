@@ -22,7 +22,27 @@
                             <th>Action</th>
                         </tr>
                     </thead>
+
                     <tbody>
+                       <?php foreach ($getAll as $key => $value) {?>
+                                <tr>
+                                 <td><?= $key+1?></td>
+                                 <td><?= $value['is_title']?></td>
+                                 <td><?= $value['depName']?></td>
+                                 <td class="border-bottom-0">
+                                    
+
+                                     <a href="standard_under_view/<?= $value['pk_is_id']?>" class="btn btn-primary btn-sm mr-2">View Details</a>
+                                <a href="standard_under_comments/<?= $value['pk_is_id']?>" class="btn btn-success btn-sm mr-2">Join Discussion</a>
+                                    
+                                 </td>
+                                 </tr>
+                                  <?php }?>
+ 
+                    </tbody>
+
+
+                    <!-- <tbody>
                       
                                 <tr>
                                  <td>1</td>
@@ -35,7 +55,7 @@
                                  </td>
                                  </tr>
  
-                    </tbody>
+                    </tbody> -->
                 </table>
             </div>    
           </div>

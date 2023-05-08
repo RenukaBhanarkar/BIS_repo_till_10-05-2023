@@ -14,9 +14,7 @@
 </style>    
 <link href="<?php echo base_url();?>assets/admin/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Begin Page Content -->
-    <div class="container">
-        <!-- Content Row -->
-      <?php print_r($getAll)?>
+    <div class="container"> 
         <div class="row mt-5">
            <div class="bloginfo">
                 <h3 style="margin-bottom: 0px;margin-top:20px;color: #0086b2!important;font-weight: 600;">Important Draft Standards View</h3>
@@ -30,37 +28,37 @@
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Subject</label>
                                     <div>
-                                        <p>Standard_subject</p>
+                                        <p><?= $getData['standard_subject']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Name of Proposer</label>
                                     <div>
-                                        <p>proposer_name</p>
+                                        <p><?= $getData['proposer_name']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Organization Type</label>
                                     <div>
-                                        <p>Type</p>
+                                        <p><?= $getData['org_type']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Date of Receipt</label>
                                     <div>
-                                        <p>12/03/2023</p>
+                                        <p><?= $getData['date_of_receipt']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Current Stage</label>
                                     <div>
-                                        <p>Stage</p>
+                                        <p><?= $getData['current_stage']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Concerned BIS Department</label>
                                     <div>
-                                        <p>BIS Department</p>
+                                        <p><?= $getData['current_bis_dept']?></p>
                                     </div>    
                             </div>
                     </div>

@@ -747,5 +747,123 @@ public function Checkleasrninglike($id,$admin_id)
         $this->db->where('pk_is_id',$pk_is_id); 
         return $quiz = $this->db->get('tbl_standards_revised')->row_array();
     }
-     
+ 
+    public function insertNewWorkCommnents($formdata)
+    {
+        $this->db->insert('tbl_new_work_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function getItemProposalComments($id)
+    { 
+        $this->db->select('tbl_new_work_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('new_work_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_new_work_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_new_work_comments')->result_array(); 
+    }
+
+    public function insertImportantDraftComments($formdata)
+    {
+        $this->db->insert('tbl_important_draft_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function getImportantDraftComments($id)
+    { 
+        $this->db->select('tbl_important_draft_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('doc_no',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_important_draft_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_important_draft_comments')->result_array(); 
+    }
+
+    public function insertStandardPublishComments($formdata)
+    {
+        $this->db->insert('tbl_standard_publish_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function getStandardPublishComments($id)
+    { 
+        $this->db->select('tbl_standard_publish_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('pk_is_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_standard_publish_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_standard_publish_comments')->result_array(); 
+    }
+
+    public function insertStandardRevisedComments($formdata)
+    {
+        $this->db->insert('tbl_standard_revised_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function getStandardRevisedComments($id)
+    { 
+        $this->db->select('tbl_standard_revised_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('pk_is_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_standard_revised_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_standard_revised_comments')->result_array(); 
+    }
+
+    public function insertStandardUnderReview($formdata)
+    { 
+        $this->db->replace('tbl_standard_under_review',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function StandardUnderReviewCount()
+    {
+        return $quiz = $this->db->get('tbl_standard_under_review')->result_array(); 
+    }
+    public function getStandardUnderReviewComments($id)
+    { 
+        $this->db->select('tbl_standard_under_review_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('pk_is_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_standard_under_review_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_standard_under_review_comments')->result_array(); 
+    }
+
+    public function getStandardUnderReview($pk_is_id)
+    {   
+        $this->db->where('pk_is_id',$pk_is_id); 
+        return $quiz = $this->db->get('tbl_standard_under_review')->row_array();
+    }
+
+    public function insertStandardUnderReviewComments($formdata)
+    {
+        $this->db->insert('tbl_standard_under_review_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function DiscussionForumList()
+    {
+        $this->db->where('status ',5); 
+        return $this->db->get('tbl_discussion_forum')->result_array(); 
+    }
+    public function DiscussionForumView($id)
+    {
+        $this->db->where('id ',$id); 
+        $this->db->where('status ',5); 
+        return $this->db->get('tbl_discussion_forum')->row_array(); 
+    }
+    public function insertDiscussionForumComments($formdata)
+    {
+        $this->db->insert('tbl_discussion_forum_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+
+    public function DiscussionForumComments($id)
+    {
+
+        $this->db->select('tbl_discussion_forum_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('forum_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_discussion_forum_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_discussion_forum_comments')->result_array();
+ 
+    }
 }

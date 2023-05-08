@@ -32,7 +32,7 @@
                                     
 
                                      <a href="standard_publish_view/<?= $value['pk_is_id']?>" class="btn btn-primary btn-sm mr-2">View Details</a>
-                                <a href="new_work_view_comments/<?= $value['pk_is_id']?>" class="btn btn-success btn-sm mr-2">Join Discussion</a>
+                                <a href="standard_publish_comments/<?= $value['pk_is_id']?>" class="btn btn-success btn-sm mr-2">Join Discussion</a>
                                     
                                  </td>
                                  </tr>

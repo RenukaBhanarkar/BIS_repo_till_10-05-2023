@@ -2115,36 +2115,7 @@ class Admin extends CI_Controller
          $this->load->view('admin/share_your_dashboard');
          $this->load->view('admin/footers/admin_footer');
     }
-    public function discussion_forum_dashboard(){
-        $this->load->view('admin/headers/admin_header');
-         $this->load->view('admin/discussion_forum_dashboard');
-         $this->load->view('admin/footers/admin_footer');
-    }
-    public function create_discussion_list(){
-        $this->load->view('admin/headers/admin_header');
-         $this->load->view('admin/create_discussion_list');
-         $this->load->view('admin/footers/admin_footer');
-    }
-    public function Manage_discussion_list(){
-        $this->load->view('admin/headers/admin_header');
-         $this->load->view('admin/Manage_discussion_list');
-         $this->load->view('admin/footers/admin_footer');
-    }
-    public function ongoing_discussion_list(){
-        $this->load->view('admin/headers/admin_header');
-         $this->load->view('admin/ongoing_discussion_list');
-         $this->load->view('admin/footers/admin_footer');
-    }
-    public function closed_discussion_list(){
-        $this->load->view('admin/headers/admin_header');
-         $this->load->view('admin/closed_discussion_list');
-         $this->load->view('admin/footers/admin_footer');
-    }
-    public function create_discussion_form(){
-        $this->load->view('admin/headers/admin_header');
-         $this->load->view('admin/create_discussion_form');
-         $this->load->view('admin/footers/admin_footer');
-    }
+    
     public function item_proposal_list(){
         $this->load->view('admin/headers/admin_header');
          $this->load->view('admin/item_proposal_list');

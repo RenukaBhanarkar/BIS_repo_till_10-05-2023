@@ -575,11 +575,36 @@ class Users extends CI_Controller
         $this->load->view('users/footers/footer');
     }
 
-     public function important_draft_comments($id){
+    public function important_draft_comments($id)
+     {
+        
+        $this->load->view('users/headers/header'); 
         $data['getData']=$this->Users_model->getImportantDraft($id);
-        $this->load->view('users/headers/header');
-        $this->load->view('users/important_draft_comments',$data);
-        $this->load->view('users/footers/footer'); 
+        $data['commnets'] = $this->Users_model->getImportantDraftComments($id);
+        if ($this->form_validation->run('important_draft_comments') == FALSE) 
+        {
+             $this->load->view('users/important_draft_comments',$data);
+        } 
+        else 
+        { 
+            $formdata = array(); 
+            $formdata['admin_id'] = $this->input->post('admin_id');
+            $formdata['description'] = $this->input->post('description');
+            $formdata['doc_no'] = $id;  
+            $formdata['created_on'] = date('Y-m-d h:i:s'); 
+            $insert_id = $this->Users_model->insertImportantDraftComments($formdata);
+            if ($insert_id)
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Added Admin it will be Publish", "SS"));
+                redirect(base_url() . "users/important_draft_comments/".$id, 'refresh');
+            }
+            else
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Not Added,Please try again","DD"));
+                redirect(base_url() . "users/important_draft_comments", 'refresh');
+            }
+        }
+        $this->load->view('users/footers/footer');
     }
     public function discussion_list(){
         $this->load->view('users/headers/header');
@@ -637,28 +662,123 @@ class Users extends CI_Controller
         $this->load->view('users/standard_publish_view',$data);
         $this->load->view('users/footers/footer');
     }
+
+    public function standard_publish_comments($id)
+     {
+        
+        $this->load->view('users/headers/header'); 
+        $data['getData']=$this->Users_model->getNewStandardsPublished($id); 
+        $data['commnets'] = $this->Users_model->getStandardPublishComments($id);
+        if ($this->form_validation->run('standard_publish_comments') == FALSE) 
+        {
+             $this->load->view('users/standard_publish_comments',$data);
+        } 
+        else 
+        { 
+            $formdata = array(); 
+            $formdata['admin_id'] = $this->input->post('admin_id');
+            $formdata['description'] = $this->input->post('description');
+            $formdata['pk_is_id'] = $id;  
+            $formdata['created_on'] = date('Y-m-d h:i:s'); 
+            $insert_id = $this->Users_model->insertStandardPublishComments($formdata);
+            if ($insert_id)
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Added Admin it will be Publish", "SS"));
+                redirect(base_url() . "users/standard_publish_comments/".$id, 'refresh');
+            }
+            else
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Not Added,Please try again","DD"));
+                redirect(base_url() . "users/standard_publish_comments", 'refresh');
+            }
+        }
+        $this->load->view('users/footers/footer');
+    }
     public function standard_under_list()
     {
+
+        //  $curl_req1 = curl_init(); 
+        // curl_setopt_array($curl_req1, array(
+        //     CURLOPT_URL => 'http://203.153.41.213:8071/php/BIS_2.0/dgdashboard/Standards_master/get_stndrds_due_for_review_data',
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => '',
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => 'POST',
+        //     CURLOPT_SSL_VERIFYPEER => false, 
+        //     CURLOPT_HTTPHEADER => array(
+        //         'Content-Type: application/json',
+        //         'Accept: application/json'
+        //     ),
+        // ));
+        // $responseNew = curl_exec($curl_req1);
+        // $responseNew = json_decode($responseNew, true); 
+        // $newCount =count($responseNew['due_for_review_data']);
+        $arr=array();
+        $getAll= $this->Users_model->StandardUnderReviewCount();
+        $arr['getAll']=$getAll;
+        // $insertedCount = count($getAll); 
+        // if ($newCount > $insertedCount ) 
+        // {
+        //     foreach($responseNew['due_for_review_data'] as $data)
+        //         { 
+        //             $this->Users_model->insertStandardUnderReview($data);
+        //         }
+        // }
         $this->load->view('users/headers/header');
-        $this->load->view('users/standard_under_list');
-        $this->load->view('users/footers/footer');
+        $this->load->view('users/standard_under_list',$arr);
+        $this->load->view('users/footers/footer'); 
     }
     public function discussion_forum_list()
-    {
+    { 
+        $data['getData']=$this->Users_model->DiscussionForumList();
+
         $this->load->view('users/headers/header');
-        $this->load->view('users/discussion_forum_list');
+        $this->load->view('users/discussion_forum_list',$data);
         $this->load->view('users/footers/footer');
     }
-    public function discussion_forum_view()
-    {
-        $this->load->view('users/headers/header');
-        $this->load->view('users/discussion_forum_view');
+    
+
+    public function discussion_forum_view($id)
+     {
+        
+        $this->load->view('users/headers/header'); 
+        $data['getData']=$this->Users_model->DiscussionForumView($id); 
+        $data['commnets'] = $this->Users_model->DiscussionForumComments($id);
+        if ($this->form_validation->run('discussion_forum_view') == FALSE) 
+        {
+             $this->load->view('users/discussion_forum_view',$data);
+        } 
+        else 
+        { 
+            $formdata = array(); 
+            $formdata['admin_id'] = $this->input->post('admin_id');
+            $formdata['description'] = $this->input->post('description');
+            $formdata['forum_id'] = $id;  
+            $formdata['created_on'] = date('Y-m-d h:i:s'); 
+            $insert_id = $this->Users_model->insertDiscussionForumComments($formdata);
+            if ($insert_id)
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Added Admin it will be Publish", "SS"));
+                redirect(base_url() . "users/discussion_forum_view/".$id, 'refresh');
+            }
+            else
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Not Added,Please try again","DD"));
+                redirect(base_url() ."users/discussion_forum_view/".$id, 'refresh');
+            }
+        }
         $this->load->view('users/footers/footer');
     }
-    public function standard_under_view()
+
+    public function standard_under_view($id)
     {
+        $data['getData']=$this->Users_model->getStandardUnderReview($id);
+
         $this->load->view('users/headers/header');
-        $this->load->view('users/standard_under_view');
+        $this->load->view('users/standard_under_view',$data);
         $this->load->view('users/footers/footer');
     }
     public function standard_revised_list()
@@ -704,6 +824,39 @@ class Users extends CI_Controller
         $this->load->view('users/standard_revised_view',$data);
         $this->load->view('users/footers/footer');
     }
+
+    public function standard_revised_comments($id)
+     {
+        
+        $this->load->view('users/headers/header'); 
+        $data['getData']=$this->Users_model->getStandardsRevised($id);
+        // print_r($data);
+        $data['commnets'] = $this->Users_model->getStandardRevisedComments($id);
+        if ($this->form_validation->run('standard_revised_comments') == FALSE) 
+        {
+             $this->load->view('users/standard_revised_comments',$data);
+        } 
+        else 
+        { 
+            $formdata = array(); 
+            $formdata['admin_id'] = $this->input->post('admin_id');
+            $formdata['description'] = $this->input->post('description');
+            $formdata['pk_is_id'] = $id;  
+            $formdata['created_on'] = date('Y-m-d h:i:s'); 
+            $insert_id = $this->Users_model->insertStandardRevisedComments($formdata);
+            if ($insert_id)
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Added Admin it will be Publish", "SS"));
+                redirect(base_url() . "users/standard_revised_comments/".$id, 'refresh');
+            }
+            else
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Not Added,Please try again","DD"));
+                redirect(base_url() . "users/standard_revised_comments", 'refresh');
+            }
+        }
+        $this->load->view('users/footers/footer');
+    }
     public function new_work_list()
     { 
         $curl_req1 = curl_init(); 
@@ -740,16 +893,41 @@ class Users extends CI_Controller
         $this->load->view('users/new_work_list',$arr);
         $this->load->view('users/footers/footer'); 
     }
-    public function new_work_view()
+    public function new_work_view($id)
     {
+        $itemProposal['getData'] = $this->Users_model->getItemProposal($id);
         $this->load->view('users/headers/header');
-        $this->load->view('users/new_work_view');
+        $this->load->view('users/new_work_view',$itemProposal);
         $this->load->view('users/footers/footer');
     }
-    public function new_work_view_comments()
+    public function new_work_view_comments($id)
     {
         $this->load->view('users/headers/header');
-        $this->load->view('users/new_work_view_comments');
+        $data['getData'] = $this->Users_model->getItemProposal($id);
+        $data['commnets'] = $this->Users_model->getItemProposalComments($id);
+        if ($this->form_validation->run('new_work_view_comments') == FALSE) 
+        {
+            $this->load->view('users/new_work_view_comments',$data);
+        } 
+        else 
+        { 
+            $formdata = array(); 
+            $formdata['admin_id'] = $this->input->post('admin_id');
+            $formdata['description'] = $this->input->post('description');
+            $formdata['new_work_id'] = $id;  
+            $formdata['created_on'] = date('Y-m-d h:i:s'); 
+            $insert_id = $this->Users_model->insertNewWorkCommnents($formdata);
+            if ($insert_id)
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Added Admin it will be Publish", "SS"));
+                redirect(base_url() . "users/new_work_view_comments/".$id, 'refresh');
+            }
+            else
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Not Added,Please try again", "DD"));
+                redirect(base_url() . "users/new_work_view_comments", 'refresh');
+            }
+        }
         $this->load->view('users/footers/footer');
     }
     public function share_your_thoughts()
@@ -2107,4 +2285,38 @@ class Users extends CI_Controller
             'data' => $data,    
         ]); 
     }
+
+    public function standard_under_comments($id)
+     {
+        
+        $this->load->view('users/headers/header'); 
+        $data['getData']=$this->Users_model->getStandardUnderReview($id); 
+        $data['commnets'] = $this->Users_model->getStandardUnderReviewComments($id);
+        if ($this->form_validation->run('standard_under_comments') == FALSE) 
+        {
+             $this->load->view('users/standard_under_comments',$data);
+        } 
+        else 
+        { 
+            $formdata = array(); 
+            $formdata['admin_id'] = $this->input->post('admin_id');
+            $formdata['description'] = $this->input->post('description');
+            $formdata['pk_is_id'] = $id;  
+            $formdata['created_on'] = date('Y-m-d h:i:s'); 
+            $insert_id = $this->Users_model->insertStandardUnderReviewComments($formdata);
+            if ($insert_id)
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Added Admin it will be Publish", "SS"));
+                redirect(base_url() . "users/standard_under_comments/".$id, 'refresh');
+            }
+            else
+            {
+                $this->session->set_flashdata('MSG', ShowAlert("Comment Not Added,Please try again","DD"));
+                redirect(base_url() . "users/standard_under_comments", 'refresh');
+            }
+        }
+        $this->load->view('users/footers/footer');
+    }
+
+
 }

@@ -28,48 +28,43 @@ border-top: 3px solid #2957a3!important;
             <div class="col-12 mt-3">
                 <div class="row">
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Document No</label>
+                        <label class="d-block text-font" style="font-weight: 600;">pk is id</label>
                         <div>
-                            <p><?= $getData['doc_no']?></p>
+                            <p><?= $getData['pk_is_id']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Department Id</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Is Number</label>
                         <div>
-                            <p><?= $getData['department_id']?></p>
+                            <p><?= $getData['IsNumber']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Department Name</label>
+                        <label class="d-block text-font" style="font-weight: 600;">is title</label>
                         <div>
-                            <p><?= $getData['department_name']?></p>
+                            <p><?= $getData['is_title']?></p>
                         </div>
                     </div>
                      
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Committee Number</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Committee Id</label>
                         <div>
-                            <p><?= $getData['CommitteeNumber']?></p>
+                            <p><?= $getData['commttid']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Document Title</label>
+                        <label class="d-block text-font" style="font-weight: 600;">dep Name</label>
                         <div>
-                            <p><?= $getData['doc_title']?></p>
+                            <p><?= $getData['depName']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Document Type</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Date Of Publish</label>
                         <div>
-                            <p><?= $getData['doc_type']?></p>
+                            <p><?= $getData['date_of_published']?></p>
                         </div>
                     </div>
-                    <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Document Stage</label>
-                        <div>
-                            <p><?= $getData['doc_stage']?></p>
-                        </div>
-                    </div>
+                    
                 </div>
                 
             </div>
@@ -109,7 +104,7 @@ if($admin_id==''){?>
     echo $this->session->flashdata('MSG');
     }
     ?>
-        <form name="important_draft_comments" id="important_draft_comments" action="<?php echo base_url().'Users/important_draft_comments/'?><?= $getData['doc_no']?>" method="post"enctype="multipart/form-data">
+        <form name="standard_under_comments" id="standard_under_comments" action="<?php echo base_url().'Users/standard_under_comments/'?><?= $getData['pk_is_id']?>" method="post"enctype="multipart/form-data">
             <div class="bg-light-comment p-3">
                 <div class="row">
                     <div class="col-sm-12">
@@ -128,8 +123,7 @@ if($admin_id==''){?>
 </div>
 <?php } ?>
 <div style="background-image: url(<?php echo base_url(); ?>/assets/images/whats-new-bg.png);">
-    <div class="container">
-        <!-- <?php print_r()?> -->
+    <div class="container"> 
           <?php foreach ($commnets as $key => $value): ?>
         <div class="artical-comment-view">
             <div class="view_content">
