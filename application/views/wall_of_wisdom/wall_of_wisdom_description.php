@@ -91,6 +91,9 @@
     padding: 3px 4px;
     border-radius: 5px;
 }
+.owl-nav{
+    display: none;
+}
 
 /* .tending_para {
     padding: 2px 0px 0px;
@@ -208,7 +211,17 @@
                         <div class="title_right">
                             <h6>Upcomming Events</h6>
                             <div class="owl-carousel owl-theme" id="owl-caraousal_news">
+                            <?php if(!(empty($events))){ foreach($events as $list){ ?>
                                 <div class="item">
+                                    <div class="quiz-section">
+                                        <div class="quiz-box_live" style="height: 172px;">
+                                            <a href="#"><img src="<?php echo base_url().'uploads/cms/events/'.$list['thumbnail'];?>" class="h-100" ></a>
+                                        </div>
+                                        <p class="quiz-text overflow-hidden p-1" > <a href="#"><?php echo $list['title']; ?></a></p>
+                                    </div>
+                                </div>
+                                <?php }} ?>
+                                <!-- <div class="item">
                                     <div class="quiz-section">
                                         <div class="quiz-box_live">
                                             <a href="#"><img src="<?php echo base_url();?>/assets/images/whats_news.jpg"></a>
@@ -239,15 +252,7 @@
                                         </div>
                                         <p class="quiz-text overflow-hidden p-1" > <a href="#">Photography Competition- Share the unknown spots of Mizoram</a></p>
                                     </div>
-                                </div>
-                                <div class="item">
-                                    <div class="quiz-section">
-                                        <div class="quiz-box_live">
-                                            <a href="#"><img src="<?php echo base_url();?>/assets/images/whats_news.jpg"></a>
-                                        </div>
-                                        <p class="quiz-text overflow-hidden p-1" > <a href="#">Photography Competition- Share the unknown spots of Mizoram</a></p>
-                                    </div>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- <div class="banner_image">
                                 <img src="<?php echo base_url();?>/assets/images/whats_news.jpg" class="w-100">

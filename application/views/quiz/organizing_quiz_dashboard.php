@@ -34,11 +34,11 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <a href="#">
+                <a href="<?php echo base_url(); ?>Standardswritting/standard_writting_dashboard">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center d-flex">
-                            <h5 class="font-weight-bold text-warning mb-1">Poster Making Competition</h5>
+                            <h5 class="font-weight-bold text-primary mb-1">Standard Writting</h5>
                            
 
                         </div>
@@ -47,11 +47,11 @@
                 </a>
             </div>
             <div class="col-xl-3 col-md-6 mb-4">
-                <a href="#">
+                <a href="<?php echo base_url(); ?>Standardswritting/miscellaneous_dashboard">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center d-flex">
-                            <h5 class="font-weight-bold text-warning mb-1">Standard Writting Competition</h5>
+                            <h5 class="font-weight-bold text-danger mb-1">Miscellaneous Competition</h5>
                             
 
                         </div>

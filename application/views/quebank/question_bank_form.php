@@ -478,7 +478,8 @@
                                       -->
                                     </div>
                                     <div class="col-md-12 submit_btn p-3">
-                                        <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#submitForm">Submit</a>
+                                        <!-- <a class="btn btn-success btn-sm text-white" data-bs-toggle="modal" data-bs-target="#submitForm">Submit</a> -->
+                                        <a class="btn btn-success btn-sm text-white" id="saveQueBank">Submit</a>
                                         <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal" data-bs-target="#cancelForm">Cancel</a>
                                         <input type="reset" name="Reset" class="btn btn-warning btn-sm text-white">
                                         <div id="err_que_bank"></div>
@@ -674,7 +675,42 @@
                     var que_bank_id = $('#que_bank_id').val();
                     var no_of_ques = $("#no_of_ques").val();
 
-                    jQuery.ajax({
+                    // jQuery.ajax({
+                    //     type: "GET",
+                    //     url: '<?php echo base_url(); ?>subadmin/toCheckNoOfQueInBank/?id=' + que_bank_id + '&no=' + no_of_ques,
+                    //     dataType: 'json',
+                    //     success: function(res) {
+                    //         // console.log(res);
+                    //         if (res.status == 0) {
+                    //             if ($("#err_que_bank").next(".validation").length == 0) {
+                    //                 $("#err_que_bank").after("<div class='validation' style='color:red;margin-bottom:15px; margin-left:16px;'>Please add questions equal to total no of questions in bank</div>");
+                    //             }
+                    //             if (!focusSet) {
+                    //                 $("#err_que_bank").focus();
+                    //             }
+                    //         } else {
+                    //             $("#err_que_bank").next(".validation").remove();
+
+                    //             window.location.replace("<?php echo base_url(); ?>subadmin/questionBankList");
+                    //         }
+
+                    //     },
+                    //     error: function(xhr, status, error) {
+                    //         //toastr.signuperr('Failed to add '+xData.name+' in wishlist.');
+                    //         console.log(error);
+                    //     }
+                    // });
+
+                    Swal.fire({
+                    title: 'Are you sure you want to Submit?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Submit',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        jQuery.ajax({
                         type: "GET",
                         url: '<?php echo base_url(); ?>subadmin/toCheckNoOfQueInBank/?id=' + que_bank_id + '&no=' + no_of_ques,
                         dataType: 'json',
@@ -699,6 +735,14 @@
                             console.log(error);
                         }
                     });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+
+
                 });
                 $('input[type=radio][name=que_type]').change(function() {
                     var lan = $('input[name="language"]:checked').val();
@@ -793,6 +837,48 @@
                         var url = $('#que_bank_form').attr('action');
                         var userForm = document.getElementById("que_bank_form");
                         var fd = new FormData(userForm);
+                        // jQuery.ajax({
+                        //     type: "POST",
+                        //     url: url,
+                        //     dataType: 'json',
+                        //     data: fd,
+                        //     cache: false,
+                        //     processData: false,
+                        //     contentType: false,
+                        //     success: function(res) {
+                        //         if (res.status == 0) {
+                        //             alert(res.message);
+
+                        //         } else {
+                        //             alert(res.message);
+                        //             var form = document.getElementById("que_bank_form");
+                        //             var elements = form.elements;
+                        //             for (var i = 0, len = elements.length; i < len; ++i) {
+                        //                 elements[i].readOnly = true;
+                        //             }
+                        //             var language = $('input[name="language"]:checked').val();
+
+                        //             $("#que_language").val(language);
+                        //             $('input[name="language"]').attr('disabled', 'disabled');
+                        //             $('#que_bank_id').val(res.id);
+                        //             $('#questions_form').show();
+                        //         }
+                        //     },
+                        //     error: function(xhr, status, error) {
+                        //         //toastr.error('Failed to add '+xData.name+' in wishlist.');
+                        //         console.log(error);
+                        //     }
+                        // });
+
+                        Swal.fire({
+                    title: 'Are you sure you want to create?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Create',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
                         jQuery.ajax({
                             type: "POST",
                             url: url,
@@ -803,10 +889,12 @@
                             contentType: false,
                             success: function(res) {
                                 if (res.status == 0) {
-                                    alert(res.message);
+                                    // alert(res.message);
+                                    Swal.fire(res.message);
 
                                 } else {
-                                    alert(res.message);
+                                    // alert(res.message);
+                                    Swal.fire(res.message);
                                     var form = document.getElementById("que_bank_form");
                                     var elements = form.elements;
                                     for (var i = 0, len = elements.length; i < len; ++i) {
@@ -825,6 +913,13 @@
                                 console.log(error);
                             }
                         });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+
                     } else {
                         return false;
                     }
@@ -1403,9 +1498,11 @@
                             // enctype :'multipart/form-data',
                             success: function(res) {
                                 if (res.status == 0) {
-                                    alert(res.message);
+                                    // alert(res.message);
+                                    Swal.fire(res.message); 
                                 } else {
-                                    alert(res.message);
+                                    // alert(res.message);
+                                    Swal.fire(res.message); 
                                     $('#que').val('');
                                     $('#que_h').val('');
                                     $('#que_image').val('');

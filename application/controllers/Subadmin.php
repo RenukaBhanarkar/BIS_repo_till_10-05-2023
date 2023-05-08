@@ -56,8 +56,11 @@ class Subadmin extends CI_Controller
     }
     public function admin_creation_form()
     {
+        $data = array();
+        $roles = $this->Admin_model->getAllRoles();
+        $data['roles'] = $roles;
         $this->load->view('admin/headers/admin_header');
-        $this->load->view('subadmin/admin_creation_form');
+        $this->load->view('subadmin/admin_creation_form',$data);
         $this->load->view('admin/footers/admin_footer');
     }
     //ajax call 
@@ -161,10 +164,11 @@ class Subadmin extends CI_Controller
     {
         $this->form_validation->set_rules('name', 'Name', 'required|trim|max_length[50]');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|max_length[30]|valid_email');
-        // $this->form_validation->set_rules('designation', 'Designation', 'required|trim|max_length[50]');
+        $this->form_validation->set_rules('department', 'Department', 'required|trim|max_length[50]');
+         $this->form_validation->set_rules('role', 'Role', 'required|trim|max_length[50]');
         // $this->form_validation->set_rules('branch', 'Branch', 'required|trim|max_length[50]');
         // $this->form_validation->set_rules('post', 'Post', 'required|trim|max_length[50]');
-        // $this->form_validation->set_rules('department', 'Department', 'required|trim|max_length[50]');
+      
         // $this->form_validation->set_rules('username', 'Username', 'required|trim|max_length[50]');
 
         if ($this->form_validation->run() == FALSE) {
@@ -175,10 +179,11 @@ class Subadmin extends CI_Controller
             $uid        = clearText($this->input->post('uid'));
             $name        = clearText($this->input->post('name'));
             $email_id        = clearText($this->input->post('email'));
-            // $designation        = clearText($this->input->post('designation'));
+            $department        = clearText($this->input->post('department'));
+            $designation        = clearText($this->input->post('role'));
             // $branch        = clearText($this->input->post('branch'));
             // $post        = clearText($this->input->post('post'));
-            // $department        = clearText($this->input->post('department'));
+          
             // $username        = clearText($this->input->post('username'));
             //$random_pass	 = $this->randomPassword();
             $random_pass     = 12345678;
@@ -188,10 +193,10 @@ class Subadmin extends CI_Controller
                 'user_uid' => $uid,
                 'name' => $name,
                 'email_id' => $email_id,
-                // 'designation' => $designation,
+                'designation' => $designation,
                 // 'branch' => $branch,
                 // 'post' => $post,
-                // 'department' => $department,
+                 'department' => $department,
                 'is_active' => 1,
                 'username' => $email_id,
                 'password' => $random_pass,
@@ -705,6 +710,7 @@ class Subadmin extends CI_Controller
         $data = array();
         $admin_id = encryptids("D", $this->session->userdata('admin_id'));
         $qui_bank_id =   encryptids("D", $this->input->get('id'));
+        $original_que_bank_id = $qui_bank_id;
         $queBank= $this->Que_bank_model->replicateByQueBankId($qui_bank_id);
       //  echo json_encode($queBank).'<br>';
         if (!empty($queBank)) {
@@ -715,7 +721,8 @@ class Subadmin extends CI_Controller
                 //'total_marks' =>  $queBank['total_marks'],
                 'created_by' => $admin_id,
                 'is_active' => 1,
-                'status' => 0
+                'status' => 0,
+                'replica_of_qb_id' => $original_que_bank_id
                 //'created_on' => GetCurrentDateTime('Y-m-d h:i:s')
             );
            // echo json_encode($dbObj).'<br>';

@@ -630,8 +630,24 @@ Your browser does not support the video tag.
 
          
         if (allfields) {
-        $("#submitForm").show();
-        $('#live_session_edit').submit();
+        // $("#submitForm").show();
+        // $('#live_session_edit').submit();
+
+            Swal.fire({
+                        title: 'Are you sure you want to Submit?',
+                        showDenyButton: true,
+                        showCancelButton: false,
+                        confirmButtonText: 'Delete',
+                        denyButtonText: `Cancel`,
+                        }).then((result) => {
+                        /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {                       
+                            $('#live_session_edit').submit();
+                        // Swal.fire('Saved!', '', 'success')                                
+                        } else if (result.isDenied) {
+                            // Swal.fire('Changes are not saved', '', 'info')
+                        }
+                        })
         } else {
         return false;
         }

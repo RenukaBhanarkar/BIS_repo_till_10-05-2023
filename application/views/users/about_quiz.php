@@ -268,14 +268,20 @@
                         </p>
                         <?php if($quizdata['region'] !="") { ?> 
                         <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
-                            <span class="start-end-time-title">Region<span class="quiz-text-date m-2"><?= $quizdata['region'];?></span>
+                            <span class="start-end-time-title">Region 
+                                <span class="quiz-text-date m-2"><?= $quizdata['region'];?></span>
                             </span>
+                            
                         </p>
                         <?php }?>
-                       <!--  <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
-                            <span class="start-end-time-title">Branch<span class="quiz-text-date m-2">12</span>
+                        <?php if($quizdata['branch'] !="") { ?> 
+                        <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
+                            <span class="start-end-time-title">Branch 
+                                <span class="quiz-text-date m-2"><?= $quizdata['region'];?></span>
                             </span>
-                        </p> -->
+                            
+                        </p>
+                        <?php }?>
                     </div>
                     <?php
 

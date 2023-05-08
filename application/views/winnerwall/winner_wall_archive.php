@@ -104,26 +104,60 @@
 function updateWinnerWall(id,status) 
     {
         console.log(status)
-        if (status==1)  { $(".sms").text('Restore'); } 
-        $('#updatemodel').modal('show');
-        $('.updatestatus').on('click', function() 
-        {
-            $.ajax({
-                type: 'POST',
-                url: '<?php echo base_url(); ?>winnerwall/updateWinnerWall',
-                data: {
-                    id: id,
-                    status: status,
-                },
-                success: function(result) 
-                {
-                    location.reload();
-                },
-                error: function(result) {
-                    alert("Error,Please try again.");
-                }
-            });
-        });
+        // if (status==1)  { $(".sms").text('Restore'); } 
+        // $('#updatemodel').modal('show');
+        // $('.updatestatus').on('click', function() 
+        // {
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?php echo base_url(); ?>winnerwall/updateWinnerWall',
+        //         data: {
+        //             id: id,
+        //             status: status,
+        //         },
+        //         success: function(result) 
+        //         {
+        //             location.reload();
+        //         },
+        //         error: function(result) {
+        //             alert("Error,Please try again.");
+        //         }
+        //     });
+        // });
+        if (status==1)  { var popuptitle='Do you want to Restore'; var buttontitle ='Restore'; } 
+        Swal.fire({
+                    title: popuptitle,
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: buttontitle,
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>winnerwall/updateWinnerWall',
+                                data: {
+                                    id: id,
+                                    status: status,
+                                },
+                                success: function(result) 
+                                {
+                                    location.reload();
+                                },
+                                error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+
+
+
+
     }
     function deleteWinnerWall(id,quiz_id) 
     {

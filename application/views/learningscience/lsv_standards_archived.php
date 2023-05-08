@@ -83,29 +83,86 @@
 <!-- /.container-fluid -->
 </div>
 <script type="text/javascript">
+// function updateLsvStandards(id,status)
+// {
+// console.log(status)
+// if (status==1)  { $(".sms").text('Restore'); }
+// $('#updatemodel').modal('show');
+// $('.updatestatus').on('click', function()
+// {
+// $.ajax({
+// type: 'POST',
+// url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
+// data: {
+// id: id,
+// status: status,
+// },
+// success: function(result)
+// {
+// location.reload();
+// },
+// error: function(result) {
+// alert("Error,Please try again.");
+// }
+// });
+// });
+// }
+
 function updateLsvStandards(id,status)
 {
-console.log(status)
-if (status==1)  { $(".sms").text('Restore'); }
-$('#updatemodel').modal('show');
-$('.updatestatus').on('click', function()
-{
-$.ajax({
-type: 'POST',
-url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
-data: {
-id: id,
-status: status,
-},
-success: function(result)
-{
-location.reload();
-},
-error: function(result) {
-alert("Error,Please try again.");
-}
-});
-});
+    // console.log(status)
+    // if (status==1)  { $(".sms").text('Restore'); }
+    // $('#updatemodel').modal('show');
+    // $('.updatestatus').on('click', function()
+    //     {
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
+    //         data: {
+    //                 id: id,
+    //                 status: status,
+    //                 },
+    //         success: function(result)
+    //         {
+    //             location.reload();
+    //         },
+    //             error: function(result) {
+    //             alert("Error,Please try again.");
+    //         }
+    //     });
+    //     });
+
+        if (status==1)  { var title1= 'Do you want to Restore?'; var buttonText = 'Restore' } 
+        
+        Swal.fire({
+                    title: title1,
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: buttonText,
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>Learningscience/updateLsvStandards',
+                                data: {
+                                        id: id,
+                                        status: status,
+                                        },
+                                success: function(result)
+                                {
+                                    location.reload();
+                                },
+                                    error: function(result) {
+                                    alert("Error,Please try again.");
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
 }
 </script>
 <!-- End of Main Content -->

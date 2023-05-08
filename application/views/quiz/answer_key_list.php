@@ -212,20 +212,20 @@
                                 <p><?php echo $row['selected_op'];?></p>
                             </div>
                         </div>
-                        <div class="mb-2 col-md-4 d-flex">
+                        <!-- <div class="mb-2 col-md-4 d-flex">
                             <label class="d-block text-font">Marked For Review:</label>
                             <div class="ml-2">
                                 <?php 
-                                    $mark =  $row['mark_review'];
+                                   /* $mark =  $row['mark_review'];
                                     if ($mark  == 1){
                                         $showMark = "Yes";
                                     }else{
                                         $showMark = "No";
-                                    }
+                                    }*/
                                 ?>
-                                <p><?= $showMark ;?></p>
+                                <p><?php //$showMark ;?></p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <?php $j++ ; } ?>
                     <!-- <hr>

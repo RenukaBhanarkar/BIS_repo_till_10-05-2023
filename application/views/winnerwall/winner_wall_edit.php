@@ -145,7 +145,7 @@ color: red;
                         </div>
                     </div>
                     <div class="col-md-12 submit_btn p-3">
-                        <a class="btn btn-success btn-sm text-white" onclick="formubmit()">Update</a>
+                        <a class="btn btn-success btn-sm text-white" onclick="return formubmit(event)">Update</a>
                         <a class="btn btn-danger btn-sm text-white" data-bs-toggle="modal" data-bs-target="#cancelForm">Cancel</a>
                         <input type="reset" name="Reset" class="btn btn-warning btn-sm text-white">
                     </div>
@@ -501,34 +501,81 @@ alert("Error,Please try again.");
 });
 }
 
+// function DeleteData(id)
+// {
+// $('#delete').modal('show');
+// $('.deletecall').on('click', function()
+// {
+// $.ajax({
+// type: 'POST',
+// url: '<?php echo base_url(); ?>winnerwall/DeleteData',
+// data: {
+// id: id,
+// },
+// success: function(result)
+// {
+// var submit_id = $("#submit_id").val();
+// displayWall(submit_id)
+// },
+// error: function(result) {
+// alert("Error,Please try again.");
+// }
+// });
+// });
+// }
 function DeleteData(id)
 {
-$('#delete').modal('show');
-$('.deletecall').on('click', function()
-{
-$.ajax({
-type: 'POST',
-url: '<?php echo base_url(); ?>winnerwall/DeleteData',
-data: {
-id: id,
-},
-success: function(result)
-{
-var submit_id = $("#submit_id").val();
-displayWall(submit_id)
-},
-error: function(result) {
-alert("Error,Please try again.");
-}
-});
-});
-}
-function formubmit(id)
-{
+    Swal.fire({
+                    title: 'Do you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        $.ajax({
+                                type: 'POST',
+                                url: '<?php echo base_url(); ?>winnerwall/DeleteData',
+                                data: {
+                                id: id,
+                                },
+                                success: function(result)
+                                {
+                                var submit_id = $("#submit_id").val();
+                                displayWall(submit_id)
+                                },
+                                error: function(result) {
+                                alert("Error,Please try again.");
+                                }
+                                });
+                                                   
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
 
-alert('Submitted Successfully');
-window.location.href = "../winner_wall_list";
- 
+}
+function formubmit(event)
+{
+event.preventDefault();
+// alert('Submitted Successfully');
+// Swal.fire('Submitted Successfully');
+Swal.fire({
+                    title: 'Do you want to Update?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Update',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        window.location.href = "../winner_wall_list";
+                                                   
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
 }
 
 
