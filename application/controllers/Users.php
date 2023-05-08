@@ -1265,22 +1265,22 @@ class Users extends CI_Controller
         }
     }
 
-    public function about_quiz($id)
-    {
+    // public function about_quiz($id)
+    // {
 
-        $data = array();
-        $quiz = $this->Users_model->viewQuiz($id);
+    //     $data = array();
+    //     $quiz = $this->Users_model->viewQuiz($id);
         
-        $data['quizdata'] = $quiz;
+    //     $data['quizdata'] = $quiz;
 
-        $prizeDetails = $this->Users_model->prizeDetails($id);
+    //     $prizeDetails = $this->Users_model->prizeDetails($id);
         
-        $data['prizeDetails'] = $prizeDetails;
-        // echo json_encode($prizeDetails);exit();
-        $this->load->view('users/headers/header');
-        $this->load->view('users/about_quiz', $data);
-        $this->load->view('users/footers/footer');
-    }
+    //     $data['prizeDetails'] = $prizeDetails;
+    //     // echo json_encode($prizeDetails);exit();
+    //     $this->load->view('users/headers/header');
+    //     $this->load->view('users/about_quiz', $data);
+    //     $this->load->view('users/footers/footer');
+    // }
     public function about_competition()
     {
         $this->load->view('users/headers/header');
@@ -1305,73 +1305,72 @@ class Users extends CI_Controller
         $this->load->view('users/all_standard_writting');
         $this->load->view('users/footers/footer');
     }
-    public function quiz_start($quiz_id)
-    {
-        $UserId = $this->session->userdata('admin_id');
-        $user_id = encryptids("D", $UserId);
-        $data = array();
-        $userQuiz = array();
-        ///////////////////// check available quiz ////////////////
+    // public function quiz_start($quiz_id)
+    // {
+    //     $UserId = $this->session->userdata('admin_id');
+    //     $user_id = encryptids("D", $UserId);
+    //     $data = array();
+    //     $userQuiz = array();
+    //     ///////////////////// check available quiz ////////////////
        
            
-            if (isset($_SESSION['admin_type']) && !empty($_SESSION['admin_type'])) {
+    //         if (isset($_SESSION['admin_type']) && !empty($_SESSION['admin_type'])) {
     
-                $sess_admin_type = encryptids("D", $this->session->userdata('admin_type'));
-                $sess_is_admin = encryptids("D", $this->session->userdata('is_admin'));
-                if ($sess_is_admin == 0) {
-                    //if Already login
+    //             $sess_admin_type = encryptids("D", $this->session->userdata('admin_type'));
+    //             $sess_is_admin = encryptids("D", $this->session->userdata('is_admin'));
+    //             if ($sess_is_admin == 0) {
+    //                 //if Already login
                    
-                    if ($this->Users_model->checkAdminLogin()) {
+    //                 if ($this->Users_model->checkAdminLogin()) {
                        
-                        if ($sess_admin_type == 2) {                    
+    //                     if ($sess_admin_type == 2) {                    
                              
-                            $userQuiz = $this->Users_model->isQuizForThisUser($user_id,$quiz_id);
-                            if(!empty($userQuiz)){
-                                $checkUserAvailable = $this->Users_model->checkUserAvailable($quiz_id, $user_id);
-                                if ($checkUserAvailable > 0) {
-                                    $this->session->set_flashdata('MSG', ShowAlert("You have already appeared for this Quiz.", "SS"));
-                                    redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-                                } else {
+    //                         $userQuiz = $this->Users_model->isQuizForThisUser($user_id,$quiz_id);
+    //                         if(!empty($userQuiz)){
+    //                             $checkUserAvailable = $this->Users_model->checkUserAvailable($quiz_id, $user_id);
+    //                             if ($checkUserAvailable > 0) {
+    //                                 $this->session->set_flashdata('MSG', ShowAlert("You have already appeared for this Quiz.", "SS"));
+    //                                 redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+    //                             } else {
                                    
-                                    $que_details = $this->Users_model->viewQuestion($quiz_id);
-                                    $data['que_details'] = $que_details;
-                                    $quiz = $this->Users_model->viewQuiz($quiz_id);
-                                    $data['quizdata'] = $quiz;
-                                    $data['user_id'] = $user_id;
-                                    $this->load->view('users/quiz_start', $data);
-                                }
+    //                                 $que_details = $this->Users_model->viewQuestion($quiz_id);
+    //                                 $data['que_details'] = $que_details;
+    //                                 $quiz = $this->Users_model->viewQuiz($quiz_id);
+    //                                 $data['quizdata'] = $quiz;
+    //                                 $data['user_id'] = $user_id;
+    //                                 $this->load->view('users/quiz_start', $data);
+    //                             }
 
-                            }else{
-                                $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
-                                redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+    //                         }else{
+    //                             $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
+    //                             redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
 
-                            }
-                        }   else{
-                            $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
-                            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+    //                         }
+    //                     }   else{
+    //                         $this->session->set_flashdata('MSG', ShowAlert("You can not appear for this quiz as you are not authenticated.", "SS"));
+    //                         redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
 
-                        }                  
+    //                     }                  
                         
-                    } else {
-                        redirect(base_url() . "Users/login", 'refresh');
-                    }
-                }else{
-                    $this->session->set_flashdata('MSG', ShowAlert("You can not appear for quiz as you are not authenticated.", "SS"));
-                    redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-                }
-        }else{
-            $this->session->set_flashdata('MSG', ShowAlert("Please Login.", "SS"));
-            redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
-        }
+    //                 } else {
+    //                     redirect(base_url() . "Users/login", 'refresh');
+    //                 }
+    //             }else{
+    //                 $this->session->set_flashdata('MSG', ShowAlert("You can not appear for quiz as you are not authenticated.", "SS"));
+    //                 redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+    //             }
+    //     }else{
+    //         $this->session->set_flashdata('MSG', ShowAlert("Please Login.", "SS"));
+    //         redirect(base_url() . "users/about_quiz/$quiz_id", 'refresh');
+    //     }
 
 
 
 
-        ///////////////////////////////////
+    //     ///////////////////////////////////
       
        
-    }
-  
+    // }
     // public function quiz_submit()
     // {
 
