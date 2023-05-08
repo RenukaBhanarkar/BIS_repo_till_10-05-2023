@@ -226,17 +226,17 @@
 </style>
 <div class="container">
     <section id="banner-section">
-       <div class="float-end" id="QuizLang">
+       <!-- <div class="float-end" id="QuizLang">
             <label class="d-block text-font mr-3">Select Language</label>
             <select class="form-control input-font" id="selectedLang" id="selectedLang" placeholder="Language">                
                 <option value="1">English</option>
                 <option value="2">Hindi</option>
             </select>
-        </div>
+        </div> -->
         
         
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-12">
                 <div class="quiz-image shadow">
                     <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="image-section" alt="Bis Quiz Images" />
                 </div>
@@ -244,21 +244,21 @@
             <div class="col-sm-7">
                 <div class="Quiz_text">
                     <h3 class="main-title">Miscellaneous Competition</h3>
-                    <p class="time-and-qus" style="color:white;">
+                    <!-- <p class="time-and-qus" style="color:white;">
                         <span class="number-quiz"><span class="question_no">10</span><span class="quiz-text">Questions</span>
                         </span>
                         <span class="number-quiz"><span class="question_no">50</span><span class="quiz-text">Minutes</span>
                         </span>
-                    </p>
+                    </p> -->
                     <div class="d-flex">
                         <p class="time-start-end d-flex" style="margin-bottom:0px;">
                             <span class="start-end-time-title mr-2">Start Date<span class="quiz-text-date m-2">12/03/2023<span style="margin-left: 12px;">12:00:00</span></span>
                             </span>
                         </p>
-                        <p class="time-start-end d-flex" style="margin-bottom:0px; margin-left: 8px;">
+                        <!-- <p class="time-start-end d-flex" style="margin-bottom:0px; margin-left: 8px;">
                             <span class="start-end-time-title">Marks<span class="quiz-text-date m-2">50</span>
                             </span>
-                        </p>
+                        </p> -->
                     </div>
                     <div class="d-flex">
                         <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px;">
@@ -270,7 +270,7 @@
                             </span>
                         </p> -->
                     </div>
-                      <a href="<?= base_url(); ?>users/login" class="btn startQuiz"> <span>Login to Participate</span></a>
+                      <a href="<?= base_url(); ?>users/start_competition" class="btn startQuiz"> <span>Login to Participate</span></a>
                    
                 </div>
             </div>

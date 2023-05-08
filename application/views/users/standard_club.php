@@ -249,7 +249,7 @@
        
       </div>
       <div class="view-button">
-        <a href="#">View All</a>
+        <a href="<?php echo base_url(); ?>users/all_creative_task">View All</a>
       </div>
 
    

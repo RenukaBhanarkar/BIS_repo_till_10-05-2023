@@ -138,13 +138,28 @@
     align-items: stretch;
     width: 28%;
 }
+.file-upload-wrapper input {
+    /* opacity: 0; */
+    position: absolute;
+    top: 5px;
+    right: 0;
+    bottom: 0;
+    left: 14px;
+    z-index: 99;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
 </style>
 <div class="container">
 <div class="row">
               <div class="col-md-3">
                <div class="static-content">
                   <div class="bloginfo">
-                       <h3 style="margin-bottom: 0px;margin-top:20px;color: #0086b2!important;font-weight: 600;">Discussion Forum</h3>
+                       <h3 style="margin-bottom: 0px;margin-top:20px;color: #0086b2!important;font-weight: 600;">Start Competition</h3>
                    </div>
                    <div class="heading-underline" style="width: 200px;">
                          <div class="left"></div><div class="right"></div>
@@ -228,17 +243,46 @@
     </div>
 </div>
 <div class="container">
-            <div class="artical-comment mb-4" >
-                <div class="view_content">
-                    <a href="">
-                    <div class="common_content" style="background: white; border-radius: 10px;">
-                        <div class="comment_user">
-                              <img src="http://localhost/BIS/BIS_repo/assets/images/user_1.png" alt="Default Profile Picture" width="5%" style="padding: 2px; margin-left: 9px;"><span style="margin-left: 15px; font-size: 17px;">Login</span>            
-                        </div>
+                <div class="bg-light-comment p-3" style="background: #b6b2b2;">
+                    <!-- <div class="Comment_image">
+                        <img src="../assets/images/user_image.png">
+                    </div> -->
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                                <div class="form-group ">
+                                    <textarea class="form-control w-100" rows="8" id="file_show" placeholder="Share Your Comments......" name="description"></textarea>
 
+                                    
+                                </div>
+                        </div>
+                        
+                        <div class="col-sm-6 mt-3">
+                            <div class="file-upload-wrapper" data-text="Select your file">
+                                <input type="file" class="file-upload-field" name="image" value="">
+                            </div>
+                        </div>
+                        <div class="button-group  mt-3" style="text-align:end;">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                    </div>
+                        
                     </div>
-                    </a>
                     
                 </div>
-            </div>
-        </div>
+</div>
+<script>
+     $(".file-upload-wrapper").hide();
+    $(document).ready(function () 
+    { 
+       
+        $("#file_show").click(function(){
+         $(".file-upload-wrapper").show();
+      });
+
+
+    });
+   // $(".file-upload-wrapper").hide();
+  //  $("#file_show").click(function(){
+ // $(".file-upload-wrapper").show();
+//});
+</script>
