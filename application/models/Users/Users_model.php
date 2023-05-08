@@ -911,4 +911,391 @@
          }
          /////////////////// quiz start functions  END ////////////////////////
 
+    // }
+ 
+    // public function ItemProposalCount()
+    // {
+    //     return $quiz = $this->db->get('tbl_item_proposal')->result_array(); 
+    // }
+    // public function getItemProposal($id)
+    // {   
+    //     $this->db->where('id',$id); 
+    //     return $quiz = $this->db->get('tbl_item_proposal')->row_array();
+    // }
+    // Item Proposal Function End For FrontEnd
+
+    // Join The classroom Function Start For FrontEnd
+    // public function getUpcomingsSessions()
+    // {
+    //     $this->db->where('status ',5); 
+    //     $this->db->order_by('created_on', 'desc'); 
+    //    return $quiz = $this->db->get('tbl_join_the_classroom')->result_array();
+    // }
+    // public function getLiveSessions()
+    // {
+    //     $this->db->where('type_of_post',3); 
+    //     $this->db->where('status ',5); 
+    //     $this->db->order_by('created_on', 'desc'); 
+    //     return $quiz = $this->db->get('tbl_join_the_classroom')->result_array();
+    // }
+
+    // public function getLatestPosts()
+    // {
+    //     $this->db->where('type_of_post',1); 
+    //     $this->db->where('status ',5); 
+    //     $this->db->order_by('created_on', 'desc'); 
+    //    return $quiz = $this->db->get('tbl_join_the_classroom')->result_array();
+    // }
+    // public function getInformativeVideo()
+    // {
+    //     $this->db->where('type_of_post',2); 
+    //     $this->db->where('status ',5); 
+    //     $this->db->order_by('created_on', 'desc'); 
+    //    return $quiz = $this->db->get('tbl_join_the_classroom')->result_array();
+    // }
+
+    // public function getJoinTheClassroomContaint($id)
+    // {   
+    //     $this->db->where('id',$id);  
+    //     return $quiz = $this->db->get('tbl_join_the_classroom')->row_array();
+    // } 
+    // Join The classroom Function End For FrontEnd
+
+    // learning Standerd Function Start For FrontEnd
+    // public function getlearningStanderdSessions()
+    // {
+    //     $this->db->where('type_of_post',3); 
+    //     $this->db->where('status ',5); 
+    //     $this->db->order_by('created_on', 'desc'); 
+    //    return $quiz = $this->db->get('tbl_learning_science_via_standards')->result_array();
+    // }
+
+    // public function getlearningStanderdPosts()
+    // {
+    //     $this->db->where('type_of_post',1); 
+    //     $this->db->where('status ',5); 
+    //     $this->db->order_by('created_on', 'desc'); 
+    //    return $quiz = $this->db->get('tbl_learning_science_via_standards')->result_array();
+    // }
+    // public function getlearningStanderdInformativeVideo()
+    // {
+    //     $this->db->where('type_of_post',2); 
+    //     $this->db->where('status ',5); 
+    //     $this->db->order_by('created_on', 'desc'); 
+    //    return $quiz = $this->db->get('tbl_learning_science_via_standards')->result_array();
+    // }
+
+    // public function getContaintlearningStanderd($id)
+    // {   
+    //     $this->db->where('id',$id);  
+    //     return $quiz = $this->db->get('tbl_learning_science_via_standards')->row_array();
+    // }
+    // learning Standerd Function End For FrontEnd
+
+
+// public function checkClassroomView($id,$admin_id)
+//     {
+//         $this->db->where('classroom_id',$id); 
+//         $this->db->where('admin_id',$admin_id); 
+//         $info = $this->db->get('tbl_join_the_classroom_info')->row_array();
+//         if (empty($info))
+//         {
+//             $formdata['classroom_id']=$id;
+//             $formdata['admin_id']=$admin_id;
+//             $formdata['user_view']=1; 
+//              $this->db->insert('tbl_join_the_classroom_info',$formdata); 
+//              $insert_id = $this->db->insert_id();
+//              if ($insert_id) {
+//                 $query = $this->db->query("SELECT * FROM tbl_join_the_classroom_info WHERE classroom_id='$id'");
+//                 $viewcount=$query->num_rows();
+//                 $formdata2['views']=$viewcount;
+//                 $this->db->where('id',$id); 
+//                 return $update = $this->db->update('tbl_join_the_classroom', $formdata2); 
+//             }
+//         }
+//         else
+//         {   
+//             return 0;  
+//         }
+    // }
+
+
+    // public function checkleasrningView($id,$admin_id)
+    // {
+    //     $this->db->where('learning_id',$id); 
+    //     $this->db->where('admin_id',$admin_id); 
+    //     $info = $this->db->get('tbl_learning_science_info')->row_array();
+    //     if (empty($info))
+    //     {
+    //         $formdata['learning_id']=$id;
+    //         $formdata['admin_id']=$admin_id;
+    //         $formdata['user_view']=1; 
+    //          $this->db->insert('tbl_learning_science_info',$formdata); 
+    //          $insert_id = $this->db->insert_id();
+    //          if ($insert_id) {
+    //             $query = $this->db->query("SELECT * FROM tbl_learning_science_info WHERE learning_id='$id'");
+    //             $viewcount=$query->num_rows();
+    //             $formdata2['views']=$viewcount;
+    //             $this->db->where('id',$id); 
+    //             return $update = $this->db->update('tbl_learning_science_via_standards', $formdata2); 
+    //         }
+    //     }
+    //     else
+    //     {   
+    //         return 0;  
+    //     }
+    // }
+
+
+// public function Checkleasrninglike($id,$admin_id)
+//     { 
+//         $this->db->where('learning_id',$id); 
+//         $this->db->where('admin_id',$admin_id); 
+//         return $info = $this->db->get('tbl_learning_science_info')->row_array(); 
+//     }
+    //  public function updateUpdateleasrningLikes($id,$admin_id)
+    //  {
+    //     $this->db->where('learning_id', $id);
+    //     $this->db->where('admin_id', $admin_id);
+    //     $data['user_like']=1;
+    //     if ($this->db->update('tbl_learning_science_info', $data)) 
+    //     {
+    //         $query = $this->db->query("SELECT * FROM tbl_learning_science_info WHERE user_like=1 AND learning_id=$id");
+    //         $viewcount=$query->num_rows();
+    //         $formdata2['likes']=$viewcount;
+    //         $this->db->where('id',$id); 
+    //         $update = $this->db->update('tbl_learning_science_via_standards', $formdata2);
+    //         if ($update) 
+    //         {
+    //             return true;
+    //         }
+    //         else
+    //         {
+    //             return false;
+    //         }
+            
+    //     } 
+    //     else  { return false; }
+    // }
+    // public function add_feedback_data($data){
+    //     if ($this->db->insert('tbl_mst_feedback_data', $data)) {
+    //         return $this->db->insert_id();
+    //     } else {
+    //         return false;
+    //     }
+    // }
+    // public function get_feedback_data(){
+    //     $this->db->select('*');
+    //     $this->db->from('tbl_mst_feedback_data');
+    //     $this->db->where('status!=','9');
+    //     $query=$this->db->get();
+    //     $res=$query->result_array();
+    //     return $res;
+    // }
+    // public function get_feedback_detail($id){
+    //     $this->db->select('*');
+    //     $this->db->from('tbl_mst_feedback_data');
+    //     $this->db->where('id',$id);
+    //     $query=$this->db->get();
+    //     $res=$query->result_array();
+    //     return $res[0];
+    // }
+    // public function delete_feedback($id){
+    //     $id=$this->db->delete('tbl_mst_feedback_data',['id'=>$id]);
+    //     if($id){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+    // public function getArchivedFeedback(){
+    //     $this->db->select('*');
+    //     $this->db->from('tbl_mst_feedback_data');
+    //     $this->db->where('status','9');
+    //     $query=$this->db->get();
+    //     $res=$query->result_array();
+    //     return $res;
+    // }
+    // public function feedback_archive($id){
+    //     $id=$this->db->update('tbl_mst_feedback_data',['status'=>'9'],['id'=>$id]);
+    //     if($id){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+    // public function restore_feedback($id){
+    //     $id=$this->db->update('tbl_mst_feedback_data',['status'=>'0'],['id'=>$id]);
+    //     if($id){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+     public function insertImportantDraft($formdata)
+    { 
+        $this->db->replace('tbl_important_draft_standards',$formdata); 
+        return $insert_id = $this->db->insert_id();
     }
+    public function ImportantDraftCount()
+    {
+        return $quiz = $this->db->get('tbl_important_draft_standards')->result_array(); 
+    }
+    public function getImportantDraft($doc_no)
+    {   
+        $this->db->where('doc_no',$doc_no); 
+        return $quiz = $this->db->get('tbl_important_draft_standards')->row_array();
+    }
+
+    public function insertNewStandardsPublished($formdata)
+    { 
+        $this->db->replace('tbl_new_standards_published',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function NewStandardsPublishedCount()
+    {
+        return $quiz = $this->db->get('tbl_new_standards_published')->result_array(); 
+    }
+    public function getNewStandardsPublished($pk_is_id)
+    {   
+        $this->db->where('pk_is_id',$pk_is_id); 
+        return $quiz = $this->db->get('tbl_new_standards_published')->row_array();
+    }
+
+    public function insertStandardsRevised($formdata)
+    { 
+        $this->db->replace('tbl_standards_revised',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function StandardsRevisedCount()
+    {
+        return $quiz = $this->db->get('tbl_standards_revised')->result_array(); 
+    }
+    public function getStandardsRevised($pk_is_id)
+    {   
+        $this->db->where('pk_is_id',$pk_is_id); 
+        return $quiz = $this->db->get('tbl_standards_revised')->row_array();
+    }
+ 
+    public function insertNewWorkCommnents($formdata)
+    {
+        $this->db->insert('tbl_new_work_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function getItemProposalComments($id)
+    { 
+        $this->db->select('tbl_new_work_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('new_work_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_new_work_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_new_work_comments')->result_array(); 
+    }
+
+    public function insertImportantDraftComments($formdata)
+    {
+        $this->db->insert('tbl_important_draft_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function getImportantDraftComments($id)
+    { 
+        $this->db->select('tbl_important_draft_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('doc_no',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_important_draft_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_important_draft_comments')->result_array(); 
+    }
+
+    public function insertStandardPublishComments($formdata)
+    {
+        $this->db->insert('tbl_standard_publish_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function getStandardPublishComments($id)
+    { 
+        $this->db->select('tbl_standard_publish_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('pk_is_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_standard_publish_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_standard_publish_comments')->result_array(); 
+    }
+
+    public function insertStandardRevisedComments($formdata)
+    {
+        $this->db->insert('tbl_standard_revised_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function getStandardRevisedComments($id)
+    { 
+        $this->db->select('tbl_standard_revised_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('pk_is_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_standard_revised_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_standard_revised_comments')->result_array(); 
+    }
+
+    public function insertStandardUnderReview($formdata)
+    { 
+        $this->db->replace('tbl_standard_under_review',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function StandardUnderReviewCount()
+    {
+        return $quiz = $this->db->get('tbl_standard_under_review')->result_array(); 
+    }
+    public function getStandardUnderReviewComments($id)
+    { 
+        $this->db->select('tbl_standard_under_review_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('pk_is_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_standard_under_review_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_standard_under_review_comments')->result_array(); 
+    }
+
+    public function getStandardUnderReview($pk_is_id)
+    {   
+        $this->db->where('pk_is_id',$pk_is_id); 
+        return $quiz = $this->db->get('tbl_standard_under_review')->row_array();
+    }
+
+    public function insertStandardUnderReviewComments($formdata)
+    {
+        $this->db->insert('tbl_standard_under_review_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+    public function DiscussionForumList()
+    {
+        $this->db->where('status ',5); 
+        return $this->db->get('tbl_discussion_forum')->result_array(); 
+    }
+    public function DiscussionForumView($id)
+    {
+        $this->db->where('id ',$id); 
+        $this->db->where('status ',5); 
+        return $this->db->get('tbl_discussion_forum')->row_array(); 
+    }
+    public function insertDiscussionForumComments($formdata)
+    {
+        $this->db->insert('tbl_discussion_forum_comments',$formdata); 
+        return $insert_id = $this->db->insert_id();
+    }
+
+    public function DiscussionForumComments($id)
+    {
+
+        $this->db->select('tbl_discussion_forum_comments.*,tbl_users.user_name'); 
+        // $this->db->where('status ',5); 
+        $this->db->where('forum_id',$id); 
+        $this->db->join('tbl_users','tbl_users.user_id = tbl_discussion_forum_comments.admin_id'); 
+        $this->db->order_by('created_on', 'desc'); 
+        return $this->db->get('tbl_discussion_forum_comments')->result_array();
+ 
+    }
+}
+// =======
+// >>>>>>> 068af7e12f46c89299a5665cd129d7be617b43b1

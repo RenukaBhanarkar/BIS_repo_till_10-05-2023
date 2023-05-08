@@ -28,45 +28,45 @@
             <div class="col-12 mt-3">
                     <div class="row">
                             <div class="mb-2 col-md-4">
-                                    <label class="d-block text-font" style="font-weight: 600;">pk_is_id</label>
+                                    <label class="d-block text-font" style="font-weight: 600;">pk is id</label>
                                     <div>
-                                        <p>533</p>
+                                        <p><?=$getData['pk_is_id']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
-                                    <label class="d-block text-font" style="font-weight: 600;">IsNumber</label>
+                                    <label class="d-block text-font" style="font-weight: 600;">Is Number</label>
                                     <div>
-                                        <p>IS 16093 IS 16093</p>
+                                        <p><?=$getData['IsNumber']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
-                                    <label class="d-block text-font" style="font-weight: 600;">is_title</label>
+                                    <label class="d-block text-font" style="font-weight: 600;">is title</label>
                                     <div>
-                                        <p>Installation of gas based instantaneous water heater - Code of practice</p>
+                                        <p><?=$getData['is_title']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">commttid</label>
                                     <div>
-                                        <p>1</p>
+                                        <p><?=$getData['commttid']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">depName</label>
                                     <div>
-                                        <p>MED 23</p>
+                                        <p><?=$getData['depName']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
-                                    <label class="d-block text-font" style="font-weight: 600;">Idate_of_published</label>
+                                    <label class="d-block text-font" style="font-weight: 600;">date_of_published</label>
                                     <div>
-                                        <p>2013-12-31 00:00:00</p>
+                                        <p><?=$getData['date_of_published']?></p>
                                     </div>    
                             </div>
                     </div>    
              </div>
              <div class="col-md-12 submit_btn p-3" style="text-align: end;">
-                               <a class="btn btn-primary btn-sm text-white" onclick="location.href='<?php echo base_url();?>users/standard_publish_List'">Back</a>
+                               <a class="btn btn-primary btn-sm text-white" onclick="location.href='<?php echo base_url();?>users/standard_under_list'">Back</a>
                         </div>  
              </div>
         </div>

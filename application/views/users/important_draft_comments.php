@@ -28,39 +28,46 @@ border-top: 3px solid #2957a3!important;
             <div class="col-12 mt-3">
                 <div class="row">
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Subject</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Document No</label>
                         <div>
-                            <p><?= $getData['standard_subject']?></p>
+                            <p><?= $getData['doc_no']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Name of Proposer</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Department Id</label>
                         <div>
-                            <p><?= $getData['proposer_name']?></p>
+                            <p><?= $getData['department_id']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Organization Type</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Department Name</label>
                         <div>
-                            <p><?= $getData['org_type']?></p>
+                            <p><?= $getData['department_name']?></p>
+                        </div>
+                    </div>
+                     
+                    <div class="mb-2 col-md-4">
+                        <label class="d-block text-font" style="font-weight: 600;">Committee Number</label>
+                        <div>
+                            <p><?= $getData['CommitteeNumber']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Date of Receipt</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Document Title</label>
                         <div>
-                            <p><?= $getData['date_of_receipt']?></p>
+                            <p><?= $getData['doc_title']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Current Stage</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Document Type</label>
                         <div>
-                            <p><?= $getData['current_stage']?></p>
+                            <p><?= $getData['doc_type']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Concerned BIS Department</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Document Stage</label>
                         <div>
-                            <p><?= $getData['current_bis_dept']?></p>
+                            <p><?= $getData['doc_stage']?></p>
                         </div>
                     </div>
                 </div>
@@ -102,7 +109,7 @@ if($admin_id==''){?>
     echo $this->session->flashdata('MSG');
     }
     ?>
-        <form name="new_work_view_comments" id="new_work_view_comments" action="<?php echo base_url().'Users/new_work_view_comments/'?><?= $getData['id']?>" method="post"enctype="multipart/form-data">
+        <form name="important_draft_comments" id="important_draft_comments" action="<?php echo base_url().'Users/important_draft_comments/'?><?= $getData['doc_no']?>" method="post"enctype="multipart/form-data">
             <div class="bg-light-comment p-3">
                 <div class="row">
                     <div class="col-sm-12">

@@ -156,4 +156,72 @@ $config = array(
 			'rules' => 'required'
 		),
 	),
+
+		'new_work_view_comments' => array(
+		array(
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'required'
+		),
+		),
+		 'important_draft_comments' => array(
+		array(
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'required'
+		),
+	),
+
+	'standard_publish_comments' => array(
+		array(
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'required'
+		),
+	),
+	'standard_revised_comments' => array(
+		array(
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'required'
+		),
+	),
+
+	'standard_under_comments' => array(
+		array(
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'required'
+		),
+	),
+
+	'create_discussion_form' => array(
+		array(
+			'field' => 'title',
+			'label' => 'title',
+			'rules' => 'required'
+		),
+		array(
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'required'
+		),
+		array(
+			'field' => 'start_date',
+			'label' => 'start date',
+			'rules' => 'required'
+		),
+		array(
+			'field' => 'end_date',
+			'label' => 'end date',
+			'rules' => 'required'
+		),
+	),
+	'discussion_forum_view' => array(
+		array(
+			'field' => 'description',
+			'label' => 'description',
+			'rules' => 'required'
+		),
+	),
 );

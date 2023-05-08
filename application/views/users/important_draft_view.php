@@ -30,43 +30,43 @@
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Document Number</label>
                                     <div>
-                                        <p>22133</p>
+                                        <p><?= $getData['doc_no']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Department Id</label>
                                     <div>
-                                        <p>74</p>
+                                       <p><?= $getData['department_id']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Department Name</label>
                                     <div>
-                                        <p>PGD</p>
+                                        <p><?= $getData['department_name']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Committee Number</label>
                                     <div>
-                                        <p>39</p>
+                                        <p><?= $getData['CommitteeNumber']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Document Title</label>
                                     <div>
-                                        <p>Optics and optical instruments  Ancillary devices for geodetic</p>
+                                         <p><?= $getData['doc_title']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Document Type</label>
                                     <div>
-                                        <p>Revision</p>
+                                        <p><?= $getData['doc_type']?></p>
                                     </div>    
                             </div>
                             <div class="mb-2 col-md-4">
                                     <label class="d-block text-font" style="font-weight: 600;">Department Stage</label>
                                     <div>
-                                        <p>P-Draft</p>
+                                        <p><?= $getData['doc_stage']?></p>
                                     </div>    
                             </div>
                     </div>    

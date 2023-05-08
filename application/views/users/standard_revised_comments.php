@@ -28,41 +28,43 @@ border-top: 3px solid #2957a3!important;
             <div class="col-12 mt-3">
                 <div class="row">
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Subject</label>
+                        <label class="d-block text-font" style="font-weight: 600;">pk is id</label>
                         <div>
-                            <p><?= $getData['standard_subject']?></p>
+                            <p><?= $getData['pk_is_id']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Name of Proposer</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Is Number</label>
                         <div>
-                            <p><?= $getData['proposer_name']?></p>
+                            <p><?= $getData['IsNumber']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Organization Type</label>
+                        <label class="d-block text-font" style="font-weight: 600;">is title</label>
                         <div>
-                            <p><?= $getData['org_type']?></p>
+                            <p><?= $getData['is_title']?></p>
+                        </div>
+                    </div>
+                     
+                    <div class="mb-2 col-md-4">
+                        <label class="d-block text-font" style="font-weight: 600;">Committee Id</label>
+                        <div>
+                            <p><?= $getData['commttid']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Date of Receipt</label>
+                        <label class="d-block text-font" style="font-weight: 600;">dep Name</label>
                         <div>
-                            <p><?= $getData['date_of_receipt']?></p>
+                            <p><?= $getData['depName']?></p>
                         </div>
                     </div>
                     <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Current Stage</label>
+                        <label class="d-block text-font" style="font-weight: 600;">Date Of Publish</label>
                         <div>
-                            <p><?= $getData['current_stage']?></p>
+                            <p><?= $getData['date_of_published']?></p>
                         </div>
                     </div>
-                    <div class="mb-2 col-md-4">
-                        <label class="d-block text-font" style="font-weight: 600;">Concerned BIS Department</label>
-                        <div>
-                            <p><?= $getData['current_bis_dept']?></p>
-                        </div>
-                    </div>
+                    
                 </div>
                 
             </div>
@@ -102,7 +104,7 @@ if($admin_id==''){?>
     echo $this->session->flashdata('MSG');
     }
     ?>
-        <form name="new_work_view_comments" id="new_work_view_comments" action="<?php echo base_url().'Users/new_work_view_comments/'?><?= $getData['id']?>" method="post"enctype="multipart/form-data">
+        <form name="standard_revised_comments" id="standard_revised_comments" action="<?php echo base_url().'Users/standard_revised_comments/'?><?= $getData['pk_is_id']?>" method="post"enctype="multipart/form-data">
             <div class="bg-light-comment p-3">
                 <div class="row">
                     <div class="col-sm-12">
@@ -121,8 +123,7 @@ if($admin_id==''){?>
 </div>
 <?php } ?>
 <div style="background-image: url(<?php echo base_url(); ?>/assets/images/whats-new-bg.png);">
-    <div class="container">
-        <!-- <?php print_r()?> -->
+    <div class="container"> 
           <?php foreach ($commnets as $key => $value): ?>
         <div class="artical-comment-view">
             <div class="view_content">

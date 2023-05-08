@@ -323,7 +323,7 @@
                 <p class="card-text">Classroom</p>
               </div>
             </div>
-          </a>
+          </a> 
         </div>
         <div class="col-md-3 col-lg-3 col-sm-3 m-2">
           <a href="<?php echo base_url() . 'users/yourwall' ?>">
