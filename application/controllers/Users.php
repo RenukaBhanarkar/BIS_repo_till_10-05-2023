@@ -852,6 +852,15 @@ class Users extends CI_Controller
     //     }
 
     // }
+    public function delete_yourwall($id){
+        $this->load->model('Admin/Your_wall_model');
+        $id = $this->Your_wall_model->deletYourwall($id);
+        if ($id) {
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function add_your_wall()
     {
         if (!file_exists('uploads/your_wall')) { mkdir('uploads/your_wall', 0777, true); }

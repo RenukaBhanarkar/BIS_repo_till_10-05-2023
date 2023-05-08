@@ -26,14 +26,14 @@
                             <div class="mb-2 col-md-4">
                                 <label class="d-block text-font">Name of Competition<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control input-font" name="name" id="name" placeholder="Enter Name of Competition" value="<?php echo set_value('name') ?>" required="">
-                                <span class="error_text"><?php echo form_error('name'); ?></span>
+                                <span class="error_text" id="err_name"><?php echo form_error('name'); ?></span>
                             </div>
                     </div>
                     <div class="row">
                             <div class="mb-2 col-md-4">
                                 <label class="d-block text-font">Name of Competition in Hindi<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control input-font" name="name_hindi" id="name_hindi" placeholder="Enter Name of Competition" value="<?php echo set_value('name_hindi') ?>" required="">
-                                <span class="error_text"><?php echo form_error('name_hindi'); ?></span>
+                                <span class="error_text" id="err_name_hindi"><?php echo form_error('name_hindi'); ?></span>
                             </div>
                     </div>
                     <div class="row">
@@ -46,7 +46,7 @@
                     <div class="row">
                         <div class="mb-2 col-md-12">
                              <label class="d-block text-font">Terms & Conditions<sup class="text-danger">*</sup></label>
-                             <textarea name="terms_conditions" id="terms_conditions" name="terms_conditions"><?php echo set_value('terms_conditions') ?></textarea>
+                             <textarea name="terms_conditions" id="terms_conditions" ><?php echo set_value('terms_conditions') ?></textarea>
                              <div class='validation' id="terms_conditions_error" style='color:red;margin-bottom:15px;'> </div>
                         </div>
                     </div>

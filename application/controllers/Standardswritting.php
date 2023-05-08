@@ -168,11 +168,32 @@ class Standardswritting extends CI_Controller
             } 
 
     }
-    public function create_competition_edit()
+    public function competition_edit(){
+        print_r($_POST); 
+        print_r($_FILES); 
+       // die;
+
+        if (!file_exists('uploads/competition/thumbnail')) { mkdir('uploads/competition/thumbnail', 0777, true); }
+        if (!file_exists('uploads/competition/prize_img')) { mkdir('uploads/competition/prize_img', 0777, true); }
+        $prizepath = 'uploads/competition/prize_img/'; 
+        $thumbnailpath = 'uploads/competition/thumbnail/'; 
+        if (!empty($_FILES['fprize_image']['tmp_name'])) {
+            $fprize_imglocation = $prizepath . time() .'prize_img'. $_FILES['fprize_image']['name']; 
+            move_uploaded_file($_FILES['fprize_image']['tmp_name'], $fprize_imglocation); }else{
+                $fprize_imglocation =$this->input->post('fold_image');
+            }
+
+            echo $fprize_imglocation;
+            die;
+        
+
+    }
+    public function create_competition_edit($id)
     {
-      
+        $data['competition'] = $this->Miscellaneous_competition->viewCompetition($id);
+        // print_r($data); die;
         $this->load->view('admin/headers/admin_header');
-        $this->load->view('standardwritting/create_competition_edit');
+        $this->load->view('standardwritting/create_competition_edit',$data);
         $this->load->view('admin/footers/admin_footer');
     }
     public function view_competition($id){
