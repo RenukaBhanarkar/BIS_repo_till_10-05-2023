@@ -108,7 +108,7 @@
            </div>
 <div class="winner-content">
     <div class="owl-carousel owl-theme" id="carouselExampleControls">
-        <?php foreach($published_wall as $list){ ?>
+        <?php if(!empty($published_wall)){ foreach($published_wall as $list){ ?>
 
                 <div class="item">
                     <div class="card" style="width: 100%;">
@@ -118,19 +118,20 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $list['title']; ?></h5>
-                            <div class="card-text" id="yourwall_description"><?php echo $list['description']; ?></div>
+                            <!-- <div class="card-text" id="yourwall_description"><?php echo $list['description']; ?></div> -->
                                 <div class="button_container" style="margin-top: 8px;">
-                                <span>Posted By..<b><?php echo $list['user_name']; ?></b></span>
+                                <!-- <span>Posted By..<b><?php echo $list['user_name']; ?></b></span> -->
                                     
                                 </div>
                                 <div style="text-align: right;">
                                     <a href="<?php echo base_url().'users/yourwallview/'.$list['id']; ?>" class="btn btn_viewAll" style="margin-left:46px;">View</a>
+                                    <button class="btn btn_viewAll delete" data-id="<?=$list['id']; ?>">Delete</button>
                                 </div>
                         </div>
                     </div>
                 </div>
             
-            <?php } ?>
+            <?php } } ?>
         
     </div>
                 
@@ -171,7 +172,7 @@
 
                         </div>
                         <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">Upload Image</label>
+                                <label class="d-block text-font">Upload Image<sup class="text-danger">*</sup></label>
                                 <div class="d-flex">
                                     <div>
                                     <input type="file" class="file-control" name="image" id="image_thumb" value="" required accept="image/*" onchange="loadFileThumbnail5(event)" >
@@ -1022,5 +1023,45 @@ if(fileSize < 20000){
                         CKEDITOR.replace( 'description' );
 
 </script> 
+<script>
+    $('.item').on('click','.delete',function(){
+        var id=$(this).attr('data-id');
+        // alert(id);
+        Swal.fire({
+                    title: 'Are you sure you want to Delete?',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: 'Delete',
+                    denyButtonText: `Cancel`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {                       
+                        jQuery.ajax({
+                               // type: "POST",
+                                url: '<?php echo base_url(); ?>users/delete_yourwall/'+id,
+                                // dataType: 'json',
+                                // data: {
+                                // "id": id,
+                                // "status": 5
+                                // },
+                                success: function(res) {
+                                if (res) {
+                                    Swal.fire('Record Deleted Successfully');
+                                    location.reload();
+                                } else {
+                                    alert("error");
+                                }
+                                },
+                                error: function(xhr, status, error) {
+                                console.log(error);
+                                }
+                            });
+                       // Swal.fire('Saved!', '', 'success')                                
+                    } else if (result.isDenied) {
+                        // Swal.fire('Changes are not saved', '', 'info')
+                    }
+                    })
+    });
+</script>
   
   
