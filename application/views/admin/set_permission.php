@@ -628,21 +628,36 @@
 
 							<td>
 								<div class="custom-control custom-checkbox mr-3">
-									<input type="checkbox" class="custom-control-input 264_mainModuleChk 373_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="373_subModuleChk" id="273_viewChk" onclick="checkAccess(this);" value="273#View" checked="">
-									<label class="custom-control-label" for="273_viewChk"></label>
+									<input type="checkbox" class="custom-control-input 264_mainModuleChk 373_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="373_subModuleChk" id="273_new_viewChk" onclick="checkAccess(this);" value="273#View" checked="">
+									<label class="custom-control-label" for="273_new_viewChk"></label>
 								</div>
 							</td>
 
 
-							<td></td>
+							<td>
+							<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 264_mainModuleChk 373_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="373_subModuleChk" id="273_new_addChk" onclick="checkAccess(this);" value="273#View" checked="">
+									<label class="custom-control-label" for="273_new_addChk"></label>
+								</div>
+							</td>
 
 
 
-							<td></td>
+							<td>
+							<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 264_mainModuleChk 373_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="373_subModuleChk" id="273_new_updateChk" onclick="checkAccess(this);" value="273#View" checked="">
+									<label class="custom-control-label" for="273_new_updateChk"></label>
+								</div>
+							</td>
 
 
 
-							<td></td>
+							<td>
+							<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 264_mainModuleChk 373_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="373_subModuleChk" id="273__newdeleteChk" onclick="checkAccess(this);" value="273#View" checked="">
+									<label class="custom-control-label" for="273__newdeleteChk"></label>
+								</div>
+							</td>
 
 
 
@@ -729,28 +744,28 @@
 
 
 							<td>
-								<div class="custom-control custom-checkbox mr-3">
+								<!-- <div class="custom-control custom-checkbox mr-3">
 									<input type="checkbox" class="custom-control-input 264_mainModuleChk 376_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="376_subModuleChk" id="376_addChk" onclick="checkAccess(this);" value="376#Add" checked="">
 									<label class="custom-control-label" for="376_addChk"></label>
-								</div>
+								</div> -->
 							</td>
 
 
 
 							<td>
-								<div class="custom-control custom-checkbox mr-3">
+								<!-- <div class="custom-control custom-checkbox mr-3">
 									<input type="checkbox" class="custom-control-input 264_mainModuleChk 376_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="376_subModuleChk" id="376_updateChk" onclick="checkAccess(this);" value="376#Update" checked="">
 									<label class="custom-control-label" for="376_updateChk"></label>
-								</div>
+								</div> -->
 							</td>
 
 
 
 							<td>
-								<div class="custom-control custom-checkbox mr-3">
+								<!-- <div class="custom-control custom-checkbox mr-3">
 									<input type="checkbox" class="custom-control-input 264_mainModuleChk 376_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="376_subModuleChk" id="376_deleteChk" onclick="checkAccess(this);" value="376#Delete" checked="">
 									<label class="custom-control-label" for="376_deleteChk"></label>
-								</div>
+								</div> -->
 							</td>
 
 
@@ -785,7 +800,12 @@
 
 
 
-							<td></td>
+							<td>
+							<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 264_mainModuleChk 377_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="377_subModuleChk" id="377_updateChk" onclick="checkAccess(this);" value="377#View" checked="">
+									<label class="custom-control-label" for="377_updateChk"></label>
+								</div>
+							</td>
 
 
 
@@ -807,7 +827,7 @@
 							<td>
 								<div class="custom-control custom-checkbox mr-3">
 									<input type="checkbox" class="custom-control-input 264_mainModuleChk" data-moduleid="264_mainModuleChk" data-submoduleid="378_subModuleChk" id="378_subModuleChk" onclick="checkSubmodules(this);" checked="">
-									<label class="custom-control-label" for="378_subModuleChk">Review Competition</label>
+									<label class="custom-control-label" for="378_subModuleChk">Review Management</label>
 								</div>
 							</td>
 
@@ -820,15 +840,30 @@
 							</td>
 
 
-							<td></td>
+							<td>
+							<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 264_mainModuleChk 378_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="378_subModuleChk" id="378_addChk" onclick="checkAccess(this);" value="378#View" checked="">
+									<label class="custom-control-label" for="378_addChk"></label>
+								</div>
+							</td>
 
 
 
-							<td></td>
+							<td>
+							<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 264_mainModuleChk 378_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="378_subModuleChk" id="378_updateChk" onclick="checkAccess(this);" value="378#View" checked="">
+									<label class="custom-control-label" for="378_updateChk"></label>
+								</div>
+							</td>
 
 
 
-							<td></td>
+							<td>
+							<div class="custom-control custom-checkbox mr-3">
+									<input type="checkbox" class="custom-control-input 264_mainModuleChk 378_subModuleChk accessSelected" data-moduleid="264_mainModuleChk" data-submoduleid="378_subModuleChk" id="378_deleteChk" onclick="checkAccess(this);" value="378#View" checked="">
+									<label class="custom-control-label" for="378_deleteChk"></label>
+								</div>
+							</td>
 
 
 
