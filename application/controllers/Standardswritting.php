@@ -197,7 +197,7 @@ class Standardswritting extends CI_Controller
         $this->load->view('admin/footers/admin_footer');
     }
     public function view_competition($id){
-        $data['quizdata'] = $this->Miscellaneous_competition->viewCompetition($id);
+        $data['quizdata'] = $this->Miscellaneous_competition->viewCompetition1($id);
         // print_r($data); die;
         $this->load->view('admin/headers/admin_header');
         $this->load->view('standardwritting/view_competition',$data);
@@ -215,6 +215,13 @@ class Standardswritting extends CI_Controller
         $data['competition']=$this->Miscellaneous_competition->ongoingCompetition();
         $this->load->view('admin/headers/admin_header');
         $this->load->view('standardwritting/ongoing_competition_list',$data);
+        $this->load->view('admin/footers/admin_footer');
+    }
+    public function ongoing_competition_submission($id){
+        $data['competition']=$this->Miscellaneous_competition->ongoingCompetitionSubmission($id);
+        // print_r($data); die;
+        $this->load->view('admin/headers/admin_header');
+        $this->load->view('standardwritting/ongoing_competition_submission',$data);
         $this->load->view('admin/footers/admin_footer');
     }
     public function closed_competition_list()

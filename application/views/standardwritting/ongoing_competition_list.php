@@ -52,6 +52,7 @@
                            </tr> -->
                            <?php if(!empty($competition)){ $i=1;
                             foreach($competition as $list){ ?>
+                            <tr>
                             <td><?php echo $i; ?></td>
                             <td><?php echo "123"; ?></td>
                             <td><?php echo $list['competiton_name']; ?></td>
@@ -61,9 +62,10 @@
                             <td><?php echo $list['status_name'];  ?></td>
                             <td>Submited task</td>
                             <td>
-                            <a href="<?php echo base_url(); ?>" class="btn btn-primary btn-sm mr-2" >View Submission</a>
+                            <a href="<?php echo base_url().'Standardswritting/ongoing_competition_submission/'.$list['id']; ?>" class="btn btn-primary btn-sm mr-2" >View Submission</a>
                                  <a href="<?php echo base_url().''; ?>" class="btn btn-info btn-sm mr-2" >View Details</a>
                             </td>
+                            </tr>
                             <?php } } ?>
                         </tbody>
                     </table>
