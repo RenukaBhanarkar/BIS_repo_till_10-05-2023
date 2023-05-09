@@ -23,15 +23,15 @@
             <form name="competition_reg" id="competition_reg" action="<?php echo base_url() . 'standardswritting/competition_reg' ?>" method="post" enctype="multipart/form-data">
                 <div class="card border-top card-body">
                     <div class="row">
-                            <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">Name of Competition<sup class="text-danger">*</sup></label>
+                            <div class="mb-2 col-md-12">
+                                <label class="d-block text-font">Title of Competition<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control input-font" name="name" id="name" placeholder="Enter Name of Competition" value="<?php echo set_value('name') ?>" required="">
                                 <span class="error_text" id="err_name"><?php echo form_error('name'); ?></span>
                             </div>
                     </div>
                     <div class="row">
-                            <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">Name of Competition in Hindi<sup class="text-danger">*</sup></label>
+                            <div class="mb-2 col-md-12">
+                                <label class="d-block text-font">Title of Competition in Hindi<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control input-font" name="name_hindi" id="name_hindi" placeholder="Enter Name of Competition" value="<?php echo set_value('name_hindi') ?>" required="">
                                 <span class="error_text" id="err_name_hindi"><?php echo form_error('name_hindi'); ?></span>
                             </div>

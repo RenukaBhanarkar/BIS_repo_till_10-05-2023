@@ -22,37 +22,51 @@
             <div class="col-12 mt-3">
                 <div class="card border-top card-body">
                     <div class="row">
-                            <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">Name of Competition</label>
+                            <div class="mb-2 col-md-12">
+                                <label class="d-block text-font">Title of Competition<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control input-font" name="Competition" id="Competition" placeholder="Enter Name of Competition" value="" required="">
                             </div>
                     </div>
                     <div class="row">
-                            <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">Name of Competition in Hindi</label>
+                            <div class="mb-2 col-md-12">
+                                <label class="d-block text-font">Title of Competition in Hindi<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control input-font" name="Competition" id="Competition" placeholder="Enter Name of Competition" value="" required="">
                             </div>
                     </div>
                     <div class="row">
                         <div class="mb-2 col-md-12">
-                             <label class="d-block text-font">Description</label>
+                             <label class="d-block text-font">Description<sup class="text-danger">*</sup></label>
                              <textarea name="description" id="description"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-2 col-md-12">
-                             <label class="d-block text-font">Terms & Conditions</label>
+                             <label class="d-block text-font">Terms & Conditions<sup class="text-danger">*</sup></label>
                              <textarea name="terms" id="terms"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">Start Date</label>
+                                <label class="d-block text-font">Start Date<sup class="text-danger">*</sup></label>
                                 <input type="date" class="form-control input-font" name="Start" id="Start" value="" required="">
                         </div>
                         <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">End Date</label>
+                                <label class="d-block text-font">Start Time<sup class="text-danger">*</sup></label>
+                                <input type="time" class="form-control input-font" name="Start" id="Start" value="" required="">
+                        </div>
+                        <div class="mb-2 col-md-4">
+                                <label class="d-block text-font">Total Marks<sup class="text-danger">*</sup></label>
+                                <input type="text" class="form-control input-font" name="Marks" id="Marks" value="" required="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-2 col-md-4">
+                                <label class="d-block text-font">End Date<sup class="text-danger">*</sup></label>
                                 <input type="date" class="form-control input-font" name="end" id="end" value="" required="">
+                        </div>
+                        <div class="mb-2 col-md-4">
+                                <label class="d-block text-font">End Time<sup class="text-danger">*</sup></label>
+                                <input type="time" class="form-control input-font" name="end" id="end" value="" required="">
                         </div>
                         <div class="mb-2 col-md-4">
                                 <label class="d-block">Upload Thumbnail<sup class="text-danger">*</sup></label>
@@ -109,15 +123,15 @@
                     </div>
                     <div class="row">
                             <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">Number of Prizes</label>
+                                <label class="d-block text-font">Number of Prizes<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control input-font" name="Prizes" id="Prizes" placeholder="Enter Prizes" value="" required="">
                             </div>
                             <div class="mb-2 col-md-4">
-                                <label class="d-block text-font">Name of Prizes</label>
+                                <label class="d-block text-font">Name of Prizes<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control input-font" name="Prizes" id="Prizes" placeholder="Enter Prizes" value="" required="">
                             </div>
                             <div class="mb-2 col-md-4">
-                                <label class="d-block">Prize Image<sup class="text-danger">*</sup></label>
+                                <label class="d-block">Prize Image</label>
                                 <div class="d-flex">
                                 <div>
                                     <input type="file" id="thumbnail" name="thumbnail" class="form-control-file" accept="image/png, image/jpeg,image/jpg" onchange="loadThumbnail(event)">
@@ -142,7 +156,7 @@
                                 <input type="text" class="form-control input-font" name="Prizes" id="Prizes" placeholder="Enter Prizes" value="" required="">
                             </div>
                             <div class="mb-2 col-md-4">
-                                <label class="d-block">Prize Image<sup class="text-danger">*</sup></label>
+                                <label class="d-block">Prize Image</label>
                                 <div class="d-flex">
                                 <div>
                                     <input type="file" id="thumbnail" name="thumbnail" class="form-control-file" accept="image/png, image/jpeg,image/jpg" onchange="loadThumbnail(event)">
@@ -167,7 +181,7 @@
                                 <input type="text" class="form-control input-font" name="Prizes" id="Prizes" placeholder="Enter Prizes" value="" required="">
                             </div>
                             <div class="mb-2 col-md-4">
-                                <label class="d-block">Prize Image<sup class="text-danger">*</sup></label>
+                                <label class="d-block">Prize Image</label>
                                 <div class="d-flex">
                                 <div>
                                     <input type="file" id="thumbnail" name="thumbnail" class="form-control-file" accept="image/png, image/jpeg,image/jpg" onchange="loadThumbnail(event)">
@@ -192,7 +206,7 @@
                                 <input type="text" class="form-control input-font" name="Prizes" id="Prizes" placeholder="Enter Prizes" value="" required="">
                             </div>
                             <div class="mb-2 col-md-4">
-                                <label class="d-block">Prize Image<sup class="text-danger">*</sup></label>
+                                <label class="d-block">Prize Image</label>
                                 <div class="d-flex">
                                 <div>
                                     <input type="file" id="thumbnail" name="thumbnail" class="form-control-file" accept="image/png, image/jpeg,image/jpg" onchange="loadThumbnail(event)">

@@ -52,7 +52,7 @@
                               <td><img src="#" alt="#" class="" width="10%"></td>
                               <td>Pending</td>
                               <td class="d-flex">
-                                 <a href="<?php echo base_url(); ?>" class="btn btn-primary btn-sm mr-2" >View</a>
+                                 <a href="<?php echo base_url(); ?>standardswritting/view_standards" class="btn btn-primary btn-sm mr-2" >View</a>
                                  <a href="<?php echo base_url(); ?>standardswritting/create_standard_edit" class="btn btn-info btn-sm mr-2" >Edit</a>
                                  <a href="<?php echo base_url(); ?>" class="btn btn-success btn-sm mr-2" >Create</a>
                                  <a href="<?php echo base_url(); ?>" class="btn btn-danger btn-sm mr-2" >Delete</a>
