@@ -238,12 +238,12 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="quiz-image shadow">
-                    <img src="<?php echo base_url(); ?>/assets/images/img_2.jpg" class="image-section" alt="Bis Quiz Images" />
+                    <img src="<?php echo base_url().$competition['thumbnail']; ?>" class="image-section" alt="Bis Quiz Images" />
                 </div>
             </div>
             <div class="col-sm-7">
                 <div class="Quiz_text">
-                    <h3 class="main-title">Miscellaneous Competition</h3>
+                    <h3 class="main-title"><?php echo $competition['competiton_name']; ?></h3>
                     <!-- <p class="time-and-qus" style="color:white;">
                         <span class="number-quiz"><span class="question_no">10</span><span class="quiz-text">Questions</span>
                         </span>
@@ -252,7 +252,7 @@
                     </p> -->
                     <div class="d-flex">
                         <p class="time-start-end d-flex" style="margin-bottom:0px;">
-                            <span class="start-end-time-title mr-2">Start Date<span class="quiz-text-date m-2">12/03/2023<span style="margin-left: 12px;">12:00:00</span></span>
+                            <span class="start-end-time-title mr-2">Start Date<span class="quiz-text-date m-2"><?php echo $competition['start_date']; ?><span style="margin-left: 12px;">12:00:00</span></span>
                             </span>
                         </p>
                         <!-- <p class="time-start-end d-flex" style="margin-bottom:0px; margin-left: 8px;">
@@ -262,7 +262,7 @@
                     </div>
                     <div class="d-flex">
                         <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px;">
-                            <span class="start-end-time-title">End Date <span class="quiz-text-date m-2">12/03/2023<span style="margin-left: 12px;">12:00:00</span>
+                            <span class="start-end-time-title">End Date <span class="quiz-text-date m-2"><?php echo $competition['end_date']; ?><span style="margin-left: 12px;">12:00:00</span>
                             </span>
                         </p>
                        <!--  <p class="time-start-end d-flex" style="margin-bottom:0px; margin-top: 10px; margin-left: 10px;">
@@ -270,7 +270,7 @@
                             </span>
                         </p> -->
                     </div>
-                      <a href="<?= base_url(); ?>users/start_competition" class="btn startQuiz"> <span>Login to Participate</span></a>
+                      <a href="<?= base_url().'users/start_competition/'.$competition['competitionn_id']; ?>" class="btn startQuiz"> <span>Login to Participate</span></a>
                    
                 </div>
             </div>
@@ -281,7 +281,8 @@
         <div class="about-inner ">
             <h2 class="about-section">About Competition</h2>
             <div class="About_point">
-            AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org
+            <!-- AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org -->
+            <?php echo $competition['description']; ?>
             </div>
             <!-- <div class="col-md-12">
                 <h1>title of Competition
@@ -292,8 +293,8 @@
         <div class="about-inner">
             <h2 class="about-section">Team's and Conditions</h2>
             <div class="About_point ">
-            AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org
-
+            <!-- AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org AVIF is a new and high-efficient image format based on the AV1 video format. The format is open-source and royalty-free, developed by a collaboration of Google, Cisco, and Xiph.org -->
+            <?php echo $competition['terms_condition']; ?>
             </div>
     </section>
 
@@ -309,58 +310,64 @@
                 <h3>First Prize</h3>
 
                 <div class="start_content">
-                    <img src="<?php echo base_url(); ?>/assets/images/prize_2.avif" alt="" class="join_img">
+                    <img src="<?php echo base_url().$competition['fprize_image']; ?>" alt="" class="join_img">
                 </div>
 
                 <div class="#">
                     <div class="title_join">
-                        <h3>Laptop</h3>
-                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;">1</span></span> 
+                        <h3><?php echo $competition['fprize_name']; ?></h3>
+                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;"><?php echo $competition['fprize_no']; ?></span></span> 
                     </div>
                 </div>
             </div>
+            <?php if(!empty($competition['sprize_name'])){ ?>
             <div class="view_join_content">
                 <h3>Second Prize</h3>
 
                 <div class="start_content">
-                    <img src="<?php echo base_url(); ?>/assets/images/prize_2.avif" alt="" class="join_img">
+                    <img src="<?php echo base_url().$competition['sprize_image']; ?>" alt="" class="join_img">
                 </div>
 
                 <div class="#">
                     <div class="title_join">
-                        <h3>Laptop</h3>
-                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;">1</span></span> 
+                        <h3><?php echo $competition['sprize_name']; ?></h3>
+                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;"><?php echo $competition['sprize_no']; ?></span></span> 
                     </div>
                 </div>
             </div>
+            <?php }else{ echo "Second Prize not available"; } ?>
+            <?php if(!empty($competition['tprize_name'])){ ?>
             <div class="view_join_content">
                 <h3>Third Prize</h3>
 
                 <div class="start_content">
-                    <img src="<?php echo base_url(); ?>/assets/images/prize_2.avif" alt="" class="join_img">
+                    <img src="<?php echo base_url().$competition['tprize_image']; ?>" alt="" class="join_img">
                 </div>
 
                 <div class="#">
                     <div class="title_join">
-                        <h3>Laptop</h3>
-                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;">1</span></span> 
+                        <h3><?php echo $competition['tprize_name']; ?></h3>
+                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;"><?php echo $competition['tprize_no']; ?></span></span> 
                     </div>
                 </div>
             </div>
+            <?php } ?>
+            <?php if(!empty($competition['cprize_name'])){ ?>
             <div class="view_join_content">
                 <h3>Consolation Prize</h3>
 
                 <div class="start_content">
-                    <img src="<?php echo base_url(); ?>/assets/images/prize_2.avif" alt="" class="join_img">
+                    <img src="<?php echo base_url().$competition['cprize_image']; ?>" alt="" class="join_img">
                 </div>
 
                 <div class="#">
                     <div class="title_join">
-                        <h3>Laptop</h3>
-                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;">1</span></span> 
+                        <h3><?php echo $competition['cprize_name']; ?></h3>
+                        <span class="last-date">Number of Prizes :<span class="date-time" style="margin-left:5px;"><?php echo $competition['cprize_no']; ?></span></span> 
                     </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
 </section>
